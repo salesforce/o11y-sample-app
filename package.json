@@ -19,7 +19,6 @@
     "homepage": "https://github.com/Gabriel Pezanoski-Cohen/o11y-sample",
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
         }
     },
     "keywords": [
