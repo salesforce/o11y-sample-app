@@ -5,10 +5,13 @@
     "author": "Gabriel Pezanoski-Cohen",
     "bugs": "https://github.com/Gabriel Pezanoski-Cohen/o11y-sample/issues",
     "dependencies": {
+        "@lwc/synthetic-shadow": "^1.9.7",
+        "@salesforce-ux/design-system": "^2.14.1",
         "compression": "^1.7.4",
+        "cors": "^2.8.5",
         "express": "^4.17.1",
         "helmet": "^4.2.0",
-        "cors": "^2.8.5",
+        "lwc-components-lightning": "^1.11.1-alpha",
         "next-gen-client": "*"
     },
     "engines": {
@@ -18,8 +21,7 @@
     },
     "homepage": "https://github.com/Gabriel Pezanoski-Cohen/o11y-sample",
     "husky": {
-        "hooks": {
-        }
+        "hooks": {}
     },
     "keywords": [
         "lwc"

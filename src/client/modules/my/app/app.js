@@ -4,7 +4,7 @@ import {
     getInstrumentation,
     registerInstrumentedApp,
     CoreCollector
-} from 'next-gen-client/client';
+} from 'next-gen-client/dist/client';
 
 import SampleSchema from './sampleSchema';
 
@@ -35,12 +35,15 @@ const bearerToken = '';
 // You can use this extension: https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden
 const useNimbus = false;
 
+
 export default class App extends LightningElement {
     constructor() {
         super();
         if (!useNimbus) {
             this.overrideFetch();
         }
+
+        this.currentSidebar;
 
         this.instrApp = registerInstrumentedApp();
         this.instr = getInstrumentation('O11y-Sample-App');
@@ -50,8 +53,8 @@ export default class App extends LightningElement {
             this.instrApp.getSchemaType,
             useNimbus ? 2 : 0
         );
-        this.instrApp.registerCollector(coreCollector);
-        this.instrApp.registerCollector(
+        this.instrApp.registerLogCollector(coreCollector);
+        this.instrApp.registerLogCollector(
             new (function () {
                 this.collect = (schema, data) => {
                     console.log(data);
@@ -88,10 +91,27 @@ export default class App extends LightningElement {
         }
     }
 
-    log() {
-        this.instr.log(sampleSchema, {
+    domEvent(event) {
+        this.instr.domEvent(event, event.target);
+    }
+
+    domEventWithSchema(event) {
+        this.instr.domEvent(event, event.target, sampleSchema, {
             requiredString: `AwesomeName Log ${new Date().toISOString()}`,
             optionalString: Math.random() >= 0.5 ? 'opt' : undefined
         });
+    }
+
+    swapSidebarActive(selection){
+        if(!this.currentSidebar){
+            this.currentSidebar = main.getElementsByClassName("getting-started-sidebar")[0];
+        }
+        if(selection.target.parentNode !== this.currentSidebar){
+            let newSidebar = selection.target.parentNode;
+            let oldSidebar = this.currentSidebar;
+            oldSidebar.classList.remove("slds-is-active");
+            newSidebar.classList.add("slds-is-active");
+            this.currentSidebar = newSidebar;
+        }
     }
 }

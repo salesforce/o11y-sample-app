@@ -1,6 +1,61 @@
-.center {
+html {
+    background: #b0c4df;
+}
+
+.bold-text {
+    margin: auto auto 5% auto;
+    font-size: 120%;
     text-align: center;
 }
+
+.introduction-text {
+    margin: 5%;
+    font-size: 140%;
+}
+
+.content-text {
+    margin: 5%;
+    font-size: 120%;
+}
+
+.hidden {
+    display: none;
+}
+
+.introduction-header {
+    text-align: center;
+    margin : auto;
+}
+
+.center {
+    text-align: center;
+    background-color: white;
+    border-radius: 2%;
+}
+
+.sidebar {
+    position:fixed;
+    height: 100vh;
+    border-top-right-radius: 2%;
+    border-bottom-right-radius: 2%;
+}
+
+.content {
+    border-radius: 2%;
+    /* height: 100vh; */
+}
+
+.test {
+    height: 100vh;
+    background-color: #b0c4df;
+}
+
+.button-container {
+    margin:1em auto 1em auto;
+    width:auto;
+    text-align: center;
+}
+
 .link {
     border: none;
     padding: 10px;
@@ -8,18 +63,20 @@
     text-decoration: none;
     background-color: #ff6000;
     color: white;
-    margin-left: 33%;
-    margin-right: 33%;
-    display: inline-block;
-    margin-top: 1em;
+    /* margin-left: 33%;
+    margin-right: 33%; */
+    /* display: inline-block; */
+    /* margin-top: 1em; */
+    /* margin: 1em 50% 1em 50%; */
 }
+
 .info {
     color: black;
     background-color: #e4f2f8;
-    margin: auto;
+    margin: 1em 1em 1em 1em;
     padding: 15px 10px;
     text-align: left;
-    width: 300px;
+    width: auto;
     border-radius: 5px;
 }
 .code {
