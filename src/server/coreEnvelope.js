@@ -1,19 +1,22 @@
 const protobuf = require('protobufjs');
 
-const coreEnvelopeSchema = require('../proto-json-module-exports/core_envelope');
-const instrumentedEventSchema = require('../proto-json-module-exports/instrumented_event');
-const sampleNameSchema = require('../proto-json-module-exports/sample_name');
-const mediaPlayerExperienceSchema = require('../proto-json-module-exports/media_player_experience');
+// Note: The schemas are currently included in this project but will
+// soon be imported through an NPM module.
+const knownSchemas = require('../schemas/module_exports/KnownSchemas');
+const coreEnvelopeSchema = knownSchemas.coreEnvelopeSchema;
+const ollySampleSchema = knownSchemas.ollySampleSchema;
 
 const schemas = new Map();
-schemas.set('CoreEnvelope', coreEnvelopeSchema);
-schemas.set('InstrumentedEvent', instrumentedEventSchema);
-schemas.set('SampleName', sampleNameSchema);
-schemas.set('MediaPlayerExperience', mediaPlayerExperienceSchema);
+schemas.set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema);
+schemas.set(getSchemaId(ollySampleSchema), ollySampleSchema);
+
+function getSchemaId(schema) {
+    return `${schema.namespace}.${schema.name}`;
+}
 
 function decode(logType, encoded) {
-    const schemaJson = schemas.get(logType);
-    const schemaInstance = protobuf.Root.fromJSON(schemaJson);
+    const schema = schemas.get(logType);
+    const schemaInstance = protobuf.Root.fromJSON(schema.pbjsSchema);
     const type = schemaInstance.lookupType(logType);
     const message = type.decode(new Uint8Array(encoded));
     const pojo = type.toObject(message, {
@@ -34,8 +37,7 @@ function processBundles(envelope) {
         // Recognizing only top-level schemas
         const isKnown = schemas.has(schemaName);
         console.log(
-            `BUNDLE #${i}: Schema='${schemaName}'${
-                !isKnown ? ' (UNKNOWN)' : ''
+            `BUNDLE #${i}: Schema='${schemaName}'${!isKnown ? ' (UNKNOWN)' : ''
             }, Messages=${messages.length}`
         );
 
@@ -62,9 +64,9 @@ function processMetrics(envelope) {
 }
 
 function processCoreEnvelope(encodedEnvelope) {
-    console.log('Encoded CoreEnvelope', encodedEnvelope);
+    console.log(`Received encoded CoreEnvelope with size ${encodedEnvelope.length} bytes.`);
 
-    const { message: envelope } = decode('CoreEnvelope', encodedEnvelope);
+    const { message: envelope } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
 
     processDiagnostics(envelope);
     processBundles(envelope);

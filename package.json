@@ -1,9 +1,9 @@
 {
     "name": "o11y-sample",
-    "description": "My amazing LWC app",
-    "version": "0.0.1",
-    "author": "Gabriel Pezanoski-Cohen",
-    "bugs": "https://github.com/Gabriel Pezanoski-Cohen/o11y-sample/issues",
+    "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
+    "version": "0.1.0",
+    "author": "instrumentationteam@salesforce.com",
+    "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
         "@lwc/synthetic-shadow": "^1.9.7",
         "@salesforce-ux/design-system": "^2.14.1",
@@ -12,18 +12,21 @@
         "express": "^4.17.1",
         "helmet": "^4.2.0",
         "lwc-components-lightning": "^1.11.1-alpha",
-        "next-gen-client": "*"
+        "next-gen-client": "0.0.46"
     },
     "engines": {
         "node": ">=10.13.0",
         "npm": ">=6.4.1",
         "yarn": ">=1.9.4"
     },
-    "homepage": "https://github.com/Gabriel Pezanoski-Cohen/o11y-sample",
-    "husky": {
-        "hooks": {}
-    },
+    "homepage": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app",
     "keywords": [
+        "distributed tracing",
+        "instrumentation",
+        "o11y",
+        "observability",
+        "olly",
+        "telemetry",
         "lwc"
     ],
     "license": "MIT",
@@ -46,23 +49,18 @@
         ],
         "exec": "node ./src/server/api.js"
     },
-    "repository": "Gabriel Pezanoski-Cohen/o11y-sample",
+    "repository": "instrumentation/o11y-sample",
     "scripts": {
         "build": "lwc-services build -m production",
         "build:development": "lwc-services build",
         "lint": "eslint ./src/**/*.js",
+        "play": "run-p watch:client serve:api ",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "serve": "run-p serve:client serve:api",
         "serve:api": "node src/server/api.js",
-        "serve:client": "node scripts/server.js",
-        "test:unit": "lwc-services test:unit",
-        "test:unit:coverage": "lwc-services test:unit --coverage",
-        "test:unit:debug": "lwc-services test:unit --debug",
-        "test:unit:watch": "lwc-services test:unit --watch",
-        "watch": "run-p watch:client watch:server",
-        "watch:client": "lwc-services watch",
-        "watch:server": "nodemon"
+        "serve:client": "node scripts/FrontendServer.js",
+        "watch:client": "lwc-services watch"
     },
     "devDependencies": {
         "eslint": "^6.8.0",

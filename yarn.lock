@@ -8531,10 +8531,10 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-gen-client@*:
-  version "0.0.44"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/next-gen-client/-/next-gen-client-0.0.44.tgz#647b680d3c25ef203496bc4a303695067822803f"
-  integrity sha512-1DMoZ2dCBn1ez2VydeU9URbDhzKpArqi1+TTHtkFVKAJui0kwzZktVgbCTtYJbWmFPYJxsICZlTDVJ6BZRNAKQ==
+next-gen-client@0.0.46:
+  version "0.0.46"
+  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/next-gen-client/-/next-gen-client-0.0.46.tgz#68da99322cec83e5a21859981aeddc9687823a0c"
+  integrity sha512-lGiAarwiwJaFmDGPaebGHsXxAQsBicske1YCH5crOh0eKDtu7Z3nk0yQt5DjFRNe3Jc3Qt4RlAhlwH5aqGqtLQ==
   dependencies:
     protobufjs "^6.10.1"
 

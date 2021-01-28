@@ -3,21 +3,25 @@
         <div class="slds-col slds-size_2-of-12 sidebar center">
             <nav class="slds-nav-vertical" aria-label="Sub page">
                 <div class="slds-nav-vertical__section">
-                <h2 id="entity-header" class="slds-nav-vertical__title">Sections</h2>
-                <ul aria-describedby="entity-header">
-                    <li class="getting-started-sidebar slds-nav-vertical__item slds-is-active">
-                        <a href="#getting-started" onclick={swapSidebarActive} class="slds-nav-vertical__action" aria-current="true">Getting Started</a>
-                    </li>
-                    <li class="dom-events-sidebar slds-nav-vertical__item">
-                        <a href="#dom-events" onclick={swapSidebarActive} class="slds-nav-vertical__action" aria-current="true">Logging Dom Events</a>
-                    </li>
-                    <li class="perf-sidebar  slds-nav-vertical__item">
-                        <a onclick={swapSidebarActive} class="slds-nav-vertical__action" aria-current="true">Perfomance Logs and Metrics</a>
-                    </li>
-                    <li class="other-sidebar slds-nav-vertical__item">
-                        <a onclick={swapSidebarActive} class="slds-nav-vertical__action" aria-current="true">Other stuff</a>
-                    </li>
-                </ul>
+                    <h2 id="entity-header" class="slds-nav-vertical__title">Sections</h2>
+                    <ul aria-describedby="entity-header">
+                        <li class="getting-started-sidebar slds-nav-vertical__item slds-is-active">
+                            <a href="#getting-started" onclick={swapSidebarActive} class="slds-nav-vertical__action"
+                                aria-current="true">Getting Started</a>
+                        </li>
+                        <li class="dom-events-sidebar slds-nav-vertical__item">
+                            <a href="#dom-events" onclick={swapSidebarActive} class="slds-nav-vertical__action"
+                                aria-current="true">Logging Dom Events</a>
+                        </li>
+                        <li class="perf-sidebar  slds-nav-vertical__item">
+                            <a onclick={swapSidebarActive} class="slds-nav-vertical__action"
+                                aria-current="true">Perfomance Logs and Metrics</a>
+                        </li>
+                        <li class="other-sidebar slds-nav-vertical__item">
+                            <a onclick={swapSidebarActive} class="slds-nav-vertical__action" aria-current="true">Other
+                                stuff</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
         </div>
@@ -25,102 +29,124 @@
         <div class="slds-col slds-size_1-of-12 background"></div>
         <div class="slds-col slds-size_8-of-12 content">
             <div class="container">
-                    <article class="slds-card" id="getting-started">
-                        <div class="slds-card__header slds-grid">
-                          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <article class="slds-card" id="getting-started">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
                             <div class="slds-media__body">
-                              <h2 class="slds-card__header-title">
-                                    <div class="slds-text-heading_large introduction-header">Doppler/O11y/Next-gen Example App</div>
-                              </h2>
+                                <h2 class="slds-card__header-title">
+                                    <div class="slds-text-heading_large introduction-header">Doppler/O11y/Next-gen
+                                        Example App</div>
+                                </h2>
                             </div>
-                          </header>
-                        </div>
-                        <div class="slds-card__body slds-card__body_inner slds-text-align_center introduction-text"><span>Welcome! This app will walk you through different ways to use the NEW 
-                            Doppler/O11y/Next-gen Instrumentation service. For any more specific questions please consult our </span> <a href="#">documentation!</a></div>
-                        <footer class="slds-card__footer">
-                        </footer>
-                    </article>
-                    <article class="slds-card">
-                        <div class="slds-card__header slds-grid">
-                          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner slds-text-align_center introduction-text">
+                        <span>Welcome! This app will walk you through different ways to use the NEW
+                            Doppler/O11y/Next-gen Instrumentation service. For any more specific questions please
+                            consult our </span> <a href="#">documentation!</a></div>
+                    <footer class="slds-card__footer">
+                    </footer>
+                </article>
+                <article class="slds-card">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
                             <div class="slds-media__body">
-                              <h2 class="slds-card__header-title">
-                                <a href="#" class="slds-card__header-link slds-truncate" title="Getting Started">
-                                  <span>Getting Started</span>
-                                </a>
-                              </h2>
+                                <h2 class="slds-card__header-title">
+                                    <a href="#" class="slds-card__header-link slds-truncate" title="Getting Started">
+                                        <span>Getting Started</span>
+                                    </a>
+                                </h2>
                             </div>
-                          </header>
-                        </div>
-                        <div class="slds-card__body slds-card__body_inner content-text">
-                            <p> To see examples of how this works, please open <strong>src/client/modules/my/app/app.js</strong>, or just follow the steps for your app!</p>
-                            <p> To start, add the next-gen-client dependency :</p>
-                            <p class="info">npm install next-gen-client --save-dev</p>
-                            <p> Next, you will need to import the specific functions from our package. If you are instrumenting and Off-core app, you will
-                                need to import 3 functions as shown below. If you are developing on core, you only need to import the first function :
-                            </p>
-                            <p class="info">import &#123;
-                                getInstrumentation,
-                                registerInstrumentedApp,
-                                CoreCollector
-                                &#125; from 'next-gen-client/dist/client';</p>
-                            <p>You also have to do something with the core collector?????????</p>
-                            <p> You then have to register your app, using a descriptive name to track your data</p>
-                            <p class="info">
-                                this.instr = getInstrumentation('DESCRIPTIVE-NAME');
-                            </p>
-                            <p> Great! Now you're ready to instrument!</p>
-                        </div>
-                        <footer class="slds-card__footer">
-                        </footer>
-                    </article>
-                    <article class="slds-card" id="dom-events">
-                        <div class="slds-card__header slds-grid">
-                          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner content-text">
+                        <p> To see examples of how this works, please open
+                            <strong>src/client/modules/my/app/app.js</strong>, or just follow the steps for your app!
+                        </p>
+                        <p> To start, add the next-gen-client dependency :</p>
+                        <p class="info">npm install next-gen-client --save-dev</p>
+                        <p> Next, you will need to import the specific functions from our package. If you are
+                            instrumenting and Off-core app, you will
+                            need to import 3 functions as shown below. If you are developing on core, you only need to
+                            import the first function :
+                        </p>
+                        <p class="info">import &#123;
+                            getInstrumentation,
+                            registerInstrumentedApp,
+                            CoreCollector
+                            &#125; from 'next-gen-client/dist/client';</p>
+                        <p>You also have to do something with the core collector?????????</p>
+                        <p> You then have to register your app, using a descriptive name to track your data</p>
+                        <p class="info">
+                            this.instr = getInstrumentation('DESCRIPTIVE-NAME');
+                        </p>
+                        <p> Great! Now you're ready to instrument!</p>
+                    </div>
+                    <footer class="slds-card__footer">
+                    </footer>
+                </article>
+                <article class="slds-card" id="dom-events">
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
                             <div class="slds-media__body">
-                              <h2 class="slds-card__header-title">
-                                <a href="#" class="slds-card__header-link slds-truncate" title="Getting Started">
-                                  <span>Logging Dom Events</span>
-                                </a>
-                              </h2>
+                                <h2 class="slds-card__header-title">
+                                    <a href="#" class="slds-card__header-link slds-truncate" title="Getting Started">
+                                        <span>Logging Dom Events</span>
+                                    </a>
+                                </h2>
                             </div>
-                          </header>
+                        </header>
+                    </div>
+                    <div class="slds-card__body slds-card__body_inner content-text">
+                        <!-- prettier-ignore -->
+                        <p class="bold-text"><strong>Follow along in your browser console to see example data, and in
+                                your terminal window to see the actual
+                                events being generated. Note that it will take ~10 seconds for the terminal window to
+                                reflect the data received.
+                            </strong></p>
+                        <p>There are two main ways to log dom events. The first is to use our automatic click tracker,
+                            which will record basic
+                            information about the dom element and log it without you having to add anything. The button
+                            below is not instrumented but will
+                            send an event through the click tracker. Note that we only automatically track clicks on
+                            buttons and anchors.
+                        </p>
+                        <div class="button-container">
+                            <button id="auto-log" class="link">Log Automatically!</button>
                         </div>
-                        <div class="slds-card__body slds-card__body_inner content-text">
-                             <!-- prettier-ignore -->         
-                             <p class="bold-text"><strong>Follow along in your browser console to see example data, and in your terminal window to see the actual
-                                 events being generated. Note that it will take ~10 seconds for the terminal window to reflect the data received.
-                             </strong></p>           
-                            <p>There are two main ways to log dom events. The first is to use our automatic click tracker, which will record basic
-                                information about the dom element and log it without you having to add anything. The button below is not instrumented but will
-                                send an event through the click tracker. Note that we only automatically track clicks on buttons and anchors.
-                            </p>
-                            <div class="button-container">
-                                <button id="auto-log" class="link">Log Automatically!</button>
-                            </div>
-                            <p> Once the terminal window receives the data, you will notice several messages received. For now, only the messages under the timestamp are 
-                                important to focus on. You will see the log received containing information on the components that were on the button, along with an Argus metric
-                                that is sent by default on click. This metric is specifically to count the number of event generated and create more transparency.
-                            </p>
-                            <br></br>
-                            <p> Below we have a button that is instrumented manually using our log function. This is the usage, using the mouse event as the input :</p>
-                            <p class="info">this.instr.domEvent(event, event.target);</p>
-                            <div class="button-container">
-                                <button onclick={domEvent} class="link">Log Manual Event!</button>
-                            </div>
-                            <p> You will see the terminal receives a similar event (since the button is the same). This method can be useful for instrumenting elements 
-                                that are not buttons or anchors. If you would like to add additional data, you can extend the domEvent function using a custom schema. More information
-                                on creating schemas can be found  <a href="#">here!</a> The button below is instrumented with a very simple custom schema.
-                            </p>
-                            <div class="button-container">
-                                <button disabled onclick={domEventWithSchema} class="link">Log Custom Schema!</button>
-                            </div>    
+                        <p> Once the terminal window receives the data, you will notice several messages received. For
+                            now, only the messages under the timestamp are
+                            important to focus on. You will see the log received containing information on the
+                            components that were on the button, along with an Argus metric
+                            that is sent by default on click. This metric is specifically to count the number of event
+                            generated and create more transparency.
+                        </p>
+                        <br></br>
+                        <p> Below we have a button that is instrumented manually using our log function. This is the
+                            usage, using the mouse event as the input :</p>
+                        <p class="info">this.instr.domEvent(event, event.target);</p>
+                        <div class="button-container">
+                            <button onclick={domEvent} class="link">Log Manual Event!</button>
                         </div>
-                        <footer class="slds-card__footer">
-                        </footer>
-                    </article>
-                </div>
+                        <p> You will see the terminal receives a similar event (since the button is the same). This
+                            method can be useful for instrumenting elements
+                            that are not buttons or anchors. If you would like to add additional data, you can extend
+                            the domEvent function using a custom schema. More information
+                            on creating schemas can be found <a href="#">here!</a> The button below is instrumented with
+                            a very simple custom schema.
+                        </p>
+                        <div class="button-container">
+                            <button onclick={handleLogCustom} class="link">Log Custom Data</button>
+                        </div>
+                        <!-- <div class="button-container">
+                                <button onclick={domEventWithSchema} class="link">Log Custom Schema!</button>
+                            </div> -->
+                    </div>
+                    <footer class="slds-card__footer">
+                    </footer>
+                </article>
             </div>
         </div>
-    </div>    
+    </div>
+    </div>
 </template>
