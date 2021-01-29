@@ -6209,11 +6209,6 @@ he@^1.2.0, he@~1.2.0:
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/he/-/he-1.2.0.tgz"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
-helmet@^4.2.0:
-  version "4.2.0"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/helmet/-/helmet-4.2.0.tgz"
-  integrity sha512-aoiSxXMd0ks1ojYpSCFoCRzgv4rY/uB9jKStaw8PkXwsdLYa/Gq+Nc5l0soH0cwBIsLAlujPnx4HLQs+LaXCrQ==
-
 hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/hex-color-regex/-/hex-color-regex-1.1.0.tgz"
@@ -8531,13 +8526,6 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-gen-client@0.0.46:
-  version "0.0.46"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/next-gen-client/-/next-gen-client-0.0.46.tgz#68da99322cec83e5a21859981aeddc9687823a0c"
-  integrity sha512-lGiAarwiwJaFmDGPaebGHsXxAQsBicske1YCH5crOh0eKDtu7Z3nk0yQt5DjFRNe3Jc3Qt4RlAhlwH5aqGqtLQ==
-  dependencies:
-    protobufjs "^6.10.1"
-
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/nice-try/-/nice-try-1.0.5.tgz"
@@ -8714,6 +8702,13 @@ nwsapi@^2.2.0:
   version "2.2.0"
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/nwsapi/-/nwsapi-2.2.0.tgz"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
+
+o11y@0.0.48:
+  version "0.0.48"
+  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11y/-/o11y-0.0.48.tgz#c7c5f8d63faa834e9635474d2964ddc04bcac06a"
+  integrity sha512-+PX+T8Rgzdua8eZdCURgfbtwATEdPvLU7s3cQGwVklwwIfOIowDERB4P8lDGUq/Cm0ynHuGoUHodjL06cBXERg==
+  dependencies:
+    protobufjs "^6.10.1"
 
 oauth-sign@~0.9.0:
   version "0.9.0"

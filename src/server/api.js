@@ -1,6 +1,4 @@
 // Simple Express server setup to serve for local testing/dev API server
-const compression = require('compression');
-const helmet = require('helmet');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -11,8 +9,6 @@ const HOST = process.env.API_HOST || 'localhost';
 const PORT = process.env.API_PORT || 3002;
 
 express()
-    .use(helmet())
-    .use(compression())
     .use(cors())
     // .use(bodyParser.urlencoded({
     //     extended: true

@@ -34,16 +34,15 @@
                         <header class="slds-media slds-media_center slds-has-flexi-truncate">
                             <div class="slds-media__body">
                                 <h2 class="slds-card__header-title">
-                                    <div class="slds-text-heading_large introduction-header">Doppler/O11y/Next-gen
-                                        Example App</div>
+                                    <div class="slds-text-heading_large introduction-header">O11y Sample App</div>
                                 </h2>
                             </div>
                         </header>
                     </div>
                     <div class="slds-card__body slds-card__body_inner slds-text-align_center introduction-text">
-                        <span>Welcome! This app will walk you through different ways to use the NEW
-                            Doppler/O11y/Next-gen Instrumentation service. For any more specific questions please
-                            consult our </span> <a href="#">documentation!</a></div>
+                        <span>Welcome! This app will walk you through different ways to use the new instrumentation
+                            service call olly.</span>
+                    </div>
                     <footer class="slds-card__footer">
                     </footer>
                 </article>
@@ -63,8 +62,8 @@
                         <p> To see examples of how this works, please open
                             <strong>src/client/modules/my/app/app.js</strong>, or just follow the steps for your app!
                         </p>
-                        <p> To start, add the next-gen-client dependency :</p>
-                        <p class="info">npm install next-gen-client --save-dev</p>
+                        <p> To start, add the o11y dependency :</p>
+                        <p class="info">npm install o11y --save</p>
                         <p> Next, you will need to import the specific functions from our package. If you are
                             instrumenting and Off-core app, you will
                             need to import 3 functions as shown below. If you are developing on core, you only need to
@@ -74,7 +73,7 @@
                             getInstrumentation,
                             registerInstrumentedApp,
                             CoreCollector
-                            &#125; from 'next-gen-client/dist/client';</p>
+                            &#125; from 'o11y/client';</p>
                         <p>You also have to do something with the core collector?????????</p>
                         <p> You then have to register your app, using a descriptive name to track your data</p>
                         <p class="info">
