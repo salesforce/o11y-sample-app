@@ -52,7 +52,7 @@
         "build:production": "lwc-services build -m production",
         "build": "lwc-services build",
         "lint": "eslint ./src/**/*.js",
-        "play": "run-p watch:client serve:api ",
+        "play": "run-p watch:client serve:api",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "serve": "run-p serve:client serve:api",
