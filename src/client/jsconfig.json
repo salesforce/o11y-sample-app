@@ -2,11 +2,7 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "moduleResolution": "node",
-        "baseUrl": "../src",
-        "typeRoots": [
-            "node_modules/@types",
-            "."
-        ],
+        "baseUrl": "../src",        
         "types": [
             "./typings/o11y"
         ]

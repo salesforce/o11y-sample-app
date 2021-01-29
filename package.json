@@ -13,7 +13,7 @@
         "o11y": "0.0.48"
     },
     "engines": {
-        "node": ">=14.15.1",
+        "node": ">=13.12.0",
         "npm": ">=7.4.3",
         "yarn": ">=1.22.4"
     },
@@ -35,17 +35,6 @@
         "./src/**/*.js": [
             "eslint"
         ]
-    },
-    "nodemonConfig": {
-        "watch": [
-            "src/server/**/*.js"
-        ],
-        "ext": "js",
-        "ignore": [
-            "src/**/*.spec.js",
-            "src/**/*.test.js"
-        ],
-        "exec": "node ./src/server/api.js"
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
