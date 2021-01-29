@@ -1,12 +1,8 @@
 // Simple Express server setup to serve the build output
-const compression = require('compression');
-const helmet = require('helmet');
 const express = require('express');
 const path = require('path');
 
 const app = express();
-app.use(helmet());
-app.use(compression());
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3001;

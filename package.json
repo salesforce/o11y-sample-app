@@ -7,17 +7,15 @@
     "dependencies": {
         "@lwc/synthetic-shadow": "^1.9.7",
         "@salesforce-ux/design-system": "^2.14.1",
-        "compression": "^1.7.4",
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "helmet": "^4.2.0",
         "lwc-components-lightning": "^1.11.1-alpha",
-        "next-gen-client": "0.0.46"
+        "o11y": "0.0.48"
     },
     "engines": {
-        "node": ">=10.13.0",
-        "npm": ">=6.4.1",
-        "yarn": ">=1.9.4"
+        "node": ">=14.15.1",
+        "npm": ">=7.4.3",
+        "yarn": ">=1.22.4"
     },
     "homepage": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app",
     "keywords": [
@@ -51,10 +49,10 @@
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
-        "build": "lwc-services build -m production",
-        "build:development": "lwc-services build",
+        "build:production": "lwc-services build -m production",
+        "build": "lwc-services build",
         "lint": "eslint ./src/**/*.js",
-        "play": "run-p watch:client serve:api ",
+        "play": "run-p watch:client serve:api",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "serve": "run-p serve:client serve:api",

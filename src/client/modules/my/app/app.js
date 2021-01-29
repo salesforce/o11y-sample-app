@@ -5,7 +5,7 @@ import {
     getInstrumentation,
     registerInstrumentedApp,
     CoreCollector
-} from 'next-gen-client/dist/client';
+} from 'o11y/client';
 
 import { ollySampleSchema } from '../../../../schemas/exports/KnownSchemas';
 
