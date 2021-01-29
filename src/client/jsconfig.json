@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "baseUrl": "../src",
+        "typeRoots": [
+            "node_modules/@types",
+            "."
+        ],
+        "types": [
+            "./typings/o11y"
+        ]
+    }
+}
