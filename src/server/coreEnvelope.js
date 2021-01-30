@@ -4,10 +4,16 @@ const protobuf = require('protobufjs');
 // soon be imported through an NPM module.
 const knownSchemas = require('../schemas/module_exports/KnownSchemas');
 const coreEnvelopeSchema = knownSchemas.coreEnvelopeSchema;
+const instrumentedEventSchema = knownSchemas.instrumentedEventSchema;
+const activitySchema = knownSchemas.activitySchema;
+const errorSchema = knownSchemas.errorSchema;
 const ollySampleSchema = knownSchemas.ollySampleSchema;
 
 const schemas = new Map();
 schemas.set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema);
+schemas.set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema);
+schemas.set(getSchemaId(activitySchema), activitySchema);
+schemas.set(getSchemaId(errorSchema), errorSchema);
 schemas.set(getSchemaId(ollySampleSchema), ollySampleSchema);
 
 function getSchemaId(schema) {

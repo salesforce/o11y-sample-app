@@ -1,4 +1,3 @@
-// <
 import { LightningElement, track, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
 
