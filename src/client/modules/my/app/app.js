@@ -1,11 +1,7 @@
 import { LightningElement } from 'lwc';
 
 // #LOOK: the import path is subject to change
-import {
-    getInstrumentation,
-    registerInstrumentedApp,
-    CoreCollector
-} from 'o11y/client';
+import { registerInstrumentedApp, CoreCollector } from 'o11y/client';
 
 import { ollySampleSchema } from '../../../../schemas/exports/KnownSchemas';
 
@@ -33,8 +29,8 @@ export default class App extends LightningElement {
             collectorMode = 1; // Use multipart/form-data for Salesforce app
         }
 
-        this.instrApp = registerInstrumentedApp();
-        this.instr = getInstrumentation('o11y-sample-App'); // Remember to provide your own app name
+        // This method should only be called by the top-level entity.
+        this.instrApp = registerInstrumentedApp('o11y-sample-App');
 
         const coreCollector = new CoreCollector(
             apiEndpoint,
@@ -72,19 +68,19 @@ export default class App extends LightningElement {
     toggleClickTracker() {
         if (this.clickTrackActive) {
             this.clickTrackActive = false;
-            this.instrApp.deactivateClickTracker(this.instr);
+            this.instrApp.deactivateClickTracker();
         } else {
             this.clickTrackActive = true;
-            this.instrApp.activateClickTracker(this.instr);
+            this.instrApp.activateClickTracker();
         }
     }
 
     domEvent(event) {
-        this.instr.domEvent(event, this);
+        this.instrApp.domEvent(event, this);
     }
 
     domEventWithSchema(event) {
-        this.instr.domEvent(event, this, ollySampleSchema, {
+        this.instrApp.domEvent(event, this, ollySampleSchema, {
             text: 'Demonstrates optional data accompanying the DomEvent',
             integerValue: Date.now()
         });
@@ -104,9 +100,9 @@ export default class App extends LightningElement {
     }
 
     handleLogCustom() {
-        this.instr.log(ollySampleSchema, {
+        this.instrApp.log(ollySampleSchema, {
             text: 'Demonstrates custom log',
-            integerValue: Date.now()
+            integerValue: Math.floor(Math.random() * 2147483647)
         });
     }
 }
