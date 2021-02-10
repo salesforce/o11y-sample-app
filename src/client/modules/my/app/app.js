@@ -4,6 +4,7 @@ import { LightningElement } from 'lwc';
 import { registerInstrumentedApp, CoreCollector } from 'o11y/client';
 
 import { ollySampleSchema } from '../../../../schemas/exports/KnownSchemas';
+import { ConsoleCollector } from '../../../consoleCollector';
 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
 const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
@@ -16,38 +17,77 @@ const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 const bearerToken = '';
 
 export default class App extends LightningElement {
+    logs = [];
+
     constructor() {
         super();
         this.initializeInstrumentation();
     }
 
     initializeInstrumentation() {
-        let collectorMode = 0; // Use application/octet-stream by default
+        // The top-level entity (the app) must initialize instrumentation before use.
+        // Components can directly use the getInstrumentation import from 'o11y/client'.        
 
-        if (apiEndpoint.indexOf('salesforce.com') >= 0) {
-            this.overrideFetch(); // Include authorization header in the calls
-            collectorMode = 1; // Use multipart/form-data for Salesforce app
-        }
-
-        // This method should only be called by the top-level entity.
+        // STEP 1: Register the app
         this.instrApp = registerInstrumentedApp('o11y-sample-App');
 
-        const coreCollector = new CoreCollector(
-            apiEndpoint,
-            this.instrApp.getSchemaType,
-            collectorMode
-        );
+        // STEP 2: Register log collectors
+        this.instrApp.registerLogCollector(new ConsoleCollector());
+        this.instrApp.registerLogCollector(this);   // See 'collect' method
+        const coreCollector = this.getCoreCollector();
         this.instrApp.registerLogCollector(coreCollector);
-        this.instrApp.registerLogCollector(
-            new (function () {
-                this.collect = (_schema, data) => {
-                    console.log(data);
-                };
-            })()
-        );
+
+        // STEP 3: Register a metrics collector
         this.instrApp.registerMetricsCollector(coreCollector);
 
+        // STEP 4: Activate the automatic click tracker
         this.toggleClickTracker();
+    }
+
+    getCoreCollector() {
+        let coreCollectorMode = 0; // Use application/octet-stream by default
+        if (apiEndpoint.indexOf('salesforce.com') >= 0) {
+            this.overrideFetch(); // Include authorization header in the calls
+            coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
+        }
+        return new CoreCollector(
+            apiEndpoint,
+            this.instrApp.getSchemaType,
+            coreCollectorMode
+        );
+    }
+
+    collect(schema, message, logMeta) {
+        const schemaId = `${schema.namespace}.${schema.name}`;
+
+        const model = {
+            schemaId: `${schema.namespace}.${schema.name}`,
+            timestamp: logMeta.timestamp,
+            rootId: logMeta.rootId,
+            seq: logMeta.sequence,
+            msg: message,
+            isActivity: this.isActivity(schemaId),
+            isError: this.isError(schemaId),
+            isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
+            isCustom: this.isCustom(schemaId),
+        };
+        this.logs = this.logs.concat(model);
+    };
+
+    isActivity(schemaId) {
+        return schemaId === 'sf.instrumentation.Activity';
+    }
+
+    isError(schemaId) {
+        return schemaId === 'sf.instrumentation.Error';
+    }
+
+    isInstrumentedEvent(schemaId) {
+        return schemaId === 'sf.instrumentation.InstrumentedEvent';
+    }
+
+    isCustom(schemaId) {
+        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.domEvent(schemaId);
     }
 
     overrideFetch() {

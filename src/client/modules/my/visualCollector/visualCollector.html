@@ -1,0 +1,12 @@
+<template>
+    <!-- <lightning-datatable key-field="seq" data={data} columns={columns}>
+    </lightning-datatable>> -->
+    <template for:each={logs} for:item="log">
+        <template if:true={log.isActivity}>
+            <my-activity-card key={log.seq} model={log}></my-activity-card>
+        </template>
+        <template if:false={log.isActivity}>
+            Non-activity
+        </template>
+    </template>
+</template>
