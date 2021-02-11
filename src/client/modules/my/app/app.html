@@ -1,29 +1,18 @@
 <template>
     <div class="slds-grid slds-wrap">
         <div class="slds-col slds-size_2-of-12 sidebar center">
-            <nav class="slds-nav-vertical" aria-label="Sub page">
-                <div class="slds-nav-vertical__section">
-                    <h2 id="entity-header" class="slds-nav-vertical__title">Sections</h2>
-                    <ul aria-describedby="entity-header">
-                        <li class="getting-started-sidebar slds-nav-vertical__item slds-is-active">
-                            <a href="#getting-started" onclick={swapSidebarActive} class="slds-nav-vertical__action"
-                                aria-current="true">Getting Started</a>
-                        </li>
-                        <li class="dom-events-sidebar slds-nav-vertical__item">
-                            <a href="#dom-events" onclick={swapSidebarActive} class="slds-nav-vertical__action"
-                                aria-current="true">Logging Dom Events</a>
-                        </li>
-                        <li class="perf-sidebar  slds-nav-vertical__item">
-                            <a onclick={swapSidebarActive} class="slds-nav-vertical__action"
-                                aria-current="true">Perfomance Logs and Metrics</a>
-                        </li>
-                        <li class="other-sidebar slds-nav-vertical__item">
-                            <a onclick={swapSidebarActive} class="slds-nav-vertical__action" aria-current="true">Other
-                                stuff</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+            <lightning-vertical-navigation selected-item={selectedNav} onselect={handleNavigationSelect}>
+                <lightning-vertical-navigation-section label="o11y Sample App">
+                    <lightning-vertical-navigation-item label="Getting Started" name="getting_started">
+                    </lightning-vertical-navigation-item>
+                    <lightning-vertical-navigation-item label="Click Tracking" name="click_tracking">
+                    </lightning-vertical-navigation-item>
+                    <lightning-vertical-navigation-item label="Error Logging" name="error_logging">
+                    </lightning-vertical-navigation-item>
+                    <lightning-vertical-navigation-item label="Activity Tracking" name="activity_tracking">
+                    </lightning-vertical-navigation-item>
+                </lightning-vertical-navigation-section>
+            </lightning-vertical-navigation>
         </div>
         <div class="slds-col slds-size_2-of-12 background"></div>
         <div class="slds-col slds-size_1-of-12 background"></div>

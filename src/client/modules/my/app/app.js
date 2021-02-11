@@ -17,6 +17,7 @@ const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 const bearerToken = '';
 
 export default class App extends LightningElement {
+    selectedNav = 'getting_started';
     logs = [];
 
     constructor() {
@@ -132,19 +133,6 @@ export default class App extends LightningElement {
         });
     }
 
-    swapSidebarActive(selection) {
-        if (!this.currentSidebar) {
-            this.currentSidebar = main.getElementsByClassName("getting-started-sidebar")[0];
-        }
-        if (selection.target.parentNode !== this.currentSidebar) {
-            const newSidebar = selection.target.parentNode;
-            const oldSidebar = this.currentSidebar;
-            oldSidebar.classList.remove("slds-is-active");
-            newSidebar.classList.add("slds-is-active");
-            this.currentSidebar = newSidebar;
-        }
-    }
-
     handleLogCustom() {
         this.instrApp.log(ollySampleSchema, {
             text: 'Demonstrates custom log',
@@ -157,6 +145,14 @@ export default class App extends LightningElement {
             throw new Error('User initiated exception');
         } catch (ex) {
             this.instrApp.error(ex);
+        }
+    }
+
+    handleNavigationSelect(event) {
+        const newNav = event.detail.name;
+        if (newNav !== this.selectedNav) {
+            console.log(newNav);
+            this.selectedNav = newNav;
         }
     }
 }
