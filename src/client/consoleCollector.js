@@ -27,7 +27,7 @@ export class ConsoleCollector {
         }
         const css = `color:${color};background-color:${bgColor}`;
         console.log(
-            `%cO11YSAMPLE%c${label} `,
+            `%cO11YSAMPLE%c ${label}`,
             'color:white;background-color:#FF6600;font-weight:bold',
             css,
             data

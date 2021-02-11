@@ -1,12 +1,20 @@
 <template>
-    <!-- <lightning-datatable key-field="seq" data={data} columns={columns}>
-    </lightning-datatable>> -->
     <template for:each={logs} for:item="log">
         <template if:true={log.isActivity}>
             <my-activity-card key={log.seq} model={log}></my-activity-card>
         </template>
-        <template if:false={log.isActivity}>
-            Non-activity
+        <template if:true={log.isInstrumentedEvent}>
+            instr
+            <my-instrumented-event-card key={log.seq} model={log}></my-instrumented-event-card>
+        </template>
+        <template if:true={log.isError}>
+            <my-error-card key={log.seq} model={log}></my-error-card>
+        </template>
+        <template if:true={log.isO11ySample}>
+            <my-o11y-sample-card key={log.seq} model={log}></my-o11y-sample-card>
+        </template>
+        <template if:true={log.isCustom}>
+            <my-custom-card key={log.seq} model={log}></my-custom-card>
         </template>
     </template>
 </template>

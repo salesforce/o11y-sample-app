@@ -69,6 +69,7 @@ export default class App extends LightningElement {
             isActivity: this.isActivity(schemaId),
             isError: this.isError(schemaId),
             isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
+            isO11ySample: this.isO11ySample(schemaId),
             isCustom: this.isCustom(schemaId),
         };
         this.logs = this.logs.concat(model);
@@ -86,8 +87,13 @@ export default class App extends LightningElement {
         return schemaId === 'sf.instrumentation.InstrumentedEvent';
     }
 
+    isO11ySample(schemaId) {
+        return schemaId === 'sf.instrumentation.OllySample';
+    }
+
+
     isCustom(schemaId) {
-        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.domEvent(schemaId);
+        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isO11ySample(schemaId);
     }
 
     overrideFetch() {
@@ -144,5 +150,13 @@ export default class App extends LightningElement {
             text: 'Demonstrates custom log',
             integerValue: Math.floor(Math.random() * 2147483647)
         });
+    }
+
+    handleErrorClick() {
+        try {
+            throw new Error('User initiated exception');
+        } catch (ex) {
+            this.instrApp.error(ex);
+        }
     }
 }

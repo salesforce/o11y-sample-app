@@ -1,21 +1,27 @@
 <template>
-    <div>
-        <h3>
-            <template if:true={model.msg.isRoot}>
-                <lightning-icon icon-name="utility:topic" alternative-text="Root Activity" title="root activity">
-                </lightning-icon>
-            </template>
-            <template if:false={model.msg.isRoot}>
-                <lightning-icon icon-name="utility:clock" alternative-text="Activity" title="activity"></lightning-icon>
-            </template>
-            Activity
-        </h3>
-        <h5>{model.timestamp}</h5>
-        <p>
-            Duration: {model.msg.duration} msecs
-        </p>
-        <p>
-            Error IDs: {model.msg.errorIds}
-        </p>
-    </div>
+    <h3>
+        <template if:true={model.msg.isRoot}>
+            <lightning-icon icon-name="standard:topic" alternative-text="Root Activity" title="root activity">
+            </lightning-icon>
+        </template>
+        <template if:false={model.msg.isRoot}>
+            <lightning-icon icon-name="standard:operating_hours" alternative-text="Activity" title="activity"></lightning-icon>
+        </template>
+        Activity
+    </h3>
+    <p>
+        Timestamp: {model.timestamp}
+    </p>
+    <p>
+        ID: {model.msg.id}
+    </p>
+    <p>
+        Name: {model.msg.name}
+    </p>
+    <p>
+        Duration: {model.msg.duration} msecs
+    </p>
+    <p>
+        Error IDs: {model.msg.errorIds}
+    </p>
 </template>
