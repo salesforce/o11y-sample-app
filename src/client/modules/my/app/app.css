@@ -2,6 +2,22 @@ html {
     background: #b0c4df;
 }
 
+h1 {
+    font-size: 32pt;
+}
+
+h2 {
+    font-size: 26pt;
+}
+
+h3 {
+    font-size: 22pt;
+}
+
+h4 {
+    font-size: 20pt;
+}
+
 .bold-text {
     margin: auto auto 5% auto;
     font-size: 120%;
@@ -24,7 +40,7 @@ html {
 
 .introduction-header {
     text-align: center;
-    margin : auto;
+    margin: auto;
 }
 
 .center {
@@ -34,7 +50,7 @@ html {
 }
 
 .sidebar {
-    position:fixed;
+    position: fixed;
     height: 100vh;
     border-top-right-radius: 2%;
     border-bottom-right-radius: 2%;
@@ -42,7 +58,9 @@ html {
 
 .content {
     border-radius: 2%;
-    /* height: 100vh; */
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 100vh;
 }
 
 .test {
@@ -51,13 +69,13 @@ html {
 }
 
 .button-container {
-    margin:1em auto 1em auto;
-    width:auto;
+    margin: 1em auto 1em auto;
+    width: auto;
     text-align: center;
 }
 
 .link {
-    border: none;
+    border: solid 1px transparent;
     padding: 10px;
     border-radius: 5px;
     text-decoration: none;
@@ -79,9 +97,11 @@ html {
     width: auto;
     border-radius: 5px;
 }
+
 .code {
     font-family: monospace;
 }
+
 .container {
     margin-top: 30px;
 }
@@ -92,4 +112,96 @@ img {
 
 .greeting {
     height: 75px;
+}
+
+.column {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.row1 {
+    display: flex;
+    height: 60px;
+    align-items: center;
+}
+
+.row2 {
+    flex-grow: 1;
+}
+
+.row3 {
+    height: 10px;
+}
+
+.slds-vertical-tabs {
+    height: 100%;
+}
+
+.app-title {
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.link:hover {
+    border-color: black;
+}
+
+.header {
+    margin: 10px 0;
+    font-size: larger;
+    font-weight: bold;
+}
+
+pre {
+    background-color: #eeeeee;
+    font-family: monospace;
+    font-size: 12pt;
+}
+
+/* Override SLDS settings */
+
+ol {
+    list-style: unset;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+lightning-tab {
+    /* subtract row1 and row3 height */
+    height: calc(100vh - 70px);
+    overflow-y: auto;
+}
+
+.collector-pane {
+    padding: 0 10px;
+}
+
+.collector-header {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.collector-header> :not(.collector-header-title):last-child {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.collector-header-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.collector-body {
+    /* subtract row1 and row3 height + collector-header height */
+    margin-top: 10px;
+    height: calc(100vh - 110px);
+    overflow-y: auto;
 }

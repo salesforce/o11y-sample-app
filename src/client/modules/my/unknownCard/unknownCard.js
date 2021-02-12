@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import { utility } from '../../../utility';
 
-export default class ActivityCard extends LightningElement {
+export default class UnknownCard extends LightningElement {
     keyValues;
 
     _model;
@@ -12,7 +12,7 @@ export default class ActivityCard extends LightningElement {
     set model(value) {
         this._model = value;
         const topItems = utility.getKeyValues(value).filter(obj => obj.key !== 'msg' && !obj.key.startsWith('_'));
-        const msgItems = value && utility.getKeyValues(value.msg);
+        const msgItems = utility.getKeyValues(value.msg);
         this.keyValues = [...topItems, ...msgItems];
     }
 }

@@ -1,16 +1,9 @@
 <template>
-    <h3>
+    <div class="card-header">
         <lightning-icon icon-name="standard:custom_notification" alternative-text="Instrumented Event"
             title="instrumented event">
-        </lightning-icon>Instrumented Event
-    </h3>
-    <p>
-        auto: {model.msg.auto}
-    </p>
-    <p>
-        Owner Component: {model.msg.ownerComponent}
-    </p>
-    <p>
-        Xpath: {model.msg.xpath}
-    </p>
+        </lightning-icon>
+        <span class="card-title">Instrumented Event</span>
+    </div>
+    <my-key-values model={keyValues}></my-key-values>
 </template>

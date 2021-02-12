@@ -17,7 +17,20 @@ const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 const bearerToken = '';
 
 export default class App extends LightningElement {
-    selectedNav = 'getting_started';
+
+    labelIntro = 'Getting Started';
+    labelEvents = 'Instrumenting DOM Events';
+    labelErrors = 'Error Logging';
+    labelActivities = 'Activity Tracking';
+    labelCustom = 'Custom Logs';
+
+    sectionIntro = 'section_intro';
+    sectionEvents = 'section_events';
+    sectionErrors = 'section_errors';
+    sectionActivities = 'section_activities';
+    sectionCustom = 'section_logs';
+
+    selectedSection = this.sectionIntro;
     logs = [];
 
     constructor() {
@@ -62,18 +75,18 @@ export default class App extends LightningElement {
         const schemaId = `${schema.namespace}.${schema.name}`;
 
         const model = {
+            seq: logMeta.sequence,
+            rootId: logMeta.rootId,
             schemaId: `${schema.namespace}.${schema.name}`,
             timestamp: logMeta.timestamp,
-            rootId: logMeta.rootId,
-            seq: logMeta.sequence,
             msg: message,
-            isActivity: this.isActivity(schemaId),
-            isError: this.isError(schemaId),
-            isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
-            isO11ySample: this.isO11ySample(schemaId),
-            isCustom: this.isCustom(schemaId),
+            _isActivity: this.isActivity(schemaId),
+            _isError: this.isError(schemaId),
+            _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
+            _isO11ySample: this.isCustom(schemaId),
+            _isUnknown: this.isUnknown(schemaId),
         };
-        this.logs = this.logs.concat(model);
+        this.logs = [model, ...this.logs];        
     };
 
     isActivity(schemaId) {
@@ -88,13 +101,12 @@ export default class App extends LightningElement {
         return schemaId === 'sf.instrumentation.InstrumentedEvent';
     }
 
-    isO11ySample(schemaId) {
+    isCustom(schemaId) {
         return schemaId === 'sf.instrumentation.OllySample';
     }
 
-
-    isCustom(schemaId) {
-        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isO11ySample(schemaId);
+    isUnknown(schemaId) {
+        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isCustom(schemaId);
     }
 
     overrideFetch() {
@@ -140,19 +152,15 @@ export default class App extends LightningElement {
         });
     }
 
-    handleErrorClick() {
-        try {
-            throw new Error('User initiated exception');
-        } catch (ex) {
-            this.instrApp.error(ex);
-        }
-    }
-
     handleNavigationSelect(event) {
         const newNav = event.detail.name;
         if (newNav !== this.selectedNav) {
             console.log(newNav);
             this.selectedNav = newNav;
         }
+    }
+
+    handleClearLogs() {
+        this.logs = [];
     }
 }

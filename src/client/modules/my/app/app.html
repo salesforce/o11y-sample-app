@@ -1,159 +1,196 @@
 <template>
-    <div class="slds-grid slds-wrap">
-        <div class="slds-col slds-size_2-of-12 sidebar center">
-            <lightning-vertical-navigation selected-item={selectedNav} onselect={handleNavigationSelect}>
-                <lightning-vertical-navigation-section label="o11y Sample App">
-                    <lightning-vertical-navigation-item label="Getting Started" name="getting_started">
-                    </lightning-vertical-navigation-item>
-                    <lightning-vertical-navigation-item label="Click Tracking" name="click_tracking">
-                    </lightning-vertical-navigation-item>
-                    <lightning-vertical-navigation-item label="Error Logging" name="error_logging">
-                    </lightning-vertical-navigation-item>
-                    <lightning-vertical-navigation-item label="Activity Tracking" name="activity_tracking">
-                    </lightning-vertical-navigation-item>
-                </lightning-vertical-navigation-section>
-            </lightning-vertical-navigation>
+    <div class="column">
+        <div class="row1">
+            <lightning-icon icon-name="standard:metrics" size="large"></lightning-icon>
+            <span class="app-title">Observability (o11y) Sample App</span>
+            <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home"
+                target="_blank">Documentation</a>
         </div>
-        <div class="slds-col slds-size_2-of-12 background"></div>
-        <div class="slds-col slds-size_1-of-12 background"></div>
-        <div class="slds-col slds-size_8-of-12 content">
-            <div class="container">
-                <article class="slds-card" id="getting-started">
-                    <div class="slds-card__header slds-grid">
-                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                            <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <div class="slds-text-heading_large introduction-header">Olly (<span
-                                            style="font-family: monospace">o11y</span>) Sample App</div>
-                                </h2>
-                            </div>
-                        </header>
-                    </div>
-                    <div class="slds-card__body slds-card__body_inner slds-text-align_center introduction-text">
-                        <span>Welcome! This app will walk you through different ways to use the new instrumentation
-                            service <strong>olly</strong>.</span>
-                    </div>
-                    <footer class="slds-card__footer">
-                    </footer>
-                </article>
-                <article class="slds-card">
-                    <div class="slds-card__header slds-grid">
-                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                            <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <a href="#" class="slds-card__header-link slds-truncate" title="Getting Started">
-                                        <span>Getting Started</span>
-                                    </a>
-                                </h2>
-                            </div>
-                        </header>
-                    </div>
-                    <div class="slds-card__body slds-card__body_inner content-text">
-                        <p> To see examples of how this works, please open
-                            <strong>src/client/modules/my/app/app.js</strong>, or just follow the steps for your app!
-                        </p>
-                        <p> To start, add the o11y dependency :</p>
-                        <p class="info">npm install o11y --save</p>
-                        <p> Next, you will need to import the specific functions from our package. If you are
-                            instrumenting and Off-core app, you will
-                            need to import 3 functions as shown below. If you are developing on core, you only need to
-                            import the first function :
-                        </p>
-                        <p class="info">import &#123;
-                            getInstrumentation,
-                            registerInstrumentedApp,
-                            CoreCollector
-                            &#125; from 'o11y/client';</p>
-                        <p>You also have to do something with the core collector?????????</p>
-                        <p> You then have to register your app, using a descriptive name to track your data</p>
-                        <p class="info">
-                            this.instr = getInstrumentation('DESCRIPTIVE-NAME');
-                        </p>
-                        <p> Great! Now you're ready to instrument!</p>
-                    </div>
-                    <footer class="slds-card__footer">
-                    </footer>
-                </article>
-                <article class="slds-card" id="dom-events">
-                    <div class="slds-card__header slds-grid">
-                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
-                            <div class="slds-media__body">
-                                <h2 class="slds-card__header-title">
-                                    <a href="#" class="slds-card__header-link slds-truncate" title="Getting Started">
-                                        <span>Logging Dom Events</span>
-                                    </a>
-                                </h2>
-                            </div>
-                        </header>
-                    </div>
-                    <div class="slds-card__body slds-card__body_inner content-text">
-                        <!-- prettier-ignore -->
-                        <p class="bold-text"><strong>Follow along in your browser console to see example data, and in
-                                your terminal window to see the actual
-                                events being generated. Note that it will take ~10 seconds for the terminal window to
-                                reflect the data received.
-                            </strong></p>
-                        <p>There are two main ways to log dom events. The first is to use our automatic click tracker,
-                            which will record basic
-                            information about the dom element and log it without you having to add anything. The button
-                            below is not instrumented but will
-                            send an event through the click tracker. Note that we only automatically track clicks on
-                            buttons and anchors.
-                        </p>
-                        <div class="button-container">
-                            <button id="auto-log" class="link">Log Automatically!</button>
+        <div class="row2">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_8-of-12">
+                    <lightning-tabset variant="vertical" active-tab-value={selectedSection}>
+                        <lightning-tab label={labelIntro} value={sectionIntro}>
+                            <my-app-section label={labelIntro} icon-name="custom:custom107">
+                                <div slot="doc">
+                                    <p class="header">Welcome!</p>
+                                    <p>
+                                        This sample app demonstrates the usage of the new instrumentation platform
+                                        "Olly",
+                                        provided by the o11y module. To play around, go ahead and experiment with the
+                                        different
+                                        tabs.
+                                    </p>
+                                    <p>
+                                        In Salesforce Core cases, the instrumentation platform will have been
+                                        initialized
+                                        for
+                                        you by
+                                        the environment. If not, such as in an off-core LWC app like this one, the
+                                        top-level
+                                        entity
+                                        must initialize it before use. Please refer to the
+                                        <code>initializeInstrumentation()</code>
+                                        method in app.js for an example.
+                                    </p>
+                                    <p>
+                                        To start instrumenting your code, add the following import:
+                                    </p>
+                                    <pre>import &#123; getInstrumentation &#125; from 'o11y/client';</pre>
+                                    <p>In your constructor, get an instrumentation instance:</p>
+                                    <pre>this.instr = getInstrumentation('my_instrumentation_name');</pre>
+                                    <p>You can then call the available methods on this instance. This functionality is
+                                        demonstrated
+                                        in the other sections of this app.</p>
+                                    <p>The instrumentation platform redirects logs to registered log collectors. This
+                                        app
+                                        registers
+                                        3
+                                        such entities:
+                                    </p>
+                                    <ol>
+                                        <li>A <em>Console collector</em>, which outputs to the developer console in your
+                                            browser,
+                                        </li>
+                                        <li>A <em>Visual collector</em>, which creates entries in to the bottom section
+                                            of
+                                            the
+                                            app,
+                                        </li>
+                                        <li>A <em>Core Collector</em>, which is exported by the o11y module and sends
+                                            logs
+                                            to a
+                                            server-side endpoint. This sample app project comes with a local server, but
+                                            you
+                                            can
+                                            also use a Salesforce instance you have access to.</li>
+                                    </ol>
+                                    <p class="header">To Debug This App:</p>
+                                    <div>
+                                        Experiments are organized into individual LWC components, with the prefix
+                                        <em>Play</em>.
+                                        <ol>
+                                            <li>Launch the <em>Developer Tools.</em></li>
+                                            <li>Select the <em>Sources</em> tab on the tab and the <em>Page</em> tab on
+                                                the
+                                                left.
+                                            </li>
+                                            <li>Drill down to <em> top &gt; o11y-sample &gt; . &gt; src &gt; client &gt;
+                                                    modules/my</em>.</li>
+                                            <li>Drill down further to the LWC component you want to debug and select the
+                                                .js
+                                                file.
+                                            </li>
+                                            <li>Set a breakpoint.</li>
+                                            <li>Run the experiment.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
+                        <lightning-tab label={labelErrors} value={sectionErrors}>
+                            <my-app-section label={labelErrors} icon-name="custom:custom34">
+                                <div slot="doc">
+                                    To log an error:
+                                    <pre>this.instr.error(err); // err is an instance of Error</pre>
+                                    <p>
+                                        For other usages, please refer to the <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error"
+                                            target="_blank">error
+                                            API documentation</a>.
+                                    </p>
+                                </div>
+                                <div slot="play">
+                                    <my-error-play></my-error-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
+                        <lightning-tab label={labelActivities} value={sectionActivities}>
+                            <my-app-section label={labelActivities} icon-name="standard:operating_hours">
+                                <div slot="doc">
+                                    To log the duration of a long-running activity, use the activity API:
+                                    <pre>
+                                const act = this.instr.startActivity('my-long-process');<br>
+                                // ... long process ...<br>
+                                act.stop();
+                            </pre>
+                                    <p>
+                                        For other usages, please refer to the <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
+                                            target="_blank">startActivity
+                                            API documentation</a>.
+                                    </p>
+                                </div>
+                                <div slot="play">
+                                    <my-activity activity-name="Activity 1"></my-activity>
+                                    <my-activity activity-name="Activity 2"></my-activity>
+                                    <my-activity activity-name="Activity 3"></my-activity>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
+                        <lightning-tab label={labelEvents} value={sectionEvents}>
+                            <my-app-section label={labelEvents} icon-name="standard:custom_notification">
+                            </my-app-section>
+                        </lightning-tab>
+                        <lightning-tab label={labelCustom} value={sectionCustom}>
+                            <my-app-section label={labelCustom} icon-name="standard:record">
+                                <div slot="doc">
+                                    <span class="header">In general, to log a custom message:</span>
+                                    <ol>
+                                        <li>First define the structure of your message as a schema, and have it
+                                            checked-in
+                                            to
+                                            the
+                                            schema repo.</li>
+                                        <li>Import your schema from the schema NPM module.</li>
+                                        <li>Pass the schema as the first argument to the log method and a compliant data
+                                            as
+                                            the
+                                            second. </li>
+                                    </ol>
+                                    <pre>
+                                        import &#123; mySchema &#125; from 'o11ysample/schemas';<br>
+                                        // ...<br>
+                                        this.instr.log(mySchema, myData);
+                                    </pre>
+                                    <span class="header">To log a sample message defined by this app:</span>
+                                    <p>
+                                        Please fill out values in the form below. All values are optional. If a
+                                        specified value is invalid for the type of the field, o11y validation will throw
+                                        an exception in development mode. In that case, the app will catch the error and
+                                        log it.
+                                    </p>
+                                    <div>
+                                        <lightning-badge label="Note" icon-name="utility:warning"></lightning-badge>
+                                        <span>
+                                            The schemas are currently embedded in this project, but this will soon
+                                            change.
+                                        </span>
+                                    </div>
+                                </div>
+                                <my-custom-play slot="play"></my-custom-play>
+                            </my-app-section>
+                        </lightning-tab>
+                    </lightning-tabset>
+                </div>
+                <div class="slds-col slds-size_4-of-12">
+                    <div class="collector-pane">
+                        <div class="collector-header">
+                            <span class="collector-header-title">Logs</span>
+                            <lightning-badge if:true={logs.length} label={logs.length}></lightning-badge>
+                            <lightning-button if:true={logs.length} label="Clear" title="Clear the log entries"
+                                onclick={handleClearLogs} variant="destructive" icon-name="utility:delete"
+                                class="slds-m-left_x-small">
+                            </lightning-button>
                         </div>
-                        <p> Once the terminal window receives the data, you will notice several messages received. For
-                            now, only the messages under the timestamp are
-                            important to focus on. You will see the log received containing information on the
-                            components that were on the button, along with an Argus metric
-                            that is sent by default on click. This metric is specifically to count the number of event
-                            generated and create more transparency.
-                        </p>
-                        <br></br>
-                        <p> Below we have a button that is instrumented manually using our log function. This is the
-                            usage, using the mouse event as the input :</p>
-                        <p class="info">this.instr.domEvent(event, event.target);</p>
-                        <div class="button-container">
-                            <button onclick={domEvent} class="link">Log Manual Event!</button>
+                        <div class="collector-body">
+                            <my-visual-collector logs={logs}></my-visual-collector>
                         </div>
-                        <p> You will see the terminal receives a similar event (since the button is the same). This
-                            method can be useful for instrumenting elements
-                            that are not buttons or anchors. If you would like to add additional data, you can extend
-                            the domEvent function using a custom schema. More information
-                            on creating schemas can be found <a href="#">here!</a> The button below is instrumented with
-                            a very simple custom schema.
-                        </p>
-                        <div class="button-container">
-                            <button onclick={handleLogCustom} class="link">Log Custom Data</button>
-                        </div>
-                        <!-- <div class="button-container">
-                                <button onclick={domEventWithSchema} class="link">Log Custom Schema!</button>
-                            </div> -->
                     </div>
-                    <footer class="slds-card__footer">
-                    </footer>
-                </article>
-                <article class="slds-card" id="activity">
-                    <div class="slds-card__header slds-grid">
-                    </div>
-                    <div class="slds-card__body slds-card__body_inner content-text">
-                        <lightning-layout horizontal-align="space">
-                            <lightning-layout-item padding="around-small">
-                                <my-activity activity-name="Activity 1"></my-activity>
-                            </lightning-layout-item>
-
-                            <lightning-layout-item padding="around-small">
-                                <my-activity activity-name="Activity 2"></my-activity>
-                            </lightning-layout-item>
-                        </lightning-layout>
-
-                    </div>
-                    <button onclick={handleErrorClick} class="link">Throw and Log an error</button>
-                    <my-visual-collector logs={logs}></my-visual-collector>
-                </article>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="row3">
+        </div>
     </div>
 </template>

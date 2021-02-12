@@ -1,10 +1,8 @@
 <template>
-    <h3>
-        <lightning-icon icon-name="standard:custom" alternative-text="Custom Schema" title="custom schema">
+    <div class="card-header">
+        <lightning-icon icon-name="standard:record" alternative-text="o11y Sample Data" title="o11y Sample Data">
         </lightning-icon>
-        Custom Schema
-    </h3>
-    <p>
-        schema ID: {model.schemaId}
-    </p>
+        <span class="card-title">O11Y Sample Data</span>
+    </div>
+    <my-key-values model={keyValues}></my-key-values>
 </template>

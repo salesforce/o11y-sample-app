@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 
-export default class O11ySampleCard extends LightningElement {
+export default class KeyValues extends LightningElement {
     @api
     model;
 }

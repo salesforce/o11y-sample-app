@@ -1,13 +1,10 @@
 <template>
-    <h3>
+    <div class="card-header">
         <lightning-icon icon-name="custom:custom34" alternative-text="Error" title="error">
         </lightning-icon>
-        Error
-    </h3>
-    <p>
-        Message: {model.msg.message}
-    </p>
-    <p>Callstack:</p>
+        <span class="card-title">Error</span>
+    </div>
+    <my-key-values model={keyValues}></my-key-values>
+    <p>stack</p>
     <pre>{model.msg.stack}</pre>
-
 </template>

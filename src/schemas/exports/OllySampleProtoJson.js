@@ -7,13 +7,33 @@ export default {
 					"nested": {
 						"OllySample": {
 							"fields": {
-								"text": {
-									"type": "string",
-									"id": 1,
+								"bool": {
+									"type": "bool",
+									"id": 1
 								},
-								"integerValue": {
-									"type": 'int32',
+								"string": {
+									"type": "string",
 									"id": 2
+								},
+								"int32": {
+									"type": "int32",
+									"id": 3
+								},
+								"int64": {
+									"type": "int32",
+									"id": 4
+								},
+								"uint32": {
+									"type": "uint32",
+									"id": 5
+								},
+								"uint64": {
+									"type": "uint64",
+									"id": 6
+								},
+								"double": {
+									"type": "double",
+									"id": 7
 								}
 							}
 						}
