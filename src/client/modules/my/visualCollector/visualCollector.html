@@ -1,0 +1,25 @@
+<template>
+    <template for:each={logs} for:item="log">
+        <div class="card-outer" key={log.seq}>
+            <lightning-card>
+                <div class="card-inner">
+                    <template if:true={log._isActivity}>
+                        <my-activity-card model={log}></my-activity-card>
+                    </template>
+                    <template if:true={log._isInstrumentedEvent}>
+                        <my-instrumented-event-card model={log}></my-instrumented-event-card>
+                    </template>
+                    <template if:true={log._isError}>
+                        <my-error-card model={log}></my-error-card>
+                    </template>
+                    <template if:true={log._isO11ySample}>
+                        <my-custom-card model={log}></my-custom-card>
+                    </template>
+                    <template if:true={log._isUnknown}>
+                        <my-unknown-card model={log}></my-unknown-card>
+                    </template>
+                </div>
+            </lightning-card>
+        </div>
+    </template>
+</template>

@@ -7,14 +7,14 @@ const coreEnvelopeSchema = knownSchemas.coreEnvelopeSchema;
 const instrumentedEventSchema = knownSchemas.instrumentedEventSchema;
 const activitySchema = knownSchemas.activitySchema;
 const errorSchema = knownSchemas.errorSchema;
-const ollySampleSchema = knownSchemas.ollySampleSchema;
+const o11ySampleSchema = knownSchemas.o11ySampleSchema;
 
 const schemas = new Map();
 schemas.set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema);
 schemas.set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema);
 schemas.set(getSchemaId(activitySchema), activitySchema);
 schemas.set(getSchemaId(errorSchema), errorSchema);
-schemas.set(getSchemaId(ollySampleSchema), ollySampleSchema);
+schemas.set(getSchemaId(o11ySampleSchema), o11ySampleSchema);
 
 function getSchemaId(schema) {
     return `${schema.namespace}.${schema.name}`;

@@ -1,0 +1,13 @@
+.section-header {
+    display: inline-block;
+    font-size: 22pt;
+    margin-bottom: 12px;
+}
+
+.section-header-title {
+    margin-left: 10px;
+}
+
+.play {
+    padding: 0;
+}

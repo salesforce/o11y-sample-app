@@ -1,7 +1,7 @@
-import ollySamplePbjs from "./OllySampleProtoJson";
+import o11ySamplePbjs from "./O11ySampleProtoJson";
 
-export const ollySampleSchema = {
+export const o11ySampleSchema = {
     namespace: 'sf.instrumentation',
-    name: 'OllySample',
-    pbjsSchema: ollySamplePbjs
+    name: 'O11ySample',
+    pbjsSchema: o11ySamplePbjs
 };

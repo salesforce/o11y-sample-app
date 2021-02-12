@@ -1,0 +1,21 @@
+<template>
+    <div class="card-header">
+        <lightning-icon icon-name="standard:custom_notification" alternative-text="Instrumented Event"
+            title="instrumented event">
+        </lightning-icon>
+        <span class="card-title">Instrumented Event</span>
+    </div>
+    <my-key-values model={keyValues}></my-key-values>
+
+    <div if:true={userSchemaName}>
+        <p class="header">User Payload (encoded)</p>
+        <p>schemaName: {userSchemaName}</p>
+        <my-key-values model={userPayload}></my-key-values>
+    </div>
+
+    <div if:true={pageSchemaName}>
+        <p class="header">Page Payload (encoded)</p>
+        <p>schemaName: {pageSchemaName}</p>
+        <my-key-values model={pagePayload}></my-key-values>
+    </div>
+</template>

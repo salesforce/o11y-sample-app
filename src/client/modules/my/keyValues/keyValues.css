@@ -1,0 +1,12 @@
+.fitwidth {
+    width: 1px;
+    white-space: nowrap;
+}
+
+tr {
+    padding-right: 20px;
+}
+
+td {
+    padding-right: 20px;
+}

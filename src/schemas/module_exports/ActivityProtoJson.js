@@ -34,30 +34,14 @@ module.exports = {
                   "rule": "repeated",
                   "type": "uint32",
                   "id": 7
-                }
-              }
-            },
-            "Error": {
-              "fields": {
-                "name": {
+                },
+                "isRoot": {
+                  "type": "bool",
+                  "id": 8
+                },
+                "preRootId": {
                   "type": "string",
-                  "id": 1
-                },
-                "message": {
-                  "type": "string",
-                  "id": 2
-                },
-                "stack": {
-                  "type": "string",
-                  "id": 3
-                },
-                "userPayload": {
-                  "type": "Payload",
-                  "id": 4
-                },
-                "pagePayload": {
-                  "type": "Payload",
-                  "id": 5
+                  "id": 9
                 }
               }
             },
