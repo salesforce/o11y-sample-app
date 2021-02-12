@@ -2,7 +2,7 @@ const activityPbjs = require("./ActivityProtoJson");
 const coreEnvelopePbjs = require("./CoreEnvelopeProtoJson");
 const errorPbjs = require("./ErrorProtoJson");
 const instrumentedEventPbjs = require("./InstrumentedEventProtoJson");
-const ollySamplePbjs = require("./OllySampleProtoJson");
+const o11ySamplePbjs = require("./O11ySampleProtoJson");
 
 // This namespace is reserved for the instrumentation team in Salesforce
 const namespace = 'sf.instrumentation';
@@ -31,8 +31,8 @@ module.exports.errorSchema = {
     pbjsSchema: errorPbjs
 };
 
-module.exports.ollySampleSchema = {
+module.exports.o11ySampleSchema = {
     namespace,
-    name: 'OllySample',
-    pbjsSchema: ollySamplePbjs
+    name: 'O11ySample',
+    pbjsSchema: o11ySamplePbjs
 };

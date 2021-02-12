@@ -1,0 +1,16 @@
+.header {
+    margin: 10px 0;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.act-example {
+    display: block;
+    margin: 12px;
+}
+
+.click-target {
+    width: 40px;
+    height: 40px;
+    background-color: red;
+}

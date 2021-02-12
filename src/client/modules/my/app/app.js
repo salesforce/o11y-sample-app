@@ -3,7 +3,7 @@ import { LightningElement } from 'lwc';
 // #LOOK: the import path is subject to change
 import { registerInstrumentedApp, CoreCollector } from 'o11y/client';
 
-import { ollySampleSchema } from '../../../../schemas/exports/KnownSchemas';
+import { o11ySampleSchema } from '../../../../schemas/exports/KnownSchemas';
 import { ConsoleCollector } from '../../../consoleCollector';
 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
@@ -102,7 +102,7 @@ export default class App extends LightningElement {
     }
 
     isCustom(schemaId) {
-        return schemaId === 'sf.instrumentation.OllySample';
+        return schemaId === 'sf.instrumentation.O11ySample';
     }
 
     isUnknown(schemaId) {
@@ -139,14 +139,14 @@ export default class App extends LightningElement {
     }
 
     domEventWithSchema(event) {
-        this.instrApp.domEvent(event, this, ollySampleSchema, {
+        this.instrApp.domEvent(event, this, o11ySampleSchema, {
             text: 'Demonstrates optional data accompanying the DomEvent',
             integerValue: Date.now()
         });
     }
 
     handleLogCustom() {
-        this.instrApp.log(ollySampleSchema, {
+        this.instrApp.log(o11ySampleSchema, {
             text: 'Demonstrates custom log',
             integerValue: Math.floor(Math.random() * 2147483647)
         });

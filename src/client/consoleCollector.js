@@ -2,13 +2,13 @@ const bgColorMap = {
     Error: 'Crimson',
     Activity: 'CadetBlue',
     InstrumentedEvent: 'DarkOliveGreen',
-    OllySample: 'BlueViolet'
+    O11ySample: 'BlueViolet'
 }
 const colorMap = {
     Error: 'white',
     Activity: 'white',
     InstrumentedEvent: 'white',
-    OllySample: 'white'
+    O11ySample: 'white'
 }
 const defaultColor = 'black';
 const defaultBgColor = 'Gainsboro';

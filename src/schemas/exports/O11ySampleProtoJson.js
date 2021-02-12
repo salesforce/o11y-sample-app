@@ -1,11 +1,11 @@
-// Must match the one in ../exports
-module.exports = {
+// Must match the one in ../module_exports
+export default {
 	"nested": {
 		"sf": {
 			"nested": {
 				"instrumentation": {
 					"nested": {
-						"OllySample": {
+						"O11ySample": {
 							"fields": {
 								"bool": {
 									"type": "bool",

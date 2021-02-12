@@ -205,3 +205,7 @@ lightning-tab {
     height: calc(100vh - 110px);
     overflow-y: auto;
 }
+
+p {
+    margin-bottom: 1em;
+}

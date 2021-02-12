@@ -16,22 +16,14 @@
                                     <p class="header">Welcome!</p>
                                     <p>
                                         This sample app demonstrates the usage of the new instrumentation platform
-                                        "Olly",
-                                        provided by the o11y module. To play around, go ahead and experiment with the
-                                        different
-                                        tabs.
+                                        "Olly", provided by the o11y module. To play around, go ahead and experiment
+                                        with the different tabs.
                                     </p>
                                     <p>
                                         In Salesforce Core cases, the instrumentation platform will have been
-                                        initialized
-                                        for
-                                        you by
-                                        the environment. If not, such as in an off-core LWC app like this one, the
-                                        top-level
-                                        entity
-                                        must initialize it before use. Please refer to the
-                                        <code>initializeInstrumentation()</code>
-                                        method in app.js for an example.
+                                        initialized for you by the environment. If not, such as in an off-core LWC app
+                                        like this one, the top-level entity must initialize it before use. Please refer
+                                        to the <code>initializeInstrumentation()</code> method in app.js for an example.
                                     </p>
                                     <p>
                                         To start instrumenting your code, add the following import:
@@ -40,46 +32,32 @@
                                     <p>In your constructor, get an instrumentation instance:</p>
                                     <pre>this.instr = getInstrumentation('my_instrumentation_name');</pre>
                                     <p>You can then call the available methods on this instance. This functionality is
-                                        demonstrated
-                                        in the other sections of this app.</p>
+                                        demonstrated in the other sections of this app.</p>
                                     <p>The instrumentation platform redirects logs to registered log collectors. This
-                                        app
-                                        registers
-                                        3
-                                        such entities:
+                                        app registers 3 such entities:
                                     </p>
                                     <ol>
                                         <li>A <em>Console collector</em>, which outputs to the developer console in your
                                             browser,
                                         </li>
                                         <li>A <em>Visual collector</em>, which creates entries in to the bottom section
-                                            of
-                                            the
-                                            app,
-                                        </li>
+                                            of the app, </li>
                                         <li>A <em>Core Collector</em>, which is exported by the o11y module and sends
-                                            logs
-                                            to a
-                                            server-side endpoint. This sample app project comes with a local server, but
-                                            you
-                                            can
-                                            also use a Salesforce instance you have access to.</li>
+                                            logs to a server-side endpoint. This sample app project comes with a local
+                                            server, but you can also use a Salesforce instance you have access to.</li>
                                     </ol>
                                     <p class="header">To Debug This App:</p>
                                     <div>
-                                        Experiments are organized into individual LWC components, with the prefix
-                                        <em>Play</em>.
                                         <ol>
                                             <li>Launch the <em>Developer Tools.</em></li>
                                             <li>Select the <em>Sources</em> tab on the tab and the <em>Page</em> tab on
-                                                the
-                                                left.
+                                                the left.
                                             </li>
                                             <li>Drill down to <em> top &gt; o11y-sample &gt; . &gt; src &gt; client &gt;
                                                     modules/my</em>.</li>
                                             <li>Drill down further to the LWC component you want to debug and select the
-                                                .js
-                                                file.
+                                                .js file. Experiments are organized into individual LWC components, with
+                                                the suffix <em> Play</em>.
                                             </li>
                                             <li>Set a breakpoint.</li>
                                             <li>Run the experiment.</li>
@@ -110,10 +88,10 @@
                                 <div slot="doc">
                                     To log the duration of a long-running activity, use the activity API:
                                     <pre>
-                                const act = this.instr.startActivity('my-long-process');<br>
-                                // ... long process ...<br>
-                                act.stop();
-                            </pre>
+                                        const act = this.instr.startActivity('my-long-process');<br>
+                                        // ... long process ...<br>
+                                        act.stop();
+                                    </pre>
                                     <p>
                                         For other usages, please refer to the <a
                                             href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
@@ -130,6 +108,30 @@
                         </lightning-tab>
                         <lightning-tab label={labelEvents} value={sectionEvents}>
                             <my-app-section label={labelEvents} icon-name="standard:custom_notification">
+                                <div slot="doc">
+                                    <p>The o11y module comes with an <em>Automatic Click Tracker (ACT)</em>. If it is
+                                        activated by the app, mouse-clicks on buttons, anchors and inputs of type button
+                                        will be captured in logs.</p>
+                                    <p>A developer can choose to log clicks or other DOM events in their event handler
+                                        using the <code>domEvent</code> API designed specifically for this purpose. In
+                                        addition to capturing the same event data that the ACT would, it allows the
+                                        developer to provide additional data to be included in the same log
+                                        entry.</p>
+                                    <p> For more detail, please refer to the <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent"
+                                            target="_blank">domEvent
+                                            API documentation</a>.
+                                    </p>
+                                    <div>
+                                        <lightning-badge label="Note" icon-name="utility:warning"></lightning-badge>
+                                        <span>
+                                            Currently, only mouse-click events are supported.
+                                        </span>
+                                    </div>
+                                </div>
+                                <div slot="play">
+                                    <my-instrumented-event-play slot="play"></my-instrumented-event-play>
+                                </div>
                             </my-app-section>
                         </lightning-tab>
                         <lightning-tab label={labelCustom} value={sectionCustom}>
@@ -138,15 +140,10 @@
                                     <span class="header">In general, to log a custom message:</span>
                                     <ol>
                                         <li>First define the structure of your message as a schema, and have it
-                                            checked-in
-                                            to
-                                            the
-                                            schema repo.</li>
+                                            checked-in to the schema repo.</li>
                                         <li>Import your schema from the schema NPM module.</li>
                                         <li>Pass the schema as the first argument to the log method and a compliant data
-                                            as
-                                            the
-                                            second. </li>
+                                            as the second. </li>
                                     </ol>
                                     <pre>
                                         import &#123; mySchema &#125; from 'o11ysample/schemas';<br>

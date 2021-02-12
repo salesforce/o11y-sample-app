@@ -1,0 +1,31 @@
+<template>
+    <p class="header">Try clicking on the below examples:</p>
+    <a class="act-example" href="https://git.soma.salesforce.com/instrumentation/o11y-sample-app"
+        target="_blank">Example link to the
+        app's source repo</a>
+    <a class="act-example" href="https://www.salesforce.com" target="_blank" onclick={handleAnchorClick}>Anchor with
+        handler that calls
+        event.preventDefault()</a>
+
+
+    <input class="act-example" type="button" value="Input [type=button] without handler">
+
+    <input class="act-example" type="button" onclick={handleInputClick} value="Input [type=button] with handler">
+
+    <button class="act-example">Button without handler</button>
+
+    <button class="act-example" onclick={handleButtonClick}>Button with handler</button>
+
+    <lightning-button label="Lightning-Button without handler" class="act-example slds-m-left_x-small">
+    </lightning-button>
+
+    <lightning-button variant="brand" label="Lightning-Button with handler" onclick={handleLwcButtonClick}
+        class="act-example slds-m-left_x-small"></lightning-button>
+
+    <div class="act-example">
+        <p>A div whose click gets ignored by the ACT, but is explicitly captured.</p>
+        <div onclick={handleDivClick} class="click-target"></div>
+
+        <!-- <my-eventer color-value={eventerColor} oncustomclick={handleEventerClick}></my-eventer> -->
+    </div>
+</template>

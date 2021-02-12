@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
-import { ollySampleSchema } from '../../../../schemas/exports/KnownSchemas';
+import { o11ySampleSchema } from '../../../../schemas/exports/KnownSchemas';
 
 export default class CustomPlay extends LightningElement {
     @api
@@ -67,7 +67,7 @@ export default class CustomPlay extends LightningElement {
 
         try {
             // This will throw in development-mode if the logData has invalid values per the schema
-            this.instr.log(ollySampleSchema, logData);
+            this.instr.log(o11ySampleSchema, logData);
         } catch (ex) {
             this.instr.error(ex);
         }
