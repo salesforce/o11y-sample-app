@@ -1,9 +1,12 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
 import { o11ySampleSchema } from '../../../../schemas/exports/KnownSchemas';
 
 export default class InstrumentedEventPlay extends LightningElement {
     divColorValue = 0;
+
+    @api
+    isActActive;
 
     constructor() {
         super();
@@ -27,6 +30,11 @@ export default class InstrumentedEventPlay extends LightningElement {
         alert(`The handler for the ${text} is executing. If the automatic click tracker is on, the click will be logged once execution resumes.`);
     }
 
+    handleAnchorClick(event) {
+        this.notify('anchor');
+        event.preventDefault();
+    }
+
     handleInputClick() {
         this.notify('input');
     }
@@ -48,5 +56,9 @@ export default class InstrumentedEventPlay extends LightningElement {
         });
         this.divColorValue = Math.floor(Math.random() * 0x1000000);
         this.updateDivColor();
+    }
+
+    handleToggleActClick() {
+        this.dispatchEvent(new CustomEvent('toggleact'));
     }
 }

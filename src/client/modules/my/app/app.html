@@ -10,7 +10,7 @@
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_8-of-12">
                     <lightning-tabset variant="vertical" active-tab-value={selectedSection}>
-                        <lightning-tab label={labelIntro} value={sectionIntro}>
+                        <lightning-tab label={labelIntro} value={sectionIntro} onactive={handleTabSelect}>
                             <my-app-section label={labelIntro} icon-name="custom:custom107">
                                 <div slot="doc">
                                     <p class="header">Welcome!</p>
@@ -66,7 +66,7 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelErrors} value={sectionErrors}>
+                        <lightning-tab label={labelErrors} value={sectionErrors} onactive={handleTabSelect}>
                             <my-app-section label={labelErrors} icon-name="custom:custom34">
                                 <div slot="doc">
                                     To log an error:
@@ -83,7 +83,7 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelActivities} value={sectionActivities}>
+                        <lightning-tab label={labelActivities} value={sectionActivities} onactive={handleTabSelect}>
                             <my-app-section label={labelActivities} icon-name="standard:operating_hours">
                                 <div slot="doc">
                                     To log the duration of a long-running activity, use the activity API:
@@ -98,6 +98,10 @@
                                             target="_blank">startActivity
                                             API documentation</a>.
                                     </p>
+                                    <p>
+                                        The sample app creates a <em>root activity</em> to capture the duration of the
+                                        active tab.
+                                    </p>
                                 </div>
                                 <div slot="play">
                                     <my-activity activity-name="Activity 1"></my-activity>
@@ -106,7 +110,7 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelEvents} value={sectionEvents}>
+                        <lightning-tab label={labelEvents} value={sectionEvents} onactive={handleTabSelect}>
                             <my-app-section label={labelEvents} icon-name="standard:custom_notification">
                                 <div slot="doc">
                                     <p>The o11y module comes with an <em>Automatic Click Tracker (ACT)</em>. If it is
@@ -130,11 +134,12 @@
                                     </div>
                                 </div>
                                 <div slot="play">
-                                    <my-instrumented-event-play slot="play"></my-instrumented-event-play>
+                                    <my-instrumented-event-play slot="play" is-act-active={clickTrackActive}
+                                        ontoggleact={handleToggleAct}></my-instrumented-event-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelCustom} value={sectionCustom}>
+                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect}>
                             <my-app-section label={labelCustom} icon-name="standard:record">
                                 <div slot="doc">
                                     <span class="header">In general, to log a custom message:</span>
@@ -152,16 +157,21 @@
                                     </pre>
                                     <span class="header">To log a sample message defined by this app:</span>
                                     <p>
-                                        Please fill out values in the form below. All values are optional. If a
-                                        specified value is invalid for the type of the field, o11y validation will throw
-                                        an exception in development mode. In that case, the app will catch the error and
-                                        log it.
+                                        The data passed to the <code>log</code> API needs to comply with the following
+                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3"
+                                            target="_blank"> proto3</a> schema:
                                     </p>
+                                    <pre class="proto3">
+                                        syntax = "proto3";<br>
+                                        package sf.instrumentation;<br><br>
+                                        message O11ySample &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
+                                        &#125;
+                                    </pre>
                                     <div>
                                         <lightning-badge label="Note" icon-name="utility:warning"></lightning-badge>
                                         <span>
                                             The schemas are currently embedded in this project, but this will soon
-                                            change.
+                                            change, when schemas must be imported via a separate module.
                                         </span>
                                     </div>
                                 </div>

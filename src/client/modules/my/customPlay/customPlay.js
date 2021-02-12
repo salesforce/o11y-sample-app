@@ -24,7 +24,7 @@ export default class CustomPlay extends LightningElement {
             switch (element.name) {
                 case 'inputBool':
                     if (!isEmpty) {
-                        logData.bool = Boolean(val);
+                        logData.bool = val === 'true' || (val === 'false' ? false : val);
                     }
                     break;
                 case 'inputString':

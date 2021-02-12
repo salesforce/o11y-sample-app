@@ -1,3 +1,9 @@
 lightning-button {
     margin-right: 10px;
 }
+
+.header {
+    margin: 10px 0;
+    font-size: larger;
+    font-weight: bold;
+}

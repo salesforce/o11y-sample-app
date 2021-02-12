@@ -30,8 +30,11 @@ export default class App extends LightningElement {
     sectionActivities = 'section_activities';
     sectionCustom = 'section_logs';
 
+    isRendered = false;
+    clickTrackActive = false;
     selectedSection = this.sectionIntro;
     logs = [];
+    rootActivity;
 
     constructor() {
         super();
@@ -54,8 +57,9 @@ export default class App extends LightningElement {
         // STEP 3: Register a metrics collector
         this.instrApp.registerMetricsCollector(coreCollector);
 
-        // STEP 4: Activate the automatic click tracker
-        this.toggleClickTracker();
+        // STEP 4: Activate the automatic click tracker via the following call:
+        // this.instrApp.activateClickTracker();
+        // For the sample app, we will leave it up to the user turn it on/off as needed
     }
 
     getCoreCollector() {
@@ -86,7 +90,7 @@ export default class App extends LightningElement {
             _isO11ySample: this.isCustom(schemaId),
             _isUnknown: this.isUnknown(schemaId),
         };
-        this.logs = [model, ...this.logs];        
+        this.logs = [model, ...this.logs];
     };
 
     isActivity(schemaId) {
@@ -124,7 +128,7 @@ export default class App extends LightningElement {
         };
     }
 
-    toggleClickTracker() {
+    handleToggleAct() {
         if (this.clickTrackActive) {
             this.clickTrackActive = false;
             this.instrApp.deactivateClickTracker();
@@ -134,33 +138,28 @@ export default class App extends LightningElement {
         }
     }
 
-    domEvent(event) {
-        this.instrApp.domEvent(event, this);
-    }
-
-    domEventWithSchema(event) {
-        this.instrApp.domEvent(event, this, o11ySampleSchema, {
-            text: 'Demonstrates optional data accompanying the DomEvent',
-            integerValue: Date.now()
-        });
-    }
-
-    handleLogCustom() {
-        this.instrApp.log(o11ySampleSchema, {
-            text: 'Demonstrates custom log',
-            integerValue: Math.floor(Math.random() * 2147483647)
-        });
-    }
-
-    handleNavigationSelect(event) {
-        const newNav = event.detail.name;
-        if (newNav !== this.selectedNav) {
-            console.log(newNav);
-            this.selectedNav = newNav;
-        }
-    }
-
     handleClearLogs() {
         this.logs = [];
+    }
+
+    handleTabSelect(event) {
+        this.startRootActivity(event.currentTarget.value);
+    }
+
+    startRootActivity(section) {
+        let label;
+        switch (section) {
+            case this.sectionIntro: label = this.labelIntro; break;
+            case this.sectionEvents: label = this.labelEvents; break;
+            case this.sectionErrors: label = this.labelErrors; break;
+            case this.sectionActivities: label = this.labelActivities; break;
+            case this.sectionCustom: label = this.labelCustom; break;
+            default: label = 'Unknown Section'; break;
+        }
+
+        if (this.rootActivity) {
+            this.rootActivity.stop();
+        }
+        this.rootActivity = this.instrApp.startRootActivity(label);
     }
 }

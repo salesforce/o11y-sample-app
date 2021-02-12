@@ -1,26 +1,34 @@
 <template>
+    <div>
+        <p class="header">Automatic Click Tracker is:<span if:true={isActActive}> On</span><span if:false={isActActive}>
+                Off</span>.
+        </p>
+        <lightning-button-group>
+            <lightning-button if:true={isActActive} label="Enable" disabled onclick={handleToggleActClick}>
+            </lightning-button>
+            <lightning-button if:false={isActActive} label="Enable" onclick={handleToggleActClick}></lightning-button>
+            <lightning-button if:true={isActActive} label="Disable" onclick={handleToggleActClick}></lightning-button>
+            <lightning-button if:false={isActActive} label="Disable" disabled onclick={handleToggleActClick}>
+            </lightning-button>
+        </lightning-button-group>
+    </div>
+
     <p class="header">Try clicking on the below examples:</p>
     <a class="act-example" href="https://git.soma.salesforce.com/instrumentation/o11y-sample-app"
-        target="_blank">Example link to the
-        app's source repo</a>
+        target="_blank">Example link to the app's source repo</a>
     <a class="act-example" href="https://www.salesforce.com" target="_blank" onclick={handleAnchorClick}>Anchor with
-        handler that calls
-        event.preventDefault()</a>
+        handler that calls event.preventDefault()</a>
 
+    <input class="act-example button" type="button" value="Input [type=button] without handler">
+    <input class="act-example button" type="button" onclick={handleInputClick} value="Input [type=button] with handler">
 
-    <input class="act-example" type="button" value="Input [type=button] without handler">
+    <button class="act-example button">Button without handler</button>
+    <button class="act-example button" onclick={handleButtonClick}>Button with handler</button>
 
-    <input class="act-example" type="button" onclick={handleInputClick} value="Input [type=button] with handler">
-
-    <button class="act-example">Button without handler</button>
-
-    <button class="act-example" onclick={handleButtonClick}>Button with handler</button>
-
-    <lightning-button label="Lightning-Button without handler" class="act-example slds-m-left_x-small">
+    <lightning-button label="Lightning-Button without handler" class="act-example slds-m-left_x-small button">
     </lightning-button>
-
     <lightning-button variant="brand" label="Lightning-Button with handler" onclick={handleLwcButtonClick}
-        class="act-example slds-m-left_x-small"></lightning-button>
+        class="act-example slds-m-left_x-small button"></lightning-button>
 
     <div class="act-example">
         <p>A div whose click gets ignored by the ACT, but is explicitly captured.</p>
