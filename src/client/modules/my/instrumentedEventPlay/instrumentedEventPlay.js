@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
-import { o11ySampleSchema } from '../../../../schemas/exports/KnownSchemas';
+import { o11ySampleSchema } from 'o11ySchema/ui-telemetry-js-schema';
 
 export default class InstrumentedEventPlay extends LightningElement {
     divColorValue = 0;

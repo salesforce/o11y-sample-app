@@ -1,9 +1,8 @@
 // Simple Express server setup to serve for local testing/dev API server
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-
-const processCoreEnvelope = require('./coreEnvelope').processCoreEnvelope;
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { processCoreEnvelope } from './coreEnvelope.mjs';
 
 const HOST = process.env.API_HOST || 'localhost';
 const PORT = process.env.API_PORT || 3002;

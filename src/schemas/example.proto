@@ -1,7 +1,7 @@
 syntax = "proto3";
-package sf.instrumentation;
+package sf.o11ySample;
 
-message O11ySample {
+message Example {
     bool bool = 1;
     string string = 2;
     int32 int32 = 3;
