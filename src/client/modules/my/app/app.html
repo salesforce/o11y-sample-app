@@ -100,13 +100,12 @@
                                     </p>
                                     <p>
                                         The sample app creates a <em>root activity</em> to capture the duration of the
-                                        active tab.
+                                        active tab. When the user switches tabs, it stops the current root activity and
+                                        starts a new one, using the label of the tab as the name of the root activity.
                                     </p>
                                 </div>
                                 <div slot="play">
-                                    <my-activity activity-name="Activity 1"></my-activity>
-                                    <my-activity activity-name="Activity 2"></my-activity>
-                                    <my-activity activity-name="Activity 3"></my-activity>
+                                    <my-activity-play></my-activity-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
