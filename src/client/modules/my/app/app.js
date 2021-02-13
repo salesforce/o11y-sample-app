@@ -1,12 +1,12 @@
 import { LightningElement } from 'lwc';
-
-// #LOOK: the import path is subject to change
 import { registerInstrumentedApp, CoreCollector } from 'o11y/client';
 
-import { o11ySampleSchema } from '../../../../schemas/exports/KnownSchemas';
 import { ConsoleCollector } from '../../../consoleCollector';
 
+// #LOOK: 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
+// You can set this to the salesforce endpoint in the form:
+// {ServerUrl}/services/data/{API version}/connect/proxy/ui-telemetry
 const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 
 // #LOOK: 
@@ -23,12 +23,23 @@ export default class App extends LightningElement {
     labelErrors = 'Error Logging';
     labelActivities = 'Activity Tracking';
     labelCustom = 'Custom Logs';
+    labelServer = 'Server Side';
+    // If adding a new label and a corrsponding section, update this.startRootActivity
 
     sectionIntro = 'section_intro';
     sectionEvents = 'section_events';
     sectionErrors = 'section_errors';
     sectionActivities = 'section_activities';
     sectionCustom = 'section_logs';
+    sectionServer = 'section_server';
+
+    sectionToLabelMap = new Map()
+        .set(this.sectionIntro, this.labelIntro)
+        .set(this.sectionEvents, this.labelEvents)
+        .set(this.sectionErrors, this.labelErrors)
+        .set(this.sectionActivities, this.labelActivities)
+        .set(this.sectionCustom, this.labelCustom)
+        .set(this.sectionServer, this.labelServer);
 
     isRendered = false;
     clickTrackActive = false;
@@ -39,6 +50,11 @@ export default class App extends LightningElement {
     constructor() {
         super();
         this.initializeInstrumentation();
+        window.addEventListener('beforeunload', () => {
+            if (this.rootActivity) {
+                this.rootActivity.stop();
+            }
+        });
     }
 
     initializeInstrumentation() {
@@ -147,19 +163,11 @@ export default class App extends LightningElement {
     }
 
     startRootActivity(section) {
-        let label;
-        switch (section) {
-            case this.sectionIntro: label = this.labelIntro; break;
-            case this.sectionEvents: label = this.labelEvents; break;
-            case this.sectionErrors: label = this.labelErrors; break;
-            case this.sectionActivities: label = this.labelActivities; break;
-            case this.sectionCustom: label = this.labelCustom; break;
-            default: label = 'Unknown Section'; break;
-        }
-
         if (this.rootActivity) {
+            // If rootActivity is not stopped explicitly, it will be terminated.
             this.rootActivity.stop();
         }
+        const label = this.sectionToLabelMap.get(section) || 'Unknown Section';
         this.rootActivity = this.instrApp.startRootActivity(label);
     }
 }

@@ -177,6 +177,28 @@
                                 <my-custom-play slot="play"></my-custom-play>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect}>
+                            <my-app-section label={labelServer} icon-name="standard:logging">
+                                <div slot="doc">
+                                    <p>
+                                        This app comes with a built-in web server so developers can see the logs flowing
+                                        end-to-end as a stand-alone app, without any dependencies to the Salesforce Core
+                                        application.
+                                    </p>
+                                    <p>
+                                        This app <em>also</em> supports uploading logs to a Salesforce instance, through
+                                        the <strong>Core Collector</strong>. To configure this usage, make changes as
+                                        needed to the source code tagged with <strong>#LOOK</strong>.</p>
+                                    <p>
+                                        For details on the Salesforce server end-point, please refer to the <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint"
+                                            target="_blank">Server
+                                            Endpoint</a> documentation.
+                                    </p>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
+
                     </lightning-tabset>
                 </div>
                 <div class="slds-col slds-size_4-of-12">
