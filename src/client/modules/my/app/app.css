@@ -200,10 +200,13 @@ lightning-tab {
 }
 
 .collector-body {
-    /* subtract row1 and row3 height + collector-header height */
+    /* subtract row1 and row3 height + collector-header height + margin-top */
     margin-top: 10px;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 120px);
     overflow-y: auto;
+    /* To match the style of the lightning-tabset: */
+    border-width: 1px;
+    border-radius: 4px;
 }
 
 p {
