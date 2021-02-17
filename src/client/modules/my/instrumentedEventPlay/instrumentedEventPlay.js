@@ -3,8 +3,6 @@ import { getInstrumentation } from 'o11y/client';
 import { o11ySampleSchema } from 'o11ySchema/ui-telemetry-js-schema';
 
 export default class InstrumentedEventPlay extends LightningElement {
-    divColorValue = 0;
-
     @api
     isActActive;
 
@@ -13,52 +11,90 @@ export default class InstrumentedEventPlay extends LightningElement {
         this.instr = getInstrumentation('InstrumentedEvent Play');
     }
 
-    renderedCallback() {
-        this.updateDivColor();
-    }
+    updateDivColor(div, colorValue) {
+        const hexColorString = `#${colorValue.toString(16).padStart(6, '0')}`;
 
-    updateDivColor() {
-        const clickTarget = this.template.querySelector('.click-target');
-        const hexColorString = `#${this.divColorValue.toString(16).padStart(6, '0')}`;
-
-        if (clickTarget.style.backgroundColor !== hexColorString) {
-            clickTarget.style.backgroundColor = hexColorString;
+        if (div.style.backgroundColor !== hexColorString) {
+            div.style.backgroundColor = hexColorString;
         }
     }
 
-    notify(text) {
+    notifyAct(text) {
         alert(`The handler for the ${text} is executing. If the automatic click tracker is on, the click will be logged once execution resumes.`);
     }
 
+    notifyNoAct(text) {
+        alert(`The handler for the ${text} is executing. If the automatic click tracker is on, it will ignore the event which the handler will log explicitly.`);
+    }
+
     handleAnchorClick(event) {
-        this.notify('anchor');
+        this.notifyAct('anchor');
         event.preventDefault();
     }
 
+    handleAnchorLogClick(event) {
+        this.notifyNoAct('anchor');
+        event.preventDefault();
+        this.logEvent(event);
+    }
+
     handleInputClick() {
-        this.notify('input');
+        this.notifyAct('input');
+    }
+
+    handleInputLogClick(event) {
+        this.notifyNoAct('input');
+        this.logEvent(event);
     }
 
     handleButtonClick() {
-        this.notify('button');
+        this.notifyAct('button');
+    }
+
+    handleButtonLogClick(event) {
+        this.notifyNoAct('button');
+        this.logEvent(event);
     }
 
     handleLwcButtonClick() {
-        this.notify('lightning-button');
+        this.notifyAct('lightning-button');
+    }
+
+    handleLwcButtonLogClick(event) {
+        this.notifyNoAct('lightning-button');
+        this.logEvent(event);
     }
 
     handleDivClick(event) {
-        const actualColor = window.getComputedStyle(this.template.querySelector('.click-target')).backgroundColor;
+        this.updateDivColor(event.target, this.newColor());
+    }
 
-        this.instr.domEvent(event, this, o11ySampleSchema, {
-            uint32: this.divColorValue,
-            string: actualColor,
-        });
-        this.divColorValue = Math.floor(Math.random() * 0x1000000);
-        this.updateDivColor();
+    handleDivLogClick(event) {
+        this.updateDivColor(event.target, this.newColor());
+        this.logEvent(event);
     }
 
     handleToggleActClick() {
         this.dispatchEvent(new CustomEvent('toggleact'));
+    }
+
+    newColor() {
+        return Math.floor(Math.random() * 0x1000000);
+    }
+
+    logEvent(event) {
+        const actualColor = window.getComputedStyle(event.target).backgroundColor;
+        // Convert actualColor text, which comes back in the form of "rgb(x, y, z)" or "rgba(x, y, z, a)", into an actual value.
+        const colorValue = actualColor.substring(actualColor.indexOf('(') + 1, actualColor.indexOf(')'))
+            .split(', ')
+            .slice(0, 3)
+            .map(s => parseInt(s))
+            .reduce((a, b) => a * 256 + b);
+
+
+        this.instr.domEvent(event, this, o11ySampleSchema, {
+            string: actualColor,
+            uint32: colorValue
+        });
     }
 }
