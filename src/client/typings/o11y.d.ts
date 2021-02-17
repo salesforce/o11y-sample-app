@@ -1,5 +1,6 @@
 declare module 'o11y/client' {
     import { INamespace, Type } from "protobufjs";
+    import { LightningElement } from "lwc";
 
     export function registerApp(): InstrumentedAppMethods | undefined;
     export function getInstrumentation(name?: string): Instrumentation;
@@ -57,7 +58,7 @@ declare module 'o11y/client' {
         log(schema: Schema, data?: SchematizedData): void;
         error(error: Error, schema?: Schema | string, data?: SchematizedData): void;
         startActivity(name: string): Activity;
-        domEvent(e: Event, handledBy: HTMLElement, schema?: Schema, data?: SchematizedData, auto?: boolean): void;
+        domEvent(e: Event, handledBy: HTMLElement | LightningElement, schema?: Schema, data?: SchematizedData, auto?: boolean): void;
         createUpCounter(name: string): UpCounter;
         createValueRecorder(name: string): ValueRecorder;
     }
