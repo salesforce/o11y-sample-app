@@ -8,7 +8,7 @@ This is a sample app that demonstrates the use of the `o11y` instrumentation pla
 
 Install yarn: `npm install -g yarn`
 
-Configure access to Nexus registry as described [here](https://git.soma.salesforce.com/nodeforce/nexus-npms). You'll need to make sure that Nexus is configured as the registry. Additionally make sure to install the proper cert as indicated on [Confluence](https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=NEXUS&title=Nexus+NPM+Repositories).
+Configure access to Nexus registry as described [here](https://git.soma.salesforce.com/nodeforce/nexus-npms). 
 
 ### Install dependencies & build
 
