@@ -7,6 +7,7 @@ import { ConsoleCollector } from '../../../consoleCollector';
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
 // You can set this to the salesforce endpoint in the form:
 // {ServerUrl}/services/data/{API version}/connect/proxy/ui-telemetry
+// const apiEndpoint = 'https://corsa04-basic-2015448476.vpod.t.force.com/services/data/v52.0/connect/proxy/ui-telemetry';
 const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 
 // #LOOK: 
@@ -80,7 +81,7 @@ export default class App extends LightningElement {
 
     getCoreCollector() {
         let coreCollectorMode = 0; // Use application/octet-stream by default
-        if (apiEndpoint.indexOf('salesforce.com') >= 0) {
+        if (apiEndpoint.indexOf('.salesforce.com') >= 0 || apiEndpoint.indexOf('.force.com') >= 0) {
             this.overrideFetch(); // Include authorization header in the calls
             coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
         }
