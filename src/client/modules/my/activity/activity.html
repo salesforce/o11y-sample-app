@@ -1,14 +1,20 @@
 <template>
     <lightning-layout vertical-align="end">
         <lightning-layout-item flexibility="auto" padding="around-small">
-            <lightning-input name="activityName" label="Activity Name" value={activityName} required disabled={isRunning}></lightning-input>
+            <lightning-input name="activityName" label="Activity Name" value={activityName} required
+                disabled={isRunning}></lightning-input>
         </lightning-layout-item>
         <lightning-layout-item padding="around-small">
-            <lightning-button-stateful variant="brand" onclick={handleToggle} selected={isRunning} label-when-off="Start"
-                label-when-on="Stop" icon-name-when-off="utility:play" icon-name-when-on="utility:stop">
+            <lightning-button-stateful variant="brand" onclick={handleToggle} selected={isRunning}
+                label-when-off="Start" label-when-on="Stop" icon-name-when-off="utility:play"
+                icon-name-when-on="utility:stop">
             </lightning-button-stateful>
         </lightning-layout-item>
         <lightning-layout-item padding="around-small">
+            <lightning-button variant="destructive" onclick={handleError} disabled={isNotRunning} label="Add an Error">
+            </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding=" around-small">
             <div class="spinnerContainer">
                 <lightning-spinner if:true={isRunning} alternative-text="running" size="small"></lightning-spinner>
             </div>
