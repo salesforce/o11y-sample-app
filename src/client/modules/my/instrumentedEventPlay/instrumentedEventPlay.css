@@ -1,3 +1,10 @@
+code {
+    font-family: monospace;
+    font-size: 10pt;
+    line-height: 19.5px;
+    background-color: lightgoldenrodyellow;
+}
+
 .header {
     margin: 10px 0;
     font-size: larger;
@@ -9,13 +16,21 @@
     margin: 12px;
 }
 
+.div-example {
+    min-height: 40px;
+    min-width: 40px;
+    background-color: lightgray;
+}
+
 .click-target {
-    width: 40px;
-    height: 40px;
-    background-color: red;
     cursor: pointer;
 }
 
 .button {
     width: 240px;
+    height: 30px;
+}
+
+.examples {
+    margin-top: 20px;
 }

@@ -1,6 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement } from 'lwc';
 
-export default class activityPlay extends LightningElement {
-   @api
-    model
+export default class ActivityPlay extends LightningElement {
 }

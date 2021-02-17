@@ -1,20 +1,22 @@
-const protobuf = require('protobufjs');
+import protobuf from 'protobufjs';
 
-// Note: The schemas are currently included in this project but will
-// soon be imported through an NPM module.
-const knownSchemas = require('../schemas/module_exports/KnownSchemas');
-const coreEnvelopeSchema = knownSchemas.coreEnvelopeSchema;
-const instrumentedEventSchema = knownSchemas.instrumentedEventSchema;
-const activitySchema = knownSchemas.activitySchema;
-const errorSchema = knownSchemas.errorSchema;
-const o11ySampleSchema = knownSchemas.o11ySampleSchema;
+import {
+    activitySchema,
+    coreEnvelopeSchema,
+    errorSchema,
+    instrumentedEventSchema,
+    o11ySampleSchema
+} from 'o11ySchema/ui-telemetry-js-schema/index.js';
 
-const schemas = new Map();
-schemas.set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema);
-schemas.set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema);
-schemas.set(getSchemaId(activitySchema), activitySchema);
-schemas.set(getSchemaId(errorSchema), errorSchema);
-schemas.set(getSchemaId(o11ySampleSchema), o11ySampleSchema);
+import { exampleSchema } from '../schemas/exampleSchema.mjs';
+
+const schemas = new Map()
+    .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
+    .set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema)
+    .set(getSchemaId(activitySchema), activitySchema)
+    .set(getSchemaId(errorSchema), errorSchema)
+    .set(getSchemaId(o11ySampleSchema), o11ySampleSchema)
+    .set(getSchemaId(exampleSchema), exampleSchema);
 
 function getSchemaId(schema) {
     return `${schema.namespace}.${schema.name}`;
@@ -69,7 +71,7 @@ function processMetrics(envelope) {
     console.log(envelope.metrics);
 }
 
-function processCoreEnvelope(encodedEnvelope) {
+export function processCoreEnvelope(encodedEnvelope) {
     console.log(`Received encoded CoreEnvelope with size ${encodedEnvelope.length} bytes.`);
 
     const { message: envelope } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
@@ -79,4 +81,3 @@ function processCoreEnvelope(encodedEnvelope) {
     processMetrics(envelope);
 }
 
-module.exports.processCoreEnvelope = processCoreEnvelope;

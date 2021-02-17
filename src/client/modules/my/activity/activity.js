@@ -1,9 +1,16 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
 
 export default class Activity extends LightningElement {
-    @track
-    isRunning = false;
+    _isRunning = false;
+    get isRunning() {
+        return this._isRunning;
+    }
+    set isRunning(value) {
+        this._isRunning = value;
+        this.isNotRunning = !value;
+    }    
+    isNotRunning = !this._isRunning;
 
     @api
     activityName;
@@ -24,5 +31,9 @@ export default class Activity extends LightningElement {
             this.activity.stop();
             this.isRunning = false;
         }
+    }
+
+    handleError() {
+        this.activity.error(new Error(`An error associated with ${this.activityName}`));
     }
 }

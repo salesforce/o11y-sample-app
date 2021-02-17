@@ -1,9 +1,10 @@
 <template>
     <div class="column">
         <div class="row1">
-            <lightning-icon icon-name="standard:metrics" size="large"></lightning-icon>
+            <lightning-icon class="app-icon" icon-name="standard:metrics" size="large"></lightning-icon>
             <span class="app-title">Observability (o11y) Sample App</span>
-            <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home"
+            <a class="doc-link"
+                href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home"
                 target="_blank">Documentation</a>
         </div>
         <div class="row2">
@@ -37,12 +38,12 @@
                                         app registers 3 such entities:
                                     </p>
                                     <ol>
-                                        <li>A <em>Console collector</em>, which outputs to the developer console in your
+                                        <li>A <em>Console</em> collector, which outputs to the developer console in your
                                             browser,
                                         </li>
-                                        <li>A <em>Visual collector</em>, which creates entries in to the bottom section
+                                        <li>A <em>Visual</em> collector, which creates entries in to the bottom section
                                             of the app, </li>
-                                        <li>A <em>Core Collector</em>, which is exported by the o11y module and sends
+                                        <li>A <em>Core</em> collector, which is exported by the o11y module and sends
                                             logs to a server-side endpoint. This sample app project comes with a local
                                             server, but you can also use a Salesforce instance you have access to.</li>
                                     </ol>
@@ -113,8 +114,9 @@
                             <my-app-section label={labelEvents} icon-name="standard:custom_notification">
                                 <div slot="doc">
                                     <p>The o11y module comes with an <em>Automatic Click Tracker (ACT)</em>. If it is
-                                        activated by the app, mouse-clicks on buttons, anchors and inputs of type button
-                                        will be captured in logs.</p>
+                                        activated by the app, mouse-clicks on certain elements
+                                        (<strong>buttons</strong>, <strong>anchors </strong>
+                                        and <strong>inputs of type button</strong>) will be captured in logs.</p>
                                     <p>A developer can choose to log clicks or other DOM events in their event handler
                                         using the <code>domEvent</code> API designed specifically for this purpose. In
                                         addition to capturing the same event data that the ACT would, it allows the
@@ -143,34 +145,42 @@
                                 <div slot="doc">
                                     <span class="header">In general, to log a custom message:</span>
                                     <ol>
-                                        <li>First define the structure of your message as a schema, and have it
-                                            checked-in to the schema repo.</li>
-                                        <li>Import your schema from the schema NPM module.</li>
-                                        <li>Pass the schema as the first argument to the log method and a compliant data
-                                            as the second. </li>
+                                        <li>First define the structure of your message as a schema, and create a PR to
+                                            add it to the <a
+                                                href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
+                                                target="_blank">schema repo</a>.</li>
+                                        <li>If applicable, add or update the dependency on the NPM module
+                                            <strong> o11ySchema</strong>.
+                                            Core scenarios will always use the latest available.
+                                        </li>
+                                        <li>In your code, add an import for your schema.</li>
+                                        <li>Pass the schema object as the first argument to the <code>log</code> method
+                                            and a compliant data as the second.</li>
                                     </ol>
                                     <pre>
-                                        import &#123; mySchema &#125; from 'o11ysample/schemas';<br>
+                                        import &#123; mySchema &#125; from 'o11ySchema/ui-telemetry-js-schema';<br>
                                         // ...<br>
                                         this.instr.log(mySchema, myData);
                                     </pre>
-                                    <span class="header">To log a sample message defined by this app:</span>
+                                    <span class="header">To log a sample message:</span>
                                     <p>
-                                        The data passed to the <code>log</code> API needs to comply with the following
+                                        This page logs data that complies with the <a
+                                            href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema/blob/master/src/main/proto/o11y_sample.proto"
+                                            target="_blank">sample schema</a>. Schemas are defined using
                                         <a href="https://developers.google.com/protocol-buffers/docs/proto3"
-                                            target="_blank"> proto3</a> schema:
+                                            target="_blank"> proto3</a> syntax. A snapshot of this schema is as follows:
                                     </p>
                                     <pre class="proto3">
                                         syntax = "proto3";<br>
                                         package sf.instrumentation;<br><br>
-                                        message O11ySample &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
+                                        message O11ySample &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
                                         &#125;
                                     </pre>
                                     <div>
-                                        <lightning-badge label="Note" icon-name="utility:warning"></lightning-badge>
+                                        <lightning-badge label="Note" icon-name="utility:info"></lightning-badge>
                                         <span>
-                                            The schemas are currently embedded in this project, but this will soon
-                                            change, when schemas must be imported via a separate module.
+                                            If you're interested in experimenting with your own schema, please see the
+                                            README.md file in the schemas folder of this project.
                                         </span>
                                     </div>
                                 </div>

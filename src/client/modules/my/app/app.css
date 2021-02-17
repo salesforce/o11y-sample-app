@@ -18,100 +18,11 @@ h4 {
     font-size: 20pt;
 }
 
-.bold-text {
-    margin: auto auto 5% auto;
-    font-size: 120%;
-    text-align: center;
-}
-
-.introduction-text {
-    margin: 5%;
-    font-size: 140%;
-}
-
-.content-text {
-    margin: 5%;
-    font-size: 120%;
-}
-
-.hidden {
-    display: none;
-}
-
-.introduction-header {
-    text-align: center;
-    margin: auto;
-}
-
-.center {
-    text-align: center;
-    background-color: white;
-    border-radius: 2%;
-}
-
-.sidebar {
-    position: fixed;
-    height: 100vh;
-    border-top-right-radius: 2%;
-    border-bottom-right-radius: 2%;
-}
-
-.content {
-    border-radius: 2%;
-    margin-left: 10px;
-    margin-right: 10px;
-    height: 100vh;
-}
-
-.test {
-    height: 100vh;
-    background-color: #b0c4df;
-}
-
-.button-container {
-    margin: 1em auto 1em auto;
-    width: auto;
-    text-align: center;
-}
-
-.link {
-    border: solid 1px transparent;
-    padding: 10px;
-    border-radius: 5px;
-    text-decoration: none;
-    background-color: #ff6000;
-    color: white;
-    /* margin-left: 33%;
-    margin-right: 33%; */
-    /* display: inline-block; */
-    /* margin-top: 1em; */
-    /* margin: 1em 50% 1em 50%; */
-}
-
-.info {
-    color: black;
-    background-color: #e4f2f8;
-    margin: 1em 1em 1em 1em;
-    padding: 15px 10px;
-    text-align: left;
-    width: auto;
-    border-radius: 5px;
-}
-
-.code {
+code {
     font-family: monospace;
-}
-
-.container {
-    margin-top: 30px;
-}
-
-img {
-    max-width: 150px;
-}
-
-.greeting {
-    height: 75px;
+    font-size: 10pt;
+    line-height: 19.5px;
+    background-color: lightgoldenrodyellow;
 }
 
 .column {
@@ -123,7 +34,7 @@ img {
 .row1 {
     display: flex;
     height: 60px;
-    align-items: center;
+    align-items: baseline;
 }
 
 .row2 {
@@ -134,19 +45,12 @@ img {
     height: 10px;
 }
 
-.slds-vertical-tabs {
-    height: 100%;
-}
-
 .app-title {
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
 }
 
-.link:hover {
-    border-color: black;
-}
 
 .header {
     margin: 10px 0;
@@ -200,10 +104,13 @@ lightning-tab {
 }
 
 .collector-body {
-    /* subtract row1 and row3 height + collector-header height */
+    /* subtract row1 and row3 height + collector-header height + margin-top */
     margin-top: 10px;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 120px);
     overflow-y: auto;
+    /* To match the style of the lightning-tabset: */
+    border-width: 1px;
+    border-radius: 4px;
 }
 
 p {
@@ -212,4 +119,16 @@ p {
 
 .proto3 {
     font-size: 10pt;
+}
+
+lightning-badge {
+    margin-right: 8px;
+}
+
+.doc-link {
+    font-size: 12pt;
+}
+
+.app-icon {
+    align-self: center;
 }
