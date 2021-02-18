@@ -7,7 +7,7 @@ import { ConsoleCollector } from '../../../consoleCollector';
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
 // You can set this to the salesforce endpoint in the form:
 // {ServerUrl}/services/data/{API version}/connect/proxy/ui-telemetry
-// const apiEndpoint = 'https://corsa04-basic-2015448476.vpod.t.force.com/services/data/v52.0/connect/proxy/ui-telemetry';
+// Example: const apiEndpoint = 'https://{HOSTNAME}/services/data/v52.0/connect/proxy/ui-telemetry';
 const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 
 // #LOOK: 
@@ -16,6 +16,14 @@ const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 // If you have Salesforce running locally, go to /qa/getUserSession.jsp to get a session ID. 
 // If using the webserver included in this app, leave the bearerToken empty.
 const bearerToken = '';
+
+// #LOOK:
+// Salesforce server end-point typically enforces CORS and CSP. For development purpose, if you
+// are running from localhost, you may need to bypass CORS and CSP. You can use the following
+// extensions.
+// DISCLAIMER: the extensions are not endorsed by Salesforce and you are using them at your own risk.
+// - Cross Domain - CORS: https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related
+// - Disable Content-Security-Policy: https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related
 
 export default class App extends LightningElement {
 
@@ -81,6 +89,8 @@ export default class App extends LightningElement {
 
     getCoreCollector() {
         let coreCollectorMode = 0; // Use application/octet-stream by default
+        // #LOOK:
+        // If the endpoint requires auth header, you may need to update the check below
         if (apiEndpoint.indexOf('.salesforce.com') >= 0 || apiEndpoint.indexOf('.force.com') >= 0) {
             this.overrideFetch(); // Include authorization header in the calls
             coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
