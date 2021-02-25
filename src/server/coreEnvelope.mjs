@@ -6,7 +6,7 @@ import {
     errorSchema,
     instrumentedEventSchema,
     o11ySampleSchema
-} from 'o11ySchema/ui-telemetry-js-schema/index.js';
+} from 'o11ySchema/sf_instrumentation/index.js';
 
 import { exampleSchema } from '../schemas/exampleSchema.mjs';
 
