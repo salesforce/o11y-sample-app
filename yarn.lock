@@ -8265,10 +8265,10 @@ o11y@0.0.52:
   dependencies:
     protobufjs "^6.10.1"
 
-o11ySchema@^0.0.18:
-  version "0.0.18"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11ySchema/-/o11ySchema-0.0.18.tgz#8341ee81aaf889de3dbade7967375a6b7fc5f2a1"
-  integrity sha512-MKw5C9zC/O/cbQn2JTvAnhEw8KpQEA2uKfwMglrKKTPTbpBTHQTA78ZbT1pnML9TwH/qyMF4NlOoZh7gdzYPmw==
+o11ySchema@^0.0.19:
+  version "0.0.19"
+  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11ySchema/-/o11ySchema-0.0.19.tgz#eefe27c4897cc6e1bfc93fc5ca7b03d7a26a6c87"
+  integrity sha512-8utaxF4wBJTmzehp1t6bt+zPC8N+7vq6NjcqBXe1TkpYVqNFA32ZoKUmaEHXMyut109cYe6HULu2McZf/7+sqA==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
