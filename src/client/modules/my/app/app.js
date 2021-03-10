@@ -36,6 +36,7 @@ export default class App extends LightningElement {
     labelErrors = 'Error Logging';
     labelActivities = 'Activity Tracking';
     labelCustom = 'Custom Logs';
+    labelIdleDetector = 'Idle Detector';
     labelServer = 'Server Side';
     // If adding a new label and a corrsponding section, update this.startRootActivity
 
@@ -44,6 +45,7 @@ export default class App extends LightningElement {
     sectionErrors = 'section_errors';
     sectionActivities = 'section_activities';
     sectionCustom = 'section_logs';
+    sectionIdleDetector = 'section_idle_detector';
     sectionServer = 'section_server';
 
     sectionToLabelMap = new Map()
@@ -52,6 +54,7 @@ export default class App extends LightningElement {
         .set(this.sectionErrors, this.labelErrors)
         .set(this.sectionActivities, this.labelActivities)
         .set(this.sectionCustom, this.labelCustom)
+        .set(this.sectionIdleDetector, this.labelIdleDetector)
         .set(this.sectionServer, this.labelServer);
 
     isRendered = false;
@@ -75,7 +78,7 @@ export default class App extends LightningElement {
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
 
         // STEP 1: Register the app
-        this.instrApp = registerInstrumentedApp('o11y-sample-App');
+        this.instrApp = registerInstrumentedApp('o11y Sample App');
 
         // STEP 2: Register log collectors
         this.instrApp.registerLogCollector(new ConsoleCollector());
@@ -110,6 +113,7 @@ export default class App extends LightningElement {
         const schemaId = `${schema.namespace}.${schema.name}`;
 
         const model = {
+            loggerName: logMeta.loggerName,
             seq: logMeta.sequence,
             rootId: logMeta.rootId,
             schemaId: `${schema.namespace}.${schema.name}`,
