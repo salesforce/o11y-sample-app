@@ -1,7 +1,5 @@
 import { LightningElement } from 'lwc';
-import { registerInstrumentedApp, CoreCollector } from 'o11y/client';
-
-import { ConsoleCollector } from '../../../consoleCollector';
+import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
 
 // #LOOK: 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
