@@ -1,7 +1,5 @@
 import { LightningElement } from 'lwc';
-import { registerInstrumentedApp, CoreCollector } from 'o11y/client';
-
-import { ConsoleCollector } from '../../../consoleCollector';
+import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
 
 // #LOOK: 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
@@ -18,12 +16,18 @@ const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
 const bearerToken = '';
 
 // #LOOK:
-// Salesforce server end-point typically enforces CORS and CSP. For development purpose, if you
-// are running from localhost, you may need to bypass CORS and CSP. You can use the following
-// extensions.
-// DISCLAIMER: the extensions are not endorsed by Salesforce and you are using them at your own risk.
-// - Cross Domain - CORS: https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related
-// - Disable Content-Security-Policy: https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related
+// Salesforce server end points typically enforce CORS and CSP. To use the sample app with a Salesforce endpoint,
+// you may need to configure or bypass CORS and CSP. You have a couple of options:
+//
+// 1. Configure CORS on the server (https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#)
+//    1.1. From Setup, enter CORS in the Quick Find box, then select CORS.
+//    1.2. Select New
+//    1.3. Enter the origin URL pattern. If you're using the defaults, you can set it to "http://localhost:3001/"
+//
+// 2. Disable CORS on the browser with the help of the extensions below. 
+//    DISCLAIMER: These extensions are not endorsed by Salesforce and you are using them at your own risk.
+//    2.1. Cross Domain - CORS: https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related
+//    2.2. Disable Content-Security-Policy: https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related
 
 export default class App extends LightningElement {
 
@@ -32,6 +36,7 @@ export default class App extends LightningElement {
     labelErrors = 'Error Logging';
     labelActivities = 'Activity Tracking';
     labelCustom = 'Custom Logs';
+    labelIdleDetector = 'Idle Detector';
     labelServer = 'Server Side';
     // If adding a new label and a corrsponding section, update this.startRootActivity
 
@@ -40,6 +45,7 @@ export default class App extends LightningElement {
     sectionErrors = 'section_errors';
     sectionActivities = 'section_activities';
     sectionCustom = 'section_logs';
+    sectionIdleDetector = 'section_idle_detector';
     sectionServer = 'section_server';
 
     sectionToLabelMap = new Map()
@@ -48,6 +54,7 @@ export default class App extends LightningElement {
         .set(this.sectionErrors, this.labelErrors)
         .set(this.sectionActivities, this.labelActivities)
         .set(this.sectionCustom, this.labelCustom)
+        .set(this.sectionIdleDetector, this.labelIdleDetector)
         .set(this.sectionServer, this.labelServer);
 
     isRendered = false;
@@ -71,7 +78,7 @@ export default class App extends LightningElement {
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
 
         // STEP 1: Register the app
-        this.instrApp = registerInstrumentedApp('o11y-sample-App');
+        this.instrApp = registerInstrumentedApp('o11y Sample App');
 
         // STEP 2: Register log collectors
         this.instrApp.registerLogCollector(new ConsoleCollector());
@@ -106,6 +113,7 @@ export default class App extends LightningElement {
         const schemaId = `${schema.namespace}.${schema.name}`;
 
         const model = {
+            loggerName: logMeta.loggerName,
             seq: logMeta.sequence,
             rootId: logMeta.rootId,
             schemaId: `${schema.namespace}.${schema.name}`,

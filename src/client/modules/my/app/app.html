@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                                 <div slot="play">
-                                    <my-instrumented-event-play slot="play" is-act-active={clickTrackActive}
+                                    <my-instrumented-event-play is-act-active={clickTrackActive}
                                         ontoggleact={handleToggleAct}></my-instrumented-event-play>
                                 </div>
                             </my-app-section>
@@ -187,18 +187,44 @@
                                 <my-custom-play slot="play"></my-custom-play>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect}>
+                            <my-app-section label={labelIdleDetector} icon-name="standard:waits">
+                                <div slot="doc">
+                                    <p>
+                                        The o11y library includes an <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector"
+                                            target="_blank">Idle Detector</a> that notifies interested parties when
+                                        the next idle is detected. It works in cooperation with Idle Detector Components
+                                        (IDCs) that opt-in.
+                                    </p>
+                                    <p>
+                                        There are 3 types of IDCs:
+                                    </p>
+                                    <ol>
+                                        <li>Single-Task IDC is busy until done. It's never busy again.</li>
+                                        <li>Multi-Task IDC is busy from time-to-time, with zero or more tasks.</li>
+                                        <li>Poll-only IDC has a busy-ness can only be ascertained by calling its
+                                            "isBusyChecker".</li>
+                                    </ol>
+                                </div>
+                                <div slot="play">
+                                    <my-idle-detector-play></my-idle-detector-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
                         <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect}>
                             <my-app-section label={labelServer} icon-name="standard:logging">
                                 <div slot="doc">
                                     <p>
-                                        This app comes with a built-in web server so developers can see the logs flowing
-                                        end-to-end as a stand-alone app, without any dependencies to the Salesforce Core
-                                        application.
+                                        This app comes with a built-in web server so developers can see the logs
+                                        flowing end-to-end as a stand-alone app, without any dependencies to the
+                                        Salesforce Core application.
                                     </p>
                                     <p>
-                                        This app <em>also</em> supports uploading logs to a Salesforce instance, through
-                                        the <strong>Core Collector</strong>. To configure this usage, search the
-                                        codebase for the keyword <strong>#LOOK</strong> and make changes as necessary.
+                                        This app <em>also</em> supports uploading logs to a Salesforce instance,
+                                        through the <strong>Core Collector</strong>. To configure this usage, search the
+                                        codebase for the keyword <strong>#LOOK</strong> and make changes as
+                                        necessary.
                                     </p>
                                     <p>
                                         For details on the Salesforce server end-point, please refer to the <a
@@ -207,14 +233,13 @@
                                             Endpoint</a> documentation.
                                     </p>
                                     <p>
-                                        Salesforce server end-point typically enforces CORS and CSP. For development purpose, if you are running from localhost, you may need to bypass CORS and CSP. You can use the <a href="https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related"
-                                            target="_blank">Cross Domain - CORS</a> and <a href="https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related"
-                                            target="_blank">Disable Content-Security-Policy</a> extensions. <strong>Disclaimer:</strong> the extensions are not endorsed by Salesforce and you are using them at your own risk.
+                                        Salesforce server end points typically enforce CORS and CSP. To use the sample
+                                        app with a Salesforce endpoint, you may need to configure or bypass CORS and
+                                        CSP. Please refer to the comments in app.js for more details.
                                     </p>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-
                     </lightning-tabset>
                 </div>
                 <div class="slds-col slds-size_4-of-12">

@@ -8258,12 +8258,18 @@ nwsapi@^2.2.0:
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/nwsapi/-/nwsapi-2.2.0.tgz"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-o11y@0.0.52:
-  version "0.0.52"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11y/-/o11y-0.0.52.tgz#f4b816ce8cb0811e7a16fb345cc215e57be82b51"
-  integrity sha512-g+mQ/T9GtCP5J5mKObv4I0eZGu2kgUxcXZMl8KiBYa1pKNzO/SrfzH7A3UquYeg0C9Ufavru0+OMOsIAFZtg8w==
+o11y@0.0.64:
+  version "0.0.64"
+  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11y/-/o11y-0.0.64.tgz#f3dc9f0341a5b3f63752f8118f406bbf6eac725e"
+  integrity sha512-/ImgTxJsKcawoY/foyG3dJJaz7lG5WFQJvEUzil1I9VRb/fCPlVEyw1YDhyKyKL0QAze/Fr9aLxQAhBymTCkeA==
   dependencies:
+    o11ySchema "^0.0.19"
     protobufjs "^6.10.1"
+
+o11ySchema@0.0.21:
+  version "0.0.21"
+  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11ySchema/-/o11ySchema-0.0.21.tgz#72a7114cb2cda1f03207f028daad5d0827bb903a"
+  integrity sha512-xoFvCoE+imApxlj0bhhl4LUAlUX9S8iLJKvov1WPrfIccq121YVHTx2x3YdTBTFwpFuUauKLQrr6T/sZPoR2KQ==
 
 o11ySchema@^0.0.19:
   version "0.0.19"
