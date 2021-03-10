@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                                 <div slot="play">
-                                    <my-instrumented-event-play slot="play" is-act-active={clickTrackActive}
+                                    <my-instrumented-event-play is-act-active={clickTrackActive}
                                         ontoggleact={handleToggleAct}></my-instrumented-event-play>
                                 </div>
                             </my-app-section>
@@ -207,9 +207,9 @@
                                             Endpoint</a> documentation.
                                     </p>
                                     <p>
-                                        Salesforce server end-point typically enforces CORS and CSP. For development purpose, if you are running from localhost, you may need to bypass CORS and CSP. You can use the <a href="https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related"
-                                            target="_blank">Cross Domain - CORS</a> and <a href="https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related"
-                                            target="_blank">Disable Content-Security-Policy</a> extensions. <strong>Disclaimer:</strong> the extensions are not endorsed by Salesforce and you are using them at your own risk.
+                                        Salesforce server end points typically enforce CORS and CSP. To use the sample
+                                        app with a Salesforce endpoint, you may need to configure or bypass CORS and
+                                        CSP. Please refer to the comments in app.js for more details.
                                     </p>
                                 </div>
                             </my-app-section>
