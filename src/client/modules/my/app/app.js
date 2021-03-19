@@ -22,9 +22,11 @@ const bearerToken = '';
 // 1. Configure CORS on the server (https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#)
 //    1.1. From Setup, enter CORS in the Quick Find box, then select CORS.
 //    1.2. Select New
-//    1.3. Enter the origin URL pattern. If you're using the defaults, you can set it to "http://localhost:3001/"
+//    1.3. Enter the origin URL pattern. If you're using the defaults, you can set it to "http://localhost:3001". 
+//         You may not be able to set a CORS entry without https. In this case, and assuming your machine is 
+//         in the internal Salesforce network, you can use the FQDN as follows: "https://YOURMACHINE.internal.salesforce.com:3001".
 //
-// 2. Disable CORS on the browser with the help of the extensions below. 
+// 2. Another options is to disable CORS on the browser with the help of certain browser extensions. 
 //    DISCLAIMER: These extensions are not endorsed by Salesforce and you are using them at your own risk.
 //    2.1. Cross Domain - CORS: https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related
 //    2.2. Disable Content-Security-Policy: https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related
