@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
+import { PagePayloadProvider } from '../../../pagePayloadProvider';
 
 // #LOOK: 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
@@ -80,7 +81,10 @@ export default class App extends LightningElement {
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
 
         // STEP 1: Register the app
-        this.instrApp = registerInstrumentedApp('o11y Sample App');
+        this.instrApp = registerInstrumentedApp('o11y Sample App', {
+            isProduction: false,
+            pagePayloadProvider: new PagePayloadProvider()
+        });
 
         // STEP 2: Register log collectors
         this.instrApp.registerLogCollector(new ConsoleCollector());
