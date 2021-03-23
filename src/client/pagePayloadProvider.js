@@ -8,7 +8,6 @@ export class PagePayloadProvider {
         setInterval(() => {
             this.lastFrameRate = this.frameCount;
             this.frameCount = 0;
-            console.log(`Frame Rate ${this.lastFrameRate}`);
         }, 1000);
 
         this.continuousRaf();
