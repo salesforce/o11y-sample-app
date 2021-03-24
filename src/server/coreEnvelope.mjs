@@ -60,6 +60,7 @@ function processBundles(envelope) {
 
                 const validity = type.verify(decodedMsg) ? 'Invalid' : 'Valid';
                 console.log(`MSG #${j} logged at ${ts}: ${validity}`);
+                console.log(msg);
                 console.log(decodedMsg);
             }
         }

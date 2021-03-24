@@ -8271,6 +8271,11 @@ o11ySchema@0.0.21:
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11ySchema/-/o11ySchema-0.0.21.tgz#72a7114cb2cda1f03207f028daad5d0827bb903a"
   integrity sha512-xoFvCoE+imApxlj0bhhl4LUAlUX9S8iLJKvov1WPrfIccq121YVHTx2x3YdTBTFwpFuUauKLQrr6T/sZPoR2KQ==
 
+o11ySchema@1.2.2:
+  version "1.2.2"
+  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/o11ySchema/-/o11ySchema-1.2.2.tgz#0e777e4d79bc23bdbd67dd07a7f7c8d6a154a5b2"
+  integrity sha512-vcS35Jt53HXcDlteHenc/tnYQozDUqQSY/DRPMeNI6rWLy/pXePNIHj6oKf9bTHXYHAZHyOalAEqJxta4WoR+w==
+
 oauth-sign@~0.9.0:
   version "0.9.0"
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/oauth-sign/-/oauth-sign-0.9.0.tgz"
