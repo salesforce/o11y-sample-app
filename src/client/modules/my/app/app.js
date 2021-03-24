@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
+import { PagePayloadProvider } from '../../../pagePayloadProvider';
 
 // #LOOK: 
 // The sample app comes with a built-in Express webserver, that defaults to port 3002.
@@ -80,7 +81,10 @@ export default class App extends LightningElement {
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
 
         // STEP 1: Register the app
-        this.instrApp = registerInstrumentedApp('o11y Sample App');
+        this.instrApp = registerInstrumentedApp('o11y Sample App', {
+            isProduction: false,
+            pagePayloadProvider: new PagePayloadProvider()
+        });
 
         // STEP 2: Register log collectors
         this.instrApp.registerLogCollector(new ConsoleCollector());
@@ -113,20 +117,16 @@ export default class App extends LightningElement {
 
     collect(schema, message, logMeta) {
         const schemaId = `${schema.namespace}.${schema.name}`;
-
-        const model = {
-            loggerName: logMeta.loggerName,
-            seq: logMeta.sequence,
-            rootId: logMeta.rootId,
-            schemaId: `${schema.namespace}.${schema.name}`,
-            timestamp: logMeta.timestamp,
+        const model = Object.assign({}, logMeta);
+        Object.assign(model, {
+            schemaId,
             msg: message,
             _isActivity: this.isActivity(schemaId),
             _isError: this.isError(schemaId),
             _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
             _isO11ySample: this.isCustom(schemaId),
             _isUnknown: this.isUnknown(schemaId),
-        };
+        });
         this.logs = [model, ...this.logs];
     };
 

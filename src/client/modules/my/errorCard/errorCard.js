@@ -12,7 +12,7 @@ export default class ErrorCard extends LightningElement {
     }
     set model(value) {
         this._model = value;
-        const topItems = utility.getKeyValues(value).filter(obj => obj.key !== 'msg' && !obj.key.startsWith('_'));
+        const topItems = utility.getKeyValues(value).filter(obj => obj.key !== 'msg' && obj.key !== 'pagePayload' && !obj.key.startsWith('_'));
         const msgItems = utility.getKeyValues(value.msg).filter(obj => obj.key !== 'stack');
         this.keyValues = [...topItems, ...msgItems];
 

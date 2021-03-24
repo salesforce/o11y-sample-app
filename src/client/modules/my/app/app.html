@@ -103,6 +103,14 @@
                                         The sample app creates a <em>root activity</em> to capture the duration of the
                                         active tab. When the user switches tabs, it stops the current root activity and
                                         starts a new one, using the label of the tab as the name of the root activity.
+                                        All activities started during a root activity is "rooted" to that activity.
+                                    </p>
+                                    <p>
+                                        Activities use the <em>performance</em> Browser API (if available) for debugging
+                                        purposes. To see it in action, start recording in the performance tab of your
+                                        browser's Developer Console. When stopped, any activities will appear in the
+                                        <em>timings</em> section in the visualization. The names will be suffixed by a
+                                        global counter to distinguish different activities with the same name.
                                     </p>
                                 </div>
                                 <div slot="play">

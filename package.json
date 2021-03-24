@@ -10,8 +10,8 @@
         "cors": "^2.8.5",
         "express": "^4.17.1",
         "lwc-components-lightning": "^1.11.1-alpha",
-        "o11y": "0.0.64",
-        "o11ySchema": "0.0.21"
+        "o11y": "0.0.70",
+        "o11ySchema": "1.2.2"
     },
     "engines": {
         "node": ">=14.15.1",
