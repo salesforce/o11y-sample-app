@@ -5,7 +5,8 @@ import {
     coreEnvelopeSchema,
     errorSchema,
     instrumentedEventSchema,
-    o11ySampleSchema
+    o11ySampleSchema,
+    o11ySamplePageSchema
 } from 'o11ySchema/sf_instrumentation/index.js';
 
 import { exampleSchema } from '../schemas/exampleSchema.mjs';
@@ -16,6 +17,7 @@ const schemas = new Map()
     .set(getSchemaId(activitySchema), activitySchema)
     .set(getSchemaId(errorSchema), errorSchema)
     .set(getSchemaId(o11ySampleSchema), o11ySampleSchema)
+    .set(getSchemaId(o11ySamplePageSchema), o11ySamplePageSchema)
     .set(getSchemaId(exampleSchema), exampleSchema);
 
 function getSchemaId(schema) {
@@ -60,8 +62,18 @@ function processBundles(envelope) {
 
                 const validity = type.verify(decodedMsg) ? 'Invalid' : 'Valid';
                 console.log(`MSG #${j} logged at ${ts}: ${validity}`);
-                console.log(msg);
-                console.log(decodedMsg);
+                console.log('Msg fields', msg);
+                if (msg.pagePayload) {
+                    const { type: pageType, message: decodedPageMsg } = decode(
+                        msg.pagePayload.schemaName,
+                        msg.pagePayload.payload
+                    );
+                    const validity = pageType.verify(decodedPageMsg) ? 'Invalid' : 'Valid';
+                    console.log(`Msg.pagePayload is ${validity}. (decoded)`, decodedPageMsg);
+                } else {
+                    console.log('Msg.pagePayload is empty');
+                }
+                console.log('Msg.data (decoded)', decodedMsg);
             }
         }
     }

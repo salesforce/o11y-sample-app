@@ -23,7 +23,7 @@ export class PagePayloadProvider {
     getPagePayload() {
         return {
             schema: o11ySamplePageSchema,
-            data: {
+            payload: {
                 url: window.location.href,
                 language: navigator.language,
                 frameRate: this.lastFrameRate

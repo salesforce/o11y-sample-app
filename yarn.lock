@@ -8258,18 +8258,13 @@ nwsapi@^2.2.0:
   resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/nwsapi/-/nwsapi-2.2.0.tgz"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-o11y@0.0.67:
-  version "0.0.67"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11y/-/o11y-0.0.67.tgz#05dbd8b6702c2c2d16d478614dd3506202ce6c0c"
-  integrity sha512-oGiFZyJoswRsiIeZBYpIsKffoeACe26Cm6lbaWgJzgg6SvpsrehW2Io++vbLKibu9ATLXXoEIV7tdKI7ekxQkg==
+o11y@0.0.70:
+  version "0.0.70"
+  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/o11y/-/o11y-0.0.70.tgz#7a7cb6a0a2465151ae0c7215899794b749b552ed"
+  integrity sha512-b4KIZmW4tLh3MY4DJFi0sCIkEEYxcpS2OzHM1h8cC7r6MOuLtnhpcpTeY47Ld43BUUt5jV4Ll+oQzBwTXfP6Jw==
   dependencies:
-    o11ySchema "0.0.21"
-    protobufjs "^6.10.1"
-
-o11ySchema@0.0.21:
-  version "0.0.21"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/o11ySchema/-/o11ySchema-0.0.21.tgz#72a7114cb2cda1f03207f028daad5d0827bb903a"
-  integrity sha512-xoFvCoE+imApxlj0bhhl4LUAlUX9S8iLJKvov1WPrfIccq121YVHTx2x3YdTBTFwpFuUauKLQrr6T/sZPoR2KQ==
+    o11ySchema "1.2.2"
+    protobufjs "6.10.2"
 
 o11ySchema@1.2.2:
   version "1.2.2"
@@ -9211,9 +9206,9 @@ prompts@2.4.0, prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-protobufjs@^6.10.1:
+protobufjs@6.10.2:
   version "6.10.2"
-  resolved "https://nexus.soma.salesforce.com/nexus/content/groups/npm-all/protobufjs/-/protobufjs-6.10.2.tgz"
+  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/protobufjs/-/protobufjs-6.10.2.tgz#b9cb6bd8ec8f87514592ba3fdfd28e93f33a469b"
   integrity sha512-27yj+04uF6ya9l+qfpH187aqEzfCF4+Uit0I9ZBQVqK09hk/SQzKa2MUqUpXaVa7LOFRg1TSSr3lVxGOk6c0SQ==
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
