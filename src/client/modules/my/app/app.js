@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
+import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
 
 // #LOOK: 
@@ -66,6 +67,16 @@ export default class App extends LightningElement {
     logs = [];
     rootActivity;
 
+    // Try to keep these values in sync with values from package.json
+    environment = {
+        appName: 'o11y-sample-app',
+        appVersion: '1.0',
+        appExperience: 'Sample Experience',
+        deviceId: 'Unknown Device ID',
+        deviceModel: 'Unknown Device Model',
+        sdkVersion: 'o11y=0.074;o11ySchema=1.5.0'
+    };
+
     constructor() {
         super();
         this.initializeInstrumentation();
@@ -83,6 +94,7 @@ export default class App extends LightningElement {
         // STEP 1: Register the app
         this.instrApp = registerInstrumentedApp('o11y Sample App', {
             isProduction: false,
+            appPayloadProvider: new AppPayloadProvider(),
             pagePayloadProvider: new PagePayloadProvider()
         });
 
@@ -108,11 +120,7 @@ export default class App extends LightningElement {
             this.overrideFetch(); // Include authorization header in the calls
             coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
         }
-        return new CoreCollector(
-            apiEndpoint,
-            this.instrApp.getSchemaType,
-            coreCollectorMode
-        );
+        return new CoreCollector(apiEndpoint, coreCollectorMode, this.environment);
     }
 
     collect(schema, message, logMeta) {
@@ -180,7 +188,9 @@ export default class App extends LightningElement {
     }
 
     handleTabSelect(event) {
-        this.startRootActivity(event.currentTarget.value);
+        const section = event.currentTarget.value;
+        window.location.hash = section && section.substring(section.indexOf('_') + 1);
+        this.startRootActivity(section);
     }
 
     startRootActivity(section) {
