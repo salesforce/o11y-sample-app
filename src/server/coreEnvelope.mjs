@@ -40,6 +40,10 @@ function processDiagnostics(envelope) {
     console.log(new Date(envelope.diagnostics.generatedTimestamp));
 }
 
+function processStatics(envelope) {
+    console.log('STATIC ATTRIBUTES', envelope.staticAttributes);
+}
+
 function processBundles(envelope) {
     for (let i = 0; i < envelope.bundles.length; i += 1) {
         const { schemaName, messages } = envelope.bundles[i];
@@ -63,19 +67,26 @@ function processBundles(envelope) {
                 const validity = type.verify(decodedMsg) ? 'Invalid' : 'Valid';
                 console.log(`MSG #${j} logged at ${ts}: ${validity}`);
                 console.log('Msg fields', msg);
-                if (msg.pagePayload) {
-                    const { type: pageType, message: decodedPageMsg } = decode(
-                        msg.pagePayload.schemaName,
-                        msg.pagePayload.payload
-                    );
-                    const validity = pageType.verify(decodedPageMsg) ? 'Invalid' : 'Valid';
-                    console.log(`Msg.pagePayload is ${validity}. (decoded)`, decodedPageMsg);
-                } else {
-                    console.log('Msg.pagePayload is empty');
-                }
+            
+                processPayload(msg.appPayload, 'Msg.appPayload');
+                processPayload(msg.pagePayload, 'Msg.pagePayload');
+                
                 console.log('Msg.data (decoded)', decodedMsg);
             }
         }
+    }
+}
+
+function processPayload(payloadObj, label) {
+    if (payloadObj) {
+        const { type: pageType, message: decodedPageMsg } = decode(
+            payloadObj.schemaName,
+            payloadObj.payload
+        );
+        const validity = pageType.verify(decodedPageMsg) ? 'Invalid' : 'Valid';
+        console.log(`${label} is ${validity}. (decoded)`, decodedPageMsg);
+    } else {
+        console.log(`${label} is empty`);
     }
 }
 
@@ -90,6 +101,7 @@ export function processCoreEnvelope(encodedEnvelope) {
     const { message: envelope } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
 
     processDiagnostics(envelope);
+    processStatics(envelope);
     processBundles(envelope);
     processMetrics(envelope);
 }
