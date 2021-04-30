@@ -11,7 +11,7 @@ export default class CustomCard extends LightningElement {
     }
     set model(value) {
         this._model = value;
-        const topItems = utility.getKeyValues(value).filter(obj => obj.key !== 'msg' && obj.key !== 'pagePayload' && !obj.key.startsWith('_'));
+        const topItems = utility.getFilteredKeyValues();
         const msgItems = value && utility.getKeyValues(value.msg);
         this.keyValues = [...topItems, ...msgItems];
     }

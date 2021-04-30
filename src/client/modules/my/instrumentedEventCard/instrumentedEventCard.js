@@ -3,8 +3,8 @@ import { utility } from '../../../utility';
 
 export default class InstrumentedEventCard extends LightningElement {
     keyValues;
-    userSchemaName;
     userPayload;
+    eventKeyValues;
 
     _model;
     @api
@@ -13,13 +13,11 @@ export default class InstrumentedEventCard extends LightningElement {
     }
     set model(value) {
         this._model = value;
-        const topItems = utility.getKeyValues(value).filter(obj => obj.key !== 'msg' && obj.key !== 'pagePayload' && !obj.key.startsWith('_'));
-        const msgItems = value && utility.getKeyValues(value.msg).filter(obj => obj.key !== 'userPayload');
+        const topItems = utility.getFilteredKeyValues();
+        const msgItems = value && utility.getKeyValues(value.msg).filter(obj => obj.key !== 'userPayload' && obj.key !== 'event');
         this.keyValues = [...topItems, ...msgItems];
 
-        if (value && value.msg.userPayload) {
-            this.userSchemaName = value.msg.userPayload.schemaName;
-            this.userPayload = utility.getKeyValues(value.msg.userPayload.payload);
-        }
+        this.userPayload = value && value.msg && value.msg.userPayload;
+        this.eventKeyValues = value && value.msg && utility.getKeyValues(value.msg.event);
     }
 }
