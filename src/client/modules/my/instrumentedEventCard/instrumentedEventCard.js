@@ -2,6 +2,7 @@ import { LightningElement, api } from 'lwc';
 import { utility } from '../../../utility';
 
 export default class InstrumentedEventCard extends LightningElement {
+    isExpanded;
     keyValues;
     userPayload;
     eventKeyValues;
@@ -19,5 +20,9 @@ export default class InstrumentedEventCard extends LightningElement {
 
         this.userPayload = value && value.msg && value.msg.userPayload;
         this.eventKeyValues = value && value.msg && utility.getKeyValues(value.msg.event);
+    }
+
+    handleToggle() {
+        this.isExpanded = !this.isExpanded;
     }
 }
