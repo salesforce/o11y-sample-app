@@ -42,7 +42,8 @@ export default class App extends LightningElement {
     labelCustom = 'Custom Logs';
     labelIdleDetector = 'Idle Detector';
     labelServer = 'Server Side';
-    // If adding a new label and a corrsponding section, update this.startRootActivity
+    labelNetwork = 'Network Instrumentation';
+    // If adding a new label, also add a corresponding section, and update sectionToLabelMap
 
     sectionIntro = 'section_intro';
     sectionEvents = 'section_events';
@@ -51,6 +52,7 @@ export default class App extends LightningElement {
     sectionCustom = 'section_logs';
     sectionIdleDetector = 'section_idle_detector';
     sectionServer = 'section_server';
+    sectionNetwork = 'section_instrumentation';
 
     sectionToLabelMap = new Map()
         .set(this.sectionIntro, this.labelIntro)
@@ -59,7 +61,8 @@ export default class App extends LightningElement {
         .set(this.sectionActivities, this.labelActivities)
         .set(this.sectionCustom, this.labelCustom)
         .set(this.sectionIdleDetector, this.labelIdleDetector)
-        .set(this.sectionServer, this.labelServer);
+        .set(this.sectionServer, this.labelServer)
+        .set(this.sectionNetwork, this.labelNetwork);
 
     isRendered = false;
     clickTrackActive = false;
@@ -68,6 +71,7 @@ export default class App extends LightningElement {
     rootActivity;
     entityType = 'section';
     pagePayloadProvider;
+    isNetworkInstrumentationEnabled = false;
 
     // Try to keep these values in sync with values from package.json
     environment = {
@@ -212,5 +216,10 @@ export default class App extends LightningElement {
         }
         const label = this.sectionToLabelMap.get(section) || 'Unknown Section';
         this.rootActivity = this.instrApp.startRootActivity(label);
+    }
+
+    handleNetworkInstrumentationToggle(event) {
+        const newValue = this.isNetworkInstrumentationEnabled = event.detail.value;
+        console.log('NETWORKINST', newValue);
     }
 }

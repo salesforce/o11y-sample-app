@@ -195,6 +195,37 @@
                                 <my-custom-play slot="play"></my-custom-play>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab label={labelNetwork} value={sectionNetwork} onactive={handleTabSelect}>
+                            <my-app-section label={labelNetwork} icon-name="custom:custom34">
+                                <div slot="doc">
+                                    <p>The o11y library offers optional network instrumentation with tracing feature.
+                                        When it's enabled, o11y takes control of the network APIs available in the
+                                        browser, and tracks the outgoing network activity (which is asynchronous by
+                                        nature). Based on configuration, any errors will be logged. The activity records
+                                        the duration of the network request.
+                                    </p>
+                                    <p>
+                                        To toggle Network Instrumentation with the default options:
+                                    </p>
+                                    <pre>this.instrApp.networkInstrumentation(true);</pre>
+                                    <p>
+                                        Note: This is an <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object"
+                                            target="_blank">app-level method</a> obtained by the app via a call to
+                                        registerInstrumentedApp.
+                                    </p>
+                                    <p>
+                                        For more info, please refer to the <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation"
+                                            target="_blank">Network Instrumentation documentation</a>.
+                                    </p>
+                                </div>
+                                <div slot="play">
+                                    <my-network-play is-enabled={isNetworkInstrumentationEnabled}
+                                        ontoggle={handleNetworkInstrumentationToggle}></my-network-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
                         <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect}>
                             <my-app-section label={labelIdleDetector} icon-name="standard:waits">
                                 <div slot="doc">

@@ -1,0 +1,18 @@
+<template>
+    <div>
+        <p class="header">Network Instrumentation</p>
+        <p>Enable</p>
+    </div>
+    <div class="container">
+        <lightning-button-group>
+            <lightning-button if:true={isEnabled} label="Enable" disabled onclick={handleToggleClick}>
+            </lightning-button>
+            <lightning-button if:false={isEnabled} label="Enable" onclick={handleToggleClick}>
+            </lightning-button>
+            <lightning-button if:true={isEnabled} label="Disable" onclick={handleToggleClick}>
+            </lightning-button>
+            <lightning-button if:false={isEnabled} label="Disable" disabled onclick={handleToggleClick}>
+            </lightning-button>
+        </lightning-button-group>
+    </div>
+</template>
