@@ -66,6 +66,8 @@ export default class App extends LightningElement {
     selectedSection = this.sectionIntro;
     logs = [];
     rootActivity;
+    entityType = 'section';
+    pagePayloadProvider;
 
     // Try to keep these values in sync with values from package.json
     environment = {
@@ -90,12 +92,15 @@ export default class App extends LightningElement {
     initializeInstrumentation() {
         // The top-level entity (the app) must initialize instrumentation before use.
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
+        
+        // STEP 0: (Optional) Instantiate AppPayloadProvider, PagePayloadProvider
+        this.pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this.entityType);
 
         // STEP 1: Register the app
         this.instrApp = registerInstrumentedApp('o11y Sample App', {
             isProduction: false,
             appPayloadProvider: new AppPayloadProvider(),
-            pagePayloadProvider: new PagePayloadProvider()
+            pagePayloadProvider: this.pagePayloadProvider
         });
 
         // STEP 2: Register log collectors
@@ -137,6 +142,11 @@ export default class App extends LightningElement {
         });
         this.logs = [model, ...this.logs];
     };
+
+    getIsDisabled() {
+        // As a collector
+        return false;
+    }
 
     isActivity(schemaId) {
         return schemaId === 'sf.instrumentation.Activity';
@@ -188,7 +198,9 @@ export default class App extends LightningElement {
     }
 
     handleTabSelect(event) {
-        const section = event.currentTarget.value;
+        const section = this.selectedSection = event.currentTarget.value;
+        this.pagePayloadProvider.setEntityInfo(section, this.entityType);
+
         window.location.hash = section && section.substring(section.indexOf('_') + 1);
         this.startRootActivity(section);
     }
