@@ -7,6 +7,8 @@ export class NetworkOptions {
     isLogErrorsDisabled;
     useTracing;
     isUseTracingDisabled;
+    sampleRate;
+    isSampleRateDisabled;
     useTracingOptions;
     isUseTracingOptionsDisabled;
     traceIdEffectiveLength;
@@ -34,6 +36,7 @@ export class NetworkOptions {
             activityName: undefined,
             logErrors: true,
             useTracing: true,
+            sampleRate: undefined,
             useTracingOptions: false,
             traceIdEffectiveLength: undefined,
             useB3Headers: false,
@@ -64,6 +67,7 @@ export class NetworkOptions {
         this.activityName = uiOptions.activityName;
         this.logErrors = uiOptions.logErrors;
         this.useTracing = uiOptions.useTracing;
+        this.sampleRate = uiOptions.sampleRate;
         this.useTracingOptions = uiOptions.useTracingOptions;
         this.traceIdEffectiveLength = uiOptions.traceIdEffectiveLength;
         this.useB3Headers = uiOptions.useB3Headers;
@@ -73,6 +77,7 @@ export class NetworkOptions {
 
     _configureUi(isEnabled) {
         let disabled = !isEnabled;
+        this.isSampleRateDisabled = false;
         this.isActivityNameDisabled = disabled;
         this.isLogErrorsDisabled = disabled;
         this.isUseTracingDisabled = disabled;

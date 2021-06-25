@@ -61,6 +61,16 @@ export default class NetworkPlay extends LightningElement {
     }
 
     @api
+    sampleRate;
+    @api
+    isSampleRateDisabled;
+    handleSampleRateChange(event) {
+        const options = this.getCurrentOptions();
+        options.sampleRate = event.detail.value;
+        this.notifyOptions(options);
+    }
+
+    @api
     useTracingOptions;
     @api
     isUseTracingOptionsDisabled;
@@ -117,6 +127,7 @@ export default class NetworkPlay extends LightningElement {
             activityName: this.activityName,
             logErrors: this.logErrors,
             useTracing: this.useTracing,
+            sampleRate: this.sampleRate,
             useTracingOptions: this.useTracingOptions,
             traceIdEffectiveLength: this.traceIdEffectiveLength,
             useB3Headers: this.useB3Headers,

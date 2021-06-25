@@ -223,7 +223,8 @@ export default class App extends LightningElement {
             this.rootActivity.stop();
         }
         const label = this.sectionToLabelMap.get(section) || 'Unknown Section';
-        this.rootActivity = this.instrApp.startRootActivity(label);
+        const isSampled = this.network.sampleRate > Math.random() * 100;
+        this.rootActivity = this.instrApp.startRootActivity(label, undefined, isSampled);
     }
 
     handleNetworkOptionsChange(event) {

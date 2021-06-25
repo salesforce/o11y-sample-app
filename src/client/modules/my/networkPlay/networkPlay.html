@@ -14,6 +14,12 @@
             </lightning-button>
         </lightning-button-group>
     </div>
+    <div class="container">
+        <lightning-input type="number" name="sampleRate" label="Tracing Sample Rate for Root Activities in (0% - 100%)"
+            placeholder="default: 0" disabled={isSampleRateDisabled} value={sampleRate} max="100" min="0"
+            onchange={handleSampleRateChange}>
+        </lightning-input>
+    </div>
     <lightning-layout>
         <lightning-layout-item>
             <div class="slds-p-around_medium lgc-bg">
@@ -47,9 +53,9 @@
                 </lightning-input>
             </div>
             <div class="slds-p-around_medium lgc-bg">
-                <lightning-input type="number" name="traceIdEffectiveLength" label="Trace ID Effective Length"
+                <lightning-input type="number" name="traceIdEffectiveLength" label="Trace ID Effective Length (1-128)"
                     placeholder="default: 32" disabled={isTraceIdEffectiveLengthDisabled} value={traceIdEffectiveLength}
-                    onchange={handleTraceIdEffectiveLengthChange}>
+                    onchange={handleTraceIdEffectiveLengthChange} max="128" min="1">
                 </lightning-input>
             </div>
             <div class="slds-p-around_medium lgc-bg">
