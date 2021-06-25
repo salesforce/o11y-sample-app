@@ -50,7 +50,7 @@ export default class App extends LightningElement {
     sectionCustom = 'section_logs';
     sectionIdleDetector = 'section_idle_detector';
     sectionServer = 'section_server';
-    sectionNetwork = 'section_instrumentation';
+    sectionNetwork = 'section_network';
 
     sectionToLabelMap = new Map()
         .set(this.sectionIntro, this.labelIntro)
@@ -79,7 +79,7 @@ export default class App extends LightningElement {
         appExperience: 'Sample Experience',
         deviceId: 'Unknown Device ID',
         deviceModel: 'Unknown Device Model',
-        sdkVersion: 'o11y=1.1.7;o11ySchema=1.11.0'
+        sdkVersion: 'o11y=1.1.9;o11ySchema=1.11.0'
     };
 
     constructor() {
@@ -144,6 +144,7 @@ export default class App extends LightningElement {
             _isActivity: this.isActivity(schemaId),
             _isError: this.isError(schemaId),
             _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
+            _isO11ySimple: this.isSimple(schemaId),
             _isO11ySample: this.isCustom(schemaId),
             _isUnknown: this.isUnknown(schemaId),
         });
@@ -167,12 +168,16 @@ export default class App extends LightningElement {
         return schemaId === 'sf.instrumentation.InstrumentedEvent';
     }
 
+    isSimple(schemaId) {
+        return schemaId === 'sf.instrumentation.Simple';
+    }
+
     isCustom(schemaId) {
         return schemaId === 'sf.instrumentation.O11ySample';
     }
 
     isUnknown(schemaId) {
-        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isCustom(schemaId);
+        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isCustom(schemaId) && !this.isSimple(schemaId);
     }
 
     overrideFetch() {
