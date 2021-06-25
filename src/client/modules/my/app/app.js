@@ -2,13 +2,11 @@ import { LightningElement } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
+import { NetworkOptions } from '../../models/networkOptions';
 
 // #LOOK: 
-// The sample app comes with a built-in Express webserver, that defaults to port 3002.
-// You can set this to the salesforce endpoint in the form:
-// {ServerUrl}/services/data/{API version}/connect/proxy/ui-telemetry
-// Example: const apiEndpoint = 'https://{HOSTNAME}/services/data/v52.0/connect/proxy/ui-telemetry';
-const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
+// API endpoint configuration has moved to shared/apiEndpoints.js
+import { apiEndpoint } from '../../shared/apiEndpoints';
 
 // #LOOK: 
 // If using a Salesforce endpoint, you must specify a bearerToken for authorization. 
@@ -42,7 +40,8 @@ export default class App extends LightningElement {
     labelCustom = 'Custom Logs';
     labelIdleDetector = 'Idle Detector';
     labelServer = 'Server Side';
-    // If adding a new label and a corrsponding section, update this.startRootActivity
+    labelNetwork = 'Network Instrumentation';
+    // If adding a new label, also add a corresponding section, and update sectionToLabelMap
 
     sectionIntro = 'section_intro';
     sectionEvents = 'section_events';
@@ -51,6 +50,7 @@ export default class App extends LightningElement {
     sectionCustom = 'section_logs';
     sectionIdleDetector = 'section_idle_detector';
     sectionServer = 'section_server';
+    sectionNetwork = 'section_network';
 
     sectionToLabelMap = new Map()
         .set(this.sectionIntro, this.labelIntro)
@@ -59,13 +59,18 @@ export default class App extends LightningElement {
         .set(this.sectionActivities, this.labelActivities)
         .set(this.sectionCustom, this.labelCustom)
         .set(this.sectionIdleDetector, this.labelIdleDetector)
-        .set(this.sectionServer, this.labelServer);
+        .set(this.sectionServer, this.labelServer)
+        .set(this.sectionNetwork, this.labelNetwork);
 
     isRendered = false;
     clickTrackActive = false;
     selectedSection = this.sectionIntro;
     logs = [];
     rootActivity;
+    entityType = 'section';
+    pagePayloadProvider;
+    isNetworkInstrumentationEnabled = false;
+    network = new NetworkOptions();
 
     // Try to keep these values in sync with values from package.json
     environment = {
@@ -74,7 +79,7 @@ export default class App extends LightningElement {
         appExperience: 'Sample Experience',
         deviceId: 'Unknown Device ID',
         deviceModel: 'Unknown Device Model',
-        sdkVersion: 'o11y=0.074;o11ySchema=1.5.0'
+        sdkVersion: 'o11y=1.1.9;o11ySchema=1.11.0'
     };
 
     constructor() {
@@ -91,11 +96,14 @@ export default class App extends LightningElement {
         // The top-level entity (the app) must initialize instrumentation before use.
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
 
+        // STEP 0: (Optional) Instantiate AppPayloadProvider, PagePayloadProvider
+        this.pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this.entityType);
+
         // STEP 1: Register the app
         this.instrApp = registerInstrumentedApp('o11y Sample App', {
             isProduction: false,
             appPayloadProvider: new AppPayloadProvider(),
-            pagePayloadProvider: new PagePayloadProvider()
+            pagePayloadProvider: this.pagePayloadProvider
         });
 
         // STEP 2: Register log collectors
@@ -109,6 +117,10 @@ export default class App extends LightningElement {
 
         // STEP 4: Activate the automatic click tracker via the following call:
         // this.instrApp.activateClickTracker();
+        // For the sample app, we will leave it up to the user turn it on/off as needed
+
+        // STEP 5: Optional: Enable network instrumentation
+        // this.instrApp.networkInstrumentation(true);
         // For the sample app, we will leave it up to the user turn it on/off as needed
     }
 
@@ -132,11 +144,17 @@ export default class App extends LightningElement {
             _isActivity: this.isActivity(schemaId),
             _isError: this.isError(schemaId),
             _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
+            _isO11ySimple: this.isSimple(schemaId),
             _isO11ySample: this.isCustom(schemaId),
             _isUnknown: this.isUnknown(schemaId),
         });
         this.logs = [model, ...this.logs];
     };
+
+    getIsDisabled() {
+        // As a collector
+        return false;
+    }
 
     isActivity(schemaId) {
         return schemaId === 'sf.instrumentation.Activity';
@@ -150,12 +168,16 @@ export default class App extends LightningElement {
         return schemaId === 'sf.instrumentation.InstrumentedEvent';
     }
 
+    isSimple(schemaId) {
+        return schemaId === 'sf.instrumentation.Simple';
+    }
+
     isCustom(schemaId) {
         return schemaId === 'sf.instrumentation.O11ySample';
     }
 
     isUnknown(schemaId) {
-        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isCustom(schemaId);
+        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isCustom(schemaId) && !this.isSimple(schemaId);
     }
 
     overrideFetch() {
@@ -188,7 +210,9 @@ export default class App extends LightningElement {
     }
 
     handleTabSelect(event) {
-        const section = event.currentTarget.value;
+        const section = this.selectedSection = event.currentTarget.value;
+        this.pagePayloadProvider.setEntityInfo(section, this.entityType);
+
         window.location.hash = section && section.substring(section.indexOf('_') + 1);
         this.startRootActivity(section);
     }
@@ -199,6 +223,16 @@ export default class App extends LightningElement {
             this.rootActivity.stop();
         }
         const label = this.sectionToLabelMap.get(section) || 'Unknown Section';
-        this.rootActivity = this.instrApp.startRootActivity(label);
+        const isSampled = this.network.sampleRate > Math.random() * 100;
+        this.rootActivity = this.instrApp.startRootActivity(label, undefined, isSampled);
+    }
+
+    handleNetworkOptionsChange(event) {
+        const uiOptions = event.detail.value;
+
+        const networkOptions = new NetworkOptions(uiOptions);
+        this.instrApp.networkInstrumentation(networkOptions.getNetworkInstrumentationOptions())
+        this.network = networkOptions;
+        this.instrApp.log('Updated Network Options');
     }
 }

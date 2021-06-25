@@ -1,4 +1,4 @@
-import { o11ySamplePageSchema } from 'o11ySchema/sf_instrumentation';
+import { o11ySampleAppPayloadSchema } from 'o11ySchema/sf_instrumentation';
 
 export class AppPayloadProvider {
     constructor() {
@@ -22,8 +22,9 @@ export class AppPayloadProvider {
 
     getPayload() {
         return {
-            schema: o11ySamplePageSchema,
+            schema: o11ySampleAppPayloadSchema,
             payload: {
+                language: navigator.language,
                 frameRate: this.lastFrameRate
             }
         };

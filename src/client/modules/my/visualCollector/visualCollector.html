@@ -12,12 +12,16 @@
                     <template if:true={log._isError}>
                         <my-error-card model={log}></my-error-card>
                     </template>
+                    <template if:true={log._isO11ySimple}>
+                        <my-simple-card model={log}></my-simple-card>
+                    </template>
                     <template if:true={log._isO11ySample}>
                         <my-custom-card model={log}></my-custom-card>
                     </template>
                     <template if:true={log._isUnknown}>
                         <my-unknown-card model={log}></my-unknown-card>
                     </template>
+                    <!-- the below section is common to all template types -->
                     <div if:true={log.appPayload} class="payload">
                         <my-payload-card header="App Payload" model={log.appPayload}></my-payload-card>
                     </div>

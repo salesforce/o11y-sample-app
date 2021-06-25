@@ -6,7 +6,8 @@ import {
     errorSchema,
     instrumentedEventSchema,
     o11ySampleSchema,
-    o11ySamplePageSchema
+    o11ySampleAppPayloadSchema,
+    o11ySamplePagePayloadSchema
 } from 'o11ySchema/sf_instrumentation/index.js';
 
 import { exampleSchema } from '../schemas/exampleSchema.mjs';
@@ -17,7 +18,8 @@ const schemas = new Map()
     .set(getSchemaId(activitySchema), activitySchema)
     .set(getSchemaId(errorSchema), errorSchema)
     .set(getSchemaId(o11ySampleSchema), o11ySampleSchema)
-    .set(getSchemaId(o11ySamplePageSchema), o11ySamplePageSchema)
+    .set(getSchemaId(o11ySampleAppPayloadSchema), o11ySampleAppPayloadSchema)
+    .set(getSchemaId(o11ySamplePagePayloadSchema), o11ySamplePagePayloadSchema)
     .set(getSchemaId(exampleSchema), exampleSchema);
 
 function getSchemaId(schema) {
