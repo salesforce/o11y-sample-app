@@ -2,13 +2,11 @@ import { LightningElement } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
+import { NetworkOptions } from '../../models/networkOptions';
 
 // #LOOK: 
-// The sample app comes with a built-in Express webserver, that defaults to port 3002.
-// You can set this to the salesforce endpoint in the form:
-// {ServerUrl}/services/data/{API version}/connect/proxy/ui-telemetry
-// Example: const apiEndpoint = 'https://{HOSTNAME}/services/data/v52.0/connect/proxy/ui-telemetry';
-const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
+// API endpoint configuration has moved to shared/apiEndpoints.js
+import { apiEndpoint } from '../../shared/apiEndpoints';
 
 // #LOOK: 
 // If using a Salesforce endpoint, you must specify a bearerToken for authorization. 
@@ -72,6 +70,7 @@ export default class App extends LightningElement {
     entityType = 'section';
     pagePayloadProvider;
     isNetworkInstrumentationEnabled = false;
+    network = new NetworkOptions();
 
     // Try to keep these values in sync with values from package.json
     environment = {
@@ -80,7 +79,7 @@ export default class App extends LightningElement {
         appExperience: 'Sample Experience',
         deviceId: 'Unknown Device ID',
         deviceModel: 'Unknown Device Model',
-        sdkVersion: 'o11y=0.074;o11ySchema=1.5.0'
+        sdkVersion: 'o11y=1.1.7;o11ySchema=1.11.0'
     };
 
     constructor() {
@@ -96,7 +95,7 @@ export default class App extends LightningElement {
     initializeInstrumentation() {
         // The top-level entity (the app) must initialize instrumentation before use.
         // Components can directly use the getInstrumentation import from 'o11y/client'.        
-        
+
         // STEP 0: (Optional) Instantiate AppPayloadProvider, PagePayloadProvider
         this.pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this.entityType);
 
@@ -118,6 +117,10 @@ export default class App extends LightningElement {
 
         // STEP 4: Activate the automatic click tracker via the following call:
         // this.instrApp.activateClickTracker();
+        // For the sample app, we will leave it up to the user turn it on/off as needed
+
+        // STEP 5: Optional: Enable network instrumentation
+        // this.instrApp.networkInstrumentation(true);
         // For the sample app, we will leave it up to the user turn it on/off as needed
     }
 
@@ -218,8 +221,12 @@ export default class App extends LightningElement {
         this.rootActivity = this.instrApp.startRootActivity(label);
     }
 
-    handleNetworkInstrumentationToggle(event) {
-        const newValue = this.isNetworkInstrumentationEnabled = event.detail.value;
-        console.log('NETWORKINST', newValue);
+    handleNetworkOptionsChange(event) {
+        const uiOptions = event.detail.value;
+
+        const networkOptions = new NetworkOptions(uiOptions);
+        this.instrApp.networkInstrumentation(networkOptions.getNetworkInstrumentationOptions())
+        this.network = networkOptions;
+        this.instrApp.log('Updated Network Options');
     }
 }

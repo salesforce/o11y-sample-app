@@ -221,8 +221,27 @@
                                     </p>
                                 </div>
                                 <div slot="play">
-                                    <my-network-play is-enabled={isNetworkInstrumentationEnabled}
-                                        ontoggle={handleNetworkInstrumentationToggle}></my-network-play>
+                                    <my-network-play is-enabled={network.isEnabled}
+                                        use-network-options={network.useNetworkOptions}
+                                        activity-name={network.activityName}
+                                        is-activity-name-disabled={network.isActivityNameDisabled}
+                                        log-errors={network.logErrors}
+                                        is-log-errors-disabled={network.isLogErrorsDisabled}
+                                        use-tracing={network.useTracing}
+                                        is-use-tracing-disabled={network.isUseTracingDisabled}
+                                        use-tracing-options={network.useTracingOptions}
+                                        is-use-tracing-options-disabled={network.isUseTracingOptionsDisabled}
+                                        trace-id-effective-length={network.traceIdEffectiveLength}
+                                        is-trace-id-effective-length-disabled={network.isTraceIdEffectiveLengthDisabled}
+                                        use-b3-headers={network.useB3Headers}
+                                        is-use-b3-headers-disabled={network.isUseB3HeadersDisabled}
+                                        use-compact-header={network.useCompactHeader}
+                                        is-use-compact-header-disabled={network.isUseCompactHeaderDisabled}
+                                        parent-span-id={network.parentSpanId}
+                                        is-parent-span-id-disabled={network.isParentSpanIdDisabled}
+                                        onoptionschange={handleNetworkOptionsChange}>
+                                    </my-network-play>
+
                                 </div>
                             </my-app-section>
                         </lightning-tab>

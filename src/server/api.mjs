@@ -3,6 +3,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { processCoreEnvelope } from './coreEnvelope.mjs';
+import { processHeaders } from './headers.mjs';
 
 const HOST = process.env.API_HOST || 'localhost';
 const PORT = process.env.API_PORT || 3002;
@@ -35,12 +36,18 @@ express()
     .post('/api/uitelemetry', (req, res) => {
         console.log(' ');
         try {
+            processHeaders(req.headers);
             processCoreEnvelope(req.body);
             res.json({ success: true });
         } catch (err) {
             console.log(err);
             res.status(422).json({ error: err });
         }
+    })
+    .get('/api/isodate', (req, res) => {
+        console.log(' ');
+        console.log('Received call to /api/test');
+        res.send(new Date().toISOString());
     })
     .listen(PORT, () =>
         console.log(

@@ -11,3 +11,11 @@ p {
 .container > * {
     margin-right: 10px;
 }
+
+.primary-option {
+    font-weight: bold;
+}
+
+.last-response {
+    margin-left: 10px;
+}
