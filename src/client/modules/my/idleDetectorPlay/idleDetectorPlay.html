@@ -19,21 +19,19 @@
         <p>When on, network accesses will participate in idle detection. The sample app makes network requests to a
             server to send instrumentation data. During the transfer, the app will be busy.</p>
         <p>To see this in action, you may want to throttle your network access via the Network tab in your browser's
-            Developer Console. (e.g. set upload=1kB/s and latency=5000ms).</p>
-        <div class="container">
-            <lightning-button-group>
-                <lightning-button if:true={isFetchOverridden} label="Enable" disabled
-                    onclick={handleToggleFetchOverrideClick}>
-                </lightning-button>
-                <lightning-button if:false={isFetchOverridden} label="Enable" onclick={handleToggleFetchOverrideClick}>
-                </lightning-button>
-                <lightning-button if:true={isFetchOverridden} label="Disable" onclick={handleToggleFetchOverrideClick}>
-                </lightning-button>
-                <lightning-button if:false={isFetchOverridden} label="Disable" disabled
-                    onclick={handleToggleFetchOverrideClick}>
-                </lightning-button>
-            </lightning-button-group>
-        </div>
+            Developer Console. (eg. set upload=1kB/s and latency=5000ms).</p>
+        <lightning-button-group>
+            <lightning-button if:true={isFetchOverridden} label="Enable" disabled
+                onclick={handleToggleFetchOverrideClick}>
+            </lightning-button>
+            <lightning-button if:false={isFetchOverridden} label="Enable" onclick={handleToggleFetchOverrideClick}>
+            </lightning-button>
+            <lightning-button if:true={isFetchOverridden} label="Disable" onclick={handleToggleFetchOverrideClick}>
+            </lightning-button>
+            <lightning-button if:false={isFetchOverridden} label="Disable" disabled
+                onclick={handleToggleFetchOverrideClick}>
+            </lightning-button>
+        </lightning-button-group>
     </div>
     <div>
         <p class="header">Start and Stop Idle Detector Components</p>
@@ -46,9 +44,11 @@
     </div>
     <div>
         <p class="header">High CPU usage</p>
-        <p>Click on this button to request an idle detection and immediately start a tight for-loop which will hang the UI thread for a few seconds.</p>
+        <p>Click on this button to request an idle detection and immediately start a tight for-loop which will hang the
+            UI thread for a few seconds.</p>
         <div class="container">
-            <lightning-button variant="destructive-text" label="Do it!" onclick={handleHighCpu} class="act-example slds-m-left_x-small button">
+            <lightning-button variant="destructive-text" label="Do it!" onclick={handleHighCpu}
+                class="act-example slds-m-left_x-small button">
             </lightning-button>
         </div>
     </div>
