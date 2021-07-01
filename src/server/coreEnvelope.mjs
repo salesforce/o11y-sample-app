@@ -8,7 +8,7 @@ import {
     o11ySampleSchema,
     o11ySampleAppPayloadSchema,
     o11ySamplePagePayloadSchema
-} from 'o11ySchema/sf_instrumentation/index.js';
+} from 'o11y_schema/sf_instrumentation';
 
 import { exampleSchema } from '../schemas/exampleSchema.mjs';
 

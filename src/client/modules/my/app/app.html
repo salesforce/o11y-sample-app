@@ -158,7 +158,7 @@
                                                 href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
                                                 target="_blank">schema repo</a>.</li>
                                         <li>If applicable, add or update the dependency on the NPM module
-                                            <strong> o11ySchema</strong>.
+                                            <strong> o11y_schema</strong>.
                                             Core scenarios will always use the latest available.
                                         </li>
                                         <li>In your code, add an import for your schema.</li>
@@ -166,7 +166,7 @@
                                             and a compliant data as the second.</li>
                                     </ol>
                                     <pre>
-                                        import &#123; mySchema &#125; from 'o11ySchema/sf_myFeature';<br>
+                                        import &#123; mySchema &#125; from 'o11y_schema/sf_myFeature';<br>
                                         // ...<br>
                                         this.instr.log(mySchema, myData);
                                     </pre>

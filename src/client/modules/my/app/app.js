@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
-import { registerInstrumentedApp, ConsoleCollector, CoreCollector } from 'o11y/client';
+import { registerInstrumentedApp, ConsoleCollector } from 'o11y/client';
+import { CoreCollector } from 'o11y/collectors'
 import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
@@ -76,14 +77,14 @@ export default class App extends LightningElement {
     network = new NetworkOptions();
     coreCollector;
 
-    // Try to keep these values in sync with values from package.json
     environment = {
         appName: 'o11y-sample-app',
         appVersion: '1.0',
         appExperience: 'Sample Experience',
         deviceId: 'Unknown Device ID',
         deviceModel: 'Unknown Device Model',
-        sdkVersion: 'o11y=1.1.9;o11ySchema=1.11.0'
+        // Try to keep these values in sync with values from package.json
+        sdkVersion: 'o11y=1.1.10;o11y_schema=1.11.2'
     };
 
     constructor() {

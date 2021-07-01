@@ -1,4 +1,4 @@
-import { o11ySamplePagePayloadSchema } from 'o11ySchema/sf_instrumentation';
+import { o11ySamplePagePayloadSchema } from 'o11y_schema/sf_instrumentation';
 
 export class PagePayloadProvider {
     constructor(entityId, entityType) {
