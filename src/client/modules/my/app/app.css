@@ -76,6 +76,16 @@ ol {
     padding-inline-start: 40px;
 }
 
+ul {
+    list-style: unset;
+    list-style-type: square;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
 lightning-tab {
     /* subtract row1 and row3 height */
     height: calc(100vh - 70px);

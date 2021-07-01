@@ -1,4 +1,4 @@
-import { o11ySampleAppPayloadSchema } from 'o11ySchema/sf_instrumentation';
+import { o11ySampleAppPayloadSchema } from 'o11y_schema/sf_instrumentation';
 
 export class AppPayloadProvider {
     constructor() {

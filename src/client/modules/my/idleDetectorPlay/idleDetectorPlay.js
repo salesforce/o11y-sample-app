@@ -1,6 +1,6 @@
 import { LightningElement, track } from 'lwc';
 import { getInstrumentation, idleDetector } from 'o11y/client';
-import { o11ySampleSchema } from 'o11ySchema/sf_instrumentation';
+import { o11ySampleSchema } from 'o11y_schema/sf_instrumentation';
 
 
 export default class IdleDetectorPlay extends LightningElement {

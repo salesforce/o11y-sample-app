@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
-import { o11ySampleSchema } from 'o11ySchema/sf_instrumentation';
+import { o11ySampleSchema } from 'o11y_schema/sf_instrumentation';
 
 export default class InstrumentedEventPlay extends LightningElement {
     @api
