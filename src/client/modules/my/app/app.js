@@ -41,6 +41,7 @@ export default class App extends LightningElement {
     labelIdleDetector = 'Idle Detector';
     labelServer = 'Server Side';
     labelNetwork = 'Network Instrumentation';
+    labelMetrics = 'Metrics'
     // If adding a new label, also add a corresponding section, and update sectionToLabelMap
 
     sectionIntro = 'section_intro';
@@ -51,6 +52,7 @@ export default class App extends LightningElement {
     sectionIdleDetector = 'section_idle_detector';
     sectionServer = 'section_server';
     sectionNetwork = 'section_network';
+    sectionMetrics = 'section_metrics';
 
     sectionToLabelMap = new Map()
         .set(this.sectionIntro, this.labelIntro)
@@ -60,7 +62,8 @@ export default class App extends LightningElement {
         .set(this.sectionCustom, this.labelCustom)
         .set(this.sectionIdleDetector, this.labelIdleDetector)
         .set(this.sectionServer, this.labelServer)
-        .set(this.sectionNetwork, this.labelNetwork);
+        .set(this.sectionNetwork, this.labelNetwork)
+        .set(this.sectionMetrics, this.labelMetrics);
 
     isRendered = false;
     clickTrackActive = false;
@@ -71,6 +74,7 @@ export default class App extends LightningElement {
     pagePayloadProvider;
     isNetworkInstrumentationEnabled = false;
     network = new NetworkOptions();
+    coreCollector;
 
     // Try to keep these values in sync with values from package.json
     environment = {
@@ -109,11 +113,11 @@ export default class App extends LightningElement {
         // STEP 2: Register log collectors
         this.instrApp.registerLogCollector(new ConsoleCollector());
         this.instrApp.registerLogCollector(this);   // See 'collect' method
-        const coreCollector = this.getCoreCollector();
-        this.instrApp.registerLogCollector(coreCollector);
+        this.coreCollector = this.getCoreCollector();
+        this.instrApp.registerLogCollector(this.coreCollector);
 
         // STEP 3: Register a metrics collector
-        this.instrApp.registerMetricsCollector(coreCollector);
+        this.instrApp.registerMetricsCollector(this.coreCollector);
 
         // STEP 4: Activate the automatic click tracker via the following call:
         // this.instrApp.activateClickTracker();
@@ -234,5 +238,11 @@ export default class App extends LightningElement {
         this.instrApp.networkInstrumentation(networkOptions.getNetworkInstrumentationOptions())
         this.network = networkOptions;
         this.instrApp.log('Updated Network Options');
+    }
+
+    handleForceCollect() {
+        // This is a hack which will be removed soon.
+        this.instrApp.log('Force Collect Metrics');
+        this.coreCollector._upload();
     }
 }

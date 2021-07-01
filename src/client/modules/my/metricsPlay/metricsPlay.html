@@ -1,0 +1,84 @@
+<template>
+    <div>
+        <p class="header">Explicit Metrics Operations</p>
+        <p>To see the effects of your actions below, you can inspect the CoreEnvelope received by the server-side. The
+            built-in test server will output to the console the contents of the Core Envelope which contain the metrics.
+        </p>
+    </div>
+    <lightning-layout>
+        <lightning-layout-item>
+            <div class="slds-p-around_medium">
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="counterName" label="Counter Name"
+                    value={counterName} onchange={handleCounterNameChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="number" name="increment"
+                    label="Increment (default: 1)" placeholder="Enter a numerical value" value={increment}
+                    onchange={handleIncrementChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" name="hasErrorForCounter"
+                    label="Has Error (default: false)" checked={hasErrorForCounter}
+                    onchange={handleHasErrorForCounterChange}>
+                </lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" label="Use Tags ⬇"
+                    name="useTagsForCounter" checked={useTagsForCounter} onchange={handleUseTagsForCounterChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="stringTagForCounter"
+                    label="String Tag" placeholder="Enter some text" disabled={isCounterTagsDisabled} value={stringTag}
+                    onchange={handleStringTagForCounterChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" name="booleanTagForCounter"
+                    label="Boolean Tag" disabled={isCounterTagsDisabled} checked={booleanTagForCounter}
+                    onchange={handleBooleanTagForCounterChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="number" name="numberTagForCounter"
+                    label="Number Tag" placeholder="Enter a numerical value" disabled={isCounterTagsDisabled}
+                    value={numberTagForCounter} onchange={handleNumberTagForCounterChange}>
+                </lightning-input>
+            </div>
+            <lightning-button variant="brand" label="Increment Counter"
+                title="Calls the incrementCounter method with the above configuration" onclick={handleIncrementCounter}
+                class="slds-m-around_medium"></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <div class="slds-p-around_medium">
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="valueRecorderName"
+                    label="ValueRecorder Name" value={valueRecorderName} onchange={handleValueRecorderNameChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="number" name="value" label="Value"
+                    placeholder="Enter a numerical value" value={value} onchange={handleValueChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" name="hasErrorForValueRecorder"
+                    label="Has Error (default: false)" checked={hasErrorForValueRecorder}
+                    onchange={handleHasErrorForValueRecorderChange}>
+                </lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" label="Use Tags ⬇"
+                    name="useTagsForValueRecorder" checked={useTagsForValueRecorder}
+                    onchange={handleUseTagsForValueRecorderChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="stringTagForValueRecorder"
+                    label="String Tag" placeholder="Enter some text" disabled={isValueRecorderTagsDisabled}
+                    value={stringTag} onchange={handleStringTagForValueRecorderChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" name="booleanTagForValueRecorder"
+                    label="Boolean Tag" disabled={isValueRecorderTagsDisabled} checked={booleanTagForValueRecorder}
+                    onchange={handleBooleanTagForValueRecorderChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="number" name="numberTagForValueRecorder"
+                    label="Number Tag" placeholder="Enter a numerical value" disabled={isValueRecorderTagsDisabled}
+                    value={numberTagForValueRecorder} onchange={handleNumberTagForValueRecorderChange}>
+                </lightning-input>
+            </div>
+            <lightning-button class="slds-m-around_medium" variant="brand" label="Track Value"
+                title="Calls the trackValue method with the above configuration" onclick={handleTrackValue}>
+            </lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+    <div class="slds-m-around_medium">
+        <lightning-button variant="brand-outline" label="Force Collect"
+            title="Forces a collection by the Core Collector" onclick={handleForceCollect}></lightning-button>
+    </div>
+</template>
