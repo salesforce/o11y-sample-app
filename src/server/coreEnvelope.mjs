@@ -69,10 +69,10 @@ function processBundles(envelope) {
                 const validity = type.verify(decodedMsg) ? 'Invalid' : 'Valid';
                 console.log(`MSG #${j} logged at ${ts}: ${validity}`);
                 console.log('Msg fields', msg);
-            
+
                 processPayload(msg.appPayload, 'Msg.appPayload');
                 processPayload(msg.pagePayload, 'Msg.pagePayload');
-                
+
                 console.log('Msg.data (decoded)', decodedMsg);
             }
         }
@@ -93,8 +93,51 @@ function processPayload(payloadObj, label) {
 }
 
 function processMetrics(envelope) {
-    console.log('METRICS');
-    console.log(envelope.metrics);
+    const metrics = envelope.metrics;
+    console.log(`METRICS: ${metrics ? '' : 'Empty.'}`);
+    if (metrics); {
+        processUpCounters(metrics.upCounters);
+        processValueRecorders(metrics.valueRecorders);
+    }
+}
+
+function processUpCounters(counters) {
+    const count = counters && counters.length;
+    console.log(`Up Counters: ${count}`);
+    for (let i = 0; i < count; i += 1) {
+        const c = counters[i];
+        console.log(`[${i}].name: ${c.name}`);
+        console.log(`[${i}].value: ${c.value}`);
+        console.log(`[${i}].createdTimestamp: ${c.createdTimestamp}`);
+        console.log(`[${i}].lastUpdatedTimestamp: ${c.lastUpdatedTimestamp}`);
+        console.log(`[${i}].tags: ${getMetricsTags(c.tags)}`);
+        console.log(`[${i}].ownerName: ${c.ownerName}`);
+    }
+}
+
+
+function processValueRecorders(valueRecorders) {
+    const count = valueRecorders && valueRecorders.length;
+    console.log(`Value Recorders: ${count}`);
+    for (let i = 0; i < count; i += 1) {
+        const v = valueRecorders[i];
+        console.log(`[${i}].name: ${v.name}`);
+        console.log(`[${i}].values: ${v.values ? v.values.length ? v.values.join(', ') : 'Empty' : 'Undefined'}`);
+        console.log(`[${i}].createdTimestamp: ${v.createdTimestamp}`);
+        console.log(`[${i}].lastUpdatedTimestamp: ${v.lastUpdatedTimestamp}`);
+        console.log(`[${i}].tags: ${getMetricsTags(v.tags)}`);
+        console.log(`[${i}].ownerName: ${v.ownerName}`);
+    }
+}
+
+function getMetricsTags(tagsArray) {
+    if (!tagsArray) {
+        return 'Undefined.';
+    }
+    if (!tagsArray.length) {
+        return 'Empty';
+    }
+    return tagsArray.map(tag => `${tag.name}=${tag.value}`).join(', ');
 }
 
 export function processCoreEnvelope(encodedEnvelope) {
