@@ -5,6 +5,7 @@ import {
     coreEnvelopeSchema,
     errorSchema,
     instrumentedEventSchema,
+    simpleSchema,
     o11ySampleSchema,
     o11ySampleAppPayloadSchema,
     o11ySamplePagePayloadSchema
@@ -17,6 +18,7 @@ const schemas = new Map()
     .set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema)
     .set(getSchemaId(activitySchema), activitySchema)
     .set(getSchemaId(errorSchema), errorSchema)
+    .set(getSchemaId(simpleSchema), simpleSchema)
     .set(getSchemaId(o11ySampleSchema), o11ySampleSchema)
     .set(getSchemaId(o11ySampleAppPayloadSchema), o11ySampleAppPayloadSchema)
     .set(getSchemaId(o11ySamplePagePayloadSchema), o11ySamplePagePayloadSchema)
