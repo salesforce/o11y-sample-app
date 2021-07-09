@@ -1,4 +1,4 @@
-import { o11ySamplePagePayloadSchema } from 'o11y_schema/sf_instrumentation';
+import { pagePayloadSchema } from 'o11y_schema/sf_o11ySample';
 
 export class PagePayloadProvider {
     constructor(entityId, entityType) {
@@ -12,7 +12,7 @@ export class PagePayloadProvider {
 
     getPayload() {
         return {
-            schema: o11ySamplePagePayloadSchema,
+            schema: pagePayloadSchema,
             payload: {
                 url: window.location.href,
                 entityId: this._entityId,

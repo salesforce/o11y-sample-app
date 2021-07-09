@@ -150,7 +150,7 @@ export default class App extends LightningElement {
             _isError: this.isError(schemaId),
             _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
             _isO11ySimple: this.isSimple(schemaId),
-            _isO11ySample: this.isCustom(schemaId),
+            _isO11ySample: this.isSample(schemaId),
             _isUnknown: this.isUnknown(schemaId),
         });
         this.logs = [model, ...this.logs];
@@ -177,12 +177,12 @@ export default class App extends LightningElement {
         return schemaId === 'sf.instrumentation.Simple';
     }
 
-    isCustom(schemaId) {
-        return schemaId === 'sf.instrumentation.O11ySample';
+    isSample(schemaId) {
+        return schemaId === 'sf.o11ySample.UserPayload';
     }
 
     isUnknown(schemaId) {
-        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isCustom(schemaId) && !this.isSimple(schemaId);
+        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isSample(schemaId) && !this.isSimple(schemaId);
     }
 
     overrideFetch() {

@@ -5,11 +5,13 @@ import {
     coreEnvelopeSchema,
     errorSchema,
     instrumentedEventSchema,
-    simpleSchema,
-    o11ySampleSchema,
-    o11ySampleAppPayloadSchema,
-    o11ySamplePagePayloadSchema
+    simpleSchema
 } from 'o11y_schema/sf_instrumentation';
+import {
+    userPayloadSchema,
+    appPayloadSchema,
+    pagePayloadSchema
+} from 'o11y_schema/sf_o11ySample';
 
 import { exampleSchema } from '../schemas/exampleSchema.mjs';
 
@@ -19,9 +21,9 @@ const schemas = new Map()
     .set(getSchemaId(activitySchema), activitySchema)
     .set(getSchemaId(errorSchema), errorSchema)
     .set(getSchemaId(simpleSchema), simpleSchema)
-    .set(getSchemaId(o11ySampleSchema), o11ySampleSchema)
-    .set(getSchemaId(o11ySampleAppPayloadSchema), o11ySampleAppPayloadSchema)
-    .set(getSchemaId(o11ySamplePagePayloadSchema), o11ySamplePagePayloadSchema)
+    .set(getSchemaId(userPayloadSchema), userPayloadSchema)
+    .set(getSchemaId(appPayloadSchema), appPayloadSchema)
+    .set(getSchemaId(pagePayloadSchema), pagePayloadSchema)
     .set(getSchemaId(exampleSchema), exampleSchema);
 
 function getSchemaId(schema) {
