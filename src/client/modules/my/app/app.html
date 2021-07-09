@@ -173,15 +173,15 @@
                                     <span class="header">To log a sample message:</span>
                                     <p>
                                         This page logs data that complies with the <a
-                                            href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema/blob/master/src/main/proto/o11y_sample.proto"
+                                            href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
                                             target="_blank">sample schema</a>. Schemas are defined using
                                         <a href="https://developers.google.com/protocol-buffers/docs/proto3"
                                             target="_blank"> proto3</a> syntax. A snapshot of this schema is as follows:
                                     </p>
                                     <pre class="proto3">
                                         syntax = "proto3";<br>
-                                        package sf.instrumentation;<br><br>
-                                        message O11ySample &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
+                                        package sf.o11ySample;<br><br>
+                                        message UserPayload &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
                                         &#125;
                                     </pre>
                                     <div>

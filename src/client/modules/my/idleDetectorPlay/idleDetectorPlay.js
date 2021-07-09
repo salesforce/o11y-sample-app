@@ -1,6 +1,6 @@
 import { LightningElement, track } from 'lwc';
 import { getInstrumentation, idleDetector } from 'o11y/client';
-import { o11ySampleSchema } from 'o11y_schema/sf_instrumentation';
+import { userPayloadSchema } from 'o11y_schema/sf_o11ySample';
 
 
 export default class IdleDetectorPlay extends LightningElement {
@@ -26,7 +26,7 @@ export default class IdleDetectorPlay extends LightningElement {
         this.idleRequestCount += 1;
         idleDetector.requestIdleDetectedCallback((timestamp) => {
             this.idleRequestCount -= 1;
-            this.instr.log(o11ySampleSchema, {
+            this.instr.log(userPayloadSchema, {
                 double: timestamp
             });
         });

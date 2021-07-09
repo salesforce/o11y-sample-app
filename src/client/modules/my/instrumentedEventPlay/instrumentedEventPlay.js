@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
-import { o11ySampleSchema } from 'o11y_schema/sf_instrumentation';
+import { userPayloadSchema } from 'o11y_schema/sf_o11ySample';
 
 export default class InstrumentedEventPlay extends LightningElement {
     @api
@@ -92,7 +92,7 @@ export default class InstrumentedEventPlay extends LightningElement {
             .reduce((a, b) => a * 256 + b);
 
 
-        this.instr.domEvent(event, this, o11ySampleSchema, {
+        this.instr.domEvent(event, this, userPayloadSchema, {
             string: actualColor,
             uint32: colorValue
         });
