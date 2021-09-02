@@ -1,0 +1,7 @@
+{
+    "window.title": "o11y-sample-app",
+    "workbench.colorCustomizations": {
+        "titleBar.activeBackground": "#ed72ed",
+        "activityBar.background": "#a554a5"
+    }
+}

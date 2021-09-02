@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
@@ -10,8 +10,8 @@
         "cors": "^2.8.5",
         "express": "^4.17.1",
         "lwc-components-lightning": "^1.11.1-alpha",
-        "o11y": "1.1.10",
-        "o11y_schema": "1.12.3"
+        "o11y": "2.0.0",
+        "o11y_schema": "2.0.2"
     },
     "engines": {
         "node": ">=14.15.1",
