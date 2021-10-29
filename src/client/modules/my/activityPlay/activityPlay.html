@@ -5,7 +5,7 @@
             concurrent activities, there's no such limit in o11y. The activities will be rooted to the current root
             activity.</p>
     </div>
-    <my-activity activity-name="Activity 1"></my-activity>
-    <my-activity activity-name="Activity 2"></my-activity>
-    <my-activity activity-name="Activity 3"></my-activity>
+    <my-activity activity-name={activity1} data-name="activity1" onnamechange={handleNameChange}></my-activity>
+    <my-activity activity-name={activity2} data-name="activity2" onnamechange={handleNameChange}></my-activity>
+    <my-activity activity-name={activity3} data-name="activity3" onnamechange={handleNameChange}></my-activity>
 </template>

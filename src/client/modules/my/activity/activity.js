@@ -1,5 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
+import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class Activity extends LightningElement {
     _isRunning = false;
@@ -35,5 +36,9 @@ export default class Activity extends LightningElement {
 
     handleError() {
         this.activity.error(new Error(`An error associated with ${this.activityName}`));
+    }
+
+    handleActivityNameChange(event) {
+        ComponentUtils.raiseEvent(this, 'namechange', event.detail.value);
     }
 }
