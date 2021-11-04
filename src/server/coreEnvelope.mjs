@@ -116,9 +116,9 @@ function processUpCounters(counters) {
         console.log(`[${i}].lastUpdatedTimestamp: ${c.lastUpdatedTimestamp}`);
         console.log(`[${i}].tags: ${getMetricsTags(c.tags)}`);
         console.log(`[${i}].ownerName: ${c.ownerName}`);
+        console.log(`[${i}].ownerAppName: ${c.ownerAppName}`);
     }
 }
-
 
 function processValueRecorders(valueRecorders) {
     const count = valueRecorders && valueRecorders.length;
@@ -131,6 +131,7 @@ function processValueRecorders(valueRecorders) {
         console.log(`[${i}].lastUpdatedTimestamp: ${v.lastUpdatedTimestamp}`);
         console.log(`[${i}].tags: ${getMetricsTags(v.tags)}`);
         console.log(`[${i}].ownerName: ${v.ownerName}`);
+        console.log(`[${i}].ownerAppName: ${v.ownerAppName}`);
     }
 }
 
