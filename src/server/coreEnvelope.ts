@@ -99,7 +99,7 @@ function processPayload(payloadObj, label) {
 function processMetrics(envelope) {
     const metrics = envelope.metrics;
     console.log(`METRICS: ${metrics ? '' : 'Empty.'}`);
-    if (metrics); {
+    if (metrics) {
         processUpCounters(metrics.upCounters);
         processValueRecorders(metrics.valueRecorders);
     }

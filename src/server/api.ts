@@ -2,8 +2,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { processCoreEnvelope } from './coreEnvelope.mjs';
-import { processHeaders } from './headers.mjs';
+import { processCoreEnvelope } from './coreEnvelope';
+import { processHeaders } from './headers';
 
 const HOST = process.env.API_HOST || 'localhost';
 const PORT = process.env.API_PORT || 3002;
