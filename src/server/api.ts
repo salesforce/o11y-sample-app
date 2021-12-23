@@ -33,7 +33,7 @@ express()
             type: 'application/octet-stream'
         })
     )
-    .post('/api/uitelemetry', (req, res) => {
+    .post('/api/uitelemetry', (req: express.Request, res: express.Response) => {
         console.log(' ');
         try {
             processHeaders(req.headers);
@@ -44,7 +44,7 @@ express()
             res.status(422).json({ error: err });
         }
     })
-    .get('/api/isodate', (req, res) => {
+    .get('/api/isodate', (_req: express.Request, res: express.Response) => {
         console.log(' ');
         console.log('Received call to /api/test');
         res.send(new Date().toISOString());

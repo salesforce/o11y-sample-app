@@ -13,7 +13,13 @@ import {
     pagePayloadSchema
 } from 'o11y_schema/sf_o11ySample';
 
-import { exampleSchema } from '../schemas/exampleSchema.mjs';
+import { CoreEnvelope } from '../interfaces/CoreEnvelope';
+import { EncodedSchematizedPayload } from '../interfaces/EncodedSchematizedPayload';
+import { MetricTag } from '../interfaces/MetricTag';
+import { Schema } from '../interfaces/Schema';
+import { ValueRecorder } from '../interfaces/ValueRecorder';
+import { UpCounter } from '../interfaces/UpCounter';
+import { exampleSchema } from '../schemas/exampleSchema';
 
 const schemas = new Map()
     .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
@@ -26,11 +32,11 @@ const schemas = new Map()
     .set(getSchemaId(pagePayloadSchema), pagePayloadSchema)
     .set(getSchemaId(exampleSchema), exampleSchema);
 
-function getSchemaId(schema) {
+function getSchemaId(schema: Schema): string {
     return `${schema.namespace}.${schema.name}`;
 }
 
-function decode(logType, encoded) {
+function decode(logType: string, encoded: Uint8Array) {
     const schema = schemas.get(logType);
     const schemaInstance = protobuf.Root.fromJSON(schema.pbjsSchema);
     const type = schemaInstance.lookupType(logType);
@@ -41,16 +47,16 @@ function decode(logType, encoded) {
     return { type, message: pojo };
 }
 
-function processDiagnostics(envelope) {
+function processDiagnostics(envelope: CoreEnvelope): void {
     console.log('DIAGS', envelope.diagnostics);
     console.log(new Date(envelope.diagnostics.generatedTimestamp));
 }
 
-function processStatics(envelope) {
+function processStatics(envelope: CoreEnvelope): void {
     console.log('STATIC ATTRIBUTES', envelope.staticAttributes);
 }
 
-function processBundles(envelope) {
+function processBundles(envelope: CoreEnvelope): void {
     for (let i = 0; i < envelope.bundles.length; i += 1) {
         const { schemaName, messages } = envelope.bundles[i];
 
@@ -83,7 +89,7 @@ function processBundles(envelope) {
     }
 }
 
-function processPayload(payloadObj, label) {
+function processPayload(payloadObj: EncodedSchematizedPayload, label: string): void {
     if (payloadObj) {
         const { type: pageType, message: decodedPageMsg } = decode(
             payloadObj.schemaName,
@@ -96,7 +102,7 @@ function processPayload(payloadObj, label) {
     }
 }
 
-function processMetrics(envelope) {
+function processMetrics(envelope: CoreEnvelope) {
     const metrics = envelope.metrics;
     console.log(`METRICS: ${metrics ? '' : 'Empty.'}`);
     if (metrics) {
@@ -105,7 +111,7 @@ function processMetrics(envelope) {
     }
 }
 
-function processUpCounters(counters) {
+function processUpCounters(counters: UpCounter[]) {
     const count = counters && counters.length;
     console.log(`Up Counters: ${count}`);
     for (let i = 0; i < count; i += 1) {
@@ -120,7 +126,7 @@ function processUpCounters(counters) {
     }
 }
 
-function processValueRecorders(valueRecorders) {
+function processValueRecorders(valueRecorders: ValueRecorder[]) {
     const count = valueRecorders && valueRecorders.length;
     console.log(`Value Recorders: ${count}`);
     for (let i = 0; i < count; i += 1) {
@@ -135,7 +141,7 @@ function processValueRecorders(valueRecorders) {
     }
 }
 
-function getMetricsTags(tagsArray) {
+function getMetricsTags(tagsArray: MetricTag[]) {
     if (!tagsArray) {
         return 'Undefined.';
     }
@@ -145,10 +151,11 @@ function getMetricsTags(tagsArray) {
     return tagsArray.map(tag => `${tag.name}=${tag.value}`).join(', ');
 }
 
-export function processCoreEnvelope(encodedEnvelope) {
+export function processCoreEnvelope(encodedEnvelope: Uint8Array) {
     console.log(`Received encoded CoreEnvelope with size ${encodedEnvelope.length} bytes.`);
 
-    const { message: envelope } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
+    const { message } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
+    const envelope = message as CoreEnvelope;
 
     processDiagnostics(envelope);
     processStatics(envelope);

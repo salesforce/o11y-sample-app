@@ -1,4 +1,6 @@
-export const exampleSchema = {
+import { Schema } from '../interfaces/Schema';
+
+export const exampleSchema: Schema = {
     namespace: 'sf.o11ySample',
     name: 'Example',
     pbjsSchema: {
