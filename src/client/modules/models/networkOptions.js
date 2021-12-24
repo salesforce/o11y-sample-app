@@ -1,33 +1,15 @@
-export class NetworkOptions {
-    isEnabled;
-    useNetworkOptions;
-    activityName;
-    isActivityNameDisabled;
-    logErrors;
-    isLogErrorsDisabled;
-    useTracing;
-    isUseTracingDisabled;
-    sampleRate;
-    isSampleRateDisabled;
-    useTracingOptions;
-    isUseTracingOptionsDisabled;
-    traceIdEffectiveLength;
-    isTraceIdEffectiveLengthDisabled;
-    useB3Headers;
-    isUseB3HeadersDisabled;
-    useCompactHeader;
-    isUseCompactHeaderDisabled;
-    parentSpanId;
-    isParentSpanIdDisabled;
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NetworkOptions = void 0;
+class NetworkOptions {
     constructor(uiOptions) {
         if (!uiOptions) {
             this.reset();
-        } else {
+        }
+        else {
             this.setOptions(uiOptions);
         }
     }
-
     reset() {
         // These are the defaults per documentation
         this.setOptions({
@@ -44,7 +26,6 @@ export class NetworkOptions {
             parentSpanId: undefined
         });
     }
-
     getNetworkInstrumentationOptions() {
         return this.isEnabled ?
             (this.useNetworkOptions ? {
@@ -60,7 +41,6 @@ export class NetworkOptions {
             } : true)
             : false;
     }
-
     setOptions(uiOptions) {
         this.isEnabled = uiOptions.isEnabled;
         this.useNetworkOptions = uiOptions.useNetworkOptions;
@@ -74,7 +54,6 @@ export class NetworkOptions {
         this.useCompactHeader = uiOptions.useCompactHeader;
         this._configureUi(this.useNetworkOptions);
     }
-
     _configureUi(isEnabled) {
         let disabled = !isEnabled;
         this.isSampleRateDisabled = false;
@@ -82,7 +61,6 @@ export class NetworkOptions {
         this.isLogErrorsDisabled = disabled;
         this.isUseTracingDisabled = disabled;
         this.isUseTracingOptionsDisabled = disabled;
-
         disabled = !(isEnabled && this.useTracing && this.useTracingOptions);
         this.isTraceIdEffectiveLengthDisabled = disabled;
         this.isUseB3HeadersDisabled = disabled;
@@ -90,3 +68,4 @@ export class NetworkOptions {
         this.isParentSpanIdDisabled = disabled;
     }
 }
+exports.NetworkOptions = NetworkOptions;

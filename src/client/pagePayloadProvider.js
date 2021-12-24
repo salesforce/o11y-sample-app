@@ -1,18 +1,18 @@
-import { pagePayloadSchema } from 'o11y_schema/sf_o11ySample';
-
-export class PagePayloadProvider {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PagePayloadProvider = void 0;
+const sf_o11ySample_1 = require("o11y_schema/sf_o11ySample");
+class PagePayloadProvider {
     constructor(entityId, entityType) {
         this.setEntityInfo(entityId, entityType);
     }
-
     setEntityInfo(id, type) {
         this._entityId = id;
         this._entityType = type;
     }
-
     getPayload() {
         return {
-            schema: pagePayloadSchema,
+            schema: sf_o11ySample_1.pagePayloadSchema,
             payload: {
                 url: window.location.href,
                 entityId: this._entityId,
@@ -21,3 +21,4 @@ export class PagePayloadProvider {
         };
     }
 }
+exports.PagePayloadProvider = PagePayloadProvider;
