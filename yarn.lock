@@ -6787,7 +6787,7 @@ lwc-components-lightning@^1.11.1-alpha:
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/lwc-components-lightning/-/42336a78a383c82aa9c271964a467a8d62f789df.tgz#42336a78a383c82aa9c271964a467a8d62f789df"
   integrity sha512-mlv7K/eKutGrAg1+apTy1KdGpD6pQOtlFHVl4aEXMfWkZ8ll4Hm58B9L4JQWvaknX7tyBrg96vsl32toTP9zFQ==
 
-lwc-services@^3.0.2:
+lwc-services@^3.2.2:
   version "3.2.2"
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/lwc-services/-/lwc-services-3.2.2.tgz#8e3aab986d2deeb9c75359b42bf9b0995002ae20"
   integrity sha512-y5hiQQywdkKwbcFZOld1wOH9SASeaFw/RlVfk29acWIexHfsl3qJhgddb3hJsKZ/g2aZSMC9TEpHhOK9GMeD0Q==
@@ -7182,7 +7182,7 @@ node-releases@^2.0.1:
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/node-releases/-/node-releases-2.0.1.tgz#3d1d395f204f1f2f29a54358b9fb678765ad2fc5"
   integrity sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==
 
-nodemon@~2.0.7:
+nodemon@2.0.15, nodemon@~2.0.7:
   version "2.0.15"
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/nodemon/-/nodemon-2.0.15.tgz#504516ce3b43d9dc9a955ccd9ec57550a31a8d4e"
   integrity sha512-gdHMNx47Gw7b3kWxJV64NI+Q5nfl0y5DgDbiVtShiwa7Z0IZ07Ll4RLFo6AjrhzMtoEZn5PDE3/c2AbVsiCkpA==
@@ -7824,7 +7824,7 @@ prepend-http@^2.0.0:
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
 
-prettier@^2.2.1:
+prettier@^2.5.1:
   version "2.5.1"
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/prettier/-/prettier-2.5.1.tgz#fff75fa9d519c54cf0fce328c1017d94546bc56a"
   integrity sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==
