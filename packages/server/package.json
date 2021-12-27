@@ -1,0 +1,56 @@
+{
+    "name": "o11y-sample-node-server",
+    "description": "Sample server endpoint that consume 'o11y' payloads",
+    "version": "238.0.0",
+    "author": "instrumentationteam@salesforce.com",
+    "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "o11y": "238.1.3",
+        "o11y_schema": "238.5.0"
+    },
+    "engines": {
+        "node": ">=14.15.1",
+        "npm": ">=7.4.3",
+        "yarn": ">=1.22.4"
+    },
+    "homepage": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app",
+    "keywords": [
+        "distributed tracing",
+        "instrumentation",
+        "o11y",
+        "observability",
+        "olly",
+        "telemetry",
+        "lwc"
+    ],
+    "license": "MIT",
+    "lint-staged": {
+        "**/*.{css,html,js,json,md,ts,yaml,yml}": [
+            "prettier --write"
+        ],
+        "./src/**/*.js": [
+            "eslint"
+        ]
+    },
+    "repository": "instrumentation/o11y-sample",
+    "scripts": {
+        "build": "tsc -b",
+        "lint": "eslint ./src/**/*.ts",
+        "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
+        "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
+        "start": "node ../../dist-server/api.js",
+        "watch": "nodemon"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.12",
+        "@types/estree": "0.0.50",
+        "@types/express": "^4.17.13",
+        "eslint": "^7.32.0",
+        "lint-staged": "^10.5.3",
+        "nodemon": "2.0.15",
+        "prettier": "^2.5.1",
+        "typescript": "^4.5.4"
+    }
+}

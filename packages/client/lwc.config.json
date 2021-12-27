@@ -1,7 +1,7 @@
 {
     "modules": [
         {
-            "dir": "src/client/modules"
+            "dir": "src/modules"
         },
         {
             "npm": "lwc-components-lightning"

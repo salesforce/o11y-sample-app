@@ -13,13 +13,13 @@ import {
     pagePayloadSchema
 } from 'o11y_schema/sf_o11ySample';
 
-import { CoreEnvelope } from '../interfaces/CoreEnvelope';
-import { EncodedSchematizedPayload } from '../interfaces/EncodedSchematizedPayload';
-import { MetricTag } from '../interfaces/MetricTag';
-import { Schema } from '../interfaces/Schema';
-import { ValueRecorder } from '../interfaces/ValueRecorder';
-import { UpCounter } from '../interfaces/UpCounter';
-import { exampleSchema } from '../schemas/exampleSchema';
+import { CoreEnvelope } from './interfaces/CoreEnvelope';
+import { EncodedSchematizedPayload } from './interfaces/EncodedSchematizedPayload';
+import { MetricTag } from './interfaces/MetricTag';
+import { Schema } from './interfaces/Schema';
+import { ValueRecorder } from './interfaces/ValueRecorder';
+import { UpCounter } from './interfaces/UpCounter';
+import { exampleSchema } from './schemas/exampleSchema';
 
 const schemas = new Map()
     .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
