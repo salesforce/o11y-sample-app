@@ -39,8 +39,8 @@
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
-        "build:production": "lwc-services build -m production -b rollup && tsc -b ./src/server",
-        "build": "lwc-services build -b rollup && tsc -b ./src/server",
+        "build:production": "lwc-services build -m production && tsc -b ./src/server",
+        "build": "lwc-services build && tsc -b ./src/server",
         "lint": "eslint ./src/**/*.js",
         "play": "run-p watch:client serve:api",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
@@ -49,7 +49,7 @@
         "start:api": "node lib/server/api.js",
         "start:client": "node scripts/server.js",
         "watch": "run-p watch:client watch:server",
-        "watch:client": "lwc-services watch -b rollup",
+        "watch:client": "lwc-services watch",
         "watch:server": "nodemon"
     },
     "devDependencies": {
