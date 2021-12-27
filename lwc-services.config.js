@@ -2,14 +2,10 @@
 // https://github.com/muenzpraeger/create-lwc-app/blob/main/packages/lwc-services/example/lwc-services.config.js
 module.exports = {
     resources: [
-        {
-            from: 'src/client/resources/',
-            to: 'dist/resources/'
-        },
-        {
-            from: 'node_modules/@salesforce-ux/design-system/assets',
-            to: 'dist/assets'
-        }
+        { from: 'src/client/resources/**', to: 'dist/resources/' },
+        { from: 'src/client/index.html', to: 'dist/' },
+        // TODO: { from: 'src/client/manifest.json', to: 'dist/manifest.json' },
+        { from: 'node_modules/@salesforce-ux/design-system/assets', to: 'dist/assets' }
     ],
     sourceDir: './src/client',
     devServer: {
