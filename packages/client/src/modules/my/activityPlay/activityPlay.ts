@@ -10,9 +10,15 @@ export default class ActivityPlay extends LightningElement {
         const element = event.detail.sender;
 
         switch (element.getAttribute('data-name')) {
-            case 'activity1': this.activity1 = name; break;
-            case 'activity2': this.activity2 = name; break;
-            case 'activity3': this.activity3 = name; break;
+            case 'activity1':
+                this.activity1 = name;
+                break;
+            case 'activity2':
+                this.activity2 = name;
+                break;
+            case 'activity3':
+                this.activity3 = name;
+                break;
         }
     }
 }

@@ -1,6 +1,6 @@
-import { TracingHeadersOptions } from "o11y/dist/modules/o11y/client/interfaces";
-import { NetworkInstrumentationOptions } from "../../interfaces/networkInstrumentationOptions";
-import { UiOptions } from "../../interfaces/uiOptions";
+import { TracingHeadersOptions } from 'o11y/dist/modules/o11y/client/interfaces';
+import { NetworkInstrumentationOptions } from '../../interfaces/networkInstrumentationOptions';
+import { UiOptions } from '../../interfaces/uiOptions';
 
 export class NetworkOptions implements UiOptions, TracingHeadersOptions {
     isEnabled: boolean;
@@ -49,19 +49,26 @@ export class NetworkOptions implements UiOptions, TracingHeadersOptions {
         });
     }
 
-    getNetworkInstrumentationOptions(): NetworkInstrumentationOptions | boolean {
-        return this.isEnabled ?
-            (this.useNetworkOptions ? {
-                logErrors: this.logErrors,
-                activityName: this.activityName,
-                useTracing: this.useTracing,
-                tracingHeadersOptions: (this.useTracingOptions ? {
-                    useB3Headers: this.useB3Headers,
-                    useCompactHeader: this.useCompactHeader,
-                    traceIdEffectiveLength: this.traceIdEffectiveLength,
-                    parentSpanId: this.parentSpanId
-                } : undefined)
-            } : true)
+    getNetworkInstrumentationOptions():
+        | NetworkInstrumentationOptions
+        | boolean {
+        return this.isEnabled
+            ? this.useNetworkOptions
+                ? {
+                      logErrors: this.logErrors,
+                      activityName: this.activityName,
+                      useTracing: this.useTracing,
+                      tracingHeadersOptions: this.useTracingOptions
+                          ? {
+                                useB3Headers: this.useB3Headers,
+                                useCompactHeader: this.useCompactHeader,
+                                traceIdEffectiveLength:
+                                    this.traceIdEffectiveLength,
+                                parentSpanId: this.parentSpanId
+                            }
+                          : undefined
+                  }
+                : true
             : false;
     }
 

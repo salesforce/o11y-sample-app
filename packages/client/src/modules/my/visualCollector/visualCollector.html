@@ -7,7 +7,9 @@
                         <my-activity-card model={log}></my-activity-card>
                     </template>
                     <template if:true={log._isInstrumentedEvent}>
-                        <my-instrumented-event-card model={log}></my-instrumented-event-card>
+                        <my-instrumented-event-card
+                            model={log}
+                        ></my-instrumented-event-card>
                     </template>
                     <template if:true={log._isError}>
                         <my-error-card model={log}></my-error-card>
@@ -23,10 +25,16 @@
                     </template>
                     <!-- the below section is common to all template types -->
                     <div if:true={log.appPayload} class="payload">
-                        <my-payload-card header="App Payload" model={log.appPayload}></my-payload-card>
+                        <my-payload-card
+                            header="App Payload"
+                            model={log.appPayload}
+                        ></my-payload-card>
                     </div>
                     <div if:true={log.pagePayload} class="payload">
-                        <my-payload-card header="Page Payload" model={log.pagePayload}></my-payload-card>
+                        <my-payload-card
+                            header="Page Payload"
+                            model={log.pagePayload}
+                        ></my-payload-card>
                     </div>
                 </div>
             </lightning-card>

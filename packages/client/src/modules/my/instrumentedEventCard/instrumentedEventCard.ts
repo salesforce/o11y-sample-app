@@ -18,11 +18,18 @@ export default class InstrumentedEventCard extends LightningElement {
     set model(value: CardModel) {
         this._model = value;
         const topItems: KeyValue[] = utility.getFilteredKeyValues();
-        const msgItems: KeyValue[] = value && utility.getKeyValues(value.msg).filter(obj => obj.key !== 'userPayload' && obj.key !== 'event');
+        const msgItems: KeyValue[] =
+            value &&
+            utility
+                .getKeyValues(value.msg)
+                .filter(
+                    (obj) => obj.key !== 'userPayload' && obj.key !== 'event'
+                );
         this.keyValues = [...topItems, ...msgItems];
 
         this.userPayload = value && value.msg && value.msg.userPayload;
-        this.eventKeyValues = value && value.msg && utility.getKeyValues(value.msg.event);
+        this.eventKeyValues =
+            value && value.msg && utility.getKeyValues(value.msg.event);
     }
 
     handleToggle(): void {

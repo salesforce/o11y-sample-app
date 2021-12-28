@@ -1,4 +1,4 @@
-import { CardModel } from "./cardModel";
+import { CardModel } from './cardModel';
 
 export interface LogModel extends CardModel {
     _isActivity?: boolean;

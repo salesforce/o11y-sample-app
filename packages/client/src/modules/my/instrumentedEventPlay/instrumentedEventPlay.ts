@@ -23,11 +23,15 @@ export default class InstrumentedEventPlay extends LightningElement {
     }
 
     notifyAct(text: string): void {
-        alert(`The handler for the ${text} is executing. If the automatic click tracker is on, the click will be logged once execution resumes.`);
+        alert(
+            `The handler for the ${text} is executing. If the automatic click tracker is on, the click will be logged once execution resumes.`
+        );
     }
 
     notifyNoAct(text: string): void {
-        alert(`The handler for the ${text} is executing. If the automatic click tracker is on, it will ignore the event which the handler will log explicitly.`);
+        alert(
+            `The handler for the ${text} is executing. If the automatic click tracker is on, it will ignore the event which the handler will log explicitly.`
+        );
     }
 
     handleAnchorClick(event: MouseEvent): void {
@@ -86,14 +90,16 @@ export default class InstrumentedEventPlay extends LightningElement {
     }
 
     logEvent(event: Event): void {
-        const actualColor = window.getComputedStyle(event.target as Element).backgroundColor;
+        const actualColor = window.getComputedStyle(
+            event.target as Element
+        ).backgroundColor;
         // Convert actualColor text, which comes back in the form of "rgb(x, y, z)" or "rgba(x, y, z, a)", into an actual value.
-        const colorValue = actualColor.substring(actualColor.indexOf('(') + 1, actualColor.indexOf(')'))
+        const colorValue = actualColor
+            .substring(actualColor.indexOf('(') + 1, actualColor.indexOf(')'))
             .split(', ')
             .slice(0, 3)
-            .map(s => parseInt(s))
+            .map((s) => parseInt(s))
             .reduce((a, b) => a * 256 + b);
-
 
         this._instr.domEvent(event, this, userPayloadSchema, {
             string: actualColor,

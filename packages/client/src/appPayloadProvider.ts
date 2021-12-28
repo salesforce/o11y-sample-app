@@ -2,7 +2,6 @@ import { SchematizedPayload } from 'o11y/dist/modules/o11y/client/interfaces';
 import { appPayloadSchema } from 'o11y_schema/sf_o11ySample';
 
 export class AppPayloadProvider {
-
     private _frameCount: number;
     private _lastFrameRate: number;
 

@@ -6,7 +6,10 @@ const buildDir = '../../dist-client';
 module.exports = {
     resources: [
         { from: 'src/resources/', to: `${buildDir}/resources/` },
-        { from: '../../node_modules/@salesforce-ux/design-system/assets', to: `${buildDir}/assets` }
+        {
+            from: '../../node_modules/@salesforce-ux/design-system/assets',
+            to: `${buildDir}/assets`
+        }
     ],
     sourceDir: './src',
     buildDir,
@@ -14,4 +17,3 @@ module.exports = {
         proxy: { '/': 'http://localhost:3002' }
     }
 };
-

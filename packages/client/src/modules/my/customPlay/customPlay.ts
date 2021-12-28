@@ -16,9 +16,9 @@ export default class CustomPlay extends LightningElement {
         this._instr = getInstrumentation('Custom Play');
     }
 
-
     handleSubmit(): void {
-        const inputs: NodeListOf<Element> = this.template.querySelectorAll('lightning-input');
+        const inputs: NodeListOf<Element> =
+            this.template.querySelectorAll('lightning-input');
 
         const logData: LogData = {};
         inputs.forEach((element: any) => {
@@ -27,7 +27,8 @@ export default class CustomPlay extends LightningElement {
             switch (element.name) {
                 case 'inputBool':
                     if (!isEmpty) {
-                        logData.bool = val === 'true' || (val === 'false' ? false : val);
+                        logData.bool =
+                            val === 'true' || (val === 'false' ? false : val);
                     }
                     break;
                 case 'inputString':
@@ -63,7 +64,9 @@ export default class CustomPlay extends LightningElement {
                     logData.ignored = val;
                     break;
                 default:
-                    this._instr.error(new Error(`Undefined input name ${element.name}`));
+                    this._instr.error(
+                        new Error(`Undefined input name ${element.name}`)
+                    );
                     return;
             }
         });

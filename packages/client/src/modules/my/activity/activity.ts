@@ -1,6 +1,9 @@
 import { LightningElement, api, track } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
-import { Activity as O11yActivity, Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
+import {
+    Activity as O11yActivity,
+    Instrumentation
+} from 'o11y/dist/modules/o11y/client/interfaces';
 import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class Activity extends LightningElement {
@@ -37,7 +40,9 @@ export default class Activity extends LightningElement {
     }
 
     handleError(): void {
-        this._activity.error(new Error(`An error associated with ${this.activityName}`));
+        this._activity.error(
+            new Error(`An error associated with ${this.activityName}`)
+        );
     }
 
     handleActivityNameChange(event: CustomEvent): void {

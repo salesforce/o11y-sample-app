@@ -1,4 +1,4 @@
 export interface KeyValue {
-    key: string,
-    value: unknown
+    key: string;
+    value: unknown;
 }

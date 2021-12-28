@@ -1,23 +1,29 @@
 import { LightningElement, track } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector } from 'o11y/client';
-import { CoreCollector } from 'o11y/collectors'
+import { CoreCollector } from 'o11y/collectors';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
 
-import { Activity, InstrumentedAppMethods, LogCollector, LogMeta, Schema } from 'o11y/dist/modules/o11y/client/interfaces';
+import {
+    Activity,
+    InstrumentedAppMethods,
+    LogCollector,
+    LogMeta,
+    Schema
+} from 'o11y/dist/modules/o11y/client/interfaces';
 import { CoreCollector as CoreCollectorType } from 'o11y/dist/modules/o11y/collectors/collectors';
-import { SchematizedData } from "o11y/dist/modules/o11y/shared/shared/TypeDefinitions";
+import { SchematizedData } from 'o11y/dist/modules/o11y/shared/shared/TypeDefinitions';
 
-// #LOOK: 
+// #LOOK:
 // API endpoint configuration has moved to shared/apiEndpoints.js
 import { apiEndpoint } from '../../shared/apiEndpoints';
 import { LogModel } from '../../models/logModel';
 
-// #LOOK: 
-// If using a Salesforce endpoint, you must specify a bearerToken for authorization. 
-// It can be either an Oauth2 access token or a session ID. 
-// If you have Salesforce running locally, go to /qa/getUserSession.jsp to get a session ID. 
+// #LOOK:
+// If using a Salesforce endpoint, you must specify a bearerToken for authorization.
+// It can be either an Oauth2 access token or a session ID.
+// If you have Salesforce running locally, go to /qa/getUserSession.jsp to get a session ID.
 // If using the webserver included in this app, leave the bearerToken empty.
 const bearerToken = '';
 
@@ -28,17 +34,16 @@ const bearerToken = '';
 // 1. Configure CORS on the server (https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#)
 //    1.1. From Setup, enter CORS in the Quick Find box, then select CORS.
 //    1.2. Select New
-//    1.3. Enter the origin URL pattern. If you're using the defaults, you can set it to "http://localhost:3001". 
-//         You may not be able to set a CORS entry without https. In this case, and assuming your machine is 
+//    1.3. Enter the origin URL pattern. If you're using the defaults, you can set it to "http://localhost:3001".
+//         You may not be able to set a CORS entry without https. In this case, and assuming your machine is
 //         in the internal Salesforce network, you can use the FQDN as follows: "https://YOURMACHINE.internal.salesforce.com:3001".
 //
-// 2. Another options is to disable CORS on the browser with the help of certain browser extensions. 
+// 2. Another options is to disable CORS on the browser with the help of certain browser extensions.
 //    DISCLAIMER: These extensions are not endorsed by Salesforce and you are using them at your own risk.
 //    2.1. Cross Domain - CORS: https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related
 //    2.2. Disable Content-Security-Policy: https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related
 
 export default class App extends LightningElement implements LogCollector {
-
     @track labelIntro = 'Getting Started';
     @track labelEvents = 'Instrumenting DOM Events';
     @track labelErrors = 'Error Logging';
@@ -47,7 +52,7 @@ export default class App extends LightningElement implements LogCollector {
     @track labelIdleDetector = 'Idle Detector';
     @track labelServer = 'Server Side';
     @track labelNetwork = 'Network Instrumentation';
-    @track labelMetrics = 'Metrics'
+    @track labelMetrics = 'Metrics';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 
     @track sectionIntro = 'section_intro';
@@ -105,10 +110,13 @@ export default class App extends LightningElement implements LogCollector {
 
     initializeInstrumentation(): void {
         // The top-level entity (the app) must initialize instrumentation before use.
-        // Components can directly use the getInstrumentation import from 'o11y/client'.        
+        // Components can directly use the getInstrumentation import from 'o11y/client'.
 
         // STEP 0: (Optional) Instantiate AppPayloadProvider, PagePayloadProvider
-        this.pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this.entityType);
+        this.pagePayloadProvider = new PagePayloadProvider(
+            this.selectedSection,
+            this.entityType
+        );
 
         // STEP 1: Register the app
         this._instrApp = registerInstrumentedApp('o11y Sample App', {
@@ -119,7 +127,7 @@ export default class App extends LightningElement implements LogCollector {
 
         // STEP 2: Register log collectors
         this._instrApp.registerLogCollector(new ConsoleCollector());
-        this._instrApp.registerLogCollector(this);   // See 'collect' method
+        this._instrApp.registerLogCollector(this); // See 'collect' method
         this.coreCollector = this.getCoreCollector();
         this._instrApp.registerLogCollector(this.coreCollector);
 
@@ -139,11 +147,18 @@ export default class App extends LightningElement implements LogCollector {
         let coreCollectorMode = 0; // Use application/octet-stream by default
         // #LOOK:
         // If the endpoint requires auth header, you may need to update the check below
-        if (apiEndpoint.indexOf('.salesforce.com') >= 0 || apiEndpoint.indexOf('.force.com') >= 0) {
+        if (
+            apiEndpoint.indexOf('.salesforce.com') >= 0 ||
+            apiEndpoint.indexOf('.force.com') >= 0
+        ) {
             this.overrideFetch(); // Include authorization header in the calls
             coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
         }
-        return new CoreCollector(apiEndpoint, coreCollectorMode, this.environment);
+        return new CoreCollector(
+            apiEndpoint,
+            coreCollectorMode,
+            this.environment
+        );
     }
 
     collect(schema: Schema, message: SchematizedData, logMeta: LogMeta): void {
@@ -157,10 +172,10 @@ export default class App extends LightningElement implements LogCollector {
             _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
             _isO11ySimple: this.isSimple(schemaId),
             _isO11ySample: this.isSample(schemaId),
-            _isUnknown: this.isUnknown(schemaId),
+            _isUnknown: this.isUnknown(schemaId)
         });
         this.logs = [model, ...this.logs];
-    };
+    }
 
     getIsDisabled(): boolean {
         // As a collector
@@ -188,7 +203,13 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     isUnknown(schemaId: string): boolean {
-        return !this.isActivity(schemaId) && !this.isError(schemaId) && !this.isInstrumentedEvent(schemaId) && !this.isSample(schemaId) && !this.isSimple(schemaId);
+        return (
+            !this.isActivity(schemaId) &&
+            !this.isError(schemaId) &&
+            !this.isInstrumentedEvent(schemaId) &&
+            !this.isSample(schemaId) &&
+            !this.isSimple(schemaId)
+        );
     }
 
     overrideFetch(): void {
@@ -221,10 +242,13 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     handleTabSelect(event: CustomEvent): void {
-        const section = this.selectedSection = (event.currentTarget as any).value;
+        const section = (this.selectedSection = (
+            event.currentTarget as any
+        ).value);
         this.pagePayloadProvider.setEntityInfo(section, this.entityType);
 
-        window.location.hash = section && section.substring(section.indexOf('_') + 1);
+        window.location.hash =
+            section && section.substring(section.indexOf('_') + 1);
         this.startRootActivity(section);
     }
 
@@ -235,14 +259,20 @@ export default class App extends LightningElement implements LogCollector {
         }
         const label = this._sectionToLabelMap.get(section) || 'Unknown Section';
         const isSampled = this.network.sampleRate > Math.random() * 100;
-        this.rootActivity = this._instrApp.startRootActivity(label, undefined, isSampled);
+        this.rootActivity = this._instrApp.startRootActivity(
+            label,
+            undefined,
+            isSampled
+        );
     }
 
     handleNetworkOptionsChange(event: CustomEvent): void {
         const uiOptions = event.detail.value;
 
         const networkOptions = new NetworkOptions(uiOptions);
-        this._instrApp.networkInstrumentation(networkOptions.getNetworkInstrumentationOptions())
+        this._instrApp.networkInstrumentation(
+            networkOptions.getNetworkInstrumentationOptions()
+        );
         this.network = networkOptions;
         // TODO: Remove "as any" when types are fixed
         this._instrApp.log('Updated Network Options' as any);

@@ -4,7 +4,6 @@ import { Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
 import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class MetricsPlay extends LightningElement {
-
     private readonly _instr: Instrumentation;
     @track counterName = 'Counter name';
     @track increment = 1;
@@ -76,11 +75,13 @@ export default class MetricsPlay extends LightningElement {
             this.counterName,
             this.increment,
             this.hasErrorForCounter,
-            this.isCounterTagsDisabled ? undefined : {
-                stringTag: this.stringTagForCounter,
-                booleanTag: this.booleanTagForCounter,
-                numberTag: this.numberTagForCounter
-            }
+            this.isCounterTagsDisabled
+                ? undefined
+                : {
+                      stringTag: this.stringTagForCounter,
+                      booleanTag: this.booleanTagForCounter,
+                      numberTag: this.numberTagForCounter
+                  }
         );
     }
 
@@ -89,11 +90,13 @@ export default class MetricsPlay extends LightningElement {
             this.valueRecorderName,
             this.value,
             this.hasErrorForValueRecorder,
-            this.isValueRecorderTagsDisabled ? undefined : {
-                stringTag: this.stringTagForValueRecorder,
-                booleanTag: this.booleanTagForValueRecorder,
-                numberTag: this.numberTagForValueRecorder
-            }
+            this.isValueRecorderTagsDisabled
+                ? undefined
+                : {
+                      stringTag: this.stringTagForValueRecorder,
+                      booleanTag: this.booleanTagForValueRecorder,
+                      numberTag: this.numberTagForValueRecorder
+                  }
         );
     }
 

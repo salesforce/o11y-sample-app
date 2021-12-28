@@ -63,7 +63,8 @@ function processBundles(envelope: CoreEnvelope): void {
         // Recognizing only top-level schemas
         const isKnown = schemas.has(schemaName);
         console.log(
-            `BUNDLE #${i}: Schema='${schemaName}'${!isKnown ? ' (UNKNOWN)' : ''
+            `BUNDLE #${i}: Schema='${schemaName}'${
+                !isKnown ? ' (UNKNOWN)' : ''
             }, Messages=${messages.length}`
         );
 
@@ -89,7 +90,10 @@ function processBundles(envelope: CoreEnvelope): void {
     }
 }
 
-function processPayload(payloadObj: EncodedSchematizedPayload, label: string): void {
+function processPayload(
+    payloadObj: EncodedSchematizedPayload,
+    label: string
+): void {
     if (payloadObj) {
         const { type: pageType, message: decodedPageMsg } = decode(
             payloadObj.schemaName,
@@ -132,7 +136,15 @@ function processValueRecorders(valueRecorders: ValueRecorder[]) {
     for (let i = 0; i < count; i += 1) {
         const v = valueRecorders[i];
         console.log(`[${i}].name: ${v.name}`);
-        console.log(`[${i}].values: ${v.values ? v.values.length ? v.values.join(', ') : 'Empty' : 'Undefined'}`);
+        console.log(
+            `[${i}].values: ${
+                v.values
+                    ? v.values.length
+                        ? v.values.join(', ')
+                        : 'Empty'
+                    : 'Undefined'
+            }`
+        );
         console.log(`[${i}].createdTimestamp: ${v.createdTimestamp}`);
         console.log(`[${i}].lastUpdatedTimestamp: ${v.lastUpdatedTimestamp}`);
         console.log(`[${i}].tags: ${getMetricsTags(v.tags)}`);
@@ -148,13 +160,18 @@ function getMetricsTags(tagsArray: MetricTag[]) {
     if (!tagsArray.length) {
         return 'Empty';
     }
-    return tagsArray.map(tag => `${tag.name}=${tag.value}`).join(', ');
+    return tagsArray.map((tag) => `${tag.name}=${tag.value}`).join(', ');
 }
 
 export function processCoreEnvelope(encodedEnvelope: Uint8Array) {
-    console.log(`Received encoded CoreEnvelope with size ${encodedEnvelope.length} bytes.`);
+    console.log(
+        `Received encoded CoreEnvelope with size ${encodedEnvelope.length} bytes.`
+    );
 
-    const { message } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
+    const { message } = decode(
+        getSchemaId(coreEnvelopeSchema),
+        encodedEnvelope
+    );
     const envelope = message as CoreEnvelope;
 
     processDiagnostics(envelope);
@@ -162,4 +179,3 @@ export function processCoreEnvelope(encodedEnvelope: Uint8Array) {
     processBundles(envelope);
     processMetrics(envelope);
 }
-

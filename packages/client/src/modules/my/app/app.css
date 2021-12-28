@@ -51,7 +51,6 @@ code {
     font-weight: bold;
 }
 
-
 .header {
     margin: 10px 0;
     font-size: larger;
@@ -102,7 +101,7 @@ lightning-tab {
     height: 40px;
 }
 
-.collector-header> :not(.collector-header-title):last-child {
+.collector-header > :not(.collector-header-title):last-child {
     flex-grow: 1;
     text-align: right;
 }

@@ -22,7 +22,9 @@ export default class PayloadCard extends LightningElement {
             this.schemaName = undefined;
             this.payload = undefined;
         } else {
-            this.schemaName = value.schema ? `${value.schema.namespace}.${value.schema.name}` : undefined;
+            this.schemaName = value.schema
+                ? `${value.schema.namespace}.${value.schema.name}`
+                : undefined;
             this.payload = utility.getKeyValues(value.payload);
         }
     }

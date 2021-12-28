@@ -15,10 +15,18 @@ export default class ErrorCard extends LightningElement {
     set model(value: CardModel) {
         this._model = value;
         const topItems: KeyValue[] = utility.getFilteredKeyValues();
-        const msgItems: KeyValue[] = value && utility.getKeyValues(value.msg).filter(obj => obj.key !== 'stack');
+        const msgItems: KeyValue[] =
+            value &&
+            utility
+                .getKeyValues(value.msg)
+                .filter((obj) => obj.key !== 'stack');
         this.keyValues = [...topItems, ...msgItems];
 
         // TODO: Why is this not being used?
-        this.callstack = value && value.msg && value.msg.stack && value.msg.stack.replace(/\n/g, '<br>');
+        this.callstack =
+            value &&
+            value.msg &&
+            value.msg.stack &&
+            value.msg.stack.replace(/\n/g, '<br>');
     }
 }
