@@ -23,6 +23,7 @@
     "license": "MIT",
     "repository": "instrumentation/o11y-sample",
     "scripts": {
+        "clean:deep": "./deep-clean.sh",
         "build": "lerna run build",
         "lint": "lerna run lint",
         "prettier": "lerna run prettier",
