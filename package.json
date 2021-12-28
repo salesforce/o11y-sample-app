@@ -1,18 +1,10 @@
 {
     "name": "o11y-sample",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
+    "private": true,
     "version": "238.0.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
-    "dependencies": {
-        "@lwc/synthetic-shadow": "^1.9.7",
-        "@salesforce-ux/design-system": "^2.14.1",
-        "cors": "^2.8.5",
-        "express": "^4.17.1",
-        "lwc-components-lightning": "^1.11.1-alpha",
-        "o11y": "238.1.3",
-        "o11y_schema": "238.5.0"
-    },
     "engines": {
         "node": ">=14.15.1",
         "npm": ">=7.4.3",
@@ -29,33 +21,27 @@
         "lwc"
     ],
     "license": "MIT",
-    "lint-staged": {
-        "**/*.{css,html,js,json,md,ts,yaml,yml}": [
-            "prettier --write"
-        ],
-        "./src/**/*.js": [
-            "eslint"
-        ]
-    },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
-        "build:production": "lwc-services build -m production",
-        "build": "lwc-services build",
-        "lint": "eslint ./src/**/*.js",
-        "play": "run-p watch:client serve:api",
-        "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
-        "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
-        "serve": "run-p serve:client serve:api",
-        "serve:api": "node src/server/api.mjs",
-        "serve:client": "node scripts/FrontendServer.js",
-        "watch:client": "lwc-services watch"
+        "clean:deep": "./deep-clean.sh",
+        "build": "lerna run build",
+        "lint": "lerna run lint",
+        "prettier": "lerna run prettier",
+        "prettier:verify": "lerna run prettier:verify",
+        "start": "run-p start:server start:client",
+        "start:client": "cd packages/client && yarn start",
+        "start:server": "cd packages/server && yarn start",
+        "watch": "run-p watch:client watch:server",
+        "watch:client": "cd packages/client && yarn watch",
+        "watch:server": "cd packages/server && yarn watch"
     },
     "devDependencies": {
-        "eslint": "^6.8.0",
-        "husky": "^4.3.6",
-        "lint-staged": "^10.5.3",
-        "lwc-services": "^3.0.2",
-        "npm-run-all": "^4.1.5",
-        "prettier": "^2.2.1"
+        "lerna": "^4.0.0",
+        "npm-run-all": "^4.1.5"
+    },
+    "workspaces": {
+        "packages": [
+            "packages/*"
+        ]
     }
 }

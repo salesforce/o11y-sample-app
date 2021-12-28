@@ -1,7 +1,0 @@
-{
-    "compilerOptions": {
-        "experimentalDecorators": true,
-        "moduleResolution": "node",
-        "baseUrl": "../src"
-    }
-}

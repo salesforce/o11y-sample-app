@@ -4,11 +4,9 @@ logs
 *-debug.log
 *-error.log
 
-# Standard lib folder
-/lib
-
-# Standard dist folder
-/dist
+# dist folders
+/dist-client
+/dist-server
 
 # Tooling files
 node_modules

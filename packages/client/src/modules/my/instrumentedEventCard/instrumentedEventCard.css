@@ -1,0 +1,18 @@
+.card-header {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    margin-left: 10px;
+}
+
+.header {
+    font: bold;
+    margin-top: 10px;
+}
+
+.payload {
+    margin-top: 10px;
+}
