@@ -46,9 +46,9 @@ recursive(distDir, [ignoreFunc], async function (err, files) {
             }
             out.write('\n');
         }
-        if (replaceCount) {
-            console.log(`Replaced ${replaceCount} in "${file}"`);
-        }
+        const message = replaceCount ? ` and replaced ${replaceCount} imports` : '';
+        console.log(`Renamed "${file}"${message}`);
+
         fs.rm(file, (err) => {
             if (err) {
                 console.error(err);
