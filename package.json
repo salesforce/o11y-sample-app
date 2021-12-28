@@ -29,8 +29,11 @@
         "prettier": "lerna run prettier",
         "prettier:verify": "lerna run prettier:verify",
         "start": "run-p start:server start:client",
-        "start:client": "node packages/client/scripts/server.js",
-        "start:server": "node dist-server/api.mjs"
+        "start:client": "cd packages/client && yarn start",
+        "start:server": "cd packages/server && yarn start",
+        "watch": "run-p watch:client watch:server",
+        "watch:client": "cd packages/client && yarn watch",
+        "watch:server": "cd packages/server && yarn watch"
     },
     "devDependencies": {
         "lerna": "^4.0.0",
