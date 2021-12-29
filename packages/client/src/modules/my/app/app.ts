@@ -100,7 +100,7 @@ export default class App extends LightningElement implements LogCollector {
         appExperience: 'Sample',
         deviceId: 'Unknown',
         deviceModel: 'Unknown',
-        sdkVersion: '238'   // Keep this up-to-date with the major version
+        sdkVersion: '238' // Keep this up-to-date with the major version
     };
 
     constructor() {
@@ -118,10 +118,7 @@ export default class App extends LightningElement implements LogCollector {
         // Components can directly use the getInstrumentation import from 'o11y/client'.
 
         // STEP 0: (Optional) Instantiate AppPayloadProvider, PagePayloadProvider
-        this.pagePayloadProvider = new PagePayloadProvider(
-            this.selectedSection,
-            this.entityType
-        );
+        this.pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this.entityType);
 
         // STEP 1: Register the app
         this._instrApp = registerInstrumentedApp('o11y Sample App', {
@@ -159,30 +156,19 @@ export default class App extends LightningElement implements LogCollector {
         let coreCollectorMode = 0; // Use application/octet-stream by default
         // #LOOK:
         // If the endpoint requires auth header, you may need to update the check below
-        if (
-            apiEndpoint.indexOf('.salesforce.com') >= 0 ||
-            apiEndpoint.indexOf('.force.com') >= 0
-        ) {
+        if (apiEndpoint.indexOf('.salesforce.com') >= 0 || apiEndpoint.indexOf('.force.com') >= 0) {
             this.overrideFetch(); // Include authorization header in the calls
             coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
         }
 
         // Create a new core collector and disable default logic to auto-upload on certain conditions
-        const cc = new CoreCollector(
-            apiEndpoint,
-            coreCollectorMode,
-            this.environment,
-            {
-                messagesLimit: maxInt,
-                metricsLimit: maxInt,
-                uploadFailedListener: (result: UploadResult) => {
-                    this._instrApp.error(
-                        'Upload failed',
-                        result.error && result.error.toString()
-                    );
-                }
+        const cc = new CoreCollector(apiEndpoint, coreCollectorMode, this.environment, {
+            messagesLimit: maxInt,
+            metricsLimit: maxInt,
+            uploadFailedListener: (result: UploadResult) => {
+                this._instrApp.error('Upload failed', result.error && result.error.toString());
             }
-        );
+        });
 
         // Note: Cannot use Infinity with setTimeout per MDN
         cc.uploadInterval = maxInt;
@@ -270,13 +256,10 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     handleTabSelect(event: CustomEvent): void {
-        const section = (this.selectedSection = (
-            event.currentTarget as any
-        ).value);
+        const section = (this.selectedSection = (event.currentTarget as any).value);
         this.pagePayloadProvider.setEntityInfo(section, this.entityType);
 
-        window.location.hash =
-            section && section.substring(section.indexOf('_') + 1);
+        window.location.hash = section && section.substring(section.indexOf('_') + 1);
         this.startRootActivity(section);
     }
 
@@ -287,20 +270,14 @@ export default class App extends LightningElement implements LogCollector {
         }
         const label = this._sectionToLabelMap.get(section) || 'Unknown Section';
         const isSampled = this.network.sampleRate > Math.random() * 100;
-        this.rootActivity = this._instrApp.startRootActivity(
-            label,
-            undefined,
-            isSampled
-        );
+        this.rootActivity = this._instrApp.startRootActivity(label, undefined, isSampled);
     }
 
     handleNetworkOptionsChange(event: CustomEvent): void {
         const uiOptions = event.detail.value;
 
         const networkOptions = new NetworkOptions(uiOptions);
-        this._instrApp.networkInstrumentation(
-            networkOptions.getNetworkInstrumentationOptions()
-        );
+        this._instrApp.networkInstrumentation(networkOptions.getNetworkInstrumentationOptions());
         this.network = networkOptions;
         // TODO: Remove "as any" when types are fixed
         this._instrApp.log('Updated Network Options' as any);
@@ -313,9 +290,7 @@ export default class App extends LightningElement implements LogCollector {
             this._updateCoreCollectorStats();
         } catch (err) {
             this._instrApp.error(err as any, 'Failed upload');
-            return;
         }
-        this._instrApp.log('Completed manual upload' as any);
     }
 
     handleMetricAdd(): void {
