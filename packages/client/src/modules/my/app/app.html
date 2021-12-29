@@ -81,6 +81,53 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect} icon-name="standard:record">
+                            <my-app-section label={labelCustom}>
+                                <div slot="doc">
+                                    <span class="header">In general, to log a custom message:</span>
+                                    <ol>
+                                        <li>
+                                            <span>First define the structure of your message as a schema, and create a PR to add it to the </span>
+                                            <a href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema" target="_blank">schema repo</a>.
+                                        </li>
+                                        <li>
+                                            If applicable, add or update the dependency on the NPM module
+                                            <strong> o11y_schema</strong>. Core scenarios will always use the latest available.
+                                        </li>
+                                        <li>In your code, add an import for your schema.</li>
+                                        <li>
+                                            <span>Pass the schema object as the first argument to the </span>
+                                            <code>log</code><span> method and a compliant data as the second.</span>
+                                        </li>
+                                    </ol>
+                                    <pre>
+                                        import &#123; mySchema &#125; from 'o11y_schema/sf_myFeature';<br>
+                                        // ...<br>
+                                        this.instr.log(mySchema, myData);
+                                    </pre>
+                                    <span class="header">To log a sample message:</span>
+                                    <p>
+                                        This page logs data that complies with the
+                                        <a href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto" target="_blank"
+                                            >sample schema</a
+                                        >. Schemas are defined using
+                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank"> proto3</a>
+                                        syntax. A snapshot of this schema is as follows:
+                                    </p>
+                                    <pre class="proto3">
+                                        syntax = "proto3";<br>
+                                        package sf.o11ySample;<br><br>
+                                        message UserPayload &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
+                                        &#125;
+                                    </pre>
+                                    <div>
+                                        <lightning-badge label="Note" icon-name="utility:info"></lightning-badge>
+                                        <span> If you're interested in experimenting with your own schema, please see the README.md file in the schemas folder of this project. </span>
+                                    </div>
+                                </div>
+                                <my-custom-play slot="play"></my-custom-play>
+                            </my-app-section>
+                        </lightning-tab>
                         <lightning-tab label={labelErrors} value={sectionErrors} onactive={handleTabSelect} icon-name="custom:custom34">
                             <my-app-section label={labelErrors}>
                                 <div slot="doc">
@@ -159,51 +206,30 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect} icon-name="standard:record">
-                            <my-app-section label={labelCustom}>
+                        <lightning-tab label={labelMetrics} value={sectionMetrics} onactive={handleTabSelect} icon-name="standard:metrics">
+                            <my-app-section label={labelMetrics}>
                                 <div slot="doc">
-                                    <span class="header">In general, to log a custom message:</span>
-                                    <ol>
-                                        <li>
-                                            <span>First define the structure of your message as a schema, and create a PR to add it to the </span>
-                                            <a href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema" target="_blank">schema repo</a>.
-                                        </li>
-                                        <li>
-                                            If applicable, add or update the dependency on the NPM module
-                                            <strong> o11y_schema</strong>. Core scenarios will always use the latest available.
-                                        </li>
-                                        <li>In your code, add an import for your schema.</li>
-                                        <li>
-                                            <span>Pass the schema object as the first argument to the </span>
-                                            <code>log</code><span> method and a compliant data as the second.</span>
-                                        </li>
-                                    </ol>
-                                    <pre>
-                                        import &#123; mySchema &#125; from 'o11y_schema/sf_myFeature';<br>
-                                        // ...<br>
-                                        this.instr.log(mySchema, myData);
-                                    </pre>
-                                    <span class="header">To log a sample message:</span>
                                     <p>
-                                        This page logs data that complies with the
-                                        <a href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto" target="_blank"
-                                            >sample schema</a
-                                        >. Schemas are defined using
-                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank"> proto3</a>
-                                        syntax. A snapshot of this schema is as follows:
+                                        The Salesforce ui-telemetry endpoint for o11y offers automatic metrics management on the server side. This saves the developer from having to call the metrics
+                                        API on the client.
                                     </p>
-                                    <pre class="proto3">
-                                        syntax = "proto3";<br>
-                                        package sf.o11ySample;<br><br>
-                                        message UserPayload &#123;<br>   bool bool = 1;<br>   string string = 2;<br>   int32 int32 = 3;<br>   int32 int64 = 4;<br>   uint32 uint32 = 5;<br>   uint64 uint64 = 6;<br>   double double = 7;<br>    
-                                        &#125;
-                                    </pre>
-                                    <div>
-                                        <lightning-badge label="Note" icon-name="utility:info"></lightning-badge>
-                                        <span> If you're interested in experimenting with your own schema, please see the README.md file in the schemas folder of this project. </span>
-                                    </div>
+                                    <p>In brief:</p>
+                                    <ul>
+                                        <li>Using the instrumentation methods (eg. log) and activity.stop with a schema will increment the corresponding "Up Counter" metric.</li>
+                                        <li>Using the activity API will track the duration of the given activity in a corrsponding "Value Recorder" metric.</li>
+                                    </ul>
+                                    <p>
+                                        The instrumentation instance also offers the incrementCounter and trackValue methods to manage metrics explicitly on the client-side. These metrics are
+                                        collected by a "Metrics Collector" that gets registered by the app. In this app, the Core log collector also happens to be the metrics collector.
+                                    </p>
+                                    <p>
+                                        <span>For more info, please refer to the </span>
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y" target="_blank">Metrics in o11y documentation</a>.
+                                    </p>
                                 </div>
-                                <my-custom-play slot="play"></my-custom-play>
+                                <div slot="play">
+                                    <my-metrics-play onmetricadd={handleMetricAdd}> </my-metrics-play>
+                                </div>
                             </my-app-section>
                         </lightning-tab>
                         <lightning-tab label={labelNetwork} value={sectionNetwork} onactive={handleTabSelect} icon-name="custom:custom68">
@@ -256,32 +282,7 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelMetrics} value={sectionMetrics} onactive={handleTabSelect} icon-name="standard:metrics">
-                            <my-app-section label={labelMetrics}>
-                                <div slot="doc">
-                                    <p>
-                                        The Salesforce ui-telemetry endpoint for o11y offers automatic metrics management on the server side. This saves the developer from having to call the metrics
-                                        API on the client.
-                                    </p>
-                                    <p>In brief:</p>
-                                    <ul>
-                                        <li>Using the instrumentation methods (eg. log) and activity.stop with a schema will increment the corresponding "Up Counter" metric.</li>
-                                        <li>Using the activity API will track the duration of the given activity in a corrsponding "Value Recorder" metric.</li>
-                                    </ul>
-                                    <p>
-                                        The instrumentation instance also offers the incrementCounter and trackValue methods to manage metrics explicitly on the client-side. These metrics are
-                                        collected by a "Metrics Collector" that gets registered by the app. In this app, the Core log collector also happens to be the metrics collector.
-                                    </p>
-                                    <p>
-                                        <span>For more info, please refer to the </span>
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y" target="_blank">Metrics in o11y documentation</a>.
-                                    </p>
-                                </div>
-                                <div slot="play">
-                                    <my-metrics-play onmetricadd={handleMetricAdd}> </my-metrics-play>
-                                </div>
-                            </my-app-section>
-                        </lightning-tab>
+
                         <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect} icon-name="standard:waits">
                             <my-app-section label={labelIdleDetector}>
                                 <div slot="doc">
