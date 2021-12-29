@@ -57,14 +57,17 @@ function processStatics(envelope: CoreEnvelope): void {
 }
 
 function processBundles(envelope: CoreEnvelope): void {
+    if (!envelope.bundles) {
+        console.log('No bundles.');
+        return;
+    }
     for (let i = 0; i < envelope.bundles.length; i += 1) {
         const { schemaName, messages } = envelope.bundles[i];
 
         // Recognizing only top-level schemas
         const isKnown = schemas.has(schemaName);
         console.log(
-            `BUNDLE #${i}: Schema='${schemaName}'${
-                !isKnown ? ' (UNKNOWN)' : ''
+            `BUNDLE #${i}: Schema='${schemaName}'${!isKnown ? ' (UNKNOWN)' : ''
             }, Messages=${messages.length}`
         );
 
@@ -77,7 +80,9 @@ function processBundles(envelope: CoreEnvelope): void {
                     msg.data
                 );
 
-                const validity = type.verify(decodedMsg) ? 'Invalid' : 'Valid';
+                const validity = type.verify(decodedMsg)
+                    ? 'Invalid'
+                    : 'Valid';
                 console.log(`MSG #${j} logged at ${ts}: ${validity}`);
                 console.log('Msg fields', msg);
 
@@ -137,12 +142,11 @@ function processValueRecorders(valueRecorders: ValueRecorder[]) {
         const v = valueRecorders[i];
         console.log(`[${i}].name: ${v.name}`);
         console.log(
-            `[${i}].values: ${
-                v.values
-                    ? v.values.length
-                        ? v.values.join(', ')
-                        : 'Empty'
-                    : 'Undefined'
+            `[${i}].values: ${v.values
+                ? v.values.length
+                    ? v.values.join(', ')
+                    : 'Empty'
+                : 'Undefined'
             }`
         );
         console.log(`[${i}].createdTimestamp: ${v.createdTimestamp}`);
