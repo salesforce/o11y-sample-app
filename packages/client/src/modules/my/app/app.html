@@ -1,7 +1,7 @@
 <template>
     <div class="column">
         <div class="row1">
-            <lightning-icon class="app-icon" icon-name="standard:metrics" size="large"></lightning-icon>
+            <lightning-icon class="app-icon" icon-name="standard:metrics" size="medium"></lightning-icon>
             <span class="app-title">Observability (o11y) Sample App</span>
             <a class="doc-link" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank">Documentation</a>
             <div class="collector-stats">
@@ -24,8 +24,8 @@
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_8-of-12">
                     <lightning-tabset variant="vertical" active-tab-value={selectedSection}>
-                        <lightning-tab label={labelIntro} value={sectionIntro} onactive={handleTabSelect}>
-                            <my-app-section label={labelIntro} icon-name="custom:custom107">
+                        <lightning-tab label={labelIntro} value={sectionIntro} onactive={handleTabSelect} icon-name="custom:custom107">
+                            <my-app-section label={labelIntro}>
                                 <div slot="doc">
                                     <p class="header">Welcome!</p>
                                     <p>
@@ -81,8 +81,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelErrors} value={sectionErrors} onactive={handleTabSelect}>
-                            <my-app-section label={labelErrors} icon-name="custom:custom34">
+                        <lightning-tab label={labelErrors} value={sectionErrors} onactive={handleTabSelect} icon-name="custom:custom34">
+                            <my-app-section label={labelErrors}>
                                 <div slot="doc">
                                     To log an error:
                                     <pre>this.instr.error(err); // err is an instance of Error</pre>
@@ -98,8 +98,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelActivities} value={sectionActivities} onactive={handleTabSelect}>
-                            <my-app-section label={labelActivities} icon-name="standard:operating_hours">
+                        <lightning-tab label={labelActivities} value={sectionActivities} onactive={handleTabSelect} icon-name="standard:operating_hours">
+                            <my-app-section label={labelActivities}>
                                 <div slot="doc">
                                     To log the duration of a long-running activity, use the activity API:
                                     <pre>
@@ -129,8 +129,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelEvents} value={sectionEvents} onactive={handleTabSelect}>
-                            <my-app-section label={labelEvents} icon-name="standard:custom_notification">
+                        <lightning-tab label={labelEvents} value={sectionEvents} onactive={handleTabSelect} icon-name="standard:custom_notification">
+                            <my-app-section label={labelEvents}>
                                 <div slot="doc">
                                     <p>
                                         <span
@@ -159,8 +159,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect}>
-                            <my-app-section label={labelCustom} icon-name="standard:record">
+                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect} icon-name="standard:record">
+                            <my-app-section label={labelCustom}>
                                 <div slot="doc">
                                     <span class="header">In general, to log a custom message:</span>
                                     <ol>
@@ -206,8 +206,8 @@
                                 <my-custom-play slot="play"></my-custom-play>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelNetwork} value={sectionNetwork} onactive={handleTabSelect}>
-                            <my-app-section label={labelNetwork} icon-name="custom:custom68">
+                        <lightning-tab label={labelNetwork} value={sectionNetwork} onactive={handleTabSelect} icon-name="custom:custom68">
+                            <my-app-section label={labelNetwork}>
                                 <div slot="doc">
                                     <p>
                                         The o11y library offers optional network instrumentation with tracing feature. When it's enabled, o11y takes control of the network APIs available in the
@@ -256,8 +256,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelMetrics} value={sectionMetrics} onactive={handleTabSelect}>
-                            <my-app-section label={labelMetrics} icon-name="standard:metrics">
+                        <lightning-tab label={labelMetrics} value={sectionMetrics} onactive={handleTabSelect} icon-name="standard:metrics">
+                            <my-app-section label={labelMetrics}>
                                 <div slot="doc">
                                     <p>
                                         The Salesforce ui-telemetry endpoint for o11y offers automatic metrics management on the server side. This saves the developer from having to call the metrics
@@ -282,8 +282,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect}>
-                            <my-app-section label={labelIdleDetector} icon-name="standard:waits">
+                        <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect} icon-name="standard:waits">
+                            <my-app-section label={labelIdleDetector}>
                                 <div slot="doc">
                                     <p>
                                         The o11y library includes an <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector" target="_blank">Idle Detector</a>&nbsp;that
@@ -301,8 +301,8 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect}>
-                            <my-app-section label={labelServer} icon-name="standard:logging">
+                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect} icon-name="standard:logging">
+                            <my-app-section label={labelServer}>
                                 <div slot="doc">
                                     <p>
                                         This app comes with a built-in web server so developers can see the logs flowing end-to-end as a stand-alone app, without any dependencies to the Salesforce

@@ -1,6 +1,6 @@
 <template>
     <span class="section-header">
-        <lightning-icon icon-name={iconName} alternative-text={label} title={label}> </lightning-icon>
+        <lightning-icon class="section-header-icon" if:true={iconName} icon-name={iconName} alternative-text={label} title={label}></lightning-icon>
         <span class="section-header-title">{label}</span>
     </span>
     <div class="doc">

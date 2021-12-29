@@ -35,7 +35,7 @@ code {
     background-color: #ccdeff;
     display: flex;
     height: 60px;
-    align-items: baseline;
+    align-items: center;
 }
 
 .row2 {
@@ -138,6 +138,7 @@ lightning-badge {
 }
 
 .app-icon {
+    margin-left: 10px;
     align-self: center;
 }
 

@@ -48,10 +48,10 @@ const bearerToken = '';
 
 export default class App extends LightningElement implements LogCollector {
     @track labelIntro = 'Getting Started';
-    @track labelEvents = 'Instrumenting DOM Events';
-    @track labelErrors = 'Error Logging';
-    @track labelActivities = 'Activity Tracking';
-    @track labelCustom = 'Custom Logs';
+    @track labelEvents = 'Log DOM Events';
+    @track labelErrors = 'Log Errors';
+    @track labelActivities = 'Log Activities';
+    @track labelCustom = 'Log Messages';
     @track labelIdleDetector = 'Idle Detector';
     @track labelServer = 'Server Side';
     @track labelNetwork = 'Network Instrumentation';
