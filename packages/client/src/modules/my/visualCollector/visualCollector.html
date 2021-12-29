@@ -23,16 +23,10 @@
                     </template>
                     <!-- the below section is common to all template types -->
                     <div if:true={log.appPayload} class="payload">
-                        <my-payload-card
-                            header="App Payload"
-                            model={log.appPayload}
-                        ></my-payload-card>
+                        <my-payload-card header="App Payload" model={log.appPayload}></my-payload-card>
                     </div>
                     <div if:true={log.pagePayload} class="payload">
-                        <my-payload-card
-                            header="Page Payload"
-                            model={log.pagePayload}
-                        ></my-payload-card>
+                        <my-payload-card header="Page Payload" model={log.pagePayload}></my-payload-card>
                     </div>
                 </div>
             </lightning-card>

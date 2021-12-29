@@ -1,14 +1,10 @@
 <template>
     <p class="header">Network Instrumentation</p>
     <lightning-button-group>
-        <lightning-button if:true={isEnabled} label="Enable" disabled onclick={handleToggleClick}>
-        </lightning-button>
-        <lightning-button if:false={isEnabled} label="Enable" onclick={handleToggleClick}>
-        </lightning-button>
-        <lightning-button if:true={isEnabled} label="Disable" onclick={handleToggleClick}>
-        </lightning-button>
-        <lightning-button if:false={isEnabled} label="Disable" disabled onclick={handleToggleClick}>
-        </lightning-button>
+        <lightning-button if:true={isEnabled} label="Enable" disabled onclick={handleToggleClick}> </lightning-button>
+        <lightning-button if:false={isEnabled} label="Enable" onclick={handleToggleClick}> </lightning-button>
+        <lightning-button if:true={isEnabled} label="Disable" onclick={handleToggleClick}> </lightning-button>
+        <lightning-button if:false={isEnabled} label="Disable" disabled onclick={handleToggleClick}> </lightning-button>
     </lightning-button-group>
     <lightning-input
         type="number"
@@ -126,14 +122,7 @@
         </lightning-layout-item>
     </lightning-layout>
     <div class="slds-p-around_medium">
-        <lightning-input
-            type="text"
-            name="testUrl"
-            label="Test URL to make an HTTP GET call"
-            value={testUrl}
-            onchange={handleTestUrlChange}
-        >
-        </lightning-input>
+        <lightning-input type="text" name="testUrl" label="Test URL to make an HTTP GET call" value={testUrl} onchange={handleTestUrlChange}> </lightning-input>
     </div>
     <lightning-button
         variant="brand"
