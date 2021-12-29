@@ -56,7 +56,5 @@ express()
         res.send(new Date().toISOString());
     })
     .listen(PORT, () =>
-        console.log(
-            `✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`
-        )
+        console.log(`✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`)
     );

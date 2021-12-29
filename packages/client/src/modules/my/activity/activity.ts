@@ -40,9 +40,7 @@ export default class Activity extends LightningElement {
     }
 
     handleError(): void {
-        this._activity.error(
-            new Error(`An error associated with ${this.activityName}`)
-        );
+        this._activity.error(new Error(`An error associated with ${this.activityName}`));
     }
 
     handleActivityNameChange(event: CustomEvent): void {

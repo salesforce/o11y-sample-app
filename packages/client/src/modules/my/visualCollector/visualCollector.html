@@ -7,9 +7,7 @@
                         <my-activity-card model={log}></my-activity-card>
                     </template>
                     <template if:true={log._isInstrumentedEvent}>
-                        <my-instrumented-event-card
-                            model={log}
-                        ></my-instrumented-event-card>
+                        <my-instrumented-event-card model={log}></my-instrumented-event-card>
                     </template>
                     <template if:true={log._isError}>
                         <my-error-card model={log}></my-error-card>

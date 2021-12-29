@@ -78,10 +78,10 @@ export default class MetricsPlay extends LightningElement {
             this.isCounterTagsDisabled
                 ? undefined
                 : {
-                    stringTag: this.stringTagForCounter,
-                    booleanTag: this.booleanTagForCounter,
-                    numberTag: this.numberTagForCounter
-                }
+                      stringTag: this.stringTagForCounter,
+                      booleanTag: this.booleanTagForCounter,
+                      numberTag: this.numberTagForCounter
+                  }
         );
         this.notifyMetricAdded();
     }
@@ -94,10 +94,10 @@ export default class MetricsPlay extends LightningElement {
             this.isValueRecorderTagsDisabled
                 ? undefined
                 : {
-                    stringTag: this.stringTagForValueRecorder,
-                    booleanTag: this.booleanTagForValueRecorder,
-                    numberTag: this.numberTagForValueRecorder
-                }
+                      stringTag: this.stringTagForValueRecorder,
+                      booleanTag: this.booleanTagForValueRecorder,
+                      numberTag: this.numberTagForValueRecorder
+                  }
         );
         this.notifyMetricAdded();
     }

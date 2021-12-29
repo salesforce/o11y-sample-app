@@ -3,10 +3,7 @@ import { getInstrumentation, idleDetector } from 'o11y/client';
 import { TaskerMulti } from 'o11y/dist/modules/o11y/client/interfaces/IdleDetector';
 import { userPayloadSchema } from 'o11y_schema/sf_o11ySample';
 
-declare type fetchType = (
-    input: RequestInfo,
-    init?: RequestInit
-) => Promise<Response>;
+declare type fetchType = (input: RequestInfo, init?: RequestInit) => Promise<Response>;
 
 export default class IdleDetectorPlay extends LightningElement {
     @track
@@ -46,10 +43,7 @@ export default class IdleDetectorPlay extends LightningElement {
             window.fetch = async function () {
                 try {
                     that._fetchTaskerMulti.add();
-                    return await that._fetchOriginal.apply(
-                        window,
-                        arguments as any
-                    );
+                    return await that._fetchOriginal.apply(window, arguments as any);
                 } finally {
                     that._fetchTaskerMulti.done();
                 }

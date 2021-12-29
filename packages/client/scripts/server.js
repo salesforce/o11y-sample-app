@@ -23,6 +23,4 @@ app.use('*', (req, res) => {
     res.sendFile(path.resolve(DIST_DIR, 'index.html'));
 });
 
-app.listen(PORT, () =>
-    console.log(`✅  Server started: http://${HOST}:${PORT}`)
-);
+app.listen(PORT, () => console.log(`✅  Server started: http://${HOST}:${PORT}`));

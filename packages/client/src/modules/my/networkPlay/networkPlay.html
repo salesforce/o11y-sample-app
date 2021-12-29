@@ -1,31 +1,13 @@
 <template>
     <p class="header">Network Instrumentation</p>
     <lightning-button-group>
-        <lightning-button
-            if:true={isEnabled}
-            label="Enable"
-            disabled
-            onclick={handleToggleClick}
-        >
+        <lightning-button if:true={isEnabled} label="Enable" disabled onclick={handleToggleClick}>
         </lightning-button>
-        <lightning-button
-            if:false={isEnabled}
-            label="Enable"
-            onclick={handleToggleClick}
-        >
+        <lightning-button if:false={isEnabled} label="Enable" onclick={handleToggleClick}>
         </lightning-button>
-        <lightning-button
-            if:true={isEnabled}
-            label="Disable"
-            onclick={handleToggleClick}
-        >
+        <lightning-button if:true={isEnabled} label="Disable" onclick={handleToggleClick}>
         </lightning-button>
-        <lightning-button
-            if:false={isEnabled}
-            label="Disable"
-            disabled
-            onclick={handleToggleClick}
-        >
+        <lightning-button if:false={isEnabled} label="Disable" disabled onclick={handleToggleClick}>
         </lightning-button>
     </lightning-button-group>
     <lightning-input
@@ -167,7 +149,5 @@
         onclick={handleXhrCall}
         class="slds-m-left_x-small"
     ></lightning-button>
-    <span if:true={lastResponse} class="last-response"
-        >Last Response: {lastResponse}</span
-    >
+    <span if:true={lastResponse} class="last-response">Last Response: {lastResponse}</span>
 </template>

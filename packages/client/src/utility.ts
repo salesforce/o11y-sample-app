@@ -13,9 +13,7 @@ class Utility {
     }
 
     getFilteredKeyValues(obj?: Record<string, unknown>): KeyValue[] {
-        return this.getKeyValues(obj).filter(
-            (retObj) => !this._isSpecialField(retObj.key)
-        );
+        return this.getKeyValues(obj).filter((retObj) => !this._isSpecialField(retObj.key));
     }
 
     _isSpecialField(key: string): boolean {

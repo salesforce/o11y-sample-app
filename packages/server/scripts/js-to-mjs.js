@@ -34,9 +34,7 @@ recursive(distDir, [ignoreFunc], async function (err, files) {
         let replaceCount = 0;
         for await (const line of lineReader) {
             // Each line in input.txt will be successively available here as `line`
-            const match = line.match(
-                /^(\s*import\s.+\sfrom\s+['"]\.\/)(.+)(['"].+)$/
-            );
+            const match = line.match(/^(\s*import\s.+\sfrom\s+['"]\.\/)(.+)(['"].+)$/);
             if (match) {
                 const left = match[1];
                 const mid = match[2];
@@ -48,9 +46,7 @@ recursive(distDir, [ignoreFunc], async function (err, files) {
             }
             out.write('\n');
         }
-        const message = replaceCount
-            ? ` and replaced ${replaceCount} imports`
-            : '';
+        const message = replaceCount ? ` and replaced ${replaceCount} imports` : '';
         console.log(`Renamed "${file}"${message}`);
 
         fs.rm(file, (err) => {

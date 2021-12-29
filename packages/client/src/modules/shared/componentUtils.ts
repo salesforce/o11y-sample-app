@@ -17,12 +17,7 @@ export class ComponentUtils {
 
     static relayEvent(component: LightningElement, event: CustomEvent) {
         if (event.detail instanceof EventDetail) {
-            this.raiseEvent(
-                component,
-                event.type,
-                event.detail.value,
-                event.detail.sender
-            );
+            this.raiseEvent(component, event.type, event.detail.value, event.detail.sender);
         } else {
             this.raiseEvent(component, event.type, event.detail);
         }

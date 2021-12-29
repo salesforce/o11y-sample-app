@@ -1,18 +1,31 @@
 <template>
     <div class="column">
         <div class="row1">
-            <lightning-icon class="app-icon" icon-name="standard:metrics" size="large"></lightning-icon>
+            <lightning-icon
+                class="app-icon"
+                icon-name="standard:metrics"
+                size="large"
+            ></lightning-icon>
             <span class="app-title">Observability (o11y) Sample App</span>
-            <a class="doc-link"
+            <a
+                class="doc-link"
                 href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home"
-                target="_blank">Documentation</a>
+                target="_blank"
+                >Documentation</a
+            >
             <div class="collector-stats">
                 <span class="stat-label">Messages: </span>
                 <lightning-badge label={ccMsgCount}></lightning-badge>
                 <span class="stat-label">Metrics: </span>
                 <lightning-badge label={ccMetricCount}></lightning-badge>
-                <lightning-button label="Flush" title="Ask Core Collector to upload its logs and metrics to the server"
-                    onclick={handleFlush} variant="brand" icon-name="utility:upload" class="slds-m-around_small">
+                <lightning-button
+                    label="Flush"
+                    title="Ask Core Collector to upload its logs and metrics to the server"
+                    onclick={handleFlush}
+                    variant="brand"
+                    icon-name="utility:upload"
+                    class="slds-m-around_small"
+                >
                 </lightning-button>
             </div>
         </div>
@@ -20,70 +33,61 @@
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_8-of-12">
                     <lightning-tabset variant="vertical" active-tab-value={selectedSection}>
-                        <lightning-tab label={labelIntro} value={sectionIntro} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelIntro}
+                            value={sectionIntro}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelIntro} icon-name="custom:custom107">
                                 <div slot="doc">
                                     <p class="header">Welcome!</p>
                                     <p>
-                                        This sample app demonstrates the usage
-                                        of the new instrumentation platform
-                                        "Olly", provided by the o11y module. To
-                                        play around, go ahead and experiment
-                                        with the different tabs.
+                                        This sample app demonstrates the usage of the new
+                                        instrumentation platform "Olly", provided by the o11y
+                                        module. To play around, go ahead and experiment with the
+                                        different tabs.
                                     </p>
                                     <p>
-                                        In Salesforce Core cases, the
-                                        instrumentation platform will have been
-                                        initialized for you by the environment.
-                                        If not, such as in an off-core LWC app
-                                        like this one, the top-level entity must
-                                        initialize it before use. Please refer
-                                        to the
+                                        In Salesforce Core cases, the instrumentation platform will
+                                        have been initialized for you by the environment. If not,
+                                        such as in an off-core LWC app like this one, the top-level
+                                        entity must initialize it before use. Please refer to the
                                         <code>initializeInstrumentation()</code>
                                         method in app.js for an example.
                                     </p>
                                     <p>
-                                        To start instrumenting your code, add
-                                        the following import:
+                                        To start instrumenting your code, add the following import:
                                     </p>
                                     <pre>
-import &#123; getInstrumentation &#125; from 'o11y/client';</pre>
-                                    <p>
-                                        In your constructor, get an
-                                        instrumentation instance:
-                                    </p>
+import &#123; getInstrumentation &#125; from 'o11y/client';</pre
+                                    >
+                                    <p>In your constructor, get an instrumentation instance:</p>
                                     <pre>
-this.instr = getInstrumentation('my_instrumentation_name');</pre>
+this.instr = getInstrumentation('my_instrumentation_name');</pre
+                                    >
                                     <p>
-                                        You can then call the available methods
-                                        on this instance. This functionality is
-                                        demonstrated in the other sections of
+                                        You can then call the available methods on this instance.
+                                        This functionality is demonstrated in the other sections of
                                         this app.
                                     </p>
                                     <p>
-                                        The instrumentation platform redirects
-                                        logs to registered log collectors. This
-                                        app registers 3 such entities:
+                                        The instrumentation platform redirects logs to registered
+                                        log collectors. This app registers 3 such entities:
                                     </p>
                                     <ol>
                                         <li>
-                                            A <em>Console</em> collector, which
-                                            outputs to the developer console in
-                                            your browser,
+                                            A <em>Console</em> collector, which outputs to the
+                                            developer console in your browser,
                                         </li>
                                         <li>
-                                            A <em>Visual</em> collector, which
-                                            creates entries in to the bottom
-                                            section of the app,
+                                            A <em>Visual</em> collector, which creates entries in to
+                                            the bottom section of the app,
                                         </li>
                                         <li>
-                                            A <em>Core</em> collector, which is
-                                            exported by the o11y module and
-                                            sends logs to a server-side
-                                            endpoint. This sample app project
-                                            comes with a local server, but you
-                                            can also use a Salesforce instance
-                                            you have access to.
+                                            A <em>Core</em> collector, which is exported by the o11y
+                                            module and sends logs to a server-side endpoint. This
+                                            sample app project comes with a local server, but you
+                                            can also use a Salesforce instance you have access to.
                                         </li>
                                     </ol>
                                     <p class="header">To Debug This App:</p>
@@ -94,23 +98,21 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre>
                                                 <em>Developer Tools.</em>
                                             </li>
                                             <li>
-                                                Select the <em>Sources</em> tab
-                                                on the tab and the
+                                                Select the <em>Sources</em> tab on the tab and the
                                                 <em>Page</em> tab on the left.
                                             </li>
                                             <li>
                                                 Drill down to
                                                 <em>
-                                                    top &gt; o11y-sample &gt; .
-                                                    &gt; src &gt; client &gt;
-                                                    modules/my</em>.
+                                                    top &gt; o11y-sample &gt; . &gt; src &gt; client
+                                                    &gt; modules/my</em
+                                                >.
                                             </li>
                                             <li>
-                                                Drill down further to the LWC
-                                                component you want to debug and
-                                                select the .js file. Experiments
-                                                are organized into individual
-                                                LWC components, with the suffix
+                                                Drill down further to the LWC component you want to
+                                                debug and select the .js file. Experiments are
+                                                organized into individual LWC components, with the
+                                                suffix
                                                 <em> Play</em>.
                                             </li>
                                             <li>Set a breakpoint.</li>
@@ -120,16 +122,22 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelErrors} value={sectionErrors} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelErrors}
+                            value={sectionErrors}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelErrors} icon-name="custom:custom34">
                                 <div slot="doc">
                                     To log an error:
-                                    <pre>
-this.instr.error(err); // err is an instance of Error</pre>
+                                    <pre>this.instr.error(err); // err is an instance of Error</pre>
                                     <p>
                                         For other usages, please refer to the
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error"
-                                            target="_blank">error API documentation</a>.
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error"
+                                            target="_blank"
+                                            >error API documentation</a
+                                        >.
                                     </p>
                                 </div>
                                 <div slot="play">
@@ -137,11 +145,18 @@ this.instr.error(err); // err is an instance of Error</pre>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelActivities} value={sectionActivities} onactive={handleTabSelect}>
-                            <my-app-section label={labelActivities} icon-name="standard:operating_hours">
+                        <lightning-tab
+                            label={labelActivities}
+                            value={sectionActivities}
+                            onactive={handleTabSelect}
+                        >
+                            <my-app-section
+                                label={labelActivities}
+                                icon-name="standard:operating_hours"
+                            >
                                 <div slot="doc">
-                                    To log the duration of a long-running
-                                    activity, use the activity API:
+                                    To log the duration of a long-running activity, use the activity
+                                    API:
                                     <pre>
                                         const act = this.instr.startActivity('my-long-process');<br>
                                         // ... long process ...<br>
@@ -149,33 +164,29 @@ this.instr.error(err); // err is an instance of Error</pre>
                                     </pre>
                                     <p>
                                         For other usages, please refer to the
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
-                                            target="_blank">startActivity API documentation</a>.
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
+                                            target="_blank"
+                                            >startActivity API documentation</a
+                                        >.
                                     </p>
                                     <p>
                                         The sample app creates a
-                                        <em>root activity</em> to capture the
-                                        duration of the active tab. When the
-                                        user switches tabs, it stops the current
-                                        root activity and starts a new one,
-                                        using the label of the tab as the name
-                                        of the root activity. All activities
-                                        started during a root activity is
-                                        "rooted" to that activity.
+                                        <em>root activity</em> to capture the duration of the active
+                                        tab. When the user switches tabs, it stops the current root
+                                        activity and starts a new one, using the label of the tab as
+                                        the name of the root activity. All activities started during
+                                        a root activity is "rooted" to that activity.
                                     </p>
                                     <p>
                                         Activities use the
-                                        <em>performance</em> Browser API (if
-                                        available) for debugging purposes. To
-                                        see it in action, start recording in the
-                                        performance tab of your browser's
-                                        Developer Console. When stopped, any
-                                        activities will appear in the
-                                        <em>timings</em> section in the
-                                        visualization. The names will be
-                                        suffixed by a global counter to
-                                        distinguish different activities with
-                                        the same name.
+                                        <em>performance</em> Browser API (if available) for
+                                        debugging purposes. To see it in action, start recording in
+                                        the performance tab of your browser's Developer Console.
+                                        When stopped, any activities will appear in the
+                                        <em>timings</em> section in the visualization. The names
+                                        will be suffixed by a global counter to distinguish
+                                        different activities with the same name.
                                     </p>
                                 </div>
                                 <div slot="play">
@@ -183,77 +194,87 @@ this.instr.error(err); // err is an instance of Error</pre>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelEvents} value={sectionEvents} onactive={handleTabSelect}>
-                            <my-app-section label={labelEvents} icon-name="standard:custom_notification">
+                        <lightning-tab
+                            label={labelEvents}
+                            value={sectionEvents}
+                            onactive={handleTabSelect}
+                        >
+                            <my-app-section
+                                label={labelEvents}
+                                icon-name="standard:custom_notification"
+                            >
                                 <div slot="doc">
                                     <p>
                                         The o11y module comes with an
-                                        <em>Automatic Click Tracker (ACT)</em>.
-                                        If it is activated by the app,
-                                        mouse-clicks on certain elements
-                                        (<strong>buttons</strong>,
-                                        <strong>anchors </strong> and
-                                        <strong>inputs of type button</strong>)
-                                        will be captured in logs.
+                                        <em>Automatic Click Tracker (ACT)</em>. If it is activated
+                                        by the app, mouse-clicks on certain elements
+                                        (<strong>buttons</strong>, <strong>anchors </strong> and
+                                        <strong>inputs of type button</strong>) will be captured in
+                                        logs.
                                     </p>
                                     <p>
-                                        A developer can choose to log clicks or
-                                        other DOM events in their event handler
-                                        using the <code>domEvent</code> API
-                                        designed specifically for this purpose.
-                                        In addition to capturing the same event
-                                        data that the ACT would, it allows the
-                                        developer to provide additional data to
-                                        be included in the same log entry.
+                                        A developer can choose to log clicks or other DOM events in
+                                        their event handler using the <code>domEvent</code> API
+                                        designed specifically for this purpose. In addition to
+                                        capturing the same event data that the ACT would, it allows
+                                        the developer to provide additional data to be included in
+                                        the same log entry.
                                     </p>
                                     <p>
                                         For more detail, please refer to the
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent"
-                                            target="_blank">domEvent API documentation</a>.
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent"
+                                            target="_blank"
+                                            >domEvent API documentation</a
+                                        >.
                                     </p>
                                     <div>
-                                        <lightning-badge label="Note" icon-name="utility:warning"></lightning-badge>
+                                        <lightning-badge
+                                            label="Note"
+                                            icon-name="utility:warning"
+                                        ></lightning-badge>
                                         <span>
-                                            Currently, only mouse-click events
-                                            are supported.
+                                            Currently, only mouse-click events are supported.
                                         </span>
                                     </div>
                                 </div>
                                 <div slot="play">
-                                    <my-instrumented-event-play is-act-active={clickTrackActive}
-                                        ontoggleact={handleToggleAct}></my-instrumented-event-play>
+                                    <my-instrumented-event-play
+                                        is-act-active={clickTrackActive}
+                                        ontoggleact={handleToggleAct}
+                                    ></my-instrumented-event-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelCustom}
+                            value={sectionCustom}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelCustom} icon-name="standard:record">
                                 <div slot="doc">
-                                    <span class="header">In general, to log a custom
-                                        message:</span>
+                                    <span class="header">In general, to log a custom message:</span>
                                     <ol>
                                         <li>
-                                            First define the structure of your
-                                            message as a schema, and create a PR
-                                            to add it to the
-                                            <a href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
-                                                target="_blank">schema repo</a>.
+                                            First define the structure of your message as a schema,
+                                            and create a PR to add it to the
+                                            <a
+                                                href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
+                                                target="_blank"
+                                                >schema repo</a
+                                            >.
                                         </li>
                                         <li>
-                                            If applicable, add or update the
-                                            dependency on the NPM module
-                                            <strong> o11y_schema</strong>. Core
-                                            scenarios will always use the latest
-                                            available.
+                                            If applicable, add or update the dependency on the NPM
+                                            module
+                                            <strong> o11y_schema</strong>. Core scenarios will
+                                            always use the latest available.
                                         </li>
+                                        <li>In your code, add an import for your schema.</li>
                                         <li>
-                                            In your code, add an import for your
-                                            schema.
-                                        </li>
-                                        <li>
-                                            Pass the schema object as the first
-                                            argument to the
-                                            <code>log</code> method and a
-                                            compliant data as the second.
+                                            Pass the schema object as the first argument to the
+                                            <code>log</code> method and a compliant data as the
+                                            second.
                                         </li>
                                     </ol>
                                     <pre>
@@ -263,15 +284,19 @@ this.instr.error(err); // err is an instance of Error</pre>
                                     </pre>
                                     <span class="header">To log a sample message:</span>
                                     <p>
-                                        This page logs data that complies with
-                                        the
-                                        <a href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
-                                            target="_blank">sample schema</a>. Schemas are defined using
-                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3"
-                                            target="_blank">
-                                            proto3</a>
-                                        syntax. A snapshot of this schema is as
-                                        follows:
+                                        This page logs data that complies with the
+                                        <a
+                                            href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
+                                            target="_blank"
+                                            >sample schema</a
+                                        >. Schemas are defined using
+                                        <a
+                                            href="https://developers.google.com/protocol-buffers/docs/proto3"
+                                            target="_blank"
+                                        >
+                                            proto3</a
+                                        >
+                                        syntax. A snapshot of this schema is as follows:
                                     </p>
                                     <pre class="proto3">
                                         syntax = "proto3";<br>
@@ -280,55 +305,61 @@ this.instr.error(err); // err is an instance of Error</pre>
                                         &#125;
                                     </pre>
                                     <div>
-                                        <lightning-badge label="Note" icon-name="utility:info"></lightning-badge>
+                                        <lightning-badge
+                                            label="Note"
+                                            icon-name="utility:info"
+                                        ></lightning-badge>
                                         <span>
-                                            If you're interested in
-                                            experimenting with your own schema,
-                                            please see the README.md file in the
-                                            schemas folder of this project.
+                                            If you're interested in experimenting with your own
+                                            schema, please see the README.md file in the schemas
+                                            folder of this project.
                                         </span>
                                     </div>
                                 </div>
                                 <my-custom-play slot="play"></my-custom-play>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelNetwork} value={sectionNetwork} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelNetwork}
+                            value={sectionNetwork}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelNetwork} icon-name="custom:custom68">
                                 <div slot="doc">
                                     <p>
-                                        The o11y library offers optional network
-                                        instrumentation with tracing feature.
-                                        When it's enabled, o11y takes control of
-                                        the network APIs available in the
-                                        browser, and tracks the outgoing network
-                                        activity (which is asynchronous by
-                                        nature). Based on configuration, any
-                                        errors will be logged. The activity
-                                        records the duration of the network
-                                        request.
+                                        The o11y library offers optional network instrumentation
+                                        with tracing feature. When it's enabled, o11y takes control
+                                        of the network APIs available in the browser, and tracks the
+                                        outgoing network activity (which is asynchronous by nature).
+                                        Based on configuration, any errors will be logged. The
+                                        activity records the duration of the network request.
                                     </p>
                                     <p>
-                                        To enable Network Instrumentation with
-                                        the default options, do:
+                                        To enable Network Instrumentation with the default options,
+                                        do:
                                     </p>
-                                    <pre>
-this.instrApp.networkInstrumentation(true);</pre>
+                                    <pre>this.instrApp.networkInstrumentation(true);</pre>
                                     <p>
                                         Note: This is an
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object"
-                                            target="_blank">app-level method</a>
-                                        obtained by the app via a call to
-                                        registerInstrumentedApp.
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object"
+                                            target="_blank"
+                                            >app-level method</a
+                                        >
+                                        obtained by the app via a call to registerInstrumentedApp.
                                     </p>
                                     <p>
                                         For more info, please refer to the
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation"
-                                            target="_blank">Network Instrumentation
-                                            documentation</a>.
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation"
+                                            target="_blank"
+                                            >Network Instrumentation documentation</a
+                                        >.
                                     </p>
                                 </div>
                                 <div slot="play">
-                                    <my-network-play is-enabled={network.isEnabled}
+                                    <my-network-play
+                                        is-enabled={network.isEnabled}
                                         use-network-options={network.useNetworkOptions}
                                         activity-name={network.activityName}
                                         is-activity-name-disabled={network.isActivityNameDisabled}
@@ -348,50 +379,53 @@ this.instrApp.networkInstrumentation(true);</pre>
                                         is-use-compact-header-disabled={network.isUseCompactHeaderDisabled}
                                         parent-span-id={network.parentSpanId}
                                         is-parent-span-id-disabled={network.isParentSpanIdDisabled}
-                                        onoptionschange={handleNetworkOptionsChange}>
+                                        onoptionschange={handleNetworkOptionsChange}
+                                    >
                                     </my-network-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelMetrics} value={sectionMetrics} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelMetrics}
+                            value={sectionMetrics}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelMetrics} icon-name="standard:metrics">
                                 <div slot="doc">
                                     <p>
-                                        The Salesforce ui-telemetry endpoint for
-                                        o11y offers automatic metrics management
-                                        on the server side. This saves the
-                                        developer from having to call the
-                                        metrics API on the client.
+                                        The Salesforce ui-telemetry endpoint for o11y offers
+                                        automatic metrics management on the server side. This saves
+                                        the developer from having to call the metrics API on the
+                                        client.
                                     </p>
                                     <p>In brief:</p>
                                     <ul>
                                         <li>
-                                            Using the instrumentation methods
-                                            (eg. log) and activity.stop with a
-                                            schema will increment the
+                                            Using the instrumentation methods (eg. log) and
+                                            activity.stop with a schema will increment the
                                             corresponding "Up Counter" metric.
                                         </li>
                                         <li>
-                                            Using the activity API will track
-                                            the duration of the given activity
-                                            in a corrsponding "Value Recorder"
+                                            Using the activity API will track the duration of the
+                                            given activity in a corrsponding "Value Recorder"
                                             metric.
                                         </li>
                                     </ul>
                                     <p>
-                                        The instrumentation instance also offers
-                                        the incrementCounter and trackValue
-                                        methods to manage metrics explicitly on
-                                        the client-side. These metrics are
-                                        collected by a "Metrics Collector" that
-                                        gets registered by the app. In this app,
-                                        the Core log collector also happens to
-                                        be the metrics collector.
+                                        The instrumentation instance also offers the
+                                        incrementCounter and trackValue methods to manage metrics
+                                        explicitly on the client-side. These metrics are collected
+                                        by a "Metrics Collector" that gets registered by the app. In
+                                        this app, the Core log collector also happens to be the
+                                        metrics collector.
                                     </p>
                                     <p>
                                         For more info, please refer to the
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y"
-                                            target="_blank">Metrics in o11y documentation</a>.
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y"
+                                            target="_blank"
+                                            >Metrics in o11y documentation</a
+                                        >.
                                     </p>
                                 </div>
                                 <div slot="play">
@@ -400,33 +434,37 @@ this.instrApp.networkInstrumentation(true);</pre>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelIdleDetector}
+                            value={sectionIdleDetector}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelIdleDetector} icon-name="standard:waits">
                                 <div slot="doc">
                                     <p>
                                         The o11y library includes an
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector"
-                                            target="_blank">Idle Detector</a>
-                                        that notifies interested parties when
-                                        the next idle is detected. It works in
-                                        cooperation with Idle Detector
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector"
+                                            target="_blank"
+                                            >Idle Detector</a
+                                        >
+                                        that notifies interested parties when the next idle is
+                                        detected. It works in cooperation with Idle Detector
                                         Components (IDCs) that opt-in.
                                     </p>
                                     <p>There are 3 types of IDCs:</p>
                                     <ol>
                                         <li>
-                                            Single-Task IDC is busy until done.
-                                            It's never busy again.
+                                            Single-Task IDC is busy until done. It's never busy
+                                            again.
                                         </li>
                                         <li>
-                                            Multi-Task IDC is busy from
-                                            time-to-time, with zero or more
-                                            tasks.
+                                            Multi-Task IDC is busy from time-to-time, with zero or
+                                            more tasks.
                                         </li>
                                         <li>
-                                            Poll-only IDC has a busy-ness can
-                                            only be ascertained by calling its
-                                            "isBusyChecker".
+                                            Poll-only IDC has a busy-ness can only be ascertained by
+                                            calling its "isBusyChecker".
                                         </li>
                                     </ol>
                                 </div>
@@ -435,40 +473,40 @@ this.instrApp.networkInstrumentation(true);</pre>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect}>
+                        <lightning-tab
+                            label={labelServer}
+                            value={sectionServer}
+                            onactive={handleTabSelect}
+                        >
                             <my-app-section label={labelServer} icon-name="standard:logging">
                                 <div slot="doc">
                                     <p>
-                                        This app comes with a built-in web
-                                        server so developers can see the logs
-                                        flowing end-to-end as a stand-alone app,
-                                        without any dependencies to the
-                                        Salesforce Core application.
+                                        This app comes with a built-in web server so developers can
+                                        see the logs flowing end-to-end as a stand-alone app,
+                                        without any dependencies to the Salesforce Core application.
                                     </p>
                                     <p>
-                                        This app <em>also</em> supports
-                                        uploading logs to a Salesforce instance,
-                                        through the
-                                        <strong>Core Collector</strong>. To
-                                        configure this usage, search the
-                                        codebase for the keyword
-                                        <strong>#LOOK</strong> and make changes
-                                        as necessary.
+                                        This app <em>also</em> supports uploading logs to a
+                                        Salesforce instance, through the
+                                        <strong>Core Collector</strong>. To configure this usage,
+                                        search the codebase for the keyword
+                                        <strong>#LOOK</strong> and make changes as necessary.
                                     </p>
                                     <p>
-                                        For details on the Salesforce server
-                                        end-point, please refer to the
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint"
-                                            target="_blank">Server Endpoint</a>
+                                        For details on the Salesforce server end-point, please refer
+                                        to the
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint"
+                                            target="_blank"
+                                            >Server Endpoint</a
+                                        >
                                         documentation.
                                     </p>
                                     <p>
-                                        Salesforce server end points typically
-                                        enforce CORS and CSP. To use the sample
-                                        app with a Salesforce endpoint, you may
-                                        need to configure or bypass CORS and
-                                        CSP. Please refer to the comments in
-                                        app.js for more details.
+                                        Salesforce server end points typically enforce CORS and CSP.
+                                        To use the sample app with a Salesforce endpoint, you may
+                                        need to configure or bypass CORS and CSP. Please refer to
+                                        the comments in app.js for more details.
                                     </p>
                                 </div>
                             </my-app-section>
@@ -479,10 +517,19 @@ this.instrApp.networkInstrumentation(true);</pre>
                     <div class="collector-pane">
                         <div class="collector-header">
                             <span class="collector-header-title">Logs</span>
-                            <lightning-badge if:true={logs.length} label={logs.length}></lightning-badge>
-                            <lightning-button if:true={logs.length} label="Clear" title="Clear the log entries"
-                                onclick={handleClearLogs} variant="destructive" icon-name="utility:delete"
-                                class="slds-m-left_x-small">
+                            <lightning-badge
+                                if:true={logs.length}
+                                label={logs.length}
+                            ></lightning-badge>
+                            <lightning-button
+                                if:true={logs.length}
+                                label="Clear"
+                                title="Clear the log entries"
+                                onclick={handleClearLogs}
+                                variant="destructive"
+                                icon-name="utility:delete"
+                                class="slds-m-left_x-small"
+                            >
                             </lightning-button>
                         </div>
                         <div class="collector-body">
