@@ -25,6 +25,8 @@
     "scripts": {
         "clean:deep": "./deep-clean.sh",
         "build": "lerna run build",
+        "build:client": "cd packages/client && yarn build",
+        "build:server": "cd packages/server && yarn build",
         "lint": "lerna run lint",
         "prettier": "lerna run prettier",
         "prettier:verify": "lerna run prettier:verify",
