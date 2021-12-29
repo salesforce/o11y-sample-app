@@ -21,6 +21,8 @@ import { apiEndpoint } from '../../shared/apiEndpoints';
 import { LogModel } from '../../models/logModel';
 import { UploadResult } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/interfaces/UploadResult';
 
+const maxInt = Math.pow(2, 31) - 1;
+
 // #LOOK:
 // If using a Salesforce endpoint, you must specify a bearerToken for authorization.
 // It can be either an Oauth2 access token or a session ID.
@@ -94,12 +96,11 @@ export default class App extends LightningElement implements LogCollector {
 
     environment = {
         appName: 'o11y-sample-app',
-        appVersion: '1.0',
-        appExperience: 'Sample Experience',
-        deviceId: 'Unknown Device ID',
-        deviceModel: 'Unknown Device Model',
-        // Try to keep these values in sync with values from package.json
-        sdkVersion: 'o11y=1.1.10;o11y_schema=1.11.2'
+        appVersion: '2.0',
+        appExperience: 'Sample',
+        deviceId: 'Unknown',
+        deviceModel: 'Unknown',
+        sdkVersion: '238'   // Keep this up-to-date with the major version
     };
 
     constructor() {
@@ -133,6 +134,7 @@ export default class App extends LightningElement implements LogCollector {
         this._instrApp.registerLogCollector(new ConsoleCollector());
         this._instrApp.registerLogCollector(this); // See 'collect' method
         this.coreCollector = this.getCoreCollector();
+        this._updateCoreCollectorStats();
         this._instrApp.registerLogCollector(this.coreCollector);
         this._instrApp.registerLogCollector({
             // This "collector" will be run every time a collection happens, and is a good place for us to update core collector stats..
@@ -171,8 +173,8 @@ export default class App extends LightningElement implements LogCollector {
             coreCollectorMode,
             this.environment,
             {
-                messagesLimit: Infinity,
-                metricsLimit: Infinity,
+                messagesLimit: maxInt,
+                metricsLimit: maxInt,
                 uploadFailedListener: (result: UploadResult) => {
                     this._instrApp.error(
                         'Upload failed',
@@ -182,9 +184,8 @@ export default class App extends LightningElement implements LogCollector {
             }
         );
 
-        cc.uploadInterval = Infinity;
-        this.ccMsgCount = cc.messagesCount;
-        this.ccMetricCount = cc.metricsCount;
+        // Note: Cannot use Infinity with setTimeout per MDN
+        cc.uploadInterval = maxInt;
         return cc;
     }
 
@@ -314,7 +315,7 @@ export default class App extends LightningElement implements LogCollector {
             this._instrApp.error(err as any, 'Failed upload');
             return;
         }
-        this._instrApp.log('Completed upload' as any);
+        this._instrApp.log('Completed manual upload' as any);
     }
 
     handleMetricAdd(): void {
