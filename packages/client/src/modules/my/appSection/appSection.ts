@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 
 export default class appSection extends LightningElement {
     @api
@@ -6,4 +6,12 @@ export default class appSection extends LightningElement {
 
     @api
     iconName: string;
+
+    handlePlaySlotChange(event: Event) {
+        const slot = event.target as HTMLSlotElement;
+        const showPlaySlot = slot.assignedElements().length !== 0;
+        if (showPlaySlot) {
+            this.template.querySelector('.play').classList.remove('hidden');
+        }
+    }
 }
