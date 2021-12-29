@@ -19,6 +19,7 @@ import { SchematizedData } from 'o11y/dist/modules/o11y/shared/shared/TypeDefini
 // API endpoint configuration has moved to shared/apiEndpoints.js
 import { apiEndpoint } from '../../shared/apiEndpoints';
 import { LogModel } from '../../models/logModel';
+import { UploadResult } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/interfaces/UploadResult';
 
 // #LOOK:
 // If using a Salesforce endpoint, you must specify a bearerToken for authorization.
@@ -88,6 +89,9 @@ export default class App extends LightningElement implements LogCollector {
     network = new NetworkOptions();
     coreCollector: CoreCollectorType;
 
+    @track ccMsgCount: number;
+    @track ccMetricCount: number;
+
     environment = {
         appName: 'o11y-sample-app',
         appVersion: '1.0',
@@ -130,6 +134,12 @@ export default class App extends LightningElement implements LogCollector {
         this._instrApp.registerLogCollector(this); // See 'collect' method
         this.coreCollector = this.getCoreCollector();
         this._instrApp.registerLogCollector(this.coreCollector);
+        this._instrApp.registerLogCollector({
+            // This "collector" will be run every time a collection happens, and is a good place for us to update core collector stats..
+            collect: () => {
+                this._updateCoreCollectorStats();
+            }
+        });
 
         // STEP 3: Register a metrics collector
         this._instrApp.registerMetricsCollector(this.coreCollector);
@@ -154,11 +164,28 @@ export default class App extends LightningElement implements LogCollector {
             this.overrideFetch(); // Include authorization header in the calls
             coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
         }
-        return new CoreCollector(
+
+        // Create a new core collector and disable default logic to auto-upload on certain conditions
+        const cc = new CoreCollector(
             apiEndpoint,
             coreCollectorMode,
-            this.environment
+            this.environment,
+            {
+                messagesLimit: Infinity,
+                metricsLimit: Infinity,
+                uploadFailedListener: (result: UploadResult) => {
+                    this._instrApp.error(
+                        'Upload failed',
+                        result.error && result.error.toString()
+                    );
+                }
+            }
         );
+
+        cc.uploadInterval = Infinity;
+        this.ccMsgCount = cc.messagesCount;
+        this.ccMetricCount = cc.metricsCount;
+        return cc;
     }
 
     collect(schema: Schema, message: SchematizedData, logMeta: LogMeta): void {
@@ -278,9 +305,24 @@ export default class App extends LightningElement implements LogCollector {
         this._instrApp.log('Updated Network Options' as any);
     }
 
-    handleForceCollect(): void {
+    async handleFlush(): Promise<void> {
         // TODO: Remove "as any" when types are fixed
-        this._instrApp.log('Force Collect Metrics' as any);
-        this.coreCollector.upload();
+        try {
+            await this.coreCollector.upload();
+            this._updateCoreCollectorStats();
+        } catch (err) {
+            this._instrApp.error(err as any, 'Failed upload');
+            return;
+        }
+        this._instrApp.log('Completed upload' as any);
+    }
+
+    handleMetricAdd(): void {
+        this._updateCoreCollectorStats();
+    }
+
+    private _updateCoreCollectorStats(): void {
+        this.ccMsgCount = this.coreCollector.messagesCount;
+        this.ccMetricCount = this.coreCollector.metricsCount;
     }
 }

@@ -32,6 +32,7 @@ code {
 }
 
 .row1 {
+    background-color: #ccdeff;
     display: flex;
     height: 60px;
     align-items: baseline;
@@ -39,10 +40,6 @@ code {
 
 .row2 {
     flex-grow: 1;
-}
-
-.row3 {
-    height: 10px;
 }
 
 .app-title {
@@ -99,6 +96,7 @@ lightning-tab {
     display: flex;
     align-items: center;
     height: 40px;
+    margin-top: 10px;
 }
 
 .collector-header > :not(.collector-header-title):last-child {
@@ -140,4 +138,16 @@ lightning-badge {
 
 .app-icon {
     align-self: center;
+}
+
+.collector-stats {
+    display: flex;
+    align-items: center;;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.stat-label {
+    font-weight: bold;
+    margin: 0 10px;
 }

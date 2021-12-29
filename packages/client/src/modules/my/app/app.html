@@ -1,35 +1,27 @@
 <template>
     <div class="column">
         <div class="row1">
-            <lightning-icon
-                class="app-icon"
-                icon-name="standard:metrics"
-                size="large"
-            ></lightning-icon>
+            <lightning-icon class="app-icon" icon-name="standard:metrics" size="large"></lightning-icon>
             <span class="app-title">Observability (o11y) Sample App</span>
-            <a
-                class="doc-link"
+            <a class="doc-link"
                 href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home"
-                target="_blank"
-                >Documentation</a
-            >
+                target="_blank">Documentation</a>
+            <div class="collector-stats">
+                <span class="stat-label">Messages: </span>
+                <lightning-badge label={ccMsgCount}></lightning-badge>
+                <span class="stat-label">Metrics: </span>
+                <lightning-badge label={ccMetricCount}></lightning-badge>
+                <lightning-button label="Flush" title="Ask Core Collector to upload its logs and metrics to the server"
+                    onclick={handleFlush} variant="brand" icon-name="utility:upload" class="slds-m-around_small">
+                </lightning-button>
+            </div>
         </div>
         <div class="row2">
             <div class="slds-grid slds-wrap">
                 <div class="slds-col slds-size_8-of-12">
-                    <lightning-tabset
-                        variant="vertical"
-                        active-tab-value={selectedSection}
-                    >
-                        <lightning-tab
-                            label={labelIntro}
-                            value={sectionIntro}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelIntro}
-                                icon-name="custom:custom107"
-                            >
+                    <lightning-tabset variant="vertical" active-tab-value={selectedSection}>
+                        <lightning-tab label={labelIntro} value={sectionIntro} onactive={handleTabSelect}>
+                            <my-app-section label={labelIntro} icon-name="custom:custom107">
                                 <div slot="doc">
                                     <p class="header">Welcome!</p>
                                     <p>
@@ -55,15 +47,13 @@
                                         the following import:
                                     </p>
                                     <pre>
-import &#123; getInstrumentation &#125; from 'o11y/client';</pre
-                                    >
+import &#123; getInstrumentation &#125; from 'o11y/client';</pre>
                                     <p>
                                         In your constructor, get an
                                         instrumentation instance:
                                     </p>
                                     <pre>
-this.instr = getInstrumentation('my_instrumentation_name');</pre
-                                    >
+this.instr = getInstrumentation('my_instrumentation_name');</pre>
                                     <p>
                                         You can then call the available methods
                                         on this instance. This functionality is
@@ -113,8 +103,7 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                                 <em>
                                                     top &gt; o11y-sample &gt; .
                                                     &gt; src &gt; client &gt;
-                                                    modules/my</em
-                                                >.
+                                                    modules/my</em>.
                                             </li>
                                             <li>
                                                 Drill down further to the LWC
@@ -131,27 +120,16 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelErrors}
-                            value={sectionErrors}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelErrors}
-                                icon-name="custom:custom34"
-                            >
+                        <lightning-tab label={labelErrors} value={sectionErrors} onactive={handleTabSelect}>
+                            <my-app-section label={labelErrors} icon-name="custom:custom34">
                                 <div slot="doc">
                                     To log an error:
                                     <pre>
-this.instr.error(err); // err is an instance of Error</pre
-                                    >
+this.instr.error(err); // err is an instance of Error</pre>
                                     <p>
                                         For other usages, please refer to the
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error"
-                                            target="_blank"
-                                            >error API documentation</a
-                                        >.
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error"
+                                            target="_blank">error API documentation</a>.
                                     </p>
                                 </div>
                                 <div slot="play">
@@ -159,15 +137,8 @@ this.instr.error(err); // err is an instance of Error</pre
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelActivities}
-                            value={sectionActivities}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelActivities}
-                                icon-name="standard:operating_hours"
-                            >
+                        <lightning-tab label={labelActivities} value={sectionActivities} onactive={handleTabSelect}>
+                            <my-app-section label={labelActivities} icon-name="standard:operating_hours">
                                 <div slot="doc">
                                     To log the duration of a long-running
                                     activity, use the activity API:
@@ -178,11 +149,8 @@ this.instr.error(err); // err is an instance of Error</pre
                                     </pre>
                                     <p>
                                         For other usages, please refer to the
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
-                                            target="_blank"
-                                            >startActivity API documentation</a
-                                        >.
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
+                                            target="_blank">startActivity API documentation</a>.
                                     </p>
                                     <p>
                                         The sample app creates a
@@ -215,15 +183,8 @@ this.instr.error(err); // err is an instance of Error</pre
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelEvents}
-                            value={sectionEvents}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelEvents}
-                                icon-name="standard:custom_notification"
-                            >
+                        <lightning-tab label={labelEvents} value={sectionEvents} onactive={handleTabSelect}>
+                            <my-app-section label={labelEvents} icon-name="standard:custom_notification">
                                 <div slot="doc">
                                     <p>
                                         The o11y module comes with an
@@ -247,17 +208,11 @@ this.instr.error(err); // err is an instance of Error</pre
                                     </p>
                                     <p>
                                         For more detail, please refer to the
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent"
-                                            target="_blank"
-                                            >domEvent API documentation</a
-                                        >.
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent"
+                                            target="_blank">domEvent API documentation</a>.
                                     </p>
                                     <div>
-                                        <lightning-badge
-                                            label="Note"
-                                            icon-name="utility:warning"
-                                        ></lightning-badge>
+                                        <lightning-badge label="Note" icon-name="utility:warning"></lightning-badge>
                                         <span>
                                             Currently, only mouse-click events
                                             are supported.
@@ -265,37 +220,23 @@ this.instr.error(err); // err is an instance of Error</pre
                                     </div>
                                 </div>
                                 <div slot="play">
-                                    <my-instrumented-event-play
-                                        is-act-active={clickTrackActive}
-                                        ontoggleact={handleToggleAct}
-                                    ></my-instrumented-event-play>
+                                    <my-instrumented-event-play is-act-active={clickTrackActive}
+                                        ontoggleact={handleToggleAct}></my-instrumented-event-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelCustom}
-                            value={sectionCustom}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelCustom}
-                                icon-name="standard:record"
-                            >
+                        <lightning-tab label={labelCustom} value={sectionCustom} onactive={handleTabSelect}>
+                            <my-app-section label={labelCustom} icon-name="standard:record">
                                 <div slot="doc">
-                                    <span class="header"
-                                        >In general, to log a custom
-                                        message:</span
-                                    >
+                                    <span class="header">In general, to log a custom
+                                        message:</span>
                                     <ol>
                                         <li>
                                             First define the structure of your
                                             message as a schema, and create a PR
                                             to add it to the
-                                            <a
-                                                href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
-                                                target="_blank"
-                                                >schema repo</a
-                                            >.
+                                            <a href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
+                                                target="_blank">schema repo</a>.
                                         </li>
                                         <li>
                                             If applicable, add or update the
@@ -320,23 +261,15 @@ this.instr.error(err); // err is an instance of Error</pre
                                         // ...<br>
                                         this.instr.log(mySchema, myData);
                                     </pre>
-                                    <span class="header"
-                                        >To log a sample message:</span
-                                    >
+                                    <span class="header">To log a sample message:</span>
                                     <p>
                                         This page logs data that complies with
                                         the
-                                        <a
-                                            href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
-                                            target="_blank"
-                                            >sample schema</a
-                                        >. Schemas are defined using
-                                        <a
-                                            href="https://developers.google.com/protocol-buffers/docs/proto3"
-                                            target="_blank"
-                                        >
-                                            proto3</a
-                                        >
+                                        <a href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
+                                            target="_blank">sample schema</a>. Schemas are defined using
+                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3"
+                                            target="_blank">
+                                            proto3</a>
                                         syntax. A snapshot of this schema is as
                                         follows:
                                     </p>
@@ -347,10 +280,7 @@ this.instr.error(err); // err is an instance of Error</pre
                                         &#125;
                                     </pre>
                                     <div>
-                                        <lightning-badge
-                                            label="Note"
-                                            icon-name="utility:info"
-                                        ></lightning-badge>
+                                        <lightning-badge label="Note" icon-name="utility:info"></lightning-badge>
                                         <span>
                                             If you're interested in
                                             experimenting with your own schema,
@@ -362,15 +292,8 @@ this.instr.error(err); // err is an instance of Error</pre
                                 <my-custom-play slot="play"></my-custom-play>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelNetwork}
-                            value={sectionNetwork}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelNetwork}
-                                icon-name="custom:custom68"
-                            >
+                        <lightning-tab label={labelNetwork} value={sectionNetwork} onactive={handleTabSelect}>
+                            <my-app-section label={labelNetwork} icon-name="custom:custom68">
                                 <div slot="doc">
                                     <p>
                                         The o11y library offers optional network
@@ -389,31 +312,23 @@ this.instr.error(err); // err is an instance of Error</pre
                                         the default options, do:
                                     </p>
                                     <pre>
-this.instrApp.networkInstrumentation(true);</pre
-                                    >
+this.instrApp.networkInstrumentation(true);</pre>
                                     <p>
                                         Note: This is an
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object"
-                                            target="_blank"
-                                            >app-level method</a
-                                        >
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object"
+                                            target="_blank">app-level method</a>
                                         obtained by the app via a call to
                                         registerInstrumentedApp.
                                     </p>
                                     <p>
                                         For more info, please refer to the
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation"
-                                            target="_blank"
-                                            >Network Instrumentation
-                                            documentation</a
-                                        >.
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation"
+                                            target="_blank">Network Instrumentation
+                                            documentation</a>.
                                     </p>
                                 </div>
                                 <div slot="play">
-                                    <my-network-play
-                                        is-enabled={network.isEnabled}
+                                    <my-network-play is-enabled={network.isEnabled}
                                         use-network-options={network.useNetworkOptions}
                                         activity-name={network.activityName}
                                         is-activity-name-disabled={network.isActivityNameDisabled}
@@ -433,21 +348,13 @@ this.instrApp.networkInstrumentation(true);</pre
                                         is-use-compact-header-disabled={network.isUseCompactHeaderDisabled}
                                         parent-span-id={network.parentSpanId}
                                         is-parent-span-id-disabled={network.isParentSpanIdDisabled}
-                                        onoptionschange={handleNetworkOptionsChange}
-                                    >
+                                        onoptionschange={handleNetworkOptionsChange}>
                                     </my-network-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelMetrics}
-                            value={sectionMetrics}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelMetrics}
-                                icon-name="standard:metrics"
-                            >
+                        <lightning-tab label={labelMetrics} value={sectionMetrics} onactive={handleTabSelect}>
+                            <my-app-section label={labelMetrics} icon-name="standard:metrics">
                                 <div slot="doc">
                                     <p>
                                         The Salesforce ui-telemetry endpoint for
@@ -483,37 +390,23 @@ this.instrApp.networkInstrumentation(true);</pre
                                     </p>
                                     <p>
                                         For more info, please refer to the
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y"
-                                            target="_blank"
-                                            >Metrics in o11y documentation</a
-                                        >.
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y"
+                                            target="_blank">Metrics in o11y documentation</a>.
                                     </p>
                                 </div>
                                 <div slot="play">
-                                    <my-metrics-play
-                                        onforcecollect={handleForceCollect}
-                                    ></my-metrics-play>
+                                    <my-metrics-play onmetricadd={handleMetricAdd}>
+                                    </my-metrics-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelIdleDetector}
-                            value={sectionIdleDetector}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelIdleDetector}
-                                icon-name="standard:waits"
-                            >
+                        <lightning-tab label={labelIdleDetector} value={sectionIdleDetector} onactive={handleTabSelect}>
+                            <my-app-section label={labelIdleDetector} icon-name="standard:waits">
                                 <div slot="doc">
                                     <p>
                                         The o11y library includes an
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector"
-                                            target="_blank"
-                                            >Idle Detector</a
-                                        >
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector"
+                                            target="_blank">Idle Detector</a>
                                         that notifies interested parties when
                                         the next idle is detected. It works in
                                         cooperation with Idle Detector
@@ -542,15 +435,8 @@ this.instrApp.networkInstrumentation(true);</pre
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab
-                            label={labelServer}
-                            value={sectionServer}
-                            onactive={handleTabSelect}
-                        >
-                            <my-app-section
-                                label={labelServer}
-                                icon-name="standard:logging"
-                            >
+                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect}>
+                            <my-app-section label={labelServer} icon-name="standard:logging">
                                 <div slot="doc">
                                     <p>
                                         This app comes with a built-in web
@@ -572,11 +458,8 @@ this.instrApp.networkInstrumentation(true);</pre
                                     <p>
                                         For details on the Salesforce server
                                         end-point, please refer to the
-                                        <a
-                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint"
-                                            target="_blank"
-                                            >Server Endpoint</a
-                                        >
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint"
+                                            target="_blank">Server Endpoint</a>
                                         documentation.
                                     </p>
                                     <p>
@@ -596,30 +479,18 @@ this.instrApp.networkInstrumentation(true);</pre
                     <div class="collector-pane">
                         <div class="collector-header">
                             <span class="collector-header-title">Logs</span>
-                            <lightning-badge
-                                if:true={logs.length}
-                                label={logs.length}
-                            ></lightning-badge>
-                            <lightning-button
-                                if:true={logs.length}
-                                label="Clear"
-                                title="Clear the log entries"
-                                onclick={handleClearLogs}
-                                variant="destructive"
-                                icon-name="utility:delete"
-                                class="slds-m-left_x-small"
-                            >
+                            <lightning-badge if:true={logs.length} label={logs.length}></lightning-badge>
+                            <lightning-button if:true={logs.length} label="Clear" title="Clear the log entries"
+                                onclick={handleClearLogs} variant="destructive" icon-name="utility:delete"
+                                class="slds-m-left_x-small">
                             </lightning-button>
                         </div>
                         <div class="collector-body">
-                            <my-visual-collector
-                                logs={logs}
-                            ></my-visual-collector>
+                            <my-visual-collector logs={logs}></my-visual-collector>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row3"></div>
     </div>
 </template>
