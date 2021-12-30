@@ -5,7 +5,9 @@ import { ComponentUtils } from '../../shared/componentUtils';
 import {
     sampleApiEndpoint,
     coreApiEndpoint,
-    coreApiEndpointSecure
+    coreApiEndpointSecure,
+    coreQaGetSession,
+    coreQaGetSessionSecure
 } from '../../shared/apiEndpoints';
 import { UploadMode } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/UploadMode';
 
@@ -14,7 +16,9 @@ const minInterval = 10;
 const maxInterval = utility.maxInt;
 
 export default class CoreCollectorPlay extends LightningElement {
-    @track
+    @track readonly qaGetSessionUrl = coreQaGetSession;
+    @track readonly qaGetSessionUrlSecure = coreQaGetSessionSecure;
+
     readonly uploadModeOptions: { label: string; value: UploadMode }[] = [
         { label: 'None', value: 2 }, // TODO: UploadMode.noUpload
         { label: 'Binary (default for sample app server)', value: 0 }, // TODO: UploadMode.fetchBinary

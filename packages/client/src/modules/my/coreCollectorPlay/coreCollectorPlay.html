@@ -64,7 +64,6 @@
                     autocomplete="off"
                     name="bearerToken"
                     label="Bearer Token (Required for Core)"
-                    placeholder="Use 'qa/getUserSession.jsp' on your local Core to get a session token"
                     value={bearerToken}
                     onchange={handleBearerTokenChange}
                 ></lightning-input>
@@ -74,4 +73,8 @@
             <lightning-button label="Clear" onclick={handleClearClick}> </lightning-button>
         </lightning-layout-item>
     </lightning-layout>
+    <p class="slds-form-element__label">
+        <span>To get a session token on your running local Core, use these links: </span>
+        <a target="_blank" href={qaGetSessionUrl}>HTTP</a><span> or </span> <a target="_blank" href={qaGetSessionUrlSecure}>HTTPS</a>.
+    </p>
 </template>

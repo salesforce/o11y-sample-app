@@ -8,3 +8,6 @@ export const coreApiEndpointSecure =
 export const defaultApiEndpoint = sampleApiEndpoint;
 
 export const isoDateEndpoint = 'http://localhost:3002/api/isodate'; // This doesn't have a Salesforce counterpart
+
+export const coreQaGetSession = 'http://localhost:6109/qa/getUserSession.jsp';
+export const coreQaGetSessionSecure = 'https://localhost:6101/qa/getUserSession.jsp';
