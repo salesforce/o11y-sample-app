@@ -1,7 +1,13 @@
-// #LOOK:
-// The sample app comes with a built-in Express webserver, that defaults to port 3002.
-// You can set this to the salesforce endpoint in the form:
-// {ServerUrl}/services/data/{API version}/connect/proxy/ui-telemetry
-// Example: const apiEndpoint = 'https://{HOSTNAME}/services/data/v52.0/connect/proxy/ui-telemetry';
-export const apiEndpoint = 'http://localhost:3002/api/uitelemetry';
+export const sampleApiEndpoint = 'http://localhost:3002/api/uitelemetry';
+export const coreApiEndpoint =
+    'http://localhost:6109/services/data/v52.0/connect/proxy/ui-telemetry';
+export const coreApiEndpointSecure =
+    'https://localhost:6101/services/data/v52.0/connect/proxy/ui-telemetry';
+
+// #LOOK: Set the default API endpoint to one of the above as you see fit.
+export const defaultApiEndpoint = sampleApiEndpoint;
+
 export const isoDateEndpoint = 'http://localhost:3002/api/isodate'; // This doesn't have a Salesforce counterpart
+
+export const coreQaGetSession = 'http://localhost:6109/qa/getUserSession.jsp';
+export const coreQaGetSessionSecure = 'https://localhost:6101/qa/getUserSession.jsp';

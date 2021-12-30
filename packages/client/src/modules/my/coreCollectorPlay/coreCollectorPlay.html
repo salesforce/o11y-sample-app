@@ -1,0 +1,80 @@
+<template>
+    <p class="header">Upload Options</p>
+    <lightning-layout>
+        <lightning-layout-item>
+            <lightning-combobox
+                name="uploadEndpointPicker"
+                label="Upload Endpoint"
+                value={uploadEndpoint}
+                options={uploadEndpointOptions}
+                onchange={handleUploadEndpointChange}
+                placeholder="Custom URL"
+            ></lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+            <lightning-input type="url" name="uploadEndpoint" label="&nbsp;" value={uploadEndpoint} onchange={handleUploadEndpointChange} placeholder="http://localhost:3002/api/uitelemetry">
+            </lightning-input>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-combobox
+        class="slds-m-top_small"
+        name="uploadMode"
+        label="Upload Mode"
+        value={uploadMode}
+        options={uploadModeOptions}
+        onchange={handleUploadModeChange}
+        placeholder="Unknown"
+    ></lightning-combobox>
+
+    <lightning-layout vertical-align="end" class="slds-m-vertical_small">
+        <lightning-layout-item>
+            <!-- min/max values must match the checks in code-->
+            <lightning-input
+                type="number"
+                name="uploadInterval"
+                label="Upload interval in milliseconds"
+                placeholder="Default is 10000 msecs"
+                value={uploadInterval}
+                onchange={handleUploadIntervalChange}
+                max="2147483647"
+                min="10"
+            ></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-m-left_x-small">
+            <lightning-button label="Default" onclick={handleDefaultIntervalClick}> </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button label="1 second" onclick={handleOneSecondIntervalClick}> </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button label="1 minute" onclick={handleOneMinuteIntervalClick}> </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button label="Maximum (disable)" onclick={handleMaxIntervalClick}> </lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <p class="header slds-p-top_small">Security</p>
+    <lightning-layout vertical-align="end">
+        <lightning-layout-item flexibility="auto">
+            <form>
+                <!-- Form wrapper needed for password inputs -->
+                <lightning-input
+                    type="password"
+                    autocomplete="off"
+                    name="bearerToken"
+                    label="Bearer Token (Required for Core)"
+                    value={bearerToken}
+                    onchange={handleBearerTokenChange}
+                ></lightning-input>
+            </form>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <lightning-button label="Clear" onclick={handleClearClick}> </lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+    <p class="slds-form-element__label">
+        <span>To get a session token on your running local Core, use these links: </span>
+        <a target="_blank" href={qaGetSessionUrl}>HTTP</a><span> or </span> <a target="_blank" href={qaGetSessionUrlSecure}>HTTPS</a>.
+    </p>
+</template>

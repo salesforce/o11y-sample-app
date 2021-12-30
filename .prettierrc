@@ -2,10 +2,15 @@
     "trailingComma": "none",
     "singleQuote": true,
     "tabWidth": 4,
+    "printWidth": 100,
+    "htmlWhitespaceSensitivity": "strict",
     "overrides": [
         {
             "files": "**/*.html",
-            "options": { "parser": "lwc" }
+            "options": {
+                "parser": "lwc",
+                "printWidth": 200
+            }
         }
     ]
 }

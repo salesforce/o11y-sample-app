@@ -90,9 +90,7 @@ export default class InstrumentedEventPlay extends LightningElement {
     }
 
     logEvent(event: Event): void {
-        const actualColor = window.getComputedStyle(
-            event.target as Element
-        ).backgroundColor;
+        const actualColor = window.getComputedStyle(event.target as Element).backgroundColor;
         // Convert actualColor text, which comes back in the form of "rgb(x, y, z)" or "rgba(x, y, z, a)", into an actual value.
         const colorValue = actualColor
             .substring(actualColor.indexOf('(') + 1, actualColor.indexOf(')'))

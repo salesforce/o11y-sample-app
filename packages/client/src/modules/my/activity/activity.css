@@ -13,4 +13,9 @@
     display: inline-block;
     width: 40px;
     height: 40px;
+    top: 10px;
+}
+
+.spinnerContainer > * {
+    background-color: unset;
 }

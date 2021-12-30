@@ -19,7 +19,7 @@ h4 {
 }
 
 code {
-    font-family: monospace;
+    font-family: 'Menlo', 'Monaco', 'Courier New', Courier, monospace;
     font-size: 10pt;
     line-height: 19.5px;
     background-color: lightgoldenrodyellow;
@@ -32,23 +32,29 @@ code {
 }
 
 .row1 {
+    background-color: #ccdeff;
     display: flex;
     height: 60px;
-    align-items: baseline;
+    align-items: center;
 }
 
 .row2 {
     flex-grow: 1;
 }
 
-.row3 {
-    height: 10px;
-}
-
 .app-title {
     padding: 10px;
     font-size: 20px;
     font-weight: bold;
+}
+
+.app-version {
+    font-weight: lighter;
+}
+
+.no-stats {
+    font-size: 8pt;
+    font-weight: lighter;;
 }
 
 .header {
@@ -58,9 +64,10 @@ code {
 }
 
 pre {
+    padding: 10px;
     background-color: #eeeeee;
-    font-family: monospace;
-    font-size: 12pt;
+    font-family: 'Menlo', 'Monaco', 'Courier New', Courier, monospace;
+    font-size: 10pt;
 }
 
 /* Override SLDS settings */
@@ -99,6 +106,7 @@ lightning-tab {
     display: flex;
     align-items: center;
     height: 40px;
+    margin-top: 10px;
 }
 
 .collector-header > :not(.collector-header-title):last-child {
@@ -139,5 +147,18 @@ lightning-badge {
 }
 
 .app-icon {
+    margin-left: 10px;
     align-self: center;
+}
+
+.collector-stats {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.stat-label {
+    font-weight: bold;
+    margin: 0 10px;
 }

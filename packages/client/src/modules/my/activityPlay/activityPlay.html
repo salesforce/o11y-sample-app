@@ -2,25 +2,11 @@
     <div>
         <p class="header">Start and Stop activities</p>
         <p>
-            You can start and stop multiple activities in any order. Although
-            this UI allows to create up to 3 concurrent activities, there's no
-            such limit in o11y. The activities will be rooted to the current
-            root activity.
+            You can start and stop multiple activities in any order. Although this UI allows to create up to 3 concurrent activities, there's no such limit in o11y. The activities will be rooted to
+            the current root activity.
         </p>
     </div>
-    <my-activity
-        activity-name={activity1}
-        data-name="activity1"
-        onnamechange={handleNameChange}
-    ></my-activity>
-    <my-activity
-        activity-name={activity2}
-        data-name="activity2"
-        onnamechange={handleNameChange}
-    ></my-activity>
-    <my-activity
-        activity-name={activity3}
-        data-name="activity3"
-        onnamechange={handleNameChange}
-    ></my-activity>
+    <my-activity activity-name={activity1} data-name="activity1" onnamechange={handleNameChange}></my-activity>
+    <my-activity activity-name={activity2} data-name="activity2" onnamechange={handleNameChange}></my-activity>
+    <my-activity activity-name={activity3} data-name="activity3" onnamechange={handleNameChange}></my-activity>
 </template>

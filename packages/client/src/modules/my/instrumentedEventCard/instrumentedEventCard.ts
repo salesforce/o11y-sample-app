@@ -22,14 +22,11 @@ export default class InstrumentedEventCard extends LightningElement {
             value &&
             utility
                 .getKeyValues(value.msg)
-                .filter(
-                    (obj) => obj.key !== 'userPayload' && obj.key !== 'event'
-                );
+                .filter((obj) => obj.key !== 'userPayload' && obj.key !== 'event');
         this.keyValues = [...topItems, ...msgItems];
 
         this.userPayload = value && value.msg && value.msg.userPayload;
-        this.eventKeyValues =
-            value && value.msg && utility.getKeyValues(value.msg.event);
+        this.eventKeyValues = value && value.msg && utility.getKeyValues(value.msg.event);
     }
 
     handleToggle(): void {

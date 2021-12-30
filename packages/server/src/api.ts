@@ -7,6 +7,7 @@ import { processHeaders } from './headers';
 
 const HOST = process.env.API_HOST || 'localhost';
 const PORT = process.env.API_PORT || 3002;
+const LOG_HEADERS = false;
 
 express()
     .use(cors())
@@ -35,10 +36,17 @@ express()
     )
     .post('/api/uitelemetry', (req: express.Request, res: express.Response) => {
         console.log(' ');
+        console.log('---------------------------------------------------------');
+        console.log('Received call to /api/uitelemetry');
         try {
-            processHeaders(req.headers);
-            processCoreEnvelope(req.body);
-            res.json({ success: true });
+            if (LOG_HEADERS) {
+                processHeaders(req.headers);
+            }
+            if (processCoreEnvelope(req.body)) {
+                res.json({ success: true });
+            } else {
+                res.status(400).send();
+            }
         } catch (err) {
             console.log(err);
             res.status(422).json({ error: err });
@@ -46,11 +54,10 @@ express()
     })
     .get('/api/isodate', (_req: express.Request, res: express.Response) => {
         console.log(' ');
-        console.log('Received call to /api/test');
+        console.log('---------------------------------------------------------');
+        console.log('Received call to /api/isodate');
         res.send(new Date().toISOString());
     })
     .listen(PORT, () =>
-        console.log(
-            `✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`
-        )
+        console.log(`✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`)
     );

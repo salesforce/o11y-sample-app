@@ -49,9 +49,7 @@ export class NetworkOptions implements UiOptions, TracingHeadersOptions {
         });
     }
 
-    getNetworkInstrumentationOptions():
-        | NetworkInstrumentationOptions
-        | boolean {
+    getNetworkInstrumentationOptions(): NetworkInstrumentationOptions | boolean {
         return this.isEnabled
             ? this.useNetworkOptions
                 ? {
@@ -62,8 +60,7 @@ export class NetworkOptions implements UiOptions, TracingHeadersOptions {
                           ? {
                                 useB3Headers: this.useB3Headers,
                                 useCompactHeader: this.useCompactHeader,
-                                traceIdEffectiveLength:
-                                    this.traceIdEffectiveLength,
+                                traceIdEffectiveLength: this.traceIdEffectiveLength,
                                 parentSpanId: this.parentSpanId
                             }
                           : undefined

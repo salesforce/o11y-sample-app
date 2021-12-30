@@ -83,6 +83,7 @@ export default class MetricsPlay extends LightningElement {
                       numberTag: this.numberTagForCounter
                   }
         );
+        this.notifyMetricAdded();
     }
 
     handleTrackValue(): void {
@@ -98,9 +99,10 @@ export default class MetricsPlay extends LightningElement {
                       numberTag: this.numberTagForValueRecorder
                   }
         );
+        this.notifyMetricAdded();
     }
 
-    handleForceCollect(): void {
-        ComponentUtils.raiseEvent(this, 'forcecollect');
+    notifyMetricAdded(): void {
+        ComponentUtils.raiseEvent(this, 'metricadd');
     }
 }

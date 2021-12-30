@@ -3,5 +3,31 @@
     "workbench.colorCustomizations": {
         "titleBar.activeBackground": "#ed72ed",
         "activityBar.background": "#a554a5"
+    },
+    "editor.rulers": [
+        100 //  matches printWidth config in .prettierrc
+    ],
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+            200 //  matches printWidth config in .prettierrc
+        ]
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.tabSize": 4,
+        "editor.formatOnSave": true
     }
 }

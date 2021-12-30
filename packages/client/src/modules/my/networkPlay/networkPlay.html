@@ -1,37 +1,16 @@
 <template>
     <p class="header">Network Instrumentation</p>
     <lightning-button-group>
-        <lightning-button
-            if:true={isEnabled}
-            label="Enable"
-            disabled
-            onclick={handleToggleClick}
-        >
-        </lightning-button>
-        <lightning-button
-            if:false={isEnabled}
-            label="Enable"
-            onclick={handleToggleClick}
-        >
-        </lightning-button>
-        <lightning-button
-            if:true={isEnabled}
-            label="Disable"
-            onclick={handleToggleClick}
-        >
-        </lightning-button>
-        <lightning-button
-            if:false={isEnabled}
-            label="Disable"
-            disabled
-            onclick={handleToggleClick}
-        >
-        </lightning-button>
+        <lightning-button if:true={isEnabled} label="Enable" disabled onclick={handleToggleClick}> </lightning-button>
+        <lightning-button if:false={isEnabled} label="Enable" onclick={handleToggleClick}> </lightning-button>
+        <lightning-button if:true={isEnabled} label="Disable" onclick={handleToggleClick}> </lightning-button>
+        <lightning-button if:false={isEnabled} label="Disable" disabled onclick={handleToggleClick}> </lightning-button>
     </lightning-button-group>
     <lightning-input
         type="number"
         name="sampleRate"
-        label="Tracing sample rate for rroot activities in (0 - 100)%"
+        formatter="percent-fixed"
+        label="Tracing sample rate for root activities (0% - 100%)"
         placeholder="default: 0"
         disabled={isSampleRateDisabled}
         value={sampleRate}
@@ -40,126 +19,109 @@
         onchange={handleSampleRateChange}
     >
     </lightning-input>
-    <lightning-layout>
+    <lightning-layout class="slds-p-top_medium">
         <lightning-layout-item>
-            <div class="slds-p-around_medium">
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="checkbox"
-                    label="Use networking options ⬇"
-                    name="useNetworkOptions"
-                    checked={useNetworkOptions}
-                    onchange={handleUseNetworkOptionsChange}
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="text"
-                    name="activityName"
-                    label="Activity Name"
-                    placeholder="default: fetch / xhr_send"
-                    disabled={isActivityNameDisabled}
-                    value={activityName}
-                    onchange={handleActivityNameChange}
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="checkbox"
-                    label="Log Errors (default: true)"
-                    name="logErrors"
-                    disabled={isLogErrorsDisabled}
-                    checked={logErrors}
-                    onchange={handleLogErrorsChange}
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="checkbox"
-                    label="Use Tracing"
-                    name="useTracing (default: true)"
-                    disabled={isUseTracingDisabled}
-                    checked={useTracing}
-                    onchange={handleUseTracingChange}
-                >
-                </lightning-input>
-            </div>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="checkbox"
+                label="Use networking options ⬇"
+                name="useNetworkOptions"
+                checked={useNetworkOptions}
+                onchange={handleUseNetworkOptionsChange}
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="text"
+                name="activityName"
+                label="Activity Name"
+                placeholder="default: fetch / xhr_send"
+                disabled={isActivityNameDisabled}
+                value={activityName}
+                onchange={handleActivityNameChange}
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="checkbox"
+                label="Log Errors (default: true)"
+                name="logErrors"
+                disabled={isLogErrorsDisabled}
+                checked={logErrors}
+                onchange={handleLogErrorsChange}
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="checkbox"
+                label="Use Tracing"
+                name="useTracing (default: true)"
+                disabled={isUseTracingDisabled}
+                checked={useTracing}
+                onchange={handleUseTracingChange}
+            >
+            </lightning-input>
         </lightning-layout-item>
-        <lightning-layout-item>
-            <div class="slds-p-around_medium">
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="checkbox"
-                    label="Use tracing options ⬇"
-                    name="useTracingOptions"
-                    checked={useTracingOptions}
-                    disabled={isUseTracingOptionsDisabled}
-                    onchange={handleUseTracingOptionsChange}
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="number"
-                    name="traceIdEffectiveLength"
-                    label="Trace ID Effective Length (1-128)"
-                    placeholder="default: 32"
-                    disabled={isTraceIdEffectiveLengthDisabled}
-                    value={traceIdEffectiveLength}
-                    onchange={handleTraceIdEffectiveLengthChange}
-                    max="128"
-                    min="1"
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="checkbox"
-                    label="Use B3 Headers (default: false, use traceparent header)"
-                    name="useB3Headers"
-                    disabled={isUseB3HeadersDisabled}
-                    checked={useB3Headers}
-                    onchange={handleUseB3HeadersChange}
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="checkbox"
-                    label="Use Compact B3 Headers (default: false)"
-                    name="useCompactHeader"
-                    disabled={isUseCompactHeaderDisabled}
-                    checked={useCompactHeader}
-                    onchange={handleUseCompactHeaderChange}
-                >
-                </lightning-input>
-                <lightning-input
-                    class="slds-p-vertical_xx-small"
-                    type="text"
-                    name="parentSpanId"
-                    label="Parent Span ID for B3"
-                    disabled={isParentSpanIdDisabled}
-                    value={parentSpanId}
-                    onchange={handleParentSpanIdChange}
-                >
-                </lightning-input>
-            </div>
+        <lightning-layout-item class="slds-m-left_x-large">
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="checkbox"
+                label="Use tracing options ⬇"
+                name="useTracingOptions"
+                checked={useTracingOptions}
+                disabled={isUseTracingOptionsDisabled}
+                onchange={handleUseTracingOptionsChange}
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="number"
+                name="traceIdEffectiveLength"
+                label="Trace ID Effective Length (1-128)"
+                placeholder="default: 32"
+                disabled={isTraceIdEffectiveLengthDisabled}
+                value={traceIdEffectiveLength}
+                onchange={handleTraceIdEffectiveLengthChange}
+                max="128"
+                min="1"
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="checkbox"
+                label="Use B3 Headers (default: false, use traceparent header)"
+                name="useB3Headers"
+                disabled={isUseB3HeadersDisabled}
+                checked={useB3Headers}
+                onchange={handleUseB3HeadersChange}
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="checkbox"
+                label="Use Compact B3 Headers (default: false)"
+                name="useCompactHeader"
+                disabled={isUseCompactHeaderDisabled}
+                checked={useCompactHeader}
+                onchange={handleUseCompactHeaderChange}
+            >
+            </lightning-input>
+            <lightning-input
+                class="slds-p-vertical_xx-small"
+                type="text"
+                name="parentSpanId"
+                label="Parent Span ID for B3"
+                disabled={isParentSpanIdDisabled}
+                value={parentSpanId}
+                onchange={handleParentSpanIdChange}
+            >
+            </lightning-input>
         </lightning-layout-item>
     </lightning-layout>
-    <div class="slds-p-around_medium">
-        <lightning-input
-            type="text"
-            name="testUrl"
-            label="Test URL to make an HTTP GET call"
-            value={testUrl}
-            onchange={handleTestUrlChange}
-        >
-        </lightning-input>
+    <div class="slds-p-vertical_medium">
+        <lightning-input type="url" name="testUrl" label="Test URL to make an HTTP GET call" value={testUrl} onchange={handleTestUrlChange}> </lightning-input>
     </div>
-    <lightning-button
-        variant="brand"
-        label="Make fetch call"
-        title="Calls /api/get-iso-date endpoint to get the current time using fetch API"
-        onclick={handleFetchCall}
-        class="slds-m-left_x-small"
-    ></lightning-button>
+    <lightning-button variant="brand" label="Make fetch call" title="Calls /api/get-iso-date endpoint to get the current time using fetch API" onclick={handleFetchCall}></lightning-button>
     <lightning-button
         variant="brand"
         label="Make XMLHttpRequest call"
@@ -167,7 +129,5 @@
         onclick={handleXhrCall}
         class="slds-m-left_x-small"
     ></lightning-button>
-    <span if:true={lastResponse} class="last-response"
-        >Last Response: {lastResponse}</span
-    >
+    <span if:true={lastResponse} class="last-response">Last Response: {lastResponse}</span>
 </template>

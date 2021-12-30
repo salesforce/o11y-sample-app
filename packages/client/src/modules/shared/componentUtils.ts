@@ -2,10 +2,10 @@ import { LightningElement } from 'lwc';
 import { EventDetail } from '../models/eventDetail';
 
 export class ComponentUtils {
-    static raiseEvent(
+    static raiseEvent<T>(
         component: LightningElement,
         eventName: string,
-        value?: unknown,
+        value?: T,
         originalComponent?: LightningElement
     ) {
         // console.debug('Event raised (by, type, detail)', component, eventName, detail);
@@ -17,12 +17,7 @@ export class ComponentUtils {
 
     static relayEvent(component: LightningElement, event: CustomEvent) {
         if (event.detail instanceof EventDetail) {
-            this.raiseEvent(
-                component,
-                event.type,
-                event.detail.value,
-                event.detail.sender
-            );
+            this.raiseEvent(component, event.type, event.detail.value, event.detail.sender);
         } else {
             this.raiseEvent(component, event.type, event.detail);
         }
