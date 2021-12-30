@@ -175,7 +175,11 @@ function getMetricsTags(tagsArray: MetricTag[]) {
     return tagsArray.map((tag) => `${tag.name}=${tag.value} `).join(', ');
 }
 
-export function processCoreEnvelope(encodedEnvelope: Uint8Array) {
+export function processCoreEnvelope(encodedEnvelope: Uint8Array): boolean {
+    if (encodedEnvelope.length === undefined) {
+        console.warn('Processing CoreEnvelope: Received invalid data. Check format.');
+        return false;
+    }
     console.log(`Received encoded CoreEnvelope with size ${encodedEnvelope.length} bytes.`);
 
     const { message } = decode(getSchemaId(coreEnvelopeSchema), encodedEnvelope);
@@ -185,4 +189,5 @@ export function processCoreEnvelope(encodedEnvelope: Uint8Array) {
     processStatics(envelope);
     processBundles(envelope);
     processMetrics(envelope);
+    return true;
 }

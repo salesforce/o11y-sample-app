@@ -42,8 +42,11 @@ express()
             if (LOG_HEADERS) {
                 processHeaders(req.headers);
             }
-            processCoreEnvelope(req.body);
-            res.json({ success: true });
+            if (processCoreEnvelope(req.body)) {
+                res.json({ success: true });
+            } else {
+                res.status(400).send();
+            }
         } catch (err) {
             console.log(err);
             res.status(422).json({ error: err });
