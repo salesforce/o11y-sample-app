@@ -121,16 +121,10 @@
             </div>
         </lightning-layout-item>
     </lightning-layout>
-    <div class="slds-p-around_medium">
-        <lightning-input type="text" name="testUrl" label="Test URL to make an HTTP GET call" value={testUrl} onchange={handleTestUrlChange}> </lightning-input>
+    <div class="slds-p-vertical_medium">
+        <lightning-input type="url" name="testUrl" label="Test URL to make an HTTP GET call" value={testUrl} onchange={handleTestUrlChange}> </lightning-input>
     </div>
-    <lightning-button
-        variant="brand"
-        label="Make fetch call"
-        title="Calls /api/get-iso-date endpoint to get the current time using fetch API"
-        onclick={handleFetchCall}
-        class="slds-m-left_x-small"
-    ></lightning-button>
+    <lightning-button variant="brand" label="Make fetch call" title="Calls /api/get-iso-date endpoint to get the current time using fetch API" onclick={handleFetchCall}></lightning-button>
     <lightning-button
         variant="brand"
         label="Make XMLHttpRequest call"
