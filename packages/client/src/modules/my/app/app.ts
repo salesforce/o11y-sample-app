@@ -4,6 +4,7 @@ import { CoreCollector } from 'o11y/collectors';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
+import { utility } from '../../../utility';
 
 import {
     Activity,
@@ -14,21 +15,12 @@ import {
 } from 'o11y/dist/modules/o11y/client/interfaces';
 import { CoreCollector as CoreCollectorType } from 'o11y/dist/modules/o11y/collectors/collectors';
 import { SchematizedData } from 'o11y/dist/modules/o11y/shared/shared/TypeDefinitions';
-
-// #LOOK:
-// API endpoint configuration has moved to shared/apiEndpoints.js
-import { apiEndpoint } from '../../shared/apiEndpoints';
+import { defaultApiEndpoint } from '../../shared/apiEndpoints';
 import { LogModel } from '../../models/logModel';
 import { UploadResult } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/interfaces/UploadResult';
-
-const maxInt = Math.pow(2, 31) - 1;
-
-// #LOOK:
-// If using a Salesforce endpoint, you must specify a bearerToken for authorization.
-// It can be either an Oauth2 access token or a session ID.
-// If you have Salesforce running locally, go to /qa/getUserSession.jsp to get a session ID.
-// If using the webserver included in this app, leave the bearerToken empty.
-const bearerToken = '';
+import { CoreCollectorPlayOptions } from '../../../interfaces/coreCollectorOptions';
+import { EventDetail } from '../../models/eventDetail';
+import { UploadMode } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/UploadMode';
 
 // #LOOK:
 // Salesforce server end points typically enforce CORS and CSP. To use the sample app with a Salesforce endpoint,
@@ -53,7 +45,7 @@ export default class App extends LightningElement implements LogCollector {
     @track labelActivities = 'Log Activities';
     @track labelCustom = 'Log Messages';
     @track labelIdleDetector = 'Idle Detector';
-    @track labelServer = 'Server Side';
+    @track labelServer = 'Core Collector';
     @track labelNetwork = 'Network Instrumentation';
     @track labelMetrics = 'Metrics';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
@@ -80,6 +72,7 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionMetrics, this.labelMetrics);
 
     private _instrApp: InstrumentedAppMethods;
+    private _fetchOrig: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
     isRendered = false;
     clickTrackActive = false;
     selectedSection = this.sectionIntro;
@@ -91,8 +84,12 @@ export default class App extends LightningElement implements LogCollector {
     network = new NetworkOptions();
     coreCollector: CoreCollectorType;
 
+    @track bearerToken = '';
     @track ccMsgCount: number;
     @track ccMetricCount: number;
+    @track ccUploadInterval: number = utility.maxInt; // Note: Cannot use Infinity with setTimeout per MDN
+    @track ccUploadMode: UploadMode = 0; // TODO: Use UploadMode.fetchBinary directly when it's exported
+    @track ccUploadEndpoint: string = defaultApiEndpoint;
 
     environment = {
         appName: 'o11y-sample-app',
@@ -153,26 +150,26 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     getCoreCollector(): CoreCollectorType {
-        let coreCollectorMode = 0; // Use application/octet-stream by default
-        // #LOOK:
-        // If the endpoint requires auth header, you may need to update the check below
-        if (apiEndpoint.indexOf('.salesforce.com') >= 0 || apiEndpoint.indexOf('.force.com') >= 0) {
-            this.overrideFetch(); // Include authorization header in the calls
-            coreCollectorMode = 1; // Use multipart/form-data for Salesforce app
-        }
-
+        const ep = this.ccUploadEndpoint;
         // Create a new core collector and disable default logic to auto-upload on certain conditions
-        const cc = new CoreCollector(apiEndpoint, coreCollectorMode, this.environment, {
-            messagesLimit: maxInt,
-            metricsLimit: maxInt,
+        const cc = new CoreCollector(ep, this.ccUploadMode, this.environment, {
+            messagesLimit: utility.maxInt,
+            metricsLimit: utility.maxInt,
             uploadFailedListener: (result: UploadResult) => {
-                this._instrApp.error('Upload failed', result.error && result.error.toString());
+                this._instrApp.error(
+                    `Upload failed to ${ep}`,
+                    result.error && result.error.toString()
+                );
             }
         });
-
-        // Note: Cannot use Infinity with setTimeout per MDN
-        cc.uploadInterval = maxInt;
+        cc.uploadInterval = this.ccUploadInterval;
         return cc;
+    }
+
+    private _updateCoreCollectorOptions(): void {
+        this.coreCollector.uploadMode = this.ccUploadMode;
+        this.coreCollector.uploadEndpoint = this.ccUploadEndpoint;
+        this.coreCollector.uploadInterval = this.ccUploadInterval;
     }
 
     collect(schema: Schema, message: SchematizedData, logMeta: LogMeta): void {
@@ -227,18 +224,25 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     overrideFetch(): void {
-        const addHeaders = {
-            Authorization: `Bearer ${bearerToken}`
+        if (this._fetchOrig) {
+            return;
+        }
+        this._fetchOrig = window.fetch;
+        window.fetch = (input, init) => {
+            init = init || {};
+            const addHeaders: HeadersInit = {
+                Authorization: `Bearer ${this.bearerToken}`
+            };
+            init.headers = Object.assign(init.headers || {}, addHeaders);
+            return this._fetchOrig.call(window, input, init);
         };
-        const fetchOrig = window.fetch;
-        window.fetch = function (input, init) {
-            console.log('Fetch');
-            if (input === apiEndpoint) {
-                init = init || {};
-                init.headers = Object.assign(init.headers || {}, addHeaders);
-            }
-            return fetchOrig.call(this, input, init);
-        };
+    }
+
+    restoreFetch(): void {
+        if (this._fetchOrig) {
+            window.fetch = this._fetchOrig;
+            this._fetchOrig = undefined;
+        }
     }
 
     handleToggleAct(): void {
@@ -284,11 +288,20 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     async handleFlush(): Promise<void> {
-        // TODO: Remove "as any" when types are fixed
         try {
-            await this.coreCollector.upload();
+            const result: UploadResult = await this.coreCollector.upload();
+            if (!result) {
+                // nothing to upload
+            } else if (result.error) {
+                throw result.error;
+            }
             this._updateCoreCollectorStats();
         } catch (err) {
+            const result: UploadResult = err as UploadResult;
+            if (result.error) {
+                err = result.error;
+            }
+            // TODO: Remove "as any" when types are fixed
             this._instrApp.error(err as any, 'Failed upload');
         }
     }
@@ -300,5 +313,24 @@ export default class App extends LightningElement implements LogCollector {
     private _updateCoreCollectorStats(): void {
         this.ccMsgCount = this.coreCollector.messagesCount;
         this.ccMetricCount = this.coreCollector.metricsCount;
+    }
+
+    handleCoreCollectorOptionsChange(
+        event: CustomEvent<EventDetail<CoreCollectorPlayOptions>>
+    ): void {
+        const options: CoreCollectorPlayOptions = event.detail.value;
+
+        this.ccUploadMode = options.uploadMode;
+        this.ccUploadEndpoint = options.uploadEndpoint;
+        this.ccUploadInterval = options.uploadInterval;
+        this.bearerToken = options.bearerToken;
+
+        this._updateCoreCollectorOptions();
+
+        if (this.bearerToken) {
+            this.overrideFetch();
+        } else {
+            this.restoreFetch();
+        }
     }
 }

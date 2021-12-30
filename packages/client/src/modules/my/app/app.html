@@ -5,7 +5,7 @@
             <span class="app-title">Observability (o11y) Sample App</span>
             <a class="doc-link" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank">Documentation</a>
             <div class="collector-stats">
-                <span class="stat-label">Messages: </span>
+                <span class="stat-label">Core Collector Messages: </span>
                 <lightning-badge label={ccMsgCount}></lightning-badge>
                 <span class="stat-label">Metrics: </span>
                 <lightning-badge label={ccMetricCount}></lightning-badge>
@@ -302,17 +302,24 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect} icon-name="standard:logging">
+                        <lightning-tab label={labelServer} value={sectionServer} onactive={handleTabSelect} icon-name="standard:macros">
                             <my-app-section label={labelServer}>
                                 <div slot="doc">
                                     <p>
-                                        This app comes with a built-in web server so developers can see the logs flowing end-to-end as a stand-alone app, without any dependencies to the Salesforce
-                                        Core application.
+                                        Core Collector (aka. CoCo) is a built-in log and metrics collector provided out-of-the-box by o11y. The sample app uses CoCo to talk to the o11y-sample web
+                                        server by default. You can use this page to configure it to talk to a different endpoint, or to a Salesforce Core application. To send the data to the server,
+                                        use the "flush" button on the top right corner.
                                     </p>
-                                    <p>
-                                        This app <em>also</em> supports uploading logs to a Salesforce instance, through the <strong>Core Collector</strong>. To configure this usage, search the
-                                        codebase for the keyword <strong>#LOOK</strong> and make changes as necessary.
-                                    </p>
+                                    <p>CoCo is highly configurable and features the following:</p>
+                                    <ul>
+                                        <li>Data buffering with configurable limits on unique schemas</li>
+                                        <li>Ability to encode logs and metrics into the <code>Core Envelope</code> proto format.</li>
+                                        <li>Periodic automatic uploading, where the interval is configurable</li>
+                                        <li>Automatic uploading when confligurable limits are hit. These are message counts and metric counts.</li>
+                                        <li>2 different upload modes: Binary (MIME: application/octet-stream) or File (MIME: multipart/form-data)</li>
+                                        <li>Optional error handler callback when auto upload fails</li>
+                                        <li>Ability to retrieve collected data to persist/modify and manually upload later</li>
+                                    </ul>
                                     <p>
                                         <span>For details on the Salesforce server end-point, please refer to the </span>
                                         <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint" target="_blank">Server Endpoint</a>
@@ -322,6 +329,14 @@
                                         Salesforce server end points typically enforce CORS and CSP. To use the sample app with a Salesforce endpoint, you may need to configure or bypass CORS and CSP.
                                         Please refer to the comments in app.js for more details.
                                     </p>
+                                </div>
+                                <div slot="play">
+                                    <my-core-collector-play
+                                        upload-mode={ccUploadMode}
+                                        upload-interval={ccUploadInterval}
+                                        upload-endpoint={ccUploadEndpoint}
+                                        onoptionschange={handleCoreCollectorOptionsChange}
+                                    ></my-core-collector-play>
                                 </div>
                             </my-app-section>
                         </lightning-tab>

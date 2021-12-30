@@ -1,0 +1,38 @@
+<template>
+    <p class="header">Server Endpoint</p>
+    <lightning-button-group>
+        <lightning-button label="o11y sample" onclick={handleO11ySampleClick}> </lightning-button>
+        <lightning-button label="Core (HTTP)" onclick={handleHttpCoreClick}> </lightning-button>
+        <lightning-button label="Core (HTTPS)" onclick={handleHttpsCoreClick}> </lightning-button>
+    </lightning-button-group>
+    <lightning-input type="url" name="uploadEndpoint" label="Upload Endpoint URL" placeholder="http://localhost:3002/api/uitelemetry" value={uploadEndpoint} onchange={handleUploadEndpointChange}>
+    </lightning-input>
+
+    <p class="header">Upload Options</p>
+    <lightning-button-group>
+        <lightning-button label="None" onclick={handleNoUploadClick}> </lightning-button>
+        <lightning-button label="Binary (for o11y sample)" onclick={handleBinaryUploadClick}> </lightning-button>
+        <lightning-button label="File (for Core)" onclick={handleFileUploadClick}> </lightning-button>
+    </lightning-button-group>
+
+    <lightning-input
+        type="text"
+        name="bearerToken"
+        label="Bearer Token (Required for Core)"
+        placeholder="Use 'qa/getUserSession.jsp' on your local Core to get a session token"
+        value={bearerToken}
+        onchange={handleBearerTokenChange}
+    ></lightning-input>
+
+    <lightning-input
+        type="number"
+        name="uploadInterval"
+        label="Upload interval in milliseconds"
+        placeholder="Default is 10000 msecs"
+        value={uploadInterval}
+        onchange={handleUploadIntervalChange}
+        max="2147483647"
+        min="1"
+    ></lightning-input>
+    <lightning-button label="Set Interval to Max " onclick={handleMaxIntervalClick}> </lightning-button>
+</template>
