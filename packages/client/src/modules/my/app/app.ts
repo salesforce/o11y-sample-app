@@ -5,6 +5,7 @@ import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
 import { utility } from '../../../utility';
+import { schemaUtil } from '../../shared/schemaUtil';
 
 import {
     Activity,
@@ -55,19 +56,17 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionNetwork, this.labelNetwork)
         .set(this.sectionMetrics, this.labelMetrics);
 
+    private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;
     private _fetchOrig: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
-    isRendered = false;
-    clickTrackActive = false;
-    selectedSection = this.sectionIntro;
-    logs: LogModel[] = [];
-    rootActivity: Activity;
-    entityType = 'section';
-    pagePayloadProvider: PagePayloadProvider;
-    isNetworkInstrumentationEnabled = false;
-    network = new NetworkOptions();
-    coreCollector: CoreCollectorType;
+    private _rootActivity: Activity;
+    private _pagePayloadProvider: PagePayloadProvider;
+    private _coreCollector: CoreCollectorType;
 
+    @track clickTrackActive = false;
+    @track selectedSection = this.sectionIntro;
+    @track logs: LogModel[] = [];
+    @track network = new NetworkOptions();
     @track bearerToken = '';
     @track ccMsgCount: number;
     @track ccMetricCount: number;
@@ -75,7 +74,7 @@ export default class App extends LightningElement implements LogCollector {
     @track ccUploadMode: UploadMode = 0; // TODO: Use UploadMode.fetchBinary directly when it's exported
     @track ccUploadEndpoint: string = defaultApiEndpoint;
 
-    environment = {
+    private readonly _environment = {
         appName: 'o11y-sample-app',
         appVersion: '2.0',
         appExperience: 'Sample',
@@ -86,34 +85,34 @@ export default class App extends LightningElement implements LogCollector {
 
     constructor() {
         super();
-        this.initializeInstrumentation();
+        this._initializeInstrumentation();
         window.addEventListener('beforeunload', () => {
-            if (this.rootActivity) {
-                this.rootActivity.stop();
+            if (this._rootActivity) {
+                this._rootActivity.stop();
             }
         });
     }
 
-    initializeInstrumentation(): void {
+    private _initializeInstrumentation(): void {
         // The top-level entity (the app) must initialize instrumentation before use.
         // Components can directly use the getInstrumentation import from 'o11y/client'.
 
         // STEP 0: (Optional) Instantiate AppPayloadProvider, PagePayloadProvider
-        this.pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this.entityType);
+        this._pagePayloadProvider = new PagePayloadProvider(this.selectedSection, this._entityType);
 
         // STEP 1: Register the app
         this._instrApp = registerInstrumentedApp('o11y Sample App', {
             isProduction: false,
             appPayloadProvider: new AppPayloadProvider(),
-            pagePayloadProvider: this.pagePayloadProvider
+            pagePayloadProvider: this._pagePayloadProvider
         });
 
         // STEP 2: Register log collectors
         this._instrApp.registerLogCollector(new ConsoleCollector());
         this._instrApp.registerLogCollector(this); // See 'collect' method
-        this.coreCollector = this.getCoreCollector();
+        this._coreCollector = this._getCoreCollector();
         this._updateCoreCollectorStats();
-        this._instrApp.registerLogCollector(this.coreCollector);
+        this._instrApp.registerLogCollector(this._coreCollector);
         this._instrApp.registerLogCollector({
             // This "collector" will be run every time a collection happens, and is a good place for us to update core collector stats..
             collect: () => {
@@ -122,7 +121,7 @@ export default class App extends LightningElement implements LogCollector {
         });
 
         // STEP 3: Register a metrics collector
-        this._instrApp.registerMetricsCollector(this.coreCollector);
+        this._instrApp.registerMetricsCollector(this._coreCollector);
 
         // STEP 4: Activate the automatic click tracker via the following call:
         // this.instrApp.activateClickTracker();
@@ -133,10 +132,10 @@ export default class App extends LightningElement implements LogCollector {
         // For the sample app, we will leave it up to the user turn it on/off as needed
     }
 
-    getCoreCollector(): CoreCollectorType {
+    private _getCoreCollector(): CoreCollectorType {
         const ep = this.ccUploadEndpoint;
         // Create a new core collector and disable default logic to auto-upload on certain conditions
-        const cc = new CoreCollector(ep, this.ccUploadMode, this.environment, {
+        const cc = new CoreCollector(ep, this.ccUploadMode, this._environment, {
             messagesLimit: utility.maxInt,
             metricsLimit: utility.maxInt,
             uploadFailedListener: (result: UploadResult) => {
@@ -151,9 +150,9 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     private _updateCoreCollectorOptions(): void {
-        this.coreCollector.uploadMode = this.ccUploadMode;
-        this.coreCollector.uploadEndpoint = this.ccUploadEndpoint;
-        this.coreCollector.uploadInterval = this.ccUploadInterval;
+        this._coreCollector.uploadMode = this.ccUploadMode;
+        this._coreCollector.uploadEndpoint = this.ccUploadEndpoint;
+        this._coreCollector.uploadInterval = this.ccUploadInterval;
     }
 
     collect(schema: Schema, message: SchematizedData, logMeta: LogMeta): void {
@@ -162,52 +161,17 @@ export default class App extends LightningElement implements LogCollector {
         Object.assign(model, {
             schemaId,
             msg: message,
-            _isActivity: this.isActivity(schemaId),
-            _isError: this.isError(schemaId),
-            _isInstrumentedEvent: this.isInstrumentedEvent(schemaId),
-            _isO11ySimple: this.isSimple(schemaId),
-            _isO11ySample: this.isSample(schemaId),
-            _isUnknown: this.isUnknown(schemaId)
+            _isActivity: schemaUtil.isActivity(schemaId),
+            _isError: schemaUtil.isError(schemaId),
+            _isInstrumentedEvent: schemaUtil.isInstrumentedEvent(schemaId),
+            _isO11ySimple: schemaUtil.isSimple(schemaId),
+            _isO11ySample: schemaUtil.isSample(schemaId),
+            _isUnknown: schemaUtil.isUnknown(schemaId)
         });
         this.logs = [model, ...this.logs];
     }
 
-    getIsDisabled(): boolean {
-        // As a collector
-        return false;
-    }
-
-    isActivity(schemaId: string): boolean {
-        return schemaId === 'sf.instrumentation.Activity';
-    }
-
-    isError(schemaId: string): boolean {
-        return schemaId === 'sf.instrumentation.Error';
-    }
-
-    isInstrumentedEvent(schemaId: string): boolean {
-        return schemaId === 'sf.instrumentation.InstrumentedEvent';
-    }
-
-    isSimple(schemaId: string): boolean {
-        return schemaId === 'sf.instrumentation.Simple';
-    }
-
-    isSample(schemaId: string): boolean {
-        return schemaId === 'sf.o11ySample.UserPayload';
-    }
-
-    isUnknown(schemaId: string): boolean {
-        return (
-            !this.isActivity(schemaId) &&
-            !this.isError(schemaId) &&
-            !this.isInstrumentedEvent(schemaId) &&
-            !this.isSample(schemaId) &&
-            !this.isSimple(schemaId)
-        );
-    }
-
-    overrideFetch(): void {
+    private _overrideFetch(): void {
         if (this._fetchOrig) {
             return;
         }
@@ -222,7 +186,7 @@ export default class App extends LightningElement implements LogCollector {
         };
     }
 
-    restoreFetch(): void {
+    private _restoreFetch(): void {
         if (this._fetchOrig) {
             window.fetch = this._fetchOrig;
             this._fetchOrig = undefined;
@@ -245,20 +209,20 @@ export default class App extends LightningElement implements LogCollector {
 
     handleTabSelect(event: CustomEvent): void {
         const section = (this.selectedSection = (event.currentTarget as any).value);
-        this.pagePayloadProvider.setEntityInfo(section, this.entityType);
+        this._pagePayloadProvider.setEntityInfo(section, this._entityType);
 
         window.location.hash = section && section.substring(section.indexOf('_') + 1);
-        this.startRootActivity(section);
+        this._startRootActivity(section);
     }
 
-    startRootActivity(section: string): void {
-        if (this.rootActivity) {
+    private _startRootActivity(section: string): void {
+        if (this._rootActivity) {
             // If rootActivity is not stopped explicitly, it will be terminated.
-            this.rootActivity.stop();
+            this._rootActivity.stop();
         }
         const label = this._sectionToLabelMap.get(section) || 'Unknown Section';
         const isSampled = this.network.sampleRate > Math.random() * 100;
-        this.rootActivity = this._instrApp.startRootActivity(label, undefined, isSampled);
+        this._rootActivity = this._instrApp.startRootActivity(label, undefined, isSampled);
     }
 
     handleNetworkOptionsChange(event: CustomEvent): void {
@@ -273,7 +237,7 @@ export default class App extends LightningElement implements LogCollector {
 
     async handleFlush(): Promise<void> {
         try {
-            const result: UploadResult = await this.coreCollector.upload();
+            const result: UploadResult = await this._coreCollector.upload();
             if (!result) {
                 // nothing to upload
             } else if (result.error) {
@@ -295,8 +259,8 @@ export default class App extends LightningElement implements LogCollector {
     }
 
     private _updateCoreCollectorStats(): void {
-        this.ccMsgCount = this.coreCollector.messagesCount;
-        this.ccMetricCount = this.coreCollector.metricsCount;
+        this.ccMsgCount = this._coreCollector.messagesCount;
+        this.ccMetricCount = this._coreCollector.metricsCount;
     }
 
     handleCoreCollectorOptionsChange(
@@ -312,9 +276,9 @@ export default class App extends LightningElement implements LogCollector {
         this._updateCoreCollectorOptions();
 
         if (this.bearerToken) {
-            this.overrideFetch();
+            this._overrideFetch();
         } else {
-            this.restoreFetch();
+            this._restoreFetch();
         }
     }
 }
