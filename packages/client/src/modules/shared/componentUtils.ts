@@ -2,10 +2,10 @@ import { LightningElement } from 'lwc';
 import { EventDetail } from '../models/eventDetail';
 
 export class ComponentUtils {
-    static raiseEvent(
+    static raiseEvent<T>(
         component: LightningElement,
         eventName: string,
-        value?: unknown,
+        value?: T,
         originalComponent?: LightningElement
     ) {
         // console.debug('Event raised (by, type, detail)', component, eventName, detail);
