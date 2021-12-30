@@ -313,7 +313,7 @@
                                     <p>CoCo is highly configurable and features the following:</p>
                                     <ul>
                                         <li>Data buffering with configurable limits on unique schemas</li>
-                                        <li>Ability to encode logs and metrics into the <code>Core Envelope</code> proto format.</li>
+                                        <li>Ability to encode logs and metrics into the <code>CoreEnvelope</code> proto format.</li>
                                         <li>Periodic automatic uploading, where the interval is configurable</li>
                                         <li>Automatic uploading when confligurable limits are hit. These are message counts and metric counts.</li>
                                         <li>2 different upload modes: Binary (MIME: application/octet-stream) or File (MIME: multipart/form-data)</li>
@@ -327,8 +327,41 @@
                                     </p>
                                     <p>
                                         Salesforce server end points typically enforce CORS and CSP. To use the sample app with a Salesforce endpoint, you may need to configure or bypass CORS and CSP.
-                                        Please refer to the comments in app.js for more details.
+                                        You have a couple of options:
                                     </p>
+                                    <ol>
+                                        <li>
+                                            <span>Configure CORS on the server (</span>
+                                            <a target="_blank" href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#">Official Documentation</a>
+                                            <span>)</span>
+                                            <ol>
+                                                <li>From Setup, enter CORS in the Quick Find box, then select CORS.</li>
+                                                <li>Select New</li>
+                                                <li
+                                                    >Enter the origin URL pattern. If you're using the defaults, you can set it to "http://localhost:3001". If you're in the internal Salesforce
+                                                    network, you can also use your FQDN, e.g. "https://YOURMACHINE.internal.salesforce.com:3001".</li
+                                                >
+                                            </ol>
+                                        </li>
+                                        <li>
+                                            <p
+                                                ><span>Another options is to disable CORS on the browser with the help of certain browser extensions. </span> <strong>Disclaimer:</strong> These are not
+                                                endorsed by Salesforce and you are using them at your own risk.</p
+                                            >
+                                            <ol>
+                                                <li
+                                                    ><a target="_blank" href="https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related"
+                                                        >Cross Domain - CORS</a
+                                                    ></li
+                                                >
+                                                <li
+                                                    ><a target="_blank" href="https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related"
+                                                        >Disable Content-Security-Policy</a
+                                                    ></li
+                                                >
+                                            </ol>
+                                        </li>
+                                    </ol>
                                 </div>
                                 <div slot="play">
                                     <my-core-collector-play
