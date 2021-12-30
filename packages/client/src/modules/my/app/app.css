@@ -48,6 +48,15 @@ code {
     font-weight: bold;
 }
 
+.app-version {
+    font-weight: lighter;
+}
+
+.no-stats {
+    font-size: 8pt;
+    font-weight: lighter;;
+}
+
 .header {
     margin: 10px 0;
     font-size: larger;

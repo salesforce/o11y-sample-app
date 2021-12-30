@@ -2,13 +2,16 @@
     <div class="column">
         <div class="row1">
             <lightning-icon class="app-icon" icon-name="standard:metrics" size="medium"></lightning-icon>
-            <span class="app-title">Observability (o11y) Sample App</span>
-            <a class="doc-link" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank">Documentation</a>
+            <span class="app-title">Observability (o11y) Sample App<span class="app-version"> {environment.sdkVersion}</span></span>
+            <a class="doc-link slds-m-horizontal_medium" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank">Documentation</a>
             <div class="collector-stats">
-                <span class="stat-label">Core Collector Messages: </span>
-                <lightning-badge label={ccMsgCount}></lightning-badge>
-                <span class="stat-label">Metrics: </span>
-                <lightning-badge label={ccMetricCount}></lightning-badge>
+                <span if:true={showCoreCollectorStats}>
+                    <span class="stat-label">Core Collector Messages: </span>
+                    <lightning-badge label={ccMsgCount}></lightning-badge>
+                    <span class="stat-label">Metrics: </span>
+                    <lightning-badge label={ccMetricCount}></lightning-badge>
+                </span>
+                <lightning-helptext if:false={showCoreCollectorStats} icon-name="utility:warning" content="Stats can only be shown when Core Collector interval is set to max."></lightning-helptext>
                 <lightning-button
                     label="Flush"
                     title="Ask Core Collector to upload its logs and metrics to the server"

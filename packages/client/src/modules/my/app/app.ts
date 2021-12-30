@@ -73,8 +73,9 @@ export default class App extends LightningElement implements LogCollector {
     @track ccUploadInterval: number = utility.maxInt; // Note: Cannot use Infinity with setTimeout per MDN
     @track ccUploadMode: UploadMode = 0; // TODO: Use UploadMode.fetchBinary directly when it's exported
     @track ccUploadEndpoint: string = defaultApiEndpoint;
+    @track showCoreCollectorStats: boolean;
 
-    private readonly _environment = {
+    @track readonly environment = {
         appName: 'o11y-sample-app',
         appVersion: '2.0',
         appExperience: 'Sample',
@@ -111,10 +112,12 @@ export default class App extends LightningElement implements LogCollector {
         this._instrApp.registerLogCollector(new ConsoleCollector());
         this._instrApp.registerLogCollector(this); // See 'collect' method
         this._coreCollector = this._getCoreCollector();
+        this._updateShowCoreCollectorStats();
         this._updateCoreCollectorStats();
         this._instrApp.registerLogCollector(this._coreCollector);
         this._instrApp.registerLogCollector({
-            // This "collector" will be run every time a collection happens, and is a good place for us to update core collector stats..
+            // This "collector" will be run every time a collection happens,
+            // and is a good place for us to update core collector stats.
             collect: () => {
                 this._updateCoreCollectorStats();
             }
@@ -135,7 +138,7 @@ export default class App extends LightningElement implements LogCollector {
     private _getCoreCollector(): CoreCollectorType {
         const ep = this.ccUploadEndpoint;
         // Create a new core collector and disable default logic to auto-upload on certain conditions
-        const cc = new CoreCollector(ep, this.ccUploadMode, this._environment, {
+        const cc = new CoreCollector(ep, this.ccUploadMode, this.environment, {
             messagesLimit: utility.maxInt,
             metricsLimit: utility.maxInt,
             uploadFailedListener: (result: UploadResult) => {
@@ -149,10 +152,18 @@ export default class App extends LightningElement implements LogCollector {
         return cc;
     }
 
-    private _updateCoreCollectorOptions(): void {
-        this._coreCollector.uploadMode = this.ccUploadMode;
-        this._coreCollector.uploadEndpoint = this.ccUploadEndpoint;
-        this._coreCollector.uploadInterval = this.ccUploadInterval;
+    private _updateShowCoreCollectorStats(): void {
+        // We don't know when the core collector has automatically uploaded and therefore has
+        // modified the collector stats without notice. Therefore, we only choose to show
+        // the stats for max values.
+        const before = this.showCoreCollectorStats;
+        this.showCoreCollectorStats = this._coreCollector.uploadInterval === utility.maxInt;
+
+        // Return true if we started showing collector stats.
+        if (!before && this.showCoreCollectorStats) {
+            // If the value has changed and we're showing stats, make sure they're up-to-date.
+            this._updateCoreCollectorStats();
+        }
     }
 
     collect(schema: Schema, message: SchematizedData, logMeta: LogMeta): void {
@@ -268,13 +279,12 @@ export default class App extends LightningElement implements LogCollector {
     ): void {
         const options: CoreCollectorPlayOptions = event.detail.value;
 
-        this.ccUploadMode = options.uploadMode;
-        this.ccUploadEndpoint = options.uploadEndpoint;
-        this.ccUploadInterval = options.uploadInterval;
+        this._coreCollector.uploadMode = this.ccUploadMode = options.uploadMode;
+        this._coreCollector.uploadEndpoint = this.ccUploadEndpoint = options.uploadEndpoint;
+        this._coreCollector.uploadInterval = this.ccUploadInterval = options.uploadInterval;
+        this._updateShowCoreCollectorStats();
+
         this.bearerToken = options.bearerToken;
-
-        this._updateCoreCollectorOptions();
-
         if (this.bearerToken) {
             this._overrideFetch();
         } else {

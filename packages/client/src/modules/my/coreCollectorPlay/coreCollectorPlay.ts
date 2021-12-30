@@ -55,6 +55,9 @@ export default class CoreCollectorPlay extends LightningElement {
     handleOneSecondIntervalClick(): void {
         this._handlUploadIntervalChange(1000);
     }
+    handleOneMinuteIntervalClick(): void {
+        this._handlUploadIntervalChange(60000);
+    }
     handleDefaultIntervalClick(): void {
         this._handlUploadIntervalChange(undefined);
     }
