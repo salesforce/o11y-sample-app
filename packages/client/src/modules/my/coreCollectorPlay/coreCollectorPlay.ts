@@ -9,73 +9,79 @@ import {
 } from '../../shared/apiEndpoints';
 import { UploadMode } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/UploadMode';
 
+// These values must match the corresponding values in the HTML.
+const minInterval = 10;
+const maxInterval = utility.maxInt;
+
 export default class CoreCollectorPlay extends LightningElement {
+    @track
+    readonly uploadModeOptions: { label: string; value: UploadMode }[] = [
+        { label: 'None', value: 2 }, // TODO: UploadMode.noUpload
+        { label: 'Binary (default for sample app server)', value: 0 }, // TODO: UploadMode.fetchBinary
+        { label: 'File (default for Core app server)', value: 1 } // TODO: UploadMode.fetchFile
+    ];
+
+    @track
+    readonly uploadEndpointOptions: { label: string; value: string }[] = [
+        { label: 'Sample App Endpoint', value: sampleApiEndpoint },
+        { label: 'Local Core (HTTP)', value: coreApiEndpoint },
+        { label: 'Local Core (HTTPS)', value: coreApiEndpointSecure }
+    ];
+
     @api uploadMode: number;
-    private _handleUploadModeChange(uploadMode: UploadMode) {
-        const options: CoreCollectorPlayOptions = this.getCurrentOptions();
-        options.uploadMode = uploadMode;
-        this.notifyOptions(options);
-    }
     handleUploadModeChange(event: CustomEvent): void {
-        this._handleUploadModeChange(utility.asNumber(event.detail.value));
+        const options: CoreCollectorPlayOptions = this._getCurrentOptions();
+        options.uploadMode = utility.asNumber(event.detail.value);
+        this._notifyOptions(options);
     }
 
     @api uploadInterval: number;
     private _handlUploadIntervalChange(interval: string | number): void {
-        const options: CoreCollectorPlayOptions = this.getCurrentOptions();
-        options.uploadInterval = utility.asNumber(interval);
-        this.notifyOptions(options);
+        const value = utility.asNumber(interval);
+        if (value < minInterval || value > maxInterval) {
+            // Do nothing
+            return;
+        }
+        const options: CoreCollectorPlayOptions = this._getCurrentOptions();
+        options.uploadInterval = value;
+        this._notifyOptions(options);
     }
     handleUploadIntervalChange(event: CustomEvent): void {
         this._handlUploadIntervalChange(event.detail.value);
     }
+    handleMaxIntervalClick(): void {
+        this._handlUploadIntervalChange(utility.maxInt);
+    }
+    handleOneSecondIntervalClick(): void {
+        this._handlUploadIntervalChange(1000);
+    }
+    handleDefaultIntervalClick(): void {
+        this._handlUploadIntervalChange(undefined);
+    }
 
     @api uploadEndpoint: string;
-    private _handleUploadEndpointChange(endpoint: string): void {
-        const options: CoreCollectorPlayOptions = this.getCurrentOptions();
-        options.uploadEndpoint = endpoint;
-        this.notifyOptions(options);
-    }
     handleUploadEndpointChange(event: CustomEvent): void {
-        this._handleUploadEndpointChange(event.detail.value);
+        const options: CoreCollectorPlayOptions = this._getCurrentOptions();
+        options.uploadEndpoint = event.detail.value;
+        this._notifyOptions(options);
+    }
+
+    private _handleBearerTokenChange(token: string): void {
+        const options: CoreCollectorPlayOptions = this._getCurrentOptions();
+        options.bearerToken = token;
+        this._notifyOptions(options);
     }
 
     @api bearerToken: string;
     handleBearerTokenChange(event: CustomEvent): void {
-        const options: CoreCollectorPlayOptions = this.getCurrentOptions();
-        options.bearerToken = event.detail.value;
-        this.notifyOptions(options);
+        this._handleBearerTokenChange(event.detail.value);
     }
 
-    handleO11ySampleClick(): void {
-        this._handleUploadEndpointChange(sampleApiEndpoint);
+    handleClearClick(): void {
+        this._handleBearerTokenChange('');
     }
 
-    handleHttpCoreClick(): void {
-        this._handleUploadEndpointChange(coreApiEndpoint);
-    }
-
-    handleHttpsCoreClick(): void {
-        this._handleUploadEndpointChange(coreApiEndpointSecure);
-    }
-
-    handleNoUploadClick(): void {
-        this._handleUploadModeChange(2); // TODO: UploadMode.noUpload
-    }
-
-    handleBinaryUploadClick(): void {
-        this._handleUploadModeChange(0); // TODO: UploadMode.fetchBinary
-    }
-
-    handleFileUploadClick(): void {
-        this._handleUploadModeChange(1); // TODO: UploadMode.fetchFile
-    }
-
-    handleMaxIntervalClick(): void {
-        this._handlUploadIntervalChange(utility.maxInt);
-    }
-
-    getCurrentOptions(): CoreCollectorPlayOptions {
+    private _getCurrentOptions(): CoreCollectorPlayOptions {
         return {
             uploadMode: this.uploadMode,
             uploadInterval: this.uploadInterval,
@@ -84,7 +90,7 @@ export default class CoreCollectorPlay extends LightningElement {
         };
     }
 
-    notifyOptions(options: CoreCollectorPlayOptions): void {
+    private _notifyOptions(options: CoreCollectorPlayOptions): void {
         ComponentUtils.raiseEvent(this, 'optionschange', options);
     }
 }
