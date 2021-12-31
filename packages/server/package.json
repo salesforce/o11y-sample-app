@@ -43,7 +43,9 @@
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "rename": "renamer --force --find '.js' --replace '.mjs' -e ext '../../dist-server/**/*.js'",
         "start": "node ../../dist-server/api.mjs",
-        "watch": "nodemon"
+        "start:withweb": "O11Y_SERVE_WEB=true yarn start",
+        "watch": "nodemon",
+        "watch:withweb": "O11Y_SERVE_WEB=true yarn watch"
     },
     "devDependencies": {
         "@types/cors": "^2.8.12",
