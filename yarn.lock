@@ -8436,10 +8436,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lwc-components-lightning@^1.11.1-alpha:
-  version "1.11.1-alpha"
-  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/lwc-components-lightning/-/42336a78a383c82aa9c271964a467a8d62f789df.tgz#42336a78a383c82aa9c271964a467a8d62f789df"
-  integrity sha512-mlv7K/eKutGrAg1+apTy1KdGpD6pQOtlFHVl4aEXMfWkZ8ll4Hm58B9L4JQWvaknX7tyBrg96vsl32toTP9zFQ==
+lwc-components-lightning@1.14.2-alpha:
+  version "1.14.2-alpha"
+  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/lwc-components-lightning/-/lwc-components-lightning-1.14.2-alpha.tgz#8d2ce29c9d793a33952a77197de84d4bd4c7673c"
+  integrity sha512-AaxStMe1Vn3ueno46LDlm4Hn7qa4bRU6DWnwK0adtlLs7cxuNtnSOwHeCUjGOCpM3snwAYT6Bg10g6b2tfH9oA==
 
 lwc-services@^3.2.2:
   version "3.2.2"
