@@ -2368,7 +2368,7 @@
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/@lwc/synthetic-shadow/-/synthetic-shadow-2.5.10.tgz#fe7e5d92570817bd0d6ef8ac523daa919ac12204"
   integrity sha512-NHX5/qCtRr3OPpEt48PgelySKtV6JWRSbwNaAZOs0NAhgCLRIG5JnxtztQLHsBDhVtxYW2L0d5rfxQuvt9aO1A==
 
-"@lwc/synthetic-shadow@^2.7.0":
+"@lwc/synthetic-shadow@2.7.0":
   version "2.7.0"
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/@lwc/synthetic-shadow/-/synthetic-shadow-2.7.0.tgz#333f1993adec11e6b7abd6e06949e4c6ba053000"
   integrity sha512-rDWB5EmX47MoneajD66qBKYrsaroHwV9+lLa0k8VF8iiSXbSikVaypVH/M4pgRvdle/bi8yVgDJZs3ZYtYOznw==
@@ -2843,7 +2843,7 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@salesforce-ux/design-system@^2.14.1":
+"@salesforce-ux/design-system@2.16.2":
   version "2.16.2"
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/@salesforce-ux/design-system/-/design-system-2.16.2.tgz#778aa4b4eff99367c1886bb74a60b3d099bfeb43"
   integrity sha512-8qG5wdR3+5s4zcszMZs9Z4HocPV6uWhisHSeUyxl6Idb5m99yER3HwyKtyIUViPB/8ukDwptLBvJWH+qwA6EOg==
