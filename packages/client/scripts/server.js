@@ -13,8 +13,8 @@ const app = express();
 // app.use(helmet());
 // app.use(compression());
 
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 3001;
+const HOST = process.env.WEB_HOST || process.env.HOST || 'localhost';
+const PORT = process.env.WEB_PORT || process.env.PORT || 3001;
 const DIST_DIR = path.resolve(__dirname, '..', '..', '..', 'dist-client');
 
 app.use(express.static(DIST_DIR));

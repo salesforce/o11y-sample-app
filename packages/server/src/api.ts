@@ -7,8 +7,8 @@ import { URL } from 'url';
 import { processCoreEnvelope } from './coreEnvelope';
 import { processHeaders } from './headers';
 
-const HOST = process.env.API_HOST || 'localhost';
-const PORT = process.env.API_PORT || 3002;
+const HOST = process.env.API_HOST || process.env.HOST || 'localhost';
+const PORT = process.env.API_PORT || process.env.PORT || 3002;
 const SERVE_WEB = process.env.O11Y_SERVE_WEB === 'true' || false;
 const LOG_HEADERS = process.env.O11Y_LOG_HEADERS === 'true' || false;
 const __dirname = new URL('.', import.meta.url).pathname;
