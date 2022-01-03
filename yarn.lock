@@ -2368,10 +2368,10 @@
   resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/@lwc/synthetic-shadow/-/synthetic-shadow-2.5.10.tgz#fe7e5d92570817bd0d6ef8ac523daa919ac12204"
   integrity sha512-NHX5/qCtRr3OPpEt48PgelySKtV6JWRSbwNaAZOs0NAhgCLRIG5JnxtztQLHsBDhVtxYW2L0d5rfxQuvt9aO1A==
 
-"@lwc/synthetic-shadow@^1.9.7":
-  version "1.18.0"
-  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/@lwc/synthetic-shadow/-/synthetic-shadow-1.18.0.tgz#75354c5c34e573dcbcf76fff925a131c5cbfaaf4"
-  integrity sha512-sRK41Dfze4DKywLkQFK//XmGaD0CJP0UvkH/E0RsKqqBR7iyssQe6YurWgL5qP4up3ZdXQpZNclT2ikDgVYA2w==
+"@lwc/synthetic-shadow@^2.7.0":
+  version "2.7.0"
+  resolved "https://nexus-proxy-prd.soma.salesforce.com/nexus/content/groups/npm-all/@lwc/synthetic-shadow/-/synthetic-shadow-2.7.0.tgz#333f1993adec11e6b7abd6e06949e4c6ba053000"
+  integrity sha512-rDWB5EmX47MoneajD66qBKYrsaroHwV9+lLa0k8VF8iiSXbSikVaypVH/M4pgRvdle/bi8yVgDJZs3ZYtYOznw==
 
 "@lwc/template-compiler@2.5.10":
   version "2.5.10"

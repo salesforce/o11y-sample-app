@@ -5,7 +5,7 @@
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
-        "@lwc/synthetic-shadow": "^1.9.7",
+        "@lwc/synthetic-shadow": "^2.7.0",
         "@salesforce-ux/design-system": "^2.14.1",
         "lwc-components-lightning": "^1.11.1-alpha",
         "o11y": "238.1.3",
