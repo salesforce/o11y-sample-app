@@ -17,10 +17,8 @@ const HOST = process.env.WEB_HOST || process.env.HOST || 'localhost';
 const PORT = process.env.WEB_PORT || process.env.PORT || 3001;
 const DIST_DIR = path.resolve(__dirname, '..', '..', '..', 'dist-client');
 
-app.use(express.static(DIST_DIR));
-
-app.use('*', (req, res) => {
-    res.sendFile(path.resolve(DIST_DIR, 'index.html'));
-});
-
-app.listen(PORT, () => console.log(`✅  Web Server started: http://${HOST}:${PORT}`));
+app.use(express.static(DIST_DIR))
+    .use('*', (_req, res) => {
+        res.sendFile(path.resolve(DIST_DIR, 'index.html'));
+    })
+    .listen(PORT, () => console.log(`✅  Web Server started: http://${HOST}:${PORT}`));
