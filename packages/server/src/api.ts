@@ -2,28 +2,35 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import path from 'path';
+import { URL } from 'url';
 import { processCoreEnvelope } from './coreEnvelope';
 import { processHeaders } from './headers';
 
-const HOST = process.env.API_HOST || 'localhost';
-const PORT = process.env.API_PORT || 3002;
-const LOG_HEADERS = false;
+const HOST = process.env.API_HOST || process.env.HOST || 'localhost';
+const PORT = process.env.API_PORT || process.env.PORT || 3002;
+const SERVE_WEB = process.env.O11Y_SERVE_WEB === 'true' || false;
+const LOG_HEADERS = process.env.O11Y_LOG_HEADERS === 'true' || false;
+const __dirname = new URL('.', import.meta.url).pathname;
+const DIST_DIR = path.resolve(__dirname, '..', 'dist-client');
 
-express()
-    .use(cors())
-    // .use(bodyParser.urlencoded({
-    //     extended: true
-    // }))
-    // .use(express.json({
-    //     extended: true,
-    //     inflate: true,
-    //     limit: '100kb',
-    //     parameterLimit: 1000,
-    //     strict: false,
-    //     //type: 'application/x-www-form-urlencoded',
-    //     type: 'application/json',
-    //     verify: undefined
-    // }))
+const app = express();
+
+// .use(bodyParser.urlencoded({
+//     extended: true
+// }))
+// .use(express.json({
+//     extended: true,
+//     inflate: true,
+//     limit: '100kb',
+//     parameterLimit: 1000,
+//     strict: false,
+//     //type: 'application/x-www-form-urlencoded',
+//     type: 'application/json',
+//     verify: undefined
+// }))
+
+app.use(cors())
     .use(
         bodyParser.json({
             type: 'application/json'
@@ -57,7 +64,15 @@ express()
         console.log('---------------------------------------------------------');
         console.log('Received call to /api/isodate');
         res.send(new Date().toISOString());
-    })
-    .listen(PORT, () =>
-        console.log(`✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`)
-    );
+    });
+
+if (SERVE_WEB) {
+    app.use(express.static(DIST_DIR));
+}
+
+app.listen(PORT, () => {
+    if (SERVE_WEB) {
+        console.log(`✅  Web Server started: http://${HOST}:${PORT}`);
+    }
+    console.log(`✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`);
+});

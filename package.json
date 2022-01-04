@@ -6,7 +6,7 @@
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "engines": {
-        "node": ">=14.15.1",
+        "node": ">=14.15.1 <17.0.0",
         "npm": ">=7.4.3",
         "yarn": ">=1.22.4"
     },
@@ -30,10 +30,11 @@
         "lint": "lerna run lint",
         "prettier": "lerna run prettier",
         "prettier:verify": "lerna run prettier:verify",
-        "start": "run-p start:server start:client",
+        "start": "cd packages/server && yarn start:withweb",
+        "start:both": "run-p start:server start:client",
         "start:client": "cd packages/client && yarn start",
         "start:server": "cd packages/server && yarn start",
-        "watch": "run-p watch:client watch:server",
+        "watch:both": "run-p watch:client watch:server",
         "watch:client": "cd packages/client && yarn watch",
         "watch:server": "cd packages/server && yarn watch"
     },

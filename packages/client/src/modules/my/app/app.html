@@ -6,7 +6,7 @@
             <a class="doc-link slds-m-horizontal_medium" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank">Documentation</a>
             <div class="collector-stats">
                 <span if:true={showCoreCollectorStats}>
-                    <span class="stat-label">Core Collector Messages: </span>
+                    <span class="stat-label">Core Collector Logs: </span>
                     <lightning-badge label={ccMsgCount}></lightning-badge>
                     <span class="stat-label">Metrics: </span>
                     <lightning-badge label={ccMetricCount}></lightning-badge>
@@ -382,8 +382,8 @@
                 <div class="slds-col slds-size_4-of-12">
                     <div class="collector-pane">
                         <div class="collector-header">
-                            <span class="collector-header-title">Logs</span>
-                            <lightning-badge if:true={logs.length} label={logs.length}></lightning-badge>
+                            <span class="collector-header-title">Visual Collector Logs</span>
+                            <lightning-badge label={logs.length}></lightning-badge>
                             <lightning-button
                                 if:true={logs.length}
                                 label="Clear"
@@ -391,7 +391,7 @@
                                 onclick={handleClearLogs}
                                 variant="destructive"
                                 icon-name="utility:delete"
-                                class="slds-m-left_x-small"
+                                class="collector-button slds-m-left_x-small"
                             >
                             </lightning-button>
                         </div>

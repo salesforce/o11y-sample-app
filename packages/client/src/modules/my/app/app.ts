@@ -16,7 +16,7 @@ import {
 } from 'o11y/dist/modules/o11y/client/interfaces';
 import { CoreCollector as CoreCollectorType } from 'o11y/dist/modules/o11y/collectors/collectors';
 import { SchematizedData } from 'o11y/dist/modules/o11y/shared/shared/TypeDefinitions';
-import { defaultApiEndpoint } from '../../shared/apiEndpoints';
+import { endpoints } from '../../shared/endpoints';
 import { LogModel } from '../../models/logModel';
 import { UploadResult } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/interfaces/UploadResult';
 import { CoreCollectorPlayOptions } from '../../../interfaces/coreCollectorOptions';
@@ -72,7 +72,7 @@ export default class App extends LightningElement implements LogCollector {
     @track ccMetricCount: number;
     @track ccUploadInterval: number = utility.maxInt; // Note: Cannot use Infinity with setTimeout per MDN
     @track ccUploadMode: UploadMode = 0; // TODO: Use UploadMode.fetchBinary directly when it's exported
-    @track ccUploadEndpoint: string = defaultApiEndpoint;
+    @track ccUploadEndpoint: string = endpoints.sampleTelemetryEndpoint;
     @track showCoreCollectorStats: boolean;
 
     @track readonly environment = {

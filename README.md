@@ -4,18 +4,29 @@ This is a sample app that demonstrates the use of the `o11y` instrumentation pla
 
 ## Getting Started
 
-### Prerequisites
+Must have yarn pre-installed.
 
-Install yarn: `npm install -g yarn`
+```sh
+yarn install
+yarn build
+yarn start  # or yarn start:both to create separate server processes
+```
 
-Configure access to Nexus registry as described [here](https://git.soma.salesforce.com/nodeforce/nexus-npms). 
+## Publishing to Heroku
 
-### Install dependencies & build
+Must have Heroku CLI pre-installed.
 
-After having installed the dependencies using `yarn install`, you'll need to build the project using `yarn build`.
+Ensure git remote for Heroku is set:
 
-### Start sample app
+```sh
+git remote add heroku https://git.heroku.com/o11y-sample-app.git
+git remote -v
+```
 
-Start the front-end and back-end servers using `yarn serve`.
+Publish:
 
-You can then navigate to your [localhost](http://localhost:3001) to view the app.
+```sh
+heroku login                        # Use SSO
+git push heroku YOUR_BRANCH:master  # Push changes
+heroku logs --tail                  # Continuously view logs
+```
