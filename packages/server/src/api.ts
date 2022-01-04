@@ -16,10 +16,6 @@ const DIST_DIR = path.resolve(__dirname, '..', 'dist-client');
 
 const app = express();
 
-if (!SERVE_WEB) {
-    app.use(cors());
-}
-
 // .use(bodyParser.urlencoded({
 //     extended: true
 // }))
@@ -34,11 +30,12 @@ if (!SERVE_WEB) {
 //     verify: undefined
 // }))
 
-app.use(
-    bodyParser.json({
-        type: 'application/json'
-    })
-)
+app.use(cors())
+    .use(
+        bodyParser.json({
+            type: 'application/json'
+        })
+    )
     .use(
         bodyParser.raw({
             type: 'application/octet-stream'

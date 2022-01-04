@@ -2,13 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 import { CoreCollectorPlayOptions } from '../../../interfaces/coreCollectorOptions';
 import { utility } from '../../../utility';
 import { ComponentUtils } from '../../shared/componentUtils';
-import {
-    sampleApiEndpoint,
-    coreApiEndpoint,
-    coreApiEndpointSecure,
-    coreQaGetSession,
-    coreQaGetSessionSecure
-} from '../../shared/apiEndpoints';
+import { endpoints } from '../../shared/endpoints';
 import { UploadMode } from 'o11y/dist/modules/o11y/collectors/collectors/core-collector/UploadMode';
 
 // These values must match the corresponding values in the HTML.
@@ -16,8 +10,8 @@ const minInterval = 10;
 const maxInterval = utility.maxInt;
 
 export default class CoreCollectorPlay extends LightningElement {
-    @track readonly qaGetSessionUrl = coreQaGetSession;
-    @track readonly qaGetSessionUrlSecure = coreQaGetSessionSecure;
+    @track readonly qaGetSessionUrl = endpoints.getCoreQaGetSessionEndpoint(false);
+    @track readonly qaGetSessionUrlSecure = endpoints.getCoreQaGetSessionEndpoint(true);
 
     readonly uploadModeOptions: { label: string; value: UploadMode }[] = [
         { label: 'None', value: 2 }, // TODO: UploadMode.noUpload
@@ -27,9 +21,9 @@ export default class CoreCollectorPlay extends LightningElement {
 
     @track
     readonly uploadEndpointOptions: { label: string; value: string }[] = [
-        { label: 'Sample App Endpoint', value: sampleApiEndpoint },
-        { label: 'Local Core (HTTP)', value: coreApiEndpoint },
-        { label: 'Local Core (HTTPS)', value: coreApiEndpointSecure }
+        { label: 'Sample App Endpoint', value: endpoints.sampleTelemetryEndpoint },
+        { label: 'Local Core (HTTP)', value: endpoints.getCoreTelemetryEndpoint(false) },
+        { label: 'Local Core (HTTPS)', value: endpoints.getCoreTelemetryEndpoint(true) }
     ];
 
     @api uploadMode: number;

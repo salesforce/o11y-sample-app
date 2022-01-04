@@ -2,7 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
 import { Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
 import { UiOptions } from '../../../interfaces/uiOptions';
-import { isoDateEndpoint } from '../../shared/apiEndpoints';
+import { endpoints } from '../../shared/endpoints';
 import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class NetworkPlay extends LightningElement {
@@ -14,7 +14,7 @@ export default class NetworkPlay extends LightningElement {
     constructor() {
         super();
         this.lastResponse = undefined;
-        this.testUrl = isoDateEndpoint;
+        this.testUrl = endpoints.sampleIsoDateEndpoint;
         this._instr = getInstrumentation('Network Instrumentation');
     }
 
