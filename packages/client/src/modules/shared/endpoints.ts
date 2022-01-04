@@ -26,7 +26,7 @@ class Endpoints {
 
     private _getHttpUrl(isSecure: boolean, hostname: string, port?: string, path?: string): string {
         const protocolText: string = isSecure ? 'https://' : 'http://';
-        const portText = port === undefined ? '' : `:${port}`;
+        const portText = port ? `:${port}` : '';
         path = path === undefined ? '' : path;
         return `${protocolText}${hostname}${portText}${path}`;
     }
