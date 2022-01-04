@@ -54,7 +54,7 @@ code {
 
 .no-stats {
     font-size: 8pt;
-    font-weight: lighter;;
+    font-weight: lighter;
 }
 
 .header {
@@ -109,14 +109,13 @@ lightning-tab {
     margin-top: 10px;
 }
 
-.collector-header > :not(.collector-header-title):last-child {
+.collector-button {
     flex-grow: 1;
     text-align: right;
 }
 
 .collector-header-title {
     font-size: 22px;
-    font-weight: bold;
     margin-right: 10px;
 }
 
