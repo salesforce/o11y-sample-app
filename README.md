@@ -21,6 +21,14 @@ yarn build
 yarn start  # or yarn start:both to create separate server processes
 ```
 
+## Version handling
+
+Replace `PLACEHOLDER` with one of `patch`, `minor`, or `major` as appropriate:
+
+```sh
+yarn lerna version PLACEHOLDER
+```
+
 ## Publishing to Heroku
 
 -   Must have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) pre-installed.
