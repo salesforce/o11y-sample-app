@@ -8,7 +8,7 @@ You can go to [o11y-sample-app](https://o11y-sample-app.herokuapp.com/), or depl
 
 > Note: deploying from git.soma is not supported
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/salesforce/o11y-sample-app)
 
 ## Getting Started with Local Development
 
