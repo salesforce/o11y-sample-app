@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample-node-server",
     "description": "Sample server endpoint that consume 'o11y' payloads",
-    "version": "238.1.1",
+    "version": "238.2.1",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
