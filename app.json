@@ -2,7 +2,7 @@
     "name": "o11y Sample App",
     "description": "A stand-alone LWC app using o11y with built-in server",
     "repository": "https://github.com/salesforce/o11y-sample-app",
-    "logo": "https://node-js-sample.herokuapp.com/node.png",
+    "logo": "https://o11y-sample-app.herokuapp.com/resources/metrics_120.png",
     "keywords": [
         "o11y",
         "instrumentation",
