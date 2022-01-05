@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample-client",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
-    "version": "238.1.1",
+    "version": "238.2.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
