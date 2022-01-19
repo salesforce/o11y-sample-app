@@ -5,7 +5,8 @@ import cors from 'cors';
 import path from 'path';
 import { URL } from 'url';
 import { processCoreEnvelope } from './coreEnvelope';
-import { processHeaders } from './headers';
+import { LogBuilder } from './logBuilder';
+import { tryServe } from './tryServe';
 
 const HOST = process.env.API_HOST || process.env.HOST || 'localhost';
 const PORT = process.env.API_PORT || process.env.PORT || 3002;
@@ -41,23 +42,37 @@ app.use(cors())
             type: 'application/octet-stream'
         })
     )
+    .use(bodyParser.text())
     .post('/api/uitelemetry', (req: express.Request, res: express.Response) => {
+        // This endpoint expects a binary inside the request body
         console.log(' ');
         console.log('---------------------------------------------------------');
         console.log('Received call to /api/uitelemetry');
-        try {
-            if (LOG_HEADERS) {
-                processHeaders(req.headers);
-            }
-            if (processCoreEnvelope(req.body)) {
-                res.json({ success: true });
-            } else {
-                res.status(400).send();
-            }
-        } catch (err) {
-            console.log(err);
-            res.status(422).json({ error: err });
-        }
+
+        tryServe(req, res, LOG_HEADERS, (body: Uint8Array, logBuilder?: LogBuilder) => {
+            const options = logBuilder?.getCoreEnvelopeProcessingOptions();
+            return processCoreEnvelope(body, options);
+        });
+    })
+    .post('/api/uitelemetry_csv', (req: express.Request, res: express.Response) => {
+        // This endpoint expects plain text inside the request body, in the form of a UInt8Array CSV
+        // (The CSV can contain signed integers)
+        console.log(' ');
+        console.log('---------------------------------------------------------');
+        console.log('Received call to /api/uitelemetry_csv');
+
+        tryServe(
+            req,
+            res,
+            LOG_HEADERS,
+            (body: string, logBuilder?: LogBuilder) => {
+                const lines: number[] = body.split(',').map((text) => parseInt(text));
+                const data = new Uint8Array(lines);
+                const options = logBuilder?.getCoreEnvelopeProcessingOptions();
+                return processCoreEnvelope(data, options);
+            },
+            (req) => typeof req.body === 'string' && req.body.trim().length > 0
+        );
     })
     .get('/api/isodate', (_req: express.Request, res: express.Response) => {
         console.log(' ');
@@ -74,5 +89,10 @@ app.listen(PORT, () => {
     if (SERVE_WEB) {
         console.log(`✅  Web Server started: http://${HOST}:${PORT}`);
     }
-    console.log(`✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`);
+    console.log(`✅  API Server started: http://${HOST}:${PORT} with endpoints:`);
+    app._router.stack.forEach((r: any) => {
+        if (r.route && r.route.path) {
+            console.log(`- ${r.route.path}`);
+        }
+    });
 });

@@ -1,5 +1,6 @@
 const PLACEHOLDER = 'PLACEHOLDER';
 const LOCALHOST = 'localhost';
+const QUERY_RETURN_LOGS = 'returnlogs';
 
 class Endpoints {
     private readonly _coreDefaultVersion = 'v52.0';
@@ -24,11 +25,27 @@ class Endpoints {
             loc.port === this._sampleLocalWebPort ? this._sampleLocalApiPort : loc.port;
     }
 
-    private _getHttpUrl(isSecure: boolean, hostname: string, port?: string, path?: string): string {
+    private _getHttpUrl(
+        isSecure: boolean,
+        hostname: string,
+        port?: string,
+        path?: string,
+        query?: Record<string, string>
+    ): string {
         const protocolText: string = isSecure ? 'https://' : 'http://';
         const portText = port ? `:${port}` : '';
         path = path === undefined ? '' : path;
-        return `${protocolText}${hostname}${portText}${path}`;
+        let qp = '';
+        if (query) {
+            const qps = [];
+            for (const key in query) {
+                qps.push(`${encodeURIComponent(key)}=${encodeURIComponent(query[key])}`);
+            }
+            if (qps.length) {
+                qp = '?' + qps.join('&');
+            }
+        }
+        return `${protocolText}${hostname}${portText}${path}${qp}`;
     }
 
     get sampleIsoDateEndpoint(): string {
@@ -45,6 +62,19 @@ class Endpoints {
             this._hostname,
             this._runtimeApiPort,
             this._sampleTelemetryEndpoint
+        );
+    }
+
+    get sampleTelemetryEndpointWithReturn(): string {
+        const qp: Record<string, string> = {};
+        qp[QUERY_RETURN_LOGS] = 'true';
+
+        return this._getHttpUrl(
+            this._isOriginSecure,
+            this._hostname,
+            this._runtimeApiPort,
+            this._sampleTelemetryEndpoint,
+            qp
         );
     }
 

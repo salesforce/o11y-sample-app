@@ -15,13 +15,17 @@ export default class CoreCollectorPlay extends LightningElement {
 
     readonly uploadModeOptions: { label: string; value: UploadMode }[] = [
         { label: 'None', value: 2 }, // TODO: UploadMode.noUpload
-        { label: 'Binary (default for sample app server)', value: 0 }, // TODO: UploadMode.fetchBinary
-        { label: 'File (default for Core app server)', value: 1 } // TODO: UploadMode.fetchFile
+        { label: 'Binary (required for sample app server)', value: 0 }, // TODO: UploadMode.fetchBinary
+        { label: 'File (required for Core app server)', value: 1 } // TODO: UploadMode.fetchFile
     ];
 
     @track
     readonly uploadEndpointOptions: { label: string; value: string }[] = [
         { label: 'Sample App Endpoint', value: endpoints.sampleTelemetryEndpoint },
+        {
+            label: 'Sample App Endpoint (returns server logs)',
+            value: endpoints.sampleTelemetryEndpointWithReturn
+        },
         { label: 'Local Core (HTTP)', value: endpoints.getCoreTelemetryEndpoint(false) },
         { label: 'Local Core (HTTPS)', value: endpoints.getCoreTelemetryEndpoint(true) }
     ];

@@ -1,3 +1,13 @@
+declare module 'o11y_schema/sf_aura';
+declare module 'o11y_schema/sf_automation';
 declare module 'o11y_schema/sf_instrumentation';
+declare module 'o11y_schema/sf_komaci';
+declare module 'o11y_schema/sf_lds';
+declare module 'o11y_schema/sf_lex';
+declare module 'o11y_schema/sf_lightningsdk';
+declare module 'o11y_schema/sf_lol';
+declare module 'o11y_schema/sf_lwrjs';
 declare module 'o11y_schema/sf_o11ySample';
+declare module 'o11y_schema/sf_searchui';
+declare module 'o11y_schema/sf_sfs';
 declare module 'o11y_schema/version';
