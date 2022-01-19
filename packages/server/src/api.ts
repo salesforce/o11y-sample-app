@@ -41,7 +41,9 @@ app.use(cors())
             type: 'application/octet-stream'
         })
     )
+    .use(bodyParser.text())
     .post('/api/uitelemetry', (req: express.Request, res: express.Response) => {
+        // This endpoint expects a binary inside the request body
         console.log(' ');
         console.log('---------------------------------------------------------');
         console.log('Received call to /api/uitelemetry');
@@ -50,6 +52,32 @@ app.use(cors())
                 processHeaders(req.headers);
             }
             if (processCoreEnvelope(req.body)) {
+                res.json({ success: true });
+            } else {
+                res.status(400).send();
+            }
+        } catch (err) {
+            console.log(err);
+            res.status(422).json({ error: err });
+        }
+    })
+    .post('/api/uitelemetry_csv', (req: express.Request, res: express.Response) => {
+        // This endpoint expects plain text inside the request body, in the form of a UInt8Array CSV
+        // (The CSV can contain signed integers)
+        console.log(' ');
+        console.log('---------------------------------------------------------');
+        console.log('Received call to /api/uitelemetry_csv');
+        try {
+            if (typeof req.body !== 'string' || req.body.trim() === '') {
+                res.status(400).send();
+                return;
+            }
+            if (LOG_HEADERS) {
+                processHeaders(req.headers);
+            }
+            const lines: number[] = req.body.split(',').map((text) => parseInt(text));
+            const data = new Uint8Array(lines);
+            if (processCoreEnvelope(data)) {
                 res.json({ success: true });
             } else {
                 res.status(400).send();
@@ -74,5 +102,10 @@ app.listen(PORT, () => {
     if (SERVE_WEB) {
         console.log(`✅  Web Server started: http://${HOST}:${PORT}`);
     }
-    console.log(`✅  API Server started: http://${HOST}:${PORT}/api/uitelemetry`);
+    console.log(`✅  API Server started: http://${HOST}:${PORT} with endpoints:`);
+    app._router.stack.forEach((r: any) => {
+        if (r.route && r.route.path) {
+            console.log(`- ${r.route.path}`);
+        }
+    });
 });
