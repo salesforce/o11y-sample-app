@@ -1,38 +1,14 @@
 import protobuf from 'protobufjs';
+import { coreEnvelopeSchema } from 'o11y_schema/sf_instrumentation';
+import { schemas, getSchemaId } from './schema';
 
-import {
-    activitySchema,
-    coreEnvelopeSchema,
-    errorSchema,
-    instrumentedEventSchema,
-    simpleSchema
-} from 'o11y_schema/sf_instrumentation';
-import { userPayloadSchema, appPayloadSchema, pagePayloadSchema } from 'o11y_schema/sf_o11ySample';
-
-import { CoreEnvelope } from './interfaces/CoreEnvelope';
-import { EncodedSchematizedPayload } from './interfaces/EncodedSchematizedPayload';
-import { MetricTag } from './interfaces/MetricTag';
-import { Schema } from './interfaces/Schema';
-import { ValueRecorder } from './interfaces/ValueRecorder';
-import { UpCounter } from './interfaces/UpCounter';
-import { exampleSchema } from './schemas/exampleSchema';
-import { LogMessage } from './interfaces/LogMessage';
-import { CoreEnvelopeProcessingOptions } from './interfaces/CoreEnvelopeProcessingOptions';
-
-const schemas = new Map()
-    .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
-    .set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema)
-    .set(getSchemaId(activitySchema), activitySchema)
-    .set(getSchemaId(errorSchema), errorSchema)
-    .set(getSchemaId(simpleSchema), simpleSchema)
-    .set(getSchemaId(userPayloadSchema), userPayloadSchema)
-    .set(getSchemaId(appPayloadSchema), appPayloadSchema)
-    .set(getSchemaId(pagePayloadSchema), pagePayloadSchema)
-    .set(getSchemaId(exampleSchema), exampleSchema);
-
-function getSchemaId(schema: Schema): string {
-    return `${schema.namespace}.${schema.name}`;
-}
+import type { CoreEnvelope } from './interfaces/CoreEnvelope';
+import type { EncodedSchematizedPayload } from './interfaces/EncodedSchematizedPayload';
+import type { MetricTag } from './interfaces/MetricTag';
+import type { ValueRecorder } from './interfaces/ValueRecorder';
+import type { UpCounter } from './interfaces/UpCounter';
+import type { LogMessage } from './interfaces/LogMessage';
+import type { CoreEnvelopeProcessingOptions } from './interfaces/CoreEnvelopeProcessingOptions';
 
 function whenText(timestamp: number): string {
     return timestamp ? new Date(timestamp).toLocaleString() : 'UNKNOWN';
