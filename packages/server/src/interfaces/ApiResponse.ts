@@ -1,5 +1,5 @@
 export interface ApiResponse {
     success?: boolean;
-    data?: string[];
+    data?: unknown;
     error?: unknown;
 }

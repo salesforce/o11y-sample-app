@@ -5,8 +5,8 @@ import cors from 'cors';
 import path from 'path';
 import { URL } from 'url';
 import { processCoreEnvelope } from './coreEnvelope';
-import { LogBuilder } from './logBuilder';
 import { tryServe } from './tryServe';
+import { LogBuilder } from './interfaces/LogBuilder';
 
 const HOST = process.env.API_HOST || process.env.HOST || 'localhost';
 const PORT = process.env.API_PORT || process.env.PORT || 3002;
