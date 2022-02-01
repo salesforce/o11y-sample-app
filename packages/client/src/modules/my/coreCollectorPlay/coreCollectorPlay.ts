@@ -23,8 +23,12 @@ export default class CoreCollectorPlay extends LightningElement {
     readonly uploadEndpointOptions: { label: string; value: string }[] = [
         { label: 'Sample App Endpoint', value: endpoints.sampleTelemetryEndpoint },
         {
-            label: 'Sample App Endpoint (returns server logs)',
-            value: endpoints.sampleTelemetryEndpointWithReturn
+            label: 'Sample App Endpoint (returns server logs as text)',
+            value: endpoints.sampleTelemetryEndpointWithTextReturn
+        },
+        {
+            label: 'Sample App Endpoint (returns server logs as JSON)',
+            value: endpoints.sampleTelemetryEndpointWithJsonReturn
         },
         { label: 'Local Core (HTTP)', value: endpoints.getCoreTelemetryEndpoint(false) },
         { label: 'Local Core (HTTPS)', value: endpoints.getCoreTelemetryEndpoint(true) }
