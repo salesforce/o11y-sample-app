@@ -34,10 +34,10 @@ export function tryServe<T>(
         }
         console.warn('STATUS: 400');
         res.status(400).send();
-    } catch (err) {
+    } catch (err: unknown) {
         console.error(err);
         result = {
-            error: err,
+            error: err instanceof Error ? err.stack : err,
             data: logBuilder?.get()
         };
         res.status(422).json(result);
