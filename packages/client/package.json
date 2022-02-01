@@ -8,8 +8,8 @@
         "@lwc/synthetic-shadow": "2.7.0",
         "@salesforce-ux/design-system": "2.16.2",
         "lightning-base-components": "1.14.2-alpha",
-        "o11y": "238.1.3",
-        "o11y_schema": "238.5.0"
+        "o11y": "238.2.0",
+        "o11y_schema": "238.8.0"
     },
     "engines": {
         "node": ">=14.15.1",

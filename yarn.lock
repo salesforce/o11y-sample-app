@@ -9304,10 +9304,10 @@ nwsapi@^2.2.0:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-o11y@238.1.3:
-  version "238.1.3"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-238.1.3.tgz#7dde57e1302316846479adaa48524d433bc8757f"
-  integrity sha512-VHIbNRdC23Dsm6NgdBh3JynZ8YPqrYWavhboRZ51YXN2N8DzN5qUboLP+izMGdO2mB6swgaUVxSOIMV48LrQmA==
+o11y@238.2.0:
+  version "238.2.0"
+  resolved "https://registry.yarnpkg.com/o11y/-/o11y-238.2.0.tgz#27c1ce365e3dc4894cc05313c304b671b504e74f"
+  integrity sha512-7R8wQSUfubuuYtTBsXjoyOCJRBlYcq8aPFMhiwWTmSiRekHhKdReP2AQZO4bhaZ7pKYrOuETZyY+s41lmFmWZQ==
   dependencies:
     o11y_schema "238.0.0"
     protobufjs "6.10.2"
@@ -9317,10 +9317,10 @@ o11y_schema@238.0.0:
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-238.0.0.tgz#a9d11b46b94e3dc680dcf86b1dbf72d62e0a2688"
   integrity sha512-Cc0fNK4Xmvcq+LS/hzn0cOhYJi718vmz4Ynmue8YNT9KbxdGrxE9W4lZCcQtS3HiG7n5z44dkDZ7+J95boA4vw==
 
-o11y_schema@238.5.0:
-  version "238.5.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-238.5.0.tgz#59e111b1a7eb3c4ce3fb92b905405e1dd3c516a6"
-  integrity sha512-mj9Ez0DR/Acbn4oxBuV0EJjsw9O6he8iZbrFOuNjo9ay9YRszoXCOGCXL1XIZEV7Ghnrw1aNb/+5hvTQKL+d3Q==
+o11y_schema@238.8.0:
+  version "238.8.0"
+  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-238.8.0.tgz#390bbfd7c1c8a7a63298b6df589503c13cccf850"
+  integrity sha512-SLi7s2LwXqpB69pSpepESo6lVD4VwA3Hry+BWleJV5zC/c6jQ44UXma/5wduzzpMpnDuxCkdsyXGJAzzpnDRXg==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
