@@ -52,6 +52,15 @@ export function getSchemaId(schema: Schema): string {
     return `${schema.namespace}.${schema.name}`;
 }
 
+export function hasUserPayload(schemaId: string): boolean {
+    return (
+        schemaId === 'sf.instrumentation.Activity' ||
+        schemaId === 'sf.instrumentation.Error' ||
+        schemaId === 'sf.instrumentation.InstrumentedEvent' ||
+        schemaId === 'sf.instrumentation.Simple'
+    );
+}
+
 export const schemas = new Map()
     // sf_aura
     .set(getSchemaId(actionSchema), actionSchema)
