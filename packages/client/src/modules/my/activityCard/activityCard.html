@@ -7,4 +7,8 @@
         <span if:false={model.msg.isRoot} class="card-title">Activity</span>
     </div>
     <my-key-values model={keyValues}></my-key-values>
+
+    <div if:true={userPayload} class="payload">
+        <my-payload-card header="User Payload" model={userPayload}></my-payload-card>
+    </div>
 </template>
