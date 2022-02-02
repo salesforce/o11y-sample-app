@@ -1,11 +1,12 @@
 import { CoreEnvelopeProcessingOptions } from './interfaces/CoreEnvelopeProcessingOptions';
-import { LogBuilderOptions } from './interfaces/LogBuilderOptions';
+import { LogBuilder } from './interfaces/LogBuilder';
+import { TextLogBuilderOptions } from './interfaces/TextLogBuilderOptions';
 
-export class LogBuilder {
+export class TextLogBuilder implements LogBuilder {
     private readonly _lines: string[] = [];
     private readonly _jsonIndent: number;
 
-    constructor(options?: LogBuilderOptions) {
+    constructor(options?: TextLogBuilderOptions) {
         this._jsonIndent = options?.jsonIndent ?? 0;
     }
 

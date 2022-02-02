@@ -2,7 +2,7 @@ import { LightningElement, api, track } from 'lwc';
 import { KeyValue } from '../../../interfaces/keyValue';
 import { utility } from '../../../utility';
 import { CardModel } from '../../models/cardModel';
-import { SchematizedPayload } from 'o11y/dist/modules/o11y/client/interfaces';
+import type { SchematizedPayload } from 'o11y/dist/modules/o11y/client/interfaces';
 
 export default class InstrumentedEventCard extends LightningElement {
     @track isExpanded: boolean;
@@ -25,8 +25,8 @@ export default class InstrumentedEventCard extends LightningElement {
                 .filter((obj) => obj.key !== 'userPayload' && obj.key !== 'event');
         this.keyValues = [...topItems, ...msgItems];
 
-        this.userPayload = value && value.msg && value.msg.userPayload;
-        this.eventKeyValues = value && value.msg && utility.getKeyValues(value.msg.event);
+        this.userPayload = value?.msg?.userPayload;
+        this.eventKeyValues = value?.msg && utility.getKeyValues(value.msg.event);
     }
 
     handleToggle(): void {

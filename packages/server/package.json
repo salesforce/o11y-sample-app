@@ -1,14 +1,14 @@
 {
     "name": "o11y-sample-node-server",
     "description": "Sample server endpoint that consume 'o11y' payloads",
-    "version": "238.3.0",
+    "version": "238.4.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
         "cors": "^2.8.5",
         "express": "^4.17.1",
-        "o11y": "238.1.3",
-        "o11y_schema": "238.5.0"
+        "o11y": "238.2.0",
+        "o11y_schema": "238.8.0"
     },
     "engines": {
         "node": ">=14.15.1",

@@ -1,6 +1,7 @@
 const PLACEHOLDER = 'PLACEHOLDER';
 const LOCALHOST = 'localhost';
 const QUERY_RETURN_LOGS = 'returnlogs';
+const QUERY_RETURN_LOGS_AS_JSON = 'returnlogsasjson';
 
 class Endpoints {
     private readonly _coreDefaultVersion = 'v52.0';
@@ -65,9 +66,22 @@ class Endpoints {
         );
     }
 
-    get sampleTelemetryEndpointWithReturn(): string {
+    get sampleTelemetryEndpointWithTextReturn(): string {
         const qp: Record<string, string> = {};
         qp[QUERY_RETURN_LOGS] = 'true';
+
+        return this._getHttpUrl(
+            this._isOriginSecure,
+            this._hostname,
+            this._runtimeApiPort,
+            this._sampleTelemetryEndpoint,
+            qp
+        );
+    }
+
+    get sampleTelemetryEndpointWithJsonReturn(): string {
+        const qp: Record<string, string> = {};
+        qp[QUERY_RETURN_LOGS_AS_JSON] = 'true';
 
         return this._getHttpUrl(
             this._isOriginSecure,

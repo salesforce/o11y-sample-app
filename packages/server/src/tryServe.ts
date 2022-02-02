@@ -1,9 +1,12 @@
 import type express from 'express';
 import type { ApiResponse } from './interfaces/ApiResponse';
 import { processHeaders } from './headers';
-import { LogBuilder } from './logBuilder';
+import { TextLogBuilder } from './textLogBuilder';
+import { JsonLogBuilder } from './jsonLogBuilder';
+import { LogBuilder } from './interfaces/LogBuilder';
 
 const QUERY_RETURN_LOGS = 'returnlogs';
+const QUERY_RETURN_LOGS_AS_JSON = 'returnlogsasjson';
 
 export function tryServe<T>(
     req: express.Request,
@@ -18,7 +21,9 @@ export function tryServe<T>(
     try {
         if (!prereqFunc || prereqFunc(req)) {
             if (req.query[QUERY_RETURN_LOGS]) {
-                logBuilder = new LogBuilder();
+                logBuilder = new TextLogBuilder({ jsonIndent: 4 });
+            } else if (req.query[QUERY_RETURN_LOGS_AS_JSON]) {
+                logBuilder = new JsonLogBuilder();
             }
             if (logHeaders) {
                 processHeaders(req.headers, logBuilder?.log.bind(logBuilder));
@@ -34,10 +39,10 @@ export function tryServe<T>(
         }
         console.warn('STATUS: 400');
         res.status(400).send();
-    } catch (err) {
+    } catch (err: unknown) {
         console.error(err);
         result = {
-            error: err,
+            error: err instanceof Error ? err.stack : err,
             data: logBuilder?.get()
         };
         res.status(422).json(result);

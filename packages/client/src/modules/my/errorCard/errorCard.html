@@ -6,4 +6,7 @@
     <my-key-values model={keyValues}></my-key-values>
     <p>stack</p>
     <pre>{model.msg.stack}</pre>
+    <div if:true={userPayload} class="payload">
+        <my-payload-card header="User Payload" model={userPayload}></my-payload-card>
+    </div>
 </template>

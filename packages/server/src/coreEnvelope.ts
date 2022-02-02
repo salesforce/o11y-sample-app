@@ -1,6 +1,6 @@
 import protobuf from 'protobufjs';
 import { coreEnvelopeSchema } from 'o11y_schema/sf_instrumentation';
-import { schemas, getSchemaId } from './schema';
+import { schemas, getSchemaId, hasUserPayload } from './schema';
 
 import type { CoreEnvelope } from './interfaces/CoreEnvelope';
 import type { EncodedSchematizedPayload } from './interfaces/EncodedSchematizedPayload';
@@ -96,16 +96,51 @@ class CoreEnvelopeProcessor {
         }
     }
 
-    processEncodedMessage(label: string, schemaName: string, encoded: Uint8Array): boolean {
+    getDecodedMessage(schemaName: string, encoded: Uint8Array): { [k: string]: any } {
         const { type, message } = decode(schemaName, encoded);
         const errorMsg: string | null = type.verify(message);
         if (errorMsg) {
-            this._warn(`${label} is INVALID.`);
-            this._error(label, errorMsg);
+            throw errorMsg;
+        }
+        return message;
+    }
+
+    processEncodedMessage(label: string, schemaName: string, encoded: Uint8Array): boolean {
+        let message;
+        try {
+            message = this.getDecodedMessage(schemaName, encoded);
+        } catch (errorMsg) {
+            this._error(`${label} is INVALID.`, errorMsg);
             return false;
         }
 
-        this._log(`${label} as decoded:`, message);
+        let isPartiallyDecoded = false;
+        if (hasUserPayload(schemaName)) {
+            const userSchemaName = message.userPayload?.schemaName;
+            if (userSchemaName) {
+                if (schemas.has(userSchemaName)) {
+                    let data;
+                    try {
+                        data = this.getDecodedMessage(
+                            message.userPayload.schemaName,
+                            message.userPayload.payload
+                        );
+                        message.userPayload.payload = data;
+                    } catch (errorMsg) {
+                        isPartiallyDecoded = true;
+                        this._error(
+                            `${label} userPayload is INVALID; it won't be decoded.`,
+                            errorMsg
+                        );
+                    }
+                } else {
+                    isPartiallyDecoded = true;
+                    this._warn(`${label} userPayload schema is UNKNOWN; it won't be decoded.`);
+                }
+            }
+        }
+
+        this._log(`${label} as ${isPartiallyDecoded ? 'partially' : 'fully'} decoded:`, message);
         return true;
     }
 

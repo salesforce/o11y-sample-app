@@ -2,10 +2,12 @@ import { LightningElement, api, track } from 'lwc';
 import { KeyValue } from '../../../interfaces/keyValue';
 import { utility } from '../../../utility';
 import { CardModel } from '../../models/cardModel';
+import type { SchematizedPayload } from 'o11y/dist/modules/o11y/client/interfaces';
 
 export default class ErrorCard extends LightningElement {
     @track callstack: string;
     @track keyValues: KeyValue[];
+    @track userPayload: SchematizedPayload;
 
     private _model: CardModel;
     @api
@@ -16,8 +18,12 @@ export default class ErrorCard extends LightningElement {
         this._model = value;
         const topItems: KeyValue[] = utility.getFilteredKeyValues();
         const msgItems: KeyValue[] =
-            value && utility.getKeyValues(value.msg).filter((obj) => obj.key !== 'stack');
+            value &&
+            utility
+                .getKeyValues(value.msg)
+                .filter((obj) => obj.key !== 'userPayload' && obj.key !== 'stack');
         this.keyValues = [...topItems, ...msgItems];
+        this.userPayload = value?.msg?.userPayload;
 
         // TODO: Why is this not being used?
         this.callstack =
