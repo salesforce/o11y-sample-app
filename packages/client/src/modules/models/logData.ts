@@ -7,4 +7,5 @@ export interface LogData {
     uint64?: number;
     double?: number;
     ignored?: string;
+    recordIds?: string[];
 }

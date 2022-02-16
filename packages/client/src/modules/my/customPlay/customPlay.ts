@@ -57,6 +57,11 @@ export default class CustomPlay extends LightningElement {
                         logData.double = Number(val);
                     }
                     break;
+                case 'inputRecordIds':
+                    if (!isEmpty) {
+                        logData.recordIds = String(val).split(',').map(x => x.trim()).filter(x => x !== '');
+                    }
+                    break;
                 case 'inputIgnored':
                     // This field isn't part of the schema
                     logData.ignored = val;
