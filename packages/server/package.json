@@ -7,7 +7,7 @@
     "dependencies": {
         "cors": "2.8.5",
         "express": "4.17.3",
-        "o11y": "238.6.0",
+        "o11y": "238.6.1",
         "o11y_schema": "238.15.0"
     },
     "engines": {

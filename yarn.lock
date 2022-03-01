@@ -9379,10 +9379,10 @@ nwsapi@^2.2.0:
   resolved "https://registry.yarnpkg.com/nwsapi/-/nwsapi-2.2.0.tgz#204879a9e3d068ff2a55139c2c772780681a38b7"
   integrity sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==
 
-o11y@238.6.0:
-  version "238.6.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-238.6.0.tgz#7ea2dcec232e1e96aacb42db05da6634bc87c028"
-  integrity sha512-cILQ/zNkgPT3LmBW18fIKZ8Sm9f5zPfTMPE2Y4BMEx4WgnXYCjAVP19KwXeBzREBwrv3WDjIH4JUsZZ6E3B/8Q==
+o11y@238.6.1:
+  version "238.6.1"
+  resolved "https://registry.yarnpkg.com/o11y/-/o11y-238.6.1.tgz#3fd1d4c3476fcf1bb75e866d94d22b89916df875"
+  integrity sha512-TQdhf1Hcx5NcmVIcC/0TW3auOrGhvqEDSsYimRoMlk8E/N2x2Hpo1tN7ttzXEetu8h9I5fjWiV2OdDGK7Yevkw==
   dependencies:
     o11y_schema "238.15.0"
     protobufjs "6.10.2"
