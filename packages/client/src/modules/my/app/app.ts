@@ -1,6 +1,7 @@
 import { LightningElement, track } from 'lwc';
 import { registerInstrumentedApp, ConsoleCollector } from 'o11y/client';
 import { CoreCollector } from 'o11y/collectors';
+import { webVitals } from 'o11y/web_vitals';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
 import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
@@ -107,6 +108,7 @@ export default class App extends LightningElement implements LogCollector {
             appPayloadProvider: new AppPayloadProvider(),
             pagePayloadProvider: this._pagePayloadProvider
         });
+        webVitals.activate(this._instrApp);
 
         // STEP 2: Register log collectors
         this._instrApp.registerLogCollector(new ConsoleCollector());
