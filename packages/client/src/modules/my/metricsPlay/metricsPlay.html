@@ -201,7 +201,14 @@
                     onchange={handleNumberTagForBucketHistogramChange}
                 >
                 </lightning-input>
-                <lightning-input class="slds-p-vertical_xx-small" type="text" name="buckets" label="Buckets" value={bucketsCsv} onchange={handleBucketsCsvChange}></lightning-input>
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="text"
+                    name="buckets"
+                    label="Buckets (Use commas to separate)"
+                    value={bucketsCsv}
+                    onchange={handleBucketsCsvChange}
+                ></lightning-input>
             </div>
             <lightning-button class="slds-m-around_medium" variant="brand" label="Bucket Value" title="Calls the bucketValue method with the above configuration" onclick={handleBucketValue}>
             </lightning-button>
