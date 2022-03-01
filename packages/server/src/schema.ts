@@ -6,7 +6,9 @@ import {
     coreEnvelopeSchema,
     errorSchema,
     instrumentedEventSchema,
-    simpleSchema
+    scenarioTrackerSchema,
+    simpleSchema,
+    webVitalsSchema
 } from 'o11y_schema/sf_instrumentation';
 import {
     batchSchema,
@@ -14,16 +16,17 @@ import {
     bulkResolveSchema,
     prefetchSchema,
     prefetchServiceSchema,
+    totalRoutingSchema,
     wireContextSchema
 } from 'o11y_schema/sf_komaci';
 import {
+    adapterUnfulfilledErrorSchema,
     durableStoreEvictSchema,
     durableStoreGraphqlSchema,
     durableStoreReadSchema,
     durableStoreWriteSchema,
     luvioStoreStatsSchema
 } from 'o11y_schema/sf_lds';
-import { initialLexRootActivitySchema, lexRootActivitySchema } from 'o11y_schema/sf_lex';
 import {
     appPrimingSchema,
     httpSchema,
@@ -32,6 +35,7 @@ import {
     moduleInvalidationSchema,
     moduleLoadSchema,
     navigationSchema,
+    resourceDownloadSchema,
     routePrimingSchema
 } from 'o11y_schema/sf_lightningsdk';
 import { sidePanelContentSchema } from 'o11y_schema/sf_lol';
@@ -40,6 +44,11 @@ import {
     mappingRequestSchema,
     moduleRequestCountSchema
 } from 'o11y_schema/sf_lwrjs';
+import {
+    barcodeScannerSchema,
+    contactsServiceSchema,
+    locationServiceSchema
+} from 'o11y_schema/sf_nimbus';
 import { userPayloadSchema, appPayloadSchema, pagePayloadSchema } from 'o11y_schema/sf_o11ySample';
 import { resultClickDemoSchema } from 'o11y_schema/sf_searchui';
 import { appStartSchema } from 'o11y_schema/sf_sfs';
@@ -73,23 +82,24 @@ export const schemas = new Map()
     .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
     .set(getSchemaId(errorSchema), errorSchema)
     .set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema)
+    .set(getSchemaId(scenarioTrackerSchema), scenarioTrackerSchema)
     .set(getSchemaId(simpleSchema), simpleSchema)
+    .set(getSchemaId(webVitalsSchema), webVitalsSchema)
     // sf_komaci
     .set(getSchemaId(batchSchema), batchSchema)
     .set(getSchemaId(batchCoordinatorSchema), batchCoordinatorSchema)
     .set(getSchemaId(bulkResolveSchema), bulkResolveSchema)
     .set(getSchemaId(prefetchSchema), prefetchSchema)
     .set(getSchemaId(prefetchServiceSchema), prefetchServiceSchema)
+    .set(getSchemaId(totalRoutingSchema), totalRoutingSchema)
     .set(getSchemaId(wireContextSchema), wireContextSchema)
-    // sf_ldx
+    // sf_lds
+    .set(getSchemaId(adapterUnfulfilledErrorSchema), adapterUnfulfilledErrorSchema)
     .set(getSchemaId(durableStoreEvictSchema), durableStoreEvictSchema)
     .set(getSchemaId(durableStoreGraphqlSchema), durableStoreGraphqlSchema)
     .set(getSchemaId(durableStoreReadSchema), durableStoreReadSchema)
     .set(getSchemaId(durableStoreWriteSchema), durableStoreWriteSchema)
     .set(getSchemaId(luvioStoreStatsSchema), luvioStoreStatsSchema)
-    // sf_lex
-    .set(getSchemaId(initialLexRootActivitySchema), initialLexRootActivitySchema)
-    .set(getSchemaId(lexRootActivitySchema), lexRootActivitySchema)
     // sf_lightningsdk
     .set(getSchemaId(appPrimingSchema), appPrimingSchema)
     .set(getSchemaId(httpSchema), httpSchema)
@@ -98,6 +108,7 @@ export const schemas = new Map()
     .set(getSchemaId(moduleInvalidationSchema), moduleInvalidationSchema)
     .set(getSchemaId(moduleLoadSchema), moduleLoadSchema)
     .set(getSchemaId(navigationSchema), navigationSchema)
+    .set(getSchemaId(resourceDownloadSchema), resourceDownloadSchema)
     .set(getSchemaId(routePrimingSchema), routePrimingSchema)
     // sf_lol
     .set(getSchemaId(sidePanelContentSchema), sidePanelContentSchema)
@@ -105,6 +116,10 @@ export const schemas = new Map()
     .set(getSchemaId(bootstrapRequestSchema), bootstrapRequestSchema)
     .set(getSchemaId(mappingRequestSchema), mappingRequestSchema)
     .set(getSchemaId(moduleRequestCountSchema), moduleRequestCountSchema)
+    // sf_nimbus
+    .set(getSchemaId(barcodeScannerSchema), barcodeScannerSchema)
+    .set(getSchemaId(contactsServiceSchema), contactsServiceSchema)
+    .set(getSchemaId(locationServiceSchema), locationServiceSchema)
     // sf_o11ySample
     .set(getSchemaId(userPayloadSchema), userPayloadSchema)
     .set(getSchemaId(appPayloadSchema), appPayloadSchema)
