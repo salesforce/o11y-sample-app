@@ -9,7 +9,10 @@
     <lightning-layout>
         <lightning-layout-item>
             <div class="slds-p-around_medium">
-                <lightning-input class="slds-p-vertical_xx-small" type="text" name="counterName" label="Counter Name" value={counterName} onchange={handleCounterNameChange}> </lightning-input>
+                <p class="slds-form-element__label">
+                    <a target="_blank" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-incrementCounter">Up Counters</a>
+                </p>
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="counterName" label="Name" value={counterName} onchange={handleCounterNameChange}> </lightning-input>
                 <lightning-input
                     class="slds-p-vertical_xx-small"
                     type="number"
@@ -76,9 +79,12 @@
         </lightning-layout-item>
         <lightning-layout-item>
             <div class="slds-p-around_medium">
-                <lightning-input class="slds-p-vertical_xx-small" type="text" name="valueRecorderName" label="ValueRecorder Name" value={valueRecorderName} onchange={handleValueRecorderNameChange}>
+                <p class="slds-form-element__label">
+                    <a target="_blank" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-trackValue">Value Recorders</a>
+                </p>
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="valueRecorderName" label="Name" value={valueRecorderName} onchange={handleValueRecorderNameChange}>
                 </lightning-input>
-                <lightning-input class="slds-p-vertical_xx-small" type="number" name="value" label="Value" placeholder="Enter a numerical value" value={value} onchange={handleValueChange}>
+                <lightning-input class="slds-p-vertical_xx-small" type="number" name="value" label="Value" placeholder="Enter a numerical value" value={vrValue} onchange={handleVrValueChange}>
                 </lightning-input>
                 <lightning-input
                     class="slds-p-vertical_xx-small"
@@ -134,6 +140,79 @@
                 </lightning-input>
             </div>
             <lightning-button class="slds-m-around_medium" variant="brand" label="Track Value" title="Calls the trackValue method with the above configuration" onclick={handleTrackValue}>
+            </lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <div class="slds-p-around_medium">
+                <p class="slds-form-element__label">
+                    <a target="_blank" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-bucketValue">Bucket Histograms</a>
+                </p>
+                <lightning-input class="slds-p-vertical_xx-small" type="text" name="bucketHistogramName" label="Name" value={bucketHistogramName} onchange={handleBucketHistogramNameChange}>
+                </lightning-input>
+                <lightning-input class="slds-p-vertical_xx-small" type="number" name="value" label="Value" placeholder="Enter a numerical value" value={bhValue} onchange={handleBhValueChange}>
+                </lightning-input>
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="checkbox"
+                    name="hasErrorForBucketHistogram"
+                    label="Has Error (default: false)"
+                    checked={hasErrorForBucketHistogram}
+                    onchange={handleHasErrorForBucketHistogramChange}
+                >
+                </lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="checkbox"
+                    label="Use Tags ⬇"
+                    name="useTagsForBucketHistogram"
+                    checked={useTagsForBucketHistogram}
+                    onchange={handleUseTagsForBucketHistogramChange}
+                >
+                </lightning-input>
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="text"
+                    name="stringTagForBucketHistogram"
+                    label="String Tag"
+                    placeholder="Enter some text"
+                    disabled={isBucketHistogramTagsDisabled}
+                    value={stringTagForBucketHistogram}
+                    onchange={handleStringTagForBucketHistogramChange}
+                >
+                </lightning-input>
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="checkbox"
+                    name="booleanTagForBucketHistogram"
+                    label="Boolean Tag"
+                    disabled={isBucketHistogramTagsDisabled}
+                    checked={booleanTagForBucketHistogram}
+                    onchange={handleBooleanTagForBucketHistogramChange}
+                >
+                </lightning-input>
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="number"
+                    name="numberTagForBucketHistogram"
+                    label="Number Tag"
+                    placeholder="Enter a numerical value"
+                    disabled={isBucketHistogramTagsDisabled}
+                    value={numberTagForBucketHistogram}
+                    onchange={handleNumberTagForBucketHistogramChange}
+                >
+                </lightning-input>
+                <lightning-input
+                    class="slds-p-vertical_xx-small"
+                    type="text"
+                    name="buckets"
+                    label="Buckets (Use commas to separate)"
+                    value={bucketsCsv}
+                    onchange={handleBucketsCsvChange}
+                ></lightning-input>
+            </div>
+            <lightning-button class="slds-m-around_medium" variant="brand" label="Bucket Value" title="Calls the bucketValue method with the above configuration" onclick={handleBucketValue}>
             </lightning-button>
         </lightning-layout-item>
     </lightning-layout>

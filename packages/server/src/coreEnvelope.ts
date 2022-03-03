@@ -5,6 +5,7 @@ import { schemas, getSchemaId, hasUserPayload } from './schema';
 import type { CoreEnvelope } from './interfaces/CoreEnvelope';
 import type { EncodedSchematizedPayload } from './interfaces/EncodedSchematizedPayload';
 import type { MetricTag } from './interfaces/MetricTag';
+import type { BucketHistogram } from './interfaces/BucketHistogram';
 import type { ValueRecorder } from './interfaces/ValueRecorder';
 import type { UpCounter } from './interfaces/UpCounter';
 import type { LogMessage } from './interfaces/LogMessage';
@@ -158,6 +159,7 @@ class CoreEnvelopeProcessor {
         if (metrics) {
             this.processUpCounters(metrics.upCounters);
             this.processValueRecorders(metrics.valueRecorders);
+            this.processBucketHistograms(metrics.bucketHistograms);
         }
     }
 
@@ -199,6 +201,30 @@ class CoreEnvelopeProcessor {
             this._log(`${label} values        :`, valuesText);
             this._log(`${label} created       :`, whenText(v.createdTimestamp));
             this._log(`${label} last updated  :`, whenText(v.lastUpdatedTimestamp));
+        }
+    }
+
+    processBucketHistograms(bucketHistograms: BucketHistogram[]) {
+        const count = bucketHistograms && bucketHistograms.length;
+        if (!count) {
+            this._log(`No Bucket Histograms.`);
+            return;
+        }
+        for (let i = 0; i < count; i += 1) {
+            const label = `BH  #${i}`;
+            const b = bucketHistograms[i];
+            const bucs = b.buckets;
+            const bucketsText = bucs ? (bucs.length ? bucs.join(', ') : 'Empty') : 'UNDEFINED';
+            const vals = b.values;
+            const valuesText = vals ? (vals.length ? vals.join(', ') : 'Empty') : 'UNDEFINED';
+            this._log(`${label} name          :`, b.name);
+            this._log(`${label} owner app name:`, b.ownerAppName);
+            this._log(`${label} owner name    :`, b.ownerName);
+            this._log(`${label} tags          :`, this.getMetricsTags(b.tags));
+            this._log(`${label} buckets       :`, bucketsText);
+            this._log(`${label} values        :`, valuesText);
+            this._log(`${label} created       :`, whenText(b.createdTimestamp));
+            this._log(`${label} last updated  :`, whenText(b.lastUpdatedTimestamp));
         }
     }
 

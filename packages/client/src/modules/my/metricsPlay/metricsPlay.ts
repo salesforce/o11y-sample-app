@@ -5,7 +5,7 @@ import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class MetricsPlay extends LightningElement {
     private readonly _instr: Instrumentation;
-    @track counterName = 'Counter name';
+    @track counterName = 'My up counter';
     @track increment = 1;
     @track hasErrorForCounter = false;
     @track isCounterTagsDisabled = true;
@@ -13,19 +13,29 @@ export default class MetricsPlay extends LightningElement {
     @track booleanTagForCounter = true;
     @track numberTagForCounter = 123;
 
-    @track valueRecorderName = 'Value Recorder name';
-    @track value = 0;
+    @track valueRecorderName = 'My value recorder';
+    @track vrValue = 0;
     @track hasErrorForValueRecorder = false;
     @track isValueRecorderTagsDisabled = true;
     @track stringTagForValueRecorder = 'A Value Recorder Tag';
     @track booleanTagForValueRecorder = true;
-    @track numberTagForValueRecorder = 789;
+    @track numberTagForValueRecorder = 123;
+
+    @track bucketHistogramName = 'My bucket histogram';
+    @track bhValue = 0;
+    @track bucketsCsv: string = undefined;
+    @track hasErrorForBucketHistogram = false;
+    @track isBucketHistogramTagsDisabled = true;
+    @track stringTagForBucketHistogram = 'A Bucket Histogram Tag';
+    @track booleanTagForBucketHistogram = true;
+    @track numberTagForBucketHistogram = 123;
 
     constructor() {
         super();
         this._instr = getInstrumentation('MetricsPlay');
     }
 
+    // Counter handlers
     handleCounterNameChange(event: CustomEvent): void {
         this.counterName = event.detail.value;
     }
@@ -48,11 +58,12 @@ export default class MetricsPlay extends LightningElement {
         this.numberTagForCounter = Number(event.detail.value);
     }
 
+    // Value Recorder handlers
     handleValueRecorderNameChange(event: CustomEvent): void {
         this.valueRecorderName = event.detail.value;
     }
-    handleValueChange(event: CustomEvent): void {
-        this.value = Number(event.detail.value);
+    handleVrValueChange(event: CustomEvent): void {
+        this.vrValue = Number(event.detail.value);
     }
     handleHasErrorForValueRecorderChange(event: CustomEvent): void {
         this.hasErrorForValueRecorder = Boolean(event.detail.checked);
@@ -68,6 +79,32 @@ export default class MetricsPlay extends LightningElement {
     }
     handleNumberTagForValueRecorderChange(event: CustomEvent): void {
         this.numberTagForValueRecorder = Number(event.detail.value);
+    }
+
+    // Bucket Histogram handlers
+    handleBucketHistogramNameChange(event: CustomEvent): void {
+        this.bucketHistogramName = event.detail.value;
+    }
+    handleBhValueChange(event: CustomEvent): void {
+        this.bhValue = Number(event.detail.value);
+    }
+    handleHasErrorForBucketHistogramChange(event: CustomEvent): void {
+        this.hasErrorForBucketHistogram = Boolean(event.detail.checked);
+    }
+    handleUseTagsForBucketHistogramChange(event: CustomEvent): void {
+        this.isBucketHistogramTagsDisabled = !event.detail.checked;
+    }
+    handleStringTagForBucketHistogramChange(event: CustomEvent): void {
+        this.stringTagForBucketHistogram = event.detail.value;
+    }
+    handleBooleanTagForBucketHistogramChange(event: CustomEvent): void {
+        this.booleanTagForBucketHistogram = Boolean(event.detail.checked);
+    }
+    handleNumberTagForBucketHistogramChange(event: CustomEvent): void {
+        this.numberTagForBucketHistogram = Number(event.detail.value);
+    }
+    handleBucketsCsvChange(event: CustomEvent): void {
+        this.bucketsCsv = event.detail.value;
     }
 
     handleIncrementCounter(): void {
@@ -89,7 +126,7 @@ export default class MetricsPlay extends LightningElement {
     handleTrackValue(): void {
         this._instr.trackValue(
             this.valueRecorderName,
-            this.value,
+            this.vrValue,
             this.hasErrorForValueRecorder,
             this.isValueRecorderTagsDisabled
                 ? undefined
@@ -97,6 +134,29 @@ export default class MetricsPlay extends LightningElement {
                       stringTag: this.stringTagForValueRecorder,
                       booleanTag: this.booleanTagForValueRecorder,
                       numberTag: this.numberTagForValueRecorder
+                  }
+        );
+        this.notifyMetricAdded();
+    }
+
+    handleBucketValue(): void {
+        const buckets: number[] = this.bucketsCsv
+            ? this.bucketsCsv
+                  .split(',')
+                  .map((t: string) => Number.parseFloat(t))
+                  .filter((n: number) => !Number.isNaN(n))
+            : undefined;
+        this._instr.bucketValue(
+            this.bucketHistogramName,
+            this.bhValue,
+            buckets,
+            this.hasErrorForBucketHistogram,
+            this.isBucketHistogramTagsDisabled
+                ? undefined
+                : {
+                      stringTag: this.stringTagForBucketHistogram,
+                      booleanTag: this.booleanTagForBucketHistogram,
+                      numberTag: this.numberTagForBucketHistogram
                   }
         );
         this.notifyMetricAdded();
