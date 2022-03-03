@@ -3,3 +3,7 @@
     font-size: larger;
     font-weight: bold;
 }
+
+.slds-form-element__label {
+    font-weight: bold;
+}

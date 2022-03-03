@@ -5,7 +5,7 @@ import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class MetricsPlay extends LightningElement {
     private readonly _instr: Instrumentation;
-    @track counterName = 'Counter name';
+    @track counterName = 'My up counter';
     @track increment = 1;
     @track hasErrorForCounter = false;
     @track isCounterTagsDisabled = true;
@@ -13,7 +13,7 @@ export default class MetricsPlay extends LightningElement {
     @track booleanTagForCounter = true;
     @track numberTagForCounter = 123;
 
-    @track valueRecorderName = 'Value Recorder name';
+    @track valueRecorderName = 'My value recorder';
     @track vrValue = 0;
     @track hasErrorForValueRecorder = false;
     @track isValueRecorderTagsDisabled = true;
@@ -21,9 +21,9 @@ export default class MetricsPlay extends LightningElement {
     @track booleanTagForValueRecorder = true;
     @track numberTagForValueRecorder = 123;
 
-    @track bucketHistogramName = 'Bucket Histogram name';
+    @track bucketHistogramName = 'My bucket histogram';
     @track bhValue = 0;
-    @track bucketsCsv = undefined;
+    @track bucketsCsv: string = undefined;
     @track hasErrorForBucketHistogram = false;
     @track isBucketHistogramTagsDisabled = true;
     @track stringTagForBucketHistogram = 'A Bucket Histogram Tag';
