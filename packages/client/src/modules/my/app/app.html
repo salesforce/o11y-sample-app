@@ -377,6 +377,14 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab label={labelLogAggregation} value={sectionLogAggregation} onactive={handleTabSelect} icon-name="standard:macros">
+                            <my-app-section label={labelLogAggregation}>
+                                <div slot="doc"> <p>This is LogAggregation section</p></div>
+                                <div slot="play">
+                                    <my-prompt-play onpromptrequest={handlePromptRequest}> </my-prompt-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
                     </lightning-tabset>
                 </div>
                 <div class="slds-col slds-size_4-of-12">
