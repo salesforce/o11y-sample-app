@@ -1,10 +1,10 @@
 # o11y Sample App
 
-This is a sample app that demonstrates the use of the `o11y` instrumentation platform on a stand-alone LWC app. It comes with a built-in server to receive instrumentation collected on the client-side.
+This stand-alone LWC app demonstrates the use of the `o11y` instrumentation platform. It comes with a built-in server to receive instrumentation collected on the client-side, but it can also be configured to direct traffic to a Salesforce instance.
 
 ## Try it Out
 
-You can go to [o11y-sample-app](https://o11y-sample-app.herokuapp.com/), or deploy your own copy of the app.
+You can go to [o11y-sample-app](https://o11y-sample-app.herokuapp.com/), or deploy a copy of the app.
 
 > Note: deploying from git.soma is not supported
 
@@ -23,10 +23,12 @@ yarn start  # or yarn start:both to create separate server processes
 
 ## Version handling
 
-Replace `PLACEHOLDER` with one of `patch`, `minor`, or `major` as appropriate:
+1. Update `environment.appVersion` in [app.ts](packages/client/src/modules/my/app/app.ts).
+
+2. Execute:
 
 ```sh
-yarn lerna version PLACEHOLDER
+yarn lerna version PLACEHOLDER # replace PLACEHOLDER with patch, minor or major as appropriate
 ```
 
 ## Publishing to Heroku
