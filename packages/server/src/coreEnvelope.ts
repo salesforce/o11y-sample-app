@@ -212,7 +212,7 @@ class CoreEnvelopeProcessor {
             this._log(`${label} last updated  : `, whenText(c.lastUpdatedTimestamp));
 
             if (this._maxTags < tagCount) {
-                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tags.`);
+                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tag(s).`);
             }
         }
         if (limitCount < count) {
@@ -243,7 +243,7 @@ class CoreEnvelopeProcessor {
             this._log(`${label} last updated  : `, whenText(v.lastUpdatedTimestamp));
 
             if (this._maxTags < tagCount) {
-                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tags.`);
+                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tag(s).`);
             }
         }
         if (limitCount < count) {
@@ -278,7 +278,7 @@ class CoreEnvelopeProcessor {
             this._log(`${label} last updated  : `, whenText(b.lastUpdatedTimestamp));
 
             if (this._maxTags < tagCount) {
-                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tags.`);
+                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tag(s).`);
             }
         }
         if (limitCount < count) {

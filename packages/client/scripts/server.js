@@ -8,7 +8,7 @@ const HOST = process.env.WEB_HOST || process.env.HOST || 'localhost';
 const PORT = process.env.WEB_PORT || process.env.PORT || 3001;
 const DIST_DIR = path.resolve(__dirname, '..', '..', '..', 'dist-client');
 
-const app = express()
+express()
     .use(
         helmet({
             // NOTE: Make sure to test any changes you make to these options by
