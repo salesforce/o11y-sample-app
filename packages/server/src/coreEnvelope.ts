@@ -12,7 +12,7 @@ import type { LogMessage } from './interfaces/LogMessage';
 import type { CoreEnvelopeProcessingOptions } from './interfaces/CoreEnvelopeProcessingOptions';
 
 function whenText(timestamp: number): string {
-    return timestamp ? new Date(timestamp).toLocaleString() : 'UNKNOWN';
+    return timestamp !== undefined ? new Date(timestamp).toLocaleString() : 'UNKNOWN';
 }
 
 function decode(logType: string, encoded: Uint8Array) {
@@ -26,10 +26,19 @@ function decode(logType: string, encoded: Uint8Array) {
     return { type, message: pojo };
 }
 
+const MAX_BUNDLES_TO_PROCESS = 100;
+const MAX_MESSAGES_PER_BUNDLE_TO_PROCESS = 100;
+const MAX_METRICS_PER_TYPE_TO_PROCESS = 100;
+const MAX_TAGS_PER_METRIC = 10;
+
 class CoreEnvelopeProcessor {
     private readonly _log: (...params: unknown[]) => void;
     private readonly _warn: (...params: unknown[]) => void;
     private readonly _error: (...params: unknown[]) => void;
+    private readonly _maxBundles?: number;
+    private readonly _maxMessages?: number;
+    private readonly _maxMetrics?: number;
+    private readonly _maxTags?: number;
 
     constructor(options?: CoreEnvelopeProcessingOptions) {
         if (options && typeof options.logMethod === 'function') {
@@ -49,11 +58,17 @@ class CoreEnvelopeProcessor {
         } else {
             this._error = console.error.bind(console);
         }
+
+        this._maxBundles = options?.maxBundlesToProcess || MAX_BUNDLES_TO_PROCESS;
+        this._maxMessages =
+            options?.maxMessagesPerBundleToProcess || MAX_MESSAGES_PER_BUNDLE_TO_PROCESS;
+        this._maxMetrics = options?.maxMetricsPerTypeToProcess || MAX_METRICS_PER_TYPE_TO_PROCESS;
+        this._maxTags = options?.maxTagsPerMetric || MAX_TAGS_PER_METRIC;
     }
 
     processDiagnostics(envelope: CoreEnvelope): void {
         this._log('DIAGS', envelope.diagnostics);
-        const whenGen: string = whenText(envelope.diagnostics.generatedTimestamp);
+        const whenGen: string = whenText(envelope.diagnostics?.generatedTimestamp);
         this._log(`Core envelope generated at ${whenGen}`);
     }
 
@@ -62,20 +77,26 @@ class CoreEnvelopeProcessor {
     }
 
     processBundles(envelope: CoreEnvelope): void {
-        if (!envelope.bundles) {
+        const bundleCount = envelope?.bundles?.length;
+        if (!bundleCount) {
             this._log('NO BUNDLES.');
             return;
         }
-        for (let i = 0; i < envelope.bundles.length; i += 1) {
+
+        const limitBundleCount = Math.min(bundleCount, this._maxBundles);
+        for (let i = 0; i < limitBundleCount; i += 1) {
             const { schemaName, messages }: { schemaName: string; messages: LogMessage[] } =
                 envelope.bundles[i];
 
-            this._log(`BUNDLE #${i} has ${messages.length} messages of schema = '${schemaName}' `);
+            const msgCount = messages?.length || 0;
+
+            this._log(`BUNDLE #${i} has ${msgCount} messages of schema = '${schemaName}' `);
 
             // Recognizing only top-level schemas
             const isKnown: boolean = schemas.has(schemaName);
             if (isKnown) {
-                for (let j = 0; j < messages.length; j += 1) {
+                const limitMsgCount = Math.min(msgCount, this._maxMessages);
+                for (let j = 0; j < limitMsgCount; j += 1) {
                     const msg: LogMessage = messages[j];
 
                     const label = `MSG #${j}`;
@@ -91,9 +112,15 @@ class CoreEnvelopeProcessor {
                     this.processPayload(`${label} app payload`, msg.appPayload);
                     this.processPayload(`${label} page payload`, msg.pagePayload);
                 }
+                if (limitMsgCount < msgCount) {
+                    this._warn(`Skipped remaining ${msgCount - limitMsgCount} messages.`);
+                }
             } else {
                 this._warn(`Schema '${schemaName}' is UNKNOWN.`);
             }
+        }
+        if (limitBundleCount < bundleCount) {
+            this._warn(`Skipped remaining ${bundleCount - limitBundleCount} bundles.`);
         }
     }
 
@@ -164,78 +191,112 @@ class CoreEnvelopeProcessor {
     }
 
     processUpCounters(counters: UpCounter[]) {
-        const count = counters && counters.length;
+        const count = counters?.length;
         if (!count) {
             this._log(`No Up Counters.`);
             return;
         }
 
-        for (let i = 0; i < count; i += 1) {
+        const limitCount = Math.min(count, this._maxMetrics);
+        for (let i = 0; i < limitCount; i += 1) {
             const label = `UPC #${i}`;
             const c = counters[i];
-            this._log(`${label} name          :`, c.name);
-            this._log(`${label} owner app name:`, c.ownerAppName);
-            this._log(`${label} owner name    :`, c.ownerName);
-            this._log(`${label} tags          :`, this.getMetricsTags(c.tags));
-            this._log(`${label} value         :`, c.value);
-            this._log(`${label} created       :`, whenText(c.createdTimestamp));
-            this._log(`${label} last updated  :`, whenText(c.lastUpdatedTimestamp));
+            const tagCount = c?.tags?.length || 0;
+
+            this._log(`${label} name          : `, c.name);
+            this._log(`${label} owner app name: `, c.ownerAppName);
+            this._log(`${label} owner name    : `, c.ownerName);
+            this._log(`${label} tags          : `, this.getMetricsTags(c.tags, this._maxTags));
+            this._log(`${label} value         : `, c.value);
+            this._log(`${label} created       : `, whenText(c.createdTimestamp));
+            this._log(`${label} last updated  : `, whenText(c.lastUpdatedTimestamp));
+
+            if (this._maxTags < tagCount) {
+                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tags.`);
+            }
+        }
+        if (limitCount < count) {
+            this._warn(`Skipped remaining ${count - limitCount} Up Counter(s).`);
         }
     }
 
     processValueRecorders(valueRecorders: ValueRecorder[]) {
-        const count = valueRecorders && valueRecorders.length;
+        const count = valueRecorders?.length;
         if (!count) {
             this._log(`No Value Recorders.`);
             return;
         }
-        for (let i = 0; i < count; i += 1) {
+        const limitCount = Math.min(count, this._maxMetrics);
+        for (let i = 0; i < limitCount; i += 1) {
             const label = `VR  #${i}`;
             const v = valueRecorders[i];
             const vals = v.values;
             const valuesText = vals ? (vals.length ? vals.join(', ') : 'Empty') : 'UNDEFINED';
-            this._log(`${label} name          :`, v.name);
-            this._log(`${label} owner app name:`, v.ownerAppName);
-            this._log(`${label} owner name    :`, v.ownerName);
-            this._log(`${label} tags          :`, this.getMetricsTags(v.tags));
-            this._log(`${label} values        :`, valuesText);
-            this._log(`${label} created       :`, whenText(v.createdTimestamp));
-            this._log(`${label} last updated  :`, whenText(v.lastUpdatedTimestamp));
+            const tagCount = v?.tags?.length || 0;
+
+            this._log(`${label} name          : `, v.name);
+            this._log(`${label} owner app name: `, v.ownerAppName);
+            this._log(`${label} owner name    : `, v.ownerName);
+            this._log(`${label} tags          : `, this.getMetricsTags(v.tags, this._maxTags));
+            this._log(`${label} values        : `, valuesText);
+            this._log(`${label} created       : `, whenText(v.createdTimestamp));
+            this._log(`${label} last updated  : `, whenText(v.lastUpdatedTimestamp));
+
+            if (this._maxTags < tagCount) {
+                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tags.`);
+            }
+        }
+        if (limitCount < count) {
+            this._warn(`Skipped remaining ${count - limitCount} Value Recorder(s).`);
         }
     }
 
     processBucketHistograms(bucketHistograms: BucketHistogram[]) {
-        const count = bucketHistograms && bucketHistograms.length;
+        const count = bucketHistograms?.length;
         if (!count) {
             this._log(`No Bucket Histograms.`);
             return;
         }
-        for (let i = 0; i < count; i += 1) {
+
+        const limitCount = Math.min(count, this._maxMetrics);
+        for (let i = 0; i < limitCount; i += 1) {
             const label = `BH  #${i}`;
             const b = bucketHistograms[i];
             const bucs = b.buckets;
             const bucketsText = bucs ? (bucs.length ? bucs.join(', ') : 'Empty') : 'UNDEFINED';
             const vals = b.values;
             const valuesText = vals ? (vals.length ? vals.join(', ') : 'Empty') : 'UNDEFINED';
-            this._log(`${label} name          :`, b.name);
-            this._log(`${label} owner app name:`, b.ownerAppName);
-            this._log(`${label} owner name    :`, b.ownerName);
-            this._log(`${label} tags          :`, this.getMetricsTags(b.tags));
-            this._log(`${label} buckets       :`, bucketsText);
-            this._log(`${label} values        :`, valuesText);
-            this._log(`${label} created       :`, whenText(b.createdTimestamp));
-            this._log(`${label} last updated  :`, whenText(b.lastUpdatedTimestamp));
+            const tagCount = b?.tags?.length || 0;
+
+            this._log(`${label} name          : `, b.name);
+            this._log(`${label} owner app name: `, b.ownerAppName);
+            this._log(`${label} owner name    : `, b.ownerName);
+            this._log(`${label} tags          : `, this.getMetricsTags(b.tags, this._maxTags));
+            this._log(`${label} buckets       : `, bucketsText);
+            this._log(`${label} values        : `, valuesText);
+            this._log(`${label} created       : `, whenText(b.createdTimestamp));
+            this._log(`${label} last updated  : `, whenText(b.lastUpdatedTimestamp));
+
+            if (this._maxTags < tagCount) {
+                this._warn(`${label}: Skipped ${tagCount - this._maxTags} tags.`);
+            }
+        }
+        if (limitCount < count) {
+            this._warn(`Skipped remaining ${count - limitCount} Bucket Histogram(s).`);
         }
     }
 
-    getMetricsTags(tagsArray: MetricTag[]) {
+    getMetricsTags(tagsArray: MetricTag[], limit: number) {
         if (!tagsArray) {
             return 'Undefined';
         }
         if (!tagsArray.length) {
             return 'EMPTY';
         }
-        return tagsArray.map((tag) => `${tag.name}=${tag.value} `).join(', ');
+        return tagsArray
+            .slice(0, limit)
+            .map((tag) => `${tag.name}=${tag.value} `)
+            .join(', ');
     }
 
     processEncodedEnvelope(encodedEnvelope: Uint8Array): boolean {
