@@ -2,6 +2,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import helmet from 'helmet';
+import { HelmetOptions } from 'helmet/dist/types/index';
+
 import path from 'path';
 import { URL } from 'url';
 import { processCoreEnvelope } from './coreEnvelope';
@@ -15,23 +18,18 @@ const LOG_HEADERS = process.env.O11Y_LOG_HEADERS === 'true' || false;
 const __dirname = new URL('.', import.meta.url).pathname;
 const DIST_DIR = path.resolve(__dirname, '..', 'dist-client');
 
-const app = express();
+const helmetOptions: HelmetOptions = {};
+if (SERVE_WEB) {
+    // NOTE: Make sure to test any changes you make to these options by
+    // hard-reloading the web page, even if it seems to work otherwise.
+    Object.assign(helmetOptions, {
+        contentSecurityPolicy: false
+    } as HelmetOptions);
+}
 
-// .use(bodyParser.urlencoded({
-//     extended: true
-// }))
-// .use(express.json({
-//     extended: true,
-//     inflate: true,
-//     limit: '100kb',
-//     parameterLimit: 1000,
-//     strict: false,
-//     //type: 'application/x-www-form-urlencoded',
-//     type: 'application/json',
-//     verify: undefined
-// }))
-
-app.use(cors())
+const app = express()
+    .use(cors())
+    .use(helmet(helmetOptions))
     .use(
         bodyParser.json({
             type: 'application/json'
