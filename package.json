@@ -46,5 +46,12 @@
         "packages": [
             "packages/*"
         ]
+    },
+    "resolutions": {
+        "browserslist": "4.20.2",
+        "glob-parent": "6.0.2",
+        "immer": "9.0.12",
+        "minimist": "1.2.6",
+        "node-forge": "1.3.0"
     }
 }

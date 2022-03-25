@@ -23,13 +23,15 @@ yarn start  # or yarn start:both to create separate server processes
 
 ## Version handling
 
-1. Update `environment.appVersion` in [app.ts](packages/client/src/modules/my/app/app.ts).
-
-2. Execute:
+1. Update `environment.appVersion` in [app.ts](packages/client/src/modules/my/app/app.ts). 
+2. Commit your change and push.
+3. Execute:
 
 ```sh
 yarn lerna version PLACEHOLDER # replace PLACEHOLDER with patch, minor or major as appropriate
 ```
+
+3. Check that the version in [app.ts](packages/client/src/modules/my/app/app.ts), [lerna.json](lerna.json) client [package.json](packages/client/package.json), and server [package.json](packages/server/package.json) are the same.
 
 ## Publishing to Heroku
 
