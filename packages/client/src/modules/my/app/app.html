@@ -3,7 +3,9 @@
         <div class="row1">
             <lightning-icon class="app-icon" icon-name="standard:metrics" size="medium"></lightning-icon>
             <span class="app-title">Observability (o11y) Sample App<span class="app-version"> {environment.sdkVersion}.{environment.appVersion}</span></span>
-            <a class="doc-link slds-m-horizontal_medium" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank">Documentation</a>
+            <a class="doc-link slds-m-horizontal_medium" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home" target="_blank" rel="noopener noreferrer"
+                >Documentation</a
+            >
             <div class="collector-stats">
                 <span if:true={showCoreCollectorStats}>
                     <span class="stat-label">Core Collector Logs: </span>
@@ -91,7 +93,7 @@
                                     <ol>
                                         <li>
                                             <span>First define the structure of your message as a schema, and create a PR to add it to the </span>
-                                            <a href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema" target="_blank">schema repo</a>.
+                                            <a href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema" target="_blank" rel="noopener noreferrer">schema repo</a>.
                                         </li>
                                         <li>
                                             If applicable, add or update the dependency on the NPM module
@@ -111,10 +113,13 @@
                                     <span class="header">To log a sample message:</span>
                                     <p>
                                         This page logs data that complies with the
-                                        <a href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto" target="_blank"
+                                        <a
+                                            href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             >sample schema</a
                                         >. Schemas are defined using
-                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank"> proto3</a>
+                                        <a href="https://developers.google.com/protocol-buffers/docs/proto3" target="_blank" rel="noopener noreferrer"> proto3</a>
                                         syntax. A snapshot of this schema is as follows:
                                     </p>
                                     <pre class="proto3">
@@ -138,7 +143,10 @@
                                     <pre>this.instr.error(err); // err is an instance of Error</pre>
                                     <p>
                                         <span>For other usages, please refer to the </span>
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error" target="_blank"
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-error"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             >error API documentation</a
                                         >.
                                     </p>
@@ -159,7 +167,10 @@
                                     </pre>
                                     <p>
                                         For other usages, please refer to the&nbsp;
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity" target="_blank"
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-startActivity"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             >startActivity API documentation</a
                                         >.
                                     </p>
@@ -195,7 +206,10 @@
                                     </p>
                                     <p>
                                         For more detail, please refer to the&nbsp;
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent" target="_blank"
+                                        <a
+                                            href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#InstrumentationObject-domEvent"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             >domEvent API documentation</a
                                         >.
                                     </p>
@@ -227,7 +241,8 @@
                                     </p>
                                     <p>
                                         <span>For more info, please refer to the </span>
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y" target="_blank">Metrics in o11y documentation</a>.
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Metrics+in+o11y" target="_blank" rel="noopener noreferrer">Metrics in o11y documentation</a
+                                        >.
                                     </p>
                                 </div>
                                 <div slot="play">
@@ -247,12 +262,14 @@
                                     <pre>this.instrApp.networkInstrumentation(true);</pre>
                                     <p>
                                         <span>Note: This is an </span>
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object" target="_blank">app-level method</a>
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object" target="_blank" rel="noopener noreferrer"
+                                            >app-level method</a
+                                        >
                                         <span> obtained by the app via a call to registerInstrumentedApp.</span>
                                     </p>
                                     <p>
                                         <span>For more info, please refer to the </span>
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation" target="_blank"
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/o11y+Built-in+Network+Instrumentation" target="_blank" rel="noopener noreferrer"
                                             >Network Instrumentation documentation</a
                                         >.
                                     </p>
@@ -290,7 +307,8 @@
                             <my-app-section label={labelIdleDetector}>
                                 <div slot="doc">
                                     <p>
-                                        The o11y library includes an <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector" target="_blank">Idle Detector</a>&nbsp;that
+                                        The o11y library includes an
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector" target="_blank" rel="noopener noreferrer">Idle Detector</a>&nbsp;that
                                         notifies interested parties when the next idle is detected. It works in cooperation with Idle Detector Components (IDCs) that opt-in.
                                     </p>
                                     <p>There are 3 types of IDCs:</p>
@@ -325,7 +343,7 @@
                                     </ul>
                                     <p>
                                         <span>For details on the Salesforce server end-point, please refer to the </span>
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint" target="_blank">Server Endpoint</a>
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint" target="_blank" rel="noopener noreferrer">Server Endpoint</a>
                                         <span> documentation.</span>
                                     </p>
                                     <p>
@@ -335,7 +353,9 @@
                                     <ol>
                                         <li>
                                             <span>Configure CORS on the server (</span>
-                                            <a target="_blank" href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#">Official Documentation</a>
+                                            <a target="_blank" rel="noopener noreferrer" href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#"
+                                                >Official Documentation</a
+                                            >
                                             <span>)</span>
                                             <ol>
                                                 <li>From Setup, enter CORS in the Quick Find box, then select CORS.</li>
@@ -353,12 +373,18 @@
                                             >
                                             <ol>
                                                 <li
-                                                    ><a target="_blank" href="https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related"
+                                                    ><a
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        href="https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai/related"
                                                         >Cross Domain - CORS</a
                                                     ></li
                                                 >
                                                 <li
-                                                    ><a target="_blank" href="https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related"
+                                                    ><a
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        href="https://chrome.google.com/webstore/detail/disable-content-security/ieelmcmcagommplceebfedjlakkhpden/related"
                                                         >Disable Content-Security-Policy</a
                                                     ></li
                                                 >

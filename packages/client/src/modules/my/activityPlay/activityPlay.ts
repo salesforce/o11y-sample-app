@@ -19,6 +19,8 @@ export default class ActivityPlay extends LightningElement {
             case 'activity3':
                 this.activity3 = name;
                 break;
+            default:
+                throw new Error('Unrecognized activity name in data-name');
         }
     }
 }
