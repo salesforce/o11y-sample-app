@@ -1,7 +1,3 @@
-# ** ARCHIVED **
-
-> This is the original and deprecated repo for the o11y-sample-app. Please go to [the repo on github.com](https://github.com/salesforce/o11y-sample-app)
-
 # o11y Sample App
 
 This stand-alone LWC app demonstrates the use of the `o11y` instrumentation platform. It comes with a built-in server to receive instrumentation collected on the client-side, but it can also be configured to direct traffic to a Salesforce instance.
