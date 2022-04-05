@@ -81,7 +81,7 @@ export default class App extends LightningElement implements LogCollector {
 
     @track readonly environment = {
         appName: 'o11y-sample-app',
-        appVersion: '7.2', // Keep this up-to-date with package.json
+        appVersion: '8.0', // Keep this up-to-date with package.json
         appExperience: 'Sample',
         deviceId: 'Unknown',
         deviceModel: 'Unknown',
