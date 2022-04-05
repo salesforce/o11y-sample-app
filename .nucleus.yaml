@@ -1,0 +1,5 @@
+steps:
+    # Documentation: https://confluence.internal.salesforce.com/display/UIPLAT/Job+Steps
+    # Default steps: https://git.soma.salesforce.com/uiplatform/nucleus-pb/blob/master/src/config/nucleus.yaml
+    node-build:
+        enabled: true
