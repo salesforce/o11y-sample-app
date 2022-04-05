@@ -2,6 +2,7 @@ import { LightningElement, track, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
 import { Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
 import { ComponentUtils } from '../../shared/componentUtils';
+import { userPayloadSchema } from 'o11y_schema/sf_o11ySample'
 
 export default class PromptPlay extends LightningElement {
     private readonly _instr: Instrumentation;
@@ -17,7 +18,7 @@ export default class PromptPlay extends LightningElement {
         this._aggregatedData = new Array();
 
         this._instr.registerForLogPrompt((reason: string) => {
-            this._instr.log(`${this._aggregatedData}`);
+            this._instr.log(userPayloadSchema, { recordIds: this._aggregatedData });
         });
     }
 
@@ -33,7 +34,7 @@ export default class PromptPlay extends LightningElement {
         this.counter++
     }
 
-    handleStringInputChange(event: CustomEvent){
+    handleStringInputChange(event: CustomEvent) {
         this.stringInput = event.detail.value;
     }
 
@@ -42,10 +43,10 @@ export default class PromptPlay extends LightningElement {
     }
 
     static getRandomAlphaNumericString(length: number): string {
-        var result           = '';
-        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var result = '';
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
+        for (var i = 0; i < length; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
