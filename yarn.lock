@@ -2389,10 +2389,10 @@
     postcss-value-parser "~4.1.0"
     string.prototype.matchall "^4.0.5"
 
-"@lwc/synthetic-shadow@2.10.0":
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/@lwc/synthetic-shadow/-/synthetic-shadow-2.10.0.tgz#7b6c38d8cf8e61886cbce945cf73d1c4dd41b986"
-  integrity sha512-1g2st6tz7oYikbrx7iicALiES+h2f3JGckAbwniTJ+LX7mr6U4+VHScEQnwJAjNU6V1gelTRNRPRf+2gXmk2fg==
+"@lwc/synthetic-shadow@2.12.1":
+  version "2.12.1"
+  resolved "https://registry.npmjs.org/@lwc/synthetic-shadow/-/synthetic-shadow-2.12.1.tgz#6f1b9eba24e7967f0827aa42bbb4219077b2a026"
+  integrity sha512-KZdyW1eK0ngui/JLEhi5pyQ4g7xZneXvMC4NZMJ3EsZLrsIpJ1AAqmvOGjimeFQh3/JjIsFZoYnWpQjTOPLf8A==
 
 "@lwc/synthetic-shadow@2.5.13", "@lwc/synthetic-shadow@~2.5.2":
   version "2.5.13"
