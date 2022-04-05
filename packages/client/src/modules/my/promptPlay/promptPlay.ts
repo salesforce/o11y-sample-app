@@ -50,5 +50,4 @@ export default class PromptPlay extends LightningElement {
         }
         return result;
     }
-    
 }
