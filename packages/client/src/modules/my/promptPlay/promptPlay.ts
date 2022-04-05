@@ -10,7 +10,6 @@ export default class PromptPlay extends LightningElement {
 
     @track counter = 0;
     @track stringInput = PromptPlay.getRandomAlphaNumericString(PromptPlay.RANDOM_RECORD_ID_LEN)
-    @api recordId: string;
 
     constructor() {
         super();

@@ -8,15 +8,10 @@ export default class MetricsPlay extends LightningElement {
     @track counterName = 'My up counter';
     @track increment = 1;
     @track hasErrorForCounter = false;
-    @track isGlobalTagDisable = true;
     @track isCounterTagsDisabled = true;
     @track stringTagForCounter = 'A Counter Tag';
     @track booleanTagForCounter = true;
     @track numberTagForCounter = 123;
-
-    @track stringGlobalTag = "Global string tag";
-    @track booleanGlobalTag = true;
-    @track numberGlobalTag = 777
 
     @track valueRecorderName = 'My value recorder';
     @track vrValue = 0;
@@ -38,20 +33,6 @@ export default class MetricsPlay extends LightningElement {
     constructor() {
         super();
         this._instr = getInstrumentation('MetricsPlay');
-    }
-
-    // Global tags handler
-    handleUseGlobalTagsChange(event: CustomEvent): void {
-        this.isGlobalTagDisable = !event.detail.checked;
-    }
-    handleStringGlobalTagChange(event: CustomEvent): void {
-        this.stringGlobalTag = event.detail.value;
-    }
-    handleBooleanGlobalTagChange(event: CustomEvent): void {
-        this.booleanGlobalTag = Boolean(event.detail.checked);
-    }
-    handleNumberGlobalTagChange(event: CustomEvent): void {
-        this.numberGlobalTag = Number(event.detail.value);
     }
 
     // Counter handlers

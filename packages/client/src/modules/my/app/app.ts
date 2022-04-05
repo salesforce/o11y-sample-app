@@ -138,13 +138,6 @@ export default class App extends LightningElement implements LogCollector {
         // STEP 5: Optional: Enable network instrumentation
         // this.instrApp.networkInstrumentation(true);
         // For the sample app, we will leave it up to the user turn it on/off as needed
-
-        // STEP 6: Optionally tie window lifecycle to log prompts
-        document.addEventListener('visibilitychange', () => {
-            if (document.visibilityState === 'hidden') {
-                this._instrApp.promptLogCollection('Page Visibility Hidden');
-            }
-        });
     }
 
     private _getCoreCollector(): CoreCollectorType {
