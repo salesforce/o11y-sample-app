@@ -157,11 +157,36 @@ class CoreEnvelopeProcessor {
         const metrics = envelope.metrics;
         this._log(`METRICS: ${metrics ? '' : 'Empty.'}`);
         if (metrics) {
+            // this.processGlobalMetrics(metrics.globalMetricTags, metrics.upCounters, metrics.valueRecorders, metrics.bucketHistograms);
             this.processUpCounters(metrics.upCounters);
             this.processValueRecorders(metrics.valueRecorders);
             this.processBucketHistograms(metrics.bucketHistograms);
         }
     }
+
+    // processGlobalMetrics(
+    //     globalMetrics: MetricTag[],
+    //     counters: UpCounter[],
+    //     valueRecorders: ValueRecorder[],
+    //     bucketHistograms: BucketHistogram[]
+    // ) {
+    //     if (!globalMetrics) return
+    //
+    //     if (counters && counters.length) {
+    //     counters.forEach(counter =>
+    //         globalMetrics.forEach(globalMetric => counter.tags.push(globalMetric))
+    //     )}
+    //
+    //     if (valueRecorders && valueRecorders.length) {
+    //     valueRecorders.forEach(valueRecorder =>
+    //         globalMetrics.forEach(globalMetric => valueRecorder.tags.push(globalMetric))
+    //     )}
+    //
+    //     if (bucketHistograms && bucketHistograms.length) {
+    //     bucketHistograms.forEach(bucketHistogram =>
+    //         globalMetrics.forEach(globalMetric => bucketHistogram.tags.push(globalMetric))
+    //     )}
+    // }
 
     processUpCounters(counters: UpCounter[]) {
         const count = counters && counters.length;

@@ -377,9 +377,38 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelLogAggregation} value={sectionLogAggregation} onactive={handleTabSelect} icon-name="standard:macros">
+                        <lightning-tab label={labelLogAggregation} value={sectionLogAggregation} onactive={handleTabSelect} icon-name="standard:fulfillment_order">
                             <my-app-section label={labelLogAggregation}>
-                                <div slot="doc"> <p>This is LogAggregation section</p></div>
+                                <div slot="doc"> 
+                                    <p> 
+                                        LogAggregator helps user aggregate logs using instrumentation client 
+                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-registerForLogPrompt"> registerForLogPrompt </a> 
+                                        api. <br />
+                                        This lets user register log messages which would be logged when instrumentation app is prompted using 
+                                        <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection"> promptLogCollection </a> 
+                                        api. <br />
+                                        <br />
+                                        This enables instrumentation clients to aggregate data and log them when needed like at the end of form submission, part of app lifecycle completes etc.
+                                        This allows user to aggregate data at different point in transaction and call log once to log their data when transaction completes. <b>P.S:</b> Users should clear 
+                                        the data structure used to store data once it is logged to avoid duplicates.<br />
+                                        <br />
+                                        <b>Note:</b> registerForLogPrompt api does has its limitation on size of log message which is 25 characters. Everything after that will be truncated. <br />
+                                        <b>API Reference:</b>
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection">
+                                                PromptLogCollection API
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-registerForLogPrompt">
+                                                RegisterForLogPrompt API
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    
+                                </div>
                                 <div slot="play">
                                     <my-prompt-play onpromptrequest={handlePromptRequest}> </my-prompt-play>
                                 </div>

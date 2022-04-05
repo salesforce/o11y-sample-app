@@ -1,4 +1,25 @@
 <template>
-    <p>Counter: {counter}</p>
-    <lightning-button label="prompt" onclick={handleRequestPrompt}></lightning-button>
+    <p class="header">Aggregate and Flush Logs</p>
+    <div class="head-stats">
+        <span class="stat-label">Logs Aggregated: </span>
+        <lightning-badge label={counter}></lightning-badge>
+    </div>
+    <p>
+        In this example, input gets pushed to an array as part of aggregation process. Input is populated with auto-generated alpha-numeric string. 
+        Use aggregate button to aggregate input. Use skip to get next available alpha-numeric random string. Use PromptLogCollection to log the array.
+    </p>
+    <lightning-layout vertical-align="end">
+        <lightning-layout-item padding="around-small">
+            <lightning-input type="text" name="inputString" value={stringInput} onchange={handleStringInputChange} maxlength="25" label="Input"></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button  label="Aggregate" title="Calls the log API with the specified values" onclick={handleAggregate} ></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button  label="Skip" title="Skips the generated value" onclick={handleSkip} ></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button variant="brand" class="slds-button slds-button_brand" label="PromptLogCollection" onclick={handlePromptLogCollection}></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
 </template>

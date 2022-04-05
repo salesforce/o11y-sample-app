@@ -9,6 +9,44 @@
     <lightning-layout>
         <lightning-layout-item>
             <div class="slds-p-around_medium">
+                <lightning-input class="slds-p-vertical_xx-small" type="checkbox" label="Use Global Tags ⬇" name="useGlobalTags" checked={useGlobalTags} onchange={handleUseGlobalTagsChange}>
+                </lightning-input>
+                <lightning-input
+                        class="slds-p-vertical_xx-small"
+                        type="text"
+                        name="stringGlobalTag"
+                        label="String Tag"
+                        placeholder="Enter some text"
+                        disabled={isGlobalTagDisable}
+                        value={stringGlobalTag}
+                        onchange={handleStringGlobalTagChange}
+                >
+                </lightning-input>
+                <lightning-input
+                        class="slds-p-vertical_xx-small"
+                        type="checkbox"
+                        name="booleanGlobalTag"
+                        label="Boolean Tag"
+                        disabled={isGlobalTagDisable}
+                        checked={booleanGlobalTag}
+                        onchange={handleBooleanGlobalTagChange}
+                >
+                </lightning-input>
+                <lightning-input
+                        class="slds-p-vertical_xx-small"
+                        type="number"
+                        name="numberGlobalTag"
+                        label="Number Tag"
+                        placeholder="Enter a numerical value"
+                        disabled={isGlobalTagDisable}
+                        value={numberGlobalTag}
+                        onchange={handleNumberGlobalTagChange}
+                >
+                </lightning-input>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <div class="slds-p-around_medium">
                 <p class="slds-form-element__label">
                     <a target="_blank" href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-incrementCounter">Up Counters</a>
                 </p>
