@@ -18,7 +18,9 @@ export default class PromptPlay extends LightningElement {
         this.accumulatedData = [];
 
         this._instr.registerForLogPrompt((reason: string) => {
-            this._instr.log(userPayloadSchema, { recordIds: this.accumulatedData });
+            if (this.accumulatedData.length) {
+                this._instr.log(userPayloadSchema, { recordIds: this.accumulatedData });
+            }
         });
     }
 

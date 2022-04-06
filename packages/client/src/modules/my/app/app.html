@@ -407,11 +407,11 @@
                             <my-app-section label={labelLogAccumulation}>
                                 <div slot="doc"> 
                                     <p>
-                                        Log aggregation gives instrumentation clients a way to avoid calling the log method too frequently and pay a performance and storage cost. 
+                                        Log accumulation is a way for instrumentation clients to avoid calling the log method too frequently and pay a performance and storage cost. 
                                         Clients can accumulate/aggregate instrumentation data in an internal data structure and choose to log it periodically. 
                                         In order to avoid losing accumulated data in case of an app-lifecycle event, o11y provides a way for the clients to be notified when that happens. 
                                         Clients use the 
-                                        <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-registerForLogPrompt"> registerForLogPrompt </a> 
+                                        <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=Instrumentation+Object#expand-registerForLogPrompt"> registerForLogPrompt </a> 
                                          method and provide a callback, in which they log their accumulated data and reset their internal data structure. 
                                         The app uses the 
                                         <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection"> promptLogCollection </a> 
