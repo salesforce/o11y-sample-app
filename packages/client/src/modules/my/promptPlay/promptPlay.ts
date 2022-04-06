@@ -1,16 +1,16 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
 import { Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
+import { userPayloadSchema } from 'o11y_schema/sf_o11ySample';
 import { ComponentUtils } from '../../shared/componentUtils';
-import { userPayloadSchema } from 'o11y_schema/sf_o11ySample'
 
 export default class PromptPlay extends LightningElement {
     private readonly _instr: Instrumentation;
-    private static readonly RANDOM_RECORD_ID_LEN: number = 8
+    private static readonly _randomRecordIdLength = 8;
 
     aggregatedData: string[];
 
-    @track recordId = PromptPlay.getRandomAlphaNumericString()
+    @track recordId = PromptPlay.getRandomAlphaNumericString();
 
     constructor() {
         super();
@@ -22,9 +22,9 @@ export default class PromptPlay extends LightningElement {
         });
     }
 
-    handlePromptLogCollection() {
+    handlePrompt() {
         ComponentUtils.raiseEvent(this, 'promptrequest');
-        this.aggregatedData = new Array()
+        this.aggregatedData = [];
     }
 
     handleTake() {
@@ -44,7 +44,7 @@ export default class PromptPlay extends LightningElement {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
-        for (var i = 0; i < PromptPlay.RANDOM_RECORD_ID_LEN; i++) {
+        for (var i = 0; i < PromptPlay._randomRecordIdLength; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
