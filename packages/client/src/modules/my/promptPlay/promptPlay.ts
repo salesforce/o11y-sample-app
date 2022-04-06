@@ -8,27 +8,27 @@ export default class PromptPlay extends LightningElement {
     private readonly _instr: Instrumentation;
     private static readonly _randomRecordIdLength = 8;
 
-    aggregatedData: string[];
+    accumulatedData: string[];
 
     @track recordId = PromptPlay.getRandomAlphaNumericString();
 
     constructor() {
         super();
         this._instr = getInstrumentation('PromptPlay');
-        this.aggregatedData = [];
+        this.accumulatedData = [];
 
         this._instr.registerForLogPrompt((reason: string) => {
-            this._instr.log(userPayloadSchema, { recordIds: this.aggregatedData });
+            this._instr.log(userPayloadSchema, { recordIds: this.accumulatedData });
         });
     }
 
     handlePrompt() {
         ComponentUtils.raiseEvent(this, 'promptrequest');
-        this.aggregatedData = [];
+        this.accumulatedData = [];
     }
 
     handleTake() {
-        this.aggregatedData.push(this.recordId);
+        this.accumulatedData.push(this.recordId);
         this.recordId = PromptPlay.getRandomAlphaNumericString();
     }
 
