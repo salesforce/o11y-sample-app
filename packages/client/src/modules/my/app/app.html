@@ -403,37 +403,20 @@
                                 </div>
                             </my-app-section>
                         </lightning-tab>
-                        <lightning-tab label={labelLogAggregation} value={sectionLogAggregation} onactive={handleTabSelect} icon-name="standard:fulfillment_order">
-                            <my-app-section label={labelLogAggregation}>
+                        <lightning-tab label={labelLogAccumulation} value={sectionLogAccumulation} onactive={handleTabSelect} icon-name="standard:fulfillment_order">
+                            <my-app-section label={labelLogAccumulation}>
                                 <div slot="doc"> 
-                                    <p> 
-                                        LogAggregator helps user aggregate logs using instrumentation client 
+                                    <p>
+                                        Log aggregation gives instrumentation clients a way to avoid calling the log method too frequently and pay a performance and storage cost. 
+                                        Clients can accumulate/aggregate instrumentation data in an internal data structure and choose to log it periodically. 
+                                        In order to avoid losing accumulated data in case of an app-lifecycle event, o11y provides a way for the clients to be notified when that happens. 
+                                        Clients use the 
                                         <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-registerForLogPrompt"> registerForLogPrompt </a> 
-                                        api. <br />
-                                        This lets user register log messages which would be logged when instrumentation app is prompted using 
+                                         method and provide a callback, in which they log their accumulated data and reset their internal data structure. 
+                                        The app uses the 
                                         <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection"> promptLogCollection </a> 
-                                        api. <br />
-                                        <br />
-                                        This enables instrumentation clients to aggregate data and log them when needed like at the end of form submission, part of app lifecycle completes etc.
-                                        This allows user to aggregate data at different point in transaction and call log once to log their data when transaction completes. <b>P.S:</b> Users should clear 
-                                        the data structure used to store data once it is logged to avoid duplicates.<br />
-                                        <br />
-                                        <b>Note:</b> registerForLogPrompt api does has its limitation on size of log message which is 25 characters. Everything after that will be truncated. <br />
-                                        <b>API Reference:</b>
+                                        method when an important app-lifecycle event occurs.
                                     </p>
-                                    <ul>
-                                        <li>
-                                            <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection">
-                                                PromptLogCollection API
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://confluence.internal.salesforce.com/display/LIGHTINS/Instrumentation+Object#expand-registerForLogPrompt">
-                                                RegisterForLogPrompt API
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    
                                 </div>
                                 <div slot="play">
                                     <my-prompt-play onpromptrequest={handlePromptRequest}> </my-prompt-play>

@@ -7,46 +7,44 @@ import { userPayloadSchema } from 'o11y_schema/sf_o11ySample'
 export default class PromptPlay extends LightningElement {
     private readonly _instr: Instrumentation;
     private static readonly RANDOM_RECORD_ID_LEN: number = 8
-    private _aggregatedData: string[];
 
-    @track counter = 0;
-    @track stringInput = PromptPlay.getRandomAlphaNumericString(PromptPlay.RANDOM_RECORD_ID_LEN)
+    aggregatedData: string[];
+
+    @track recordId = PromptPlay.getRandomAlphaNumericString()
 
     constructor() {
         super();
         this._instr = getInstrumentation('PromptPlay');
-        this._aggregatedData = new Array();
+        this.aggregatedData = [];
 
         this._instr.registerForLogPrompt((reason: string) => {
-            this._instr.log(userPayloadSchema, { recordIds: this._aggregatedData });
+            this._instr.log(userPayloadSchema, { recordIds: this.aggregatedData });
         });
     }
 
     handlePromptLogCollection() {
         ComponentUtils.raiseEvent(this, 'promptrequest');
-        this.counter = 0
-        this._aggregatedData = new Array()
+        this.aggregatedData = new Array()
     }
 
-    handleAggregate() {
-        this._aggregatedData.push(this.stringInput);
-        this.stringInput = PromptPlay.getRandomAlphaNumericString(PromptPlay.RANDOM_RECORD_ID_LEN);
-        this.counter++
+    handleTake() {
+        this.aggregatedData.push(this.recordId);
+        this.recordId = PromptPlay.getRandomAlphaNumericString();
     }
 
-    handleStringInputChange(event: CustomEvent) {
-        this.stringInput = event.detail.value;
+    handleRecordIdChange(event: CustomEvent) {
+        this.recordId = event.detail.value;
     }
 
     handleSkip() {
-        this.stringInput = PromptPlay.getRandomAlphaNumericString(PromptPlay.RANDOM_RECORD_ID_LEN);
+        this.recordId = PromptPlay.getRandomAlphaNumericString();
     }
 
-    static getRandomAlphaNumericString(length: number): string {
-        var result = '';
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for (var i = 0; i < length; i++) {
+    static getRandomAlphaNumericString(): string {
+        let result = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for (var i = 0; i < PromptPlay.RANDOM_RECORD_ID_LEN; i++) {
             result += characters.charAt(Math.floor(Math.random() * charactersLength));
         }
         return result;
