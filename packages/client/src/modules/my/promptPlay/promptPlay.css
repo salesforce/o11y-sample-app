@@ -1,0 +1,20 @@
+p.header {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+p.subheader {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.stat-label {
+    font-weight: bold;
+    font-size: medium;
+    margin: 0 10px;
+    align-items: center;
+}
+
+.head-stats {
+    text-align: right;
+}

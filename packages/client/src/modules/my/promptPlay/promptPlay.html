@@ -1,0 +1,26 @@
+<template>
+    <p class="header">Accumulate and Log</p>
+    <div class="head-stats">
+        <span class="stat-label">Logs Accumulated: </span>
+        <lightning-badge label={accumulatedData.length}></lightning-badge>
+    </div>
+    <p>
+        In this example, the record ID provided in the input box will be accumulated when you click the "take" button and ignored if you click the "skip" button. 
+        In each case, a new record ID is generated for convenience. 
+        The user can simulate an app-lifecycle event by clicking the "prompt" button.
+    </p>
+    <lightning-layout vertical-align="end">
+        <lightning-layout-item padding="around-small">
+            <lightning-input type="text" name="inputString" value={recordId} onchange={handleRecordIdChange} maxlength="25" label="Input"></lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button  label="Take" title="Calls the log API with the specified values" onclick={handleTake} ></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button  label="Skip" title="Skips the generated value" onclick={handleSkip} ></lightning-button>
+        </lightning-layout-item>
+        <lightning-layout-item padding="around-small">
+            <lightning-button variant="brand" class="slds-button slds-button_brand" label="Prompt" onclick={handlePrompt}></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

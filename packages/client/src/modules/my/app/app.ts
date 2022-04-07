@@ -34,6 +34,7 @@ export default class App extends LightningElement implements LogCollector {
     @track labelServer = 'Core Collector';
     @track labelNetwork = 'Network Instrumentation';
     @track labelMetrics = 'Metrics';
+    @track labelLogAccumulation = 'Log Accumulation';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 
     @track sectionIntro = 'section_intro';
@@ -45,6 +46,7 @@ export default class App extends LightningElement implements LogCollector {
     @track sectionServer = 'section_server';
     @track sectionNetwork = 'section_network';
     @track sectionMetrics = 'section_metrics';
+    @track sectionLogAccumulation = 'section_log_accumulation';
 
     private readonly _sectionToLabelMap = new Map<string, string>()
         .set(this.sectionIntro, this.labelIntro)
@@ -55,7 +57,8 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionIdleDetector, this.labelIdleDetector)
         .set(this.sectionServer, this.labelServer)
         .set(this.sectionNetwork, this.labelNetwork)
-        .set(this.sectionMetrics, this.labelMetrics);
+        .set(this.sectionMetrics, this.labelMetrics)
+        .set(this.sectionLogAccumulation, this.labelLogAccumulation);
 
     private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;
@@ -78,7 +81,7 @@ export default class App extends LightningElement implements LogCollector {
 
     @track readonly environment = {
         appName: 'o11y-sample-app',
-        appVersion: '7.3', // Keep this up-to-date with package.json
+        appVersion: '8.0', // Keep this up-to-date with package.json
         appExperience: 'Sample',
         deviceId: 'Unknown',
         deviceModel: 'Unknown',
@@ -292,5 +295,9 @@ export default class App extends LightningElement implements LogCollector {
         } else {
             this._restoreFetch();
         }
+    }
+
+    handlePromptRequest() {
+        this._instrApp.promptLogCollection('Prompt Requested');
     }
 }
