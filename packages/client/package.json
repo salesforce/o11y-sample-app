@@ -8,6 +8,7 @@
         "@lwc/synthetic-shadow": "2.10.0",
         "@salesforce-ux/design-system": "2.17.5",
         "lightning-base-components": "1.14.4-alpha",
+        "lwc": "^2.12.1",
         "o11y": "238.6.1",
         "o11y_schema": "238.15.0"
     },
@@ -55,7 +56,6 @@
         "fork-ts-checker-webpack-plugin": "^7.2.3",
         "html-webpack-plugin": "^5",
         "lint-staged": "^10.5.3",
-        "lwc-services": "^3.2.2",
         "lwc-webpack-plugin": "^2",
         "prettier": "^2.5.1",
         "webpack": "^5",
