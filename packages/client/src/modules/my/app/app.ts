@@ -215,7 +215,7 @@ export default class App extends LightningElement implements LogCollector {
             this._instrApp.deactivateClickTracker();
         } else {
             this.clickTrackActive = true;
-            this._instrApp.activateClickTracker(this._instrApp);
+            this._instrApp.activateClickTracker();
         }
     }
 

@@ -37,20 +37,29 @@
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
-        "build:production": "lwc-services build -m production",
-        "build": "lwc-services build",
+        "build:production": "NODE_ENV=production webpack",
+        "build": "webpack",
         "lint": "eslint ./src/**/*.ts",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "start": "node scripts/server.js",
-        "watch": "lwc-services watch"
+        "watch": "webpack-dev-server"
     },
     "devDependencies": {
         "@types/estree": "0.0.50",
         "@types/express": "^4.17.13",
+        "copy-webpack-plugin": "^5",
+        "error-overlay-webpack-plugin": "^1",
+        "esbuild-loader": "^2.18.0",
         "eslint": "^7.32.0",
+        "fork-ts-checker-webpack-plugin": "^7.2.3",
+        "html-webpack-plugin": "^5",
         "lint-staged": "^10.5.3",
         "lwc-services": "^3.2.2",
-        "prettier": "^2.5.1"
+        "lwc-webpack-plugin": "^2",
+        "prettier": "^2.5.1",
+        "webpack": "^5",
+        "webpack-cli": "^3",
+        "webpack-dev-server": "^3"
     }
 }
