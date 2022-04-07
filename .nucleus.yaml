@@ -3,3 +3,6 @@ steps:
     # Default steps: https://git.soma.salesforce.com/uiplatform/nucleus-pb/blob/master/src/config/nucleus.yaml
     node-build:
         enabled: true
+    node-unit-tests:
+        run:
+            command: yarn test

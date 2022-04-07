@@ -36,7 +36,8 @@
         "start:server": "cd packages/server && yarn start",
         "watch:both": "run-p watch:client watch:server",
         "watch:client": "cd packages/client && yarn watch",
-        "watch:server": "cd packages/server && yarn watch"
+        "watch:server": "cd packages/server && yarn watch",
+        "test": "./scripts/check-yarn-lock.sh"
     },
     "devDependencies": {
         "lerna": "^4.0.0",
