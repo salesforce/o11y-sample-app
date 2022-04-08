@@ -37,6 +37,7 @@ module.exports = {
         }),
         new ForkTsCheckerPlugin(),
         new LwcWebpackPlugin({
+            // https://www.npmjs.com/package/lwc-webpack-plugin
             modules: [
                 {
                     dir: 'src/modules'
@@ -45,9 +46,6 @@ module.exports = {
                     npm: 'lightning-base-components'
                 }
             ]
-            // stylesheetConfig: {},
-            // outputConfig: {},
-            // experimentalDynamicComponent: {}
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'src', 'index.html')
