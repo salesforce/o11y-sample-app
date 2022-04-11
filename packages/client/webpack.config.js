@@ -6,7 +6,8 @@ const LwcWebpackPlugin = require('lwc-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-const mode = process.env.NODE_ENV || 'development';
+const devMode = 'development';
+const mode = process.env.NODE_ENV || devMode;
 const buildDir = path.join(__dirname, '..', '..', 'dist-client');
 
 module.exports = {
@@ -68,7 +69,7 @@ module.exports = {
                 to: path.join(buildDir, 'assets')
             }
         ]),
-        new ErrorOverlayPlugin()
+        ...(mode === devMode ? [new ErrorOverlayPlugin()] : [])
     ],
     devServer: {
         // https://webpack.js.org/configuration/dev-server
