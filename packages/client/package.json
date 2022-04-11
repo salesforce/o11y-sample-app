@@ -1,15 +1,16 @@
 {
     "name": "o11y-sample-client",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
-    "version": "238.8.0",
+    "version": "238.9.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
-        "@lwc/synthetic-shadow": "2.10.0",
+        "@lwc/synthetic-shadow": "2.12.1",
         "@salesforce-ux/design-system": "2.17.5",
-        "lightning-base-components": "1.14.4-alpha",
-        "o11y": "238.6.1",
-        "o11y_schema": "238.15.0"
+        "lightning-base-components": "1.14.6-alpha",
+        "lwc": "2.12.1",
+        "o11y": "238.9.0",
+        "o11y_schema": "238.24.0"
     },
     "engines": {
         "node": ">=14.16.0",
@@ -37,20 +38,28 @@
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
-        "build:production": "lwc-services build -m production",
-        "build": "lwc-services build",
+        "build:production": "NODE_ENV=production webpack",
+        "build": "webpack",
         "lint": "eslint ./src/**/*.ts",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "start": "node scripts/server.js",
-        "watch": "lwc-services watch"
+        "watch": "webpack-dev-server"
     },
     "devDependencies": {
         "@types/estree": "0.0.50",
         "@types/express": "^4.17.13",
+        "copy-webpack-plugin": "^5",
+        "error-overlay-webpack-plugin": "^1",
+        "esbuild-loader": "^2.18.0",
         "eslint": "^7.32.0",
+        "fork-ts-checker-webpack-plugin": "^7.2.3",
+        "html-webpack-plugin": "^5",
         "lint-staged": "^10.5.3",
-        "lwc-services": "^3.2.2",
-        "prettier": "^2.5.1"
+        "lwc-webpack-plugin": "^2",
+        "prettier": "^2.5.1",
+        "webpack": "^5",
+        "webpack-cli": "^3",
+        "webpack-dev-server": "^3"
     }
 }

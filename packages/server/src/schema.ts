@@ -1,12 +1,16 @@
 // Reminder: If adding schema imports from a new module, declare it in o11y_schema.d.ts
 import { actionSchema, transportSchema } from 'o11y_schema/sf_aura';
-import { explorerCardDataSchema, explorerInitLoadSchema } from 'o11y_schema/sf_automation';
+import {
+    explorerCardDataSchema,
+    explorerInitLoadSchema,
+    explorerReorderSchema
+} from 'o11y_schema/sf_automation';
 import {
     activitySchema,
     coreEnvelopeSchema,
     errorSchema,
     instrumentedEventSchema,
-    scenarioTrackerSchema,
+    scenarioTrackerSchema as deprecated_scenarioTrackerSchema,
     simpleSchema,
     webVitalsSchema
 } from 'o11y_schema/sf_instrumentation';
@@ -28,6 +32,13 @@ import {
     luvioStoreStatsSchema
 } from 'o11y_schema/sf_lds';
 import {
+    appPayloadSchema as lex_appPayloadSchema,
+    pageEndSchema,
+    pagePayloadSchema as lex_pagePayloadSchema,
+    pageviewDraftSchema,
+    scenarioTrackerSchema
+} from 'o11y_schema/sf_lex';
+import {
     appPrimingSchema,
     httpSchema,
     launchSchema,
@@ -38,7 +49,12 @@ import {
     resourceDownloadSchema,
     routePrimingSchema
 } from 'o11y_schema/sf_lightningsdk';
-import { sidePanelContentSchema } from 'o11y_schema/sf_lol';
+import {
+    homeOpenedSchema,
+    moduleOpenedCompletedSchema,
+    sidePanelContentSchema,
+    sidePanelSimpleEventSchema
+} from 'o11y_schema/sf_lol';
 import {
     bootstrapRequestSchema,
     mappingRequestSchema,
@@ -51,7 +67,7 @@ import {
 } from 'o11y_schema/sf_nimbus';
 import { userPayloadSchema, appPayloadSchema, pagePayloadSchema } from 'o11y_schema/sf_o11ySample';
 import { resultClickDemoSchema } from 'o11y_schema/sf_searchui';
-import { appStartSchema } from 'o11y_schema/sf_sfs';
+import { appInfoSchema, appStartSchema } from 'o11y_schema/sf_sfs';
 
 import { exampleSchema } from './schemas/exampleSchema';
 
@@ -77,12 +93,13 @@ export const schemas = new Map()
     // sf_automation
     .set(getSchemaId(explorerCardDataSchema), explorerCardDataSchema)
     .set(getSchemaId(explorerInitLoadSchema), explorerInitLoadSchema)
+    .set(getSchemaId(explorerReorderSchema), explorerReorderSchema)
     // sf_instrumentation
     .set(getSchemaId(activitySchema), activitySchema)
     .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
     .set(getSchemaId(errorSchema), errorSchema)
     .set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema)
-    .set(getSchemaId(scenarioTrackerSchema), scenarioTrackerSchema)
+    .set(getSchemaId(deprecated_scenarioTrackerSchema), deprecated_scenarioTrackerSchema)
     .set(getSchemaId(simpleSchema), simpleSchema)
     .set(getSchemaId(webVitalsSchema), webVitalsSchema)
     // sf_komaci
@@ -100,6 +117,12 @@ export const schemas = new Map()
     .set(getSchemaId(durableStoreReadSchema), durableStoreReadSchema)
     .set(getSchemaId(durableStoreWriteSchema), durableStoreWriteSchema)
     .set(getSchemaId(luvioStoreStatsSchema), luvioStoreStatsSchema)
+    // sf_lex
+    .set(getSchemaId(lex_appPayloadSchema), lex_appPayloadSchema)
+    .set(getSchemaId(pageEndSchema), pageEndSchema)
+    .set(getSchemaId(lex_pagePayloadSchema), lex_pagePayloadSchema)
+    .set(getSchemaId(pageviewDraftSchema), pageviewDraftSchema)
+    .set(getSchemaId(scenarioTrackerSchema), scenarioTrackerSchema)
     // sf_lightningsdk
     .set(getSchemaId(appPrimingSchema), appPrimingSchema)
     .set(getSchemaId(httpSchema), httpSchema)
@@ -111,7 +134,10 @@ export const schemas = new Map()
     .set(getSchemaId(resourceDownloadSchema), resourceDownloadSchema)
     .set(getSchemaId(routePrimingSchema), routePrimingSchema)
     // sf_lol
+    .set(getSchemaId(homeOpenedSchema), homeOpenedSchema)
+    .set(getSchemaId(moduleOpenedCompletedSchema), moduleOpenedCompletedSchema)
     .set(getSchemaId(sidePanelContentSchema), sidePanelContentSchema)
+    .set(getSchemaId(sidePanelSimpleEventSchema), sidePanelSimpleEventSchema)
     // sf_lwrjs
     .set(getSchemaId(bootstrapRequestSchema), bootstrapRequestSchema)
     .set(getSchemaId(mappingRequestSchema), mappingRequestSchema)
@@ -127,6 +153,7 @@ export const schemas = new Map()
     // sf_searchui
     .set(getSchemaId(resultClickDemoSchema), resultClickDemoSchema)
     // sf_sfs
+    .set(getSchemaId(appInfoSchema), appInfoSchema)
     .set(getSchemaId(appStartSchema), appStartSchema)
     // Schema specific to this app
     .set(getSchemaId(exampleSchema), exampleSchema);

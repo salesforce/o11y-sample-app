@@ -2,7 +2,7 @@
     "name": "o11y-sample-parent",
     "description": "Sample application to demonstrate the 'o11y' observability platform",
     "private": true,
-    "version": "238.7.3",
+    "version": "238.9.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "engines": {
@@ -36,7 +36,8 @@
         "start:server": "cd packages/server && yarn start",
         "watch:both": "run-p watch:client watch:server",
         "watch:client": "cd packages/client && yarn watch",
-        "watch:server": "cd packages/server && yarn watch"
+        "watch:server": "cd packages/server && yarn watch",
+        "test": "./scripts/check-yarn-lock.sh"
     },
     "devDependencies": {
         "lerna": "^4.0.0",

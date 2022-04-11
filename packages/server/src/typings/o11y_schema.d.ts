@@ -3,6 +3,7 @@ declare module 'o11y_schema/sf_automation';
 declare module 'o11y_schema/sf_instrumentation';
 declare module 'o11y_schema/sf_komaci';
 declare module 'o11y_schema/sf_lds';
+declare module 'o11y_schema/sf_lex';
 declare module 'o11y_schema/sf_lightningsdk';
 declare module 'o11y_schema/sf_lol';
 declare module 'o11y_schema/sf_lwrjs';
