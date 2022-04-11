@@ -1,3 +1,10 @@
+display-name: o11y Sample App
+team-name: UI Platform Instrumentation
+branches:
+    release:
+        pull-request:
+            workflow: release
+            merge-method: force-push
 steps:
     # Documentation: https://confluence.internal.salesforce.com/display/UIPLAT/Job+Steps
     # Default steps: https://git.soma.salesforce.com/uiplatform/nucleus-pb/blob/master/src/config/nucleus.yaml
@@ -6,3 +13,13 @@ steps:
     node-unit-tests:
         run:
             command: yarn test
+    deploy-to-heroku:
+        group: publish
+        type: run-command
+        description: deploy to heroku
+        run:
+            command: scripts/deploy-to-heroku.sh
+        env:
+            HEROKU_LOGIN: '{{ secrets.HEROKU_LOGIN }}'
+            HEROKU_PASSWORD: '{{ secrets.HEROKU_PASSWORD }}'
+        after: npm-configure-for-publish
