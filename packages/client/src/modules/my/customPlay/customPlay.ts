@@ -59,7 +59,10 @@ export default class CustomPlay extends LightningElement {
                     break;
                 case 'inputRecordIds':
                     if (!isEmpty) {
-                        logData.recordIds = String(val).split(',').map(x => x.trim()).filter(x => x !== '');
+                        logData.recordIds = String(val)
+                            .split(',')
+                            .map((x) => x.trim())
+                            .filter((x) => x !== '');
                     }
                     break;
                 case 'inputIgnored':
