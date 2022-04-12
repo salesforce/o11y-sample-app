@@ -73,6 +73,7 @@ module.exports = {
     ],
     devServer: {
         // https://webpack.js.org/configuration/dev-server
+        port: 3001,
         proxy: { '/': 'http://localhost:3002' }
     }
 };
