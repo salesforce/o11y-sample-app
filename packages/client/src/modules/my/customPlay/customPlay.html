@@ -38,6 +38,34 @@
                 <lightning-input type="text" name="inputUint64" label="Enter a 64-bit unsigned-integer"> </lightning-input>
             </div>
         </lightning-layout-item>
+        <lightning-layout-item>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputBoolOpt" label="Enter a boolean value (optional)" placeholder="eg. true/false"> </lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputDoubleOpt" label="Enter a double value (optional)"></lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="checkbox" name="optStringEmpty" label="(For optional string) If checked, pass in an empty string when field is left blank"></lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputStringOpt" label="Enter some text (optional)"></lightning-input>
+            </div>
+        </lightning-layout-item>
+        <lightning-layout-item>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputInt32Opt" label="Enter a 32-bit integer (optional)"></lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputInt64Opt" label="Enter a 64-bit integer (optional)"></lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputUint32Opt" label="Enter a 32-bit unsigned-integer (optional)"> </lightning-input>
+            </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="text" name="inputUint64Opt" label="Enter a 64-bit unsigned-integer (optional)"> </lightning-input>
+            </div>
+        </lightning-layout-item>
     </lightning-layout>
     <lightning-button variant="brand" label="Log the values" title="Calls the log API with the specified values" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
 </template>

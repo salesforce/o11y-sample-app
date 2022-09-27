@@ -9,8 +9,8 @@
         "@salesforce-ux/design-system": "2.17.5",
         "lightning-base-components": "1.14.6-alpha",
         "lwc": "2.12.1",
-        "o11y": "238.9.0",
-        "o11y_schema": "238.24.0"
+        "o11y": "242.2.0",
+        "o11y_schema": "242.4.0"
     },
     "engines": {
         "node": ">=14.16.0",

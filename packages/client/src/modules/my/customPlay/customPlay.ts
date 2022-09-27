@@ -20,6 +20,7 @@ export default class CustomPlay extends LightningElement {
         const inputs: NodeListOf<Element> = this.template.querySelectorAll('lightning-input');
 
         const logData: LogData = {};
+        let optStringEmpty = false;
         inputs.forEach((element: any) => {
             const val = element.value;
             const isEmpty = val === '' || val === undefined;
@@ -68,6 +69,44 @@ export default class CustomPlay extends LightningElement {
                 case 'inputIgnored':
                     // This field isn't part of the schema
                     logData.ignored = val;
+                    break;
+                case 'inputBoolOpt':
+                    if (!isEmpty) {
+                        logData.isOptBool = val === 'true' || (val === 'false' ? false : val);
+                    }
+                    break;
+                case 'inputStringOpt':
+                    if(!isEmpty || optStringEmpty){
+                        logData.optString = String(val);
+                    }
+                    break;
+                case 'inputInt32Opt':
+                    if (!isEmpty) {
+                        logData.optInt32 = Number(val);
+                    }
+                    break;
+                case 'inputInt64Opt':
+                    if (!isEmpty) {
+                        logData.optInt64 = Number(val);
+                    }
+                    break;
+                case 'inputUint32Opt':
+                    if (!isEmpty) {
+                        logData.optUint32 = Number(val);
+                    }
+                    break;
+                case 'inputUint64Opt':
+                    if (!isEmpty) {
+                        logData.optUint64 = Number(val);
+                    }
+                    break;
+                case 'inputDoubleOpt':
+                    if (!isEmpty) {
+                        logData.optDouble = Number(val);
+                    }
+                    break;
+                case 'optStringEmpty':
+                    optStringEmpty = element.checked;
                     break;
                 default:
                     this._instr.error(new Error(`Undefined input name ${element.name}`));

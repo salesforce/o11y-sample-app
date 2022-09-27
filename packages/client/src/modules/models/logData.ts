@@ -8,4 +8,11 @@ export interface LogData {
     double?: number;
     ignored?: string;
     recordIds?: string[];
+    isOptBool?: boolean;
+    optString?: string;
+    optInt32?: number;
+    optInt64?: number;
+    optUint32?: number;
+    optUint64?: number;
+    optDouble?: number;
 }
