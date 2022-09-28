@@ -2,14 +2,17 @@
     <div>
         <p class="header">Try out different values:</p>
         <p>
-            All values are optional. If a specified value is invalid for the type of the field, o11y validation will throw an exception in development mode. In that case, the app will catch the error
-            and log it.
+            If a specified value is invalid for the type of the field, o11y validation will throw an exception in
+            development mode. In that case, the app will catch the error
+            and log it. If a value is empty it will not be logged, with the exception of fields with type string (which
+            will log an empty string or can be toggled with the checkbox).
         </p>
     </div>
     <lightning-layout>
         <lightning-layout-item>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputBool" label="Enter a boolean value" placeholder="eg. true/false"> </lightning-input>
+                <lightning-input type="text" name="inputBool" label="Enter a boolean value"
+                    placeholder="eg. true/false"> </lightning-input>
             </div>
             <div class="slds-p-around_medium">
                 <lightning-input type="text" name="inputString" label="Enter some text"></lightning-input>
@@ -18,10 +21,13 @@
                 <lightning-input type="text" name="inputDouble" label="Enter a double value"></lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputIgnored" label="Enter any value" placeholder="This field will be ignored."></lightning-input>
+                <lightning-input type="text" name="inputIgnored" label="Enter any value"
+                    placeholder="This field will be ignored."></lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputRecordIds" label="Enter Salesforce Record Id's (comma-separated)" placeholder="005aabbccddeeffggh"></lightning-input>
+                <lightning-input type="text" name="inputRecordIds"
+                    label="Enter Salesforce Record Id's (comma-separated)" placeholder="005aabbccddeeffggh">
+                </lightning-input>
             </div>
         </lightning-layout-item>
         <lightning-layout-item>
@@ -32,40 +38,51 @@
                 <lightning-input type="text" name="inputInt64" label="Enter a 64-bit integer"></lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputUint32" label="Enter a 32-bit unsigned-integer"> </lightning-input>
+                <lightning-input type="text" name="inputUint32" label="Enter a 32-bit unsigned-integer">
+                </lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputUint64" label="Enter a 64-bit unsigned-integer"> </lightning-input>
+                <lightning-input type="text" name="inputUint64" label="Enter a 64-bit unsigned-integer">
+                </lightning-input>
             </div>
         </lightning-layout-item>
         <lightning-layout-item>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputBoolOpt" label="Enter a boolean value (optional)" placeholder="eg. true/false"> </lightning-input>
+                <lightning-input type="text" name="inputBoolOpt" label="Enter a boolean value (optional)"
+                    placeholder="eg. true/false"> </lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputDoubleOpt" label="Enter a double value (optional)"></lightning-input>
-            </div>
-            <div class="slds-p-around_medium">
-                <lightning-input type="checkbox" name="optStringEmpty" label="(For optional string) If checked, pass in an empty string when field is left blank"></lightning-input>
+                <lightning-input type="text" name="inputDoubleOpt" label="Enter a double value (optional)">
+                </lightning-input>
             </div>
             <div class="slds-p-around_medium">
                 <lightning-input type="text" name="inputStringOpt" label="Enter some text (optional)"></lightning-input>
             </div>
+            <div class="slds-p-around_medium">
+                <lightning-input type="checkbox" name="optStringEmpty"
+                    label="(For optional string) If checked, pass in an empty string when field is left blank">
+                </lightning-input>
+            </div>
         </lightning-layout-item>
         <lightning-layout-item>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputInt32Opt" label="Enter a 32-bit integer (optional)"></lightning-input>
+                <lightning-input type="text" name="inputInt32Opt" label="Enter a 32-bit integer (optional)">
+                </lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputInt64Opt" label="Enter a 64-bit integer (optional)"></lightning-input>
+                <lightning-input type="text" name="inputInt64Opt" label="Enter a 64-bit integer (optional)">
+                </lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputUint32Opt" label="Enter a 32-bit unsigned-integer (optional)"> </lightning-input>
+                <lightning-input type="text" name="inputUint32Opt" label="Enter a 32-bit unsigned-integer (optional)">
+                </lightning-input>
             </div>
             <div class="slds-p-around_medium">
-                <lightning-input type="text" name="inputUint64Opt" label="Enter a 64-bit unsigned-integer (optional)"> </lightning-input>
+                <lightning-input type="text" name="inputUint64Opt" label="Enter a 64-bit unsigned-integer (optional)">
+                </lightning-input>
             </div>
         </lightning-layout-item>
     </lightning-layout>
-    <lightning-button variant="brand" label="Log the values" title="Calls the log API with the specified values" onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
+    <lightning-button variant="brand" label="Log the values" title="Calls the log API with the specified values"
+        onclick={handleSubmit} class="slds-m-left_x-small"></lightning-button>
 </template>

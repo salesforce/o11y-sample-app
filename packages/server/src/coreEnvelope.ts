@@ -143,7 +143,7 @@ class CoreEnvelopeProcessor {
         }
 
         let isPartiallyDecoded = false;
-        this.populateOptionals(message,schemaName);
+        this.populateOptionals(message, schemaName);
         if (hasUserPayload(schemaName)) {
             const userSchemaName = message.userPayload?.schemaName;
             if (userSchemaName) {
@@ -173,13 +173,13 @@ class CoreEnvelopeProcessor {
         return true;
     }
 
-    populateOptionals(msg:{ [k: string]: any }, schemaName: string): void{
+    populateOptionals(msg: { [k: string]: any }, schemaName: string): void {
         const schema = schemas.get(schemaName);
         const parts = schemaName.split('.');
         let fields = parts.length === 3 && schema?.pbjsSchema?.nested?.[parts[0]]?.nested?.[parts[1]]?.nested?.[parts[2]]?.fields;
-        for(let key of Object.keys(fields)){
-            if(msg[key] === undefined && fields?.[key]?.options?.proto3_optional){
-                msg[key] = undefined;
+        for (let key of Object.keys(fields)) {
+            if (msg[key] === undefined && fields?.[key]?.options?.proto3_optional) {
+                msg[key] = null;
             }
         }
     }

@@ -20,7 +20,6 @@ export default class CustomPlay extends LightningElement {
         const inputs: NodeListOf<Element> = this.template.querySelectorAll('lightning-input');
 
         const logData: LogData = {};
-        let optStringEmpty = false;
         inputs.forEach((element: any) => {
             const val = element.value;
             const isEmpty = val === '' || val === undefined;
@@ -76,7 +75,7 @@ export default class CustomPlay extends LightningElement {
                     }
                     break;
                 case 'inputStringOpt':
-                    if(!isEmpty || optStringEmpty){
+                    if (!isEmpty) {
                         logData.optString = String(val);
                     }
                     break;
@@ -106,7 +105,9 @@ export default class CustomPlay extends LightningElement {
                     }
                     break;
                 case 'optStringEmpty':
-                    optStringEmpty = element.checked;
+                    if (element.checked && logData.optString === undefined) {
+                        logData.optString = '';
+                    }
                     break;
                 default:
                     this._instr.error(new Error(`Undefined input name ${element.name}`));
