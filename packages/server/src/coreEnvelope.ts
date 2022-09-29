@@ -143,6 +143,7 @@ class CoreEnvelopeProcessor {
         }
 
         let isPartiallyDecoded = false;
+        this.populateOptionals(message, schemaName);
         if (hasUserPayload(schemaName)) {
             const userSchemaName = message.userPayload?.schemaName;
             if (userSchemaName) {
@@ -170,6 +171,17 @@ class CoreEnvelopeProcessor {
 
         this._log(`${label} as ${isPartiallyDecoded ? 'partially' : 'fully'} decoded:`, message);
         return true;
+    }
+
+    populateOptionals(msg: { [k: string]: any }, schemaName: string): void {
+        const schema = schemas.get(schemaName);
+        const parts = schemaName.split('.');
+        const fields = parts.length === 3 && schema?.pbjsSchema?.nested?.[parts[0]]?.nested?.[parts[1]]?.nested?.[parts[2]]?.fields;
+        for (const key of Object.keys(fields)) {
+            if (msg[key] === undefined && fields?.[key]?.options?.proto3_optional) {
+                msg[key] = null;
+            }
+        }
     }
 
     processPayload(label: string, payloadObj: EncodedSchematizedPayload): void {
