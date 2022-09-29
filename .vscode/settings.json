@@ -8,7 +8,7 @@
         100 //  matches printWidth config in .prettierrc
     ],
     "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.defaultFormatter": "vscode.html-language-features",
         "editor.tabSize": 4,
         "editor.formatOnSave": true,
         "editor.rulers": [
