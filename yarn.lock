@@ -6751,10 +6751,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-o11y@242.2.0:
-  version "242.2.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-242.2.0.tgz#aab4ad581a8cae0ca47fe412ae710df99b6875f5"
-  integrity sha512-5U3Ol2hFQqcJyH1M6eEO6s/HzRcyFZe0FDWBUvhdx1joDZu4eywp9wfrvrv4ZIKo2EQB5clZ2GDS+X7M5+D/LA==
+o11y@242.3.3:
+  version "242.3.3"
+  resolved "https://registry.yarnpkg.com/o11y/-/o11y-242.3.3.tgz#d7a651444c94908d900755db1b1f9bcd7de146ad"
+  integrity sha512-yp8tvg2nAkz/B9+QxcAG+2B+kdZ1ws/Fu5TqNaMyVn164qEPHzbKpPN2/DmDvLxjA5DLfu1RsuIK8cbcyIj+zw==
   dependencies:
     o11y_schema "242.2.0"
     protobufjs "6.11.3"
