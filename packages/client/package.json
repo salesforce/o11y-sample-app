@@ -8,7 +8,7 @@
         "@lwc/synthetic-shadow": "2.12.1",
         "@salesforce-ux/design-system": "2.21.0",
         "lightning-base-components": "1.14.6-alpha",
-        "lwc": "2.12.1",
+        "lwc": "2.45.2",
         "o11y": "246.1.0",
         "o11y_schema": "246.4.0",
         "protobufjs": "6.11.3"
