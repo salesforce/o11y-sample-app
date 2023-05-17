@@ -65,8 +65,8 @@ import {
 
 import {
     adgResolveSchema as sf_komaci_adgResolveSchema,
-    batchSchema as sf_komaci_batchSchema,
     batchCoordinatorSchema as sf_komaci_batchCoordinatorSchema,
+    batchSchema as sf_komaci_batchSchema,
     bulkResolveSchema as sf_komaci_bulkResolveSchema,
     generatedModuleInfoSchema as sf_komaci_generatedModuleInfoSchema,
     localFunctionContextSchema as sf_komaci_localFunctionContextSchema,
@@ -90,8 +90,8 @@ import {
 
 import {
     appPayloadSchema as sf_lex_appPayloadSchema,
-    bootstrapSchema as sf_lex_bootstrapSchema,
     bootstrapRequestSchema as sf_lex_bootstrapRequestSchema,
+    bootstrapSchema as sf_lex_bootstrapSchema,
     bootstrapTimingSchema as sf_lex_bootstrapTimingSchema,
     componentLoadSchema as sf_lex_componentLoadSchema,
     pageEndSchema as sf_lex_pageEndSchema,
@@ -207,7 +207,6 @@ import {
 } from 'o11y_schema/sf_siteSearch';
 
 import {
-    perfTest0422Schema1Schema as sf_testAiltnPageview_perfTest0422Schema1Schema,
     perfTest0422Schema10Schema as sf_testAiltnPageview_perfTest0422Schema10Schema,
     perfTest0422Schema11Schema as sf_testAiltnPageview_perfTest0422Schema11Schema,
     perfTest0422Schema12Schema as sf_testAiltnPageview_perfTest0422Schema12Schema,
@@ -218,10 +217,11 @@ import {
     perfTest0422Schema17Schema as sf_testAiltnPageview_perfTest0422Schema17Schema,
     perfTest0422Schema18Schema as sf_testAiltnPageview_perfTest0422Schema18Schema,
     perfTest0422Schema19Schema as sf_testAiltnPageview_perfTest0422Schema19Schema,
-    perfTest0422Schema2Schema as sf_testAiltnPageview_perfTest0422Schema2Schema,
+    perfTest0422Schema1Schema as sf_testAiltnPageview_perfTest0422Schema1Schema,
     perfTest0422Schema20Schema as sf_testAiltnPageview_perfTest0422Schema20Schema,
     perfTest0422Schema21Schema as sf_testAiltnPageview_perfTest0422Schema21Schema,
     perfTest0422Schema22Schema as sf_testAiltnPageview_perfTest0422Schema22Schema,
+    perfTest0422Schema2Schema as sf_testAiltnPageview_perfTest0422Schema2Schema,
     perfTest0422Schema3Schema as sf_testAiltnPageview_perfTest0422Schema3Schema,
     perfTest0422Schema4Schema as sf_testAiltnPageview_perfTest0422Schema4Schema,
     perfTest0422Schema5Schema as sf_testAiltnPageview_perfTest0422Schema5Schema,
@@ -254,30 +254,36 @@ export function hasUserPayload(schemaId: string): boolean {
 }
 
 export const schemas = new Map()
+    // sf_actions
     .set(getSchemaId(sf_actions_actionBarUsageSchema), sf_actions_actionBarUsageSchema)
+    // sf_aura
     .set(getSchemaId(sf_aura_actionSchema), sf_aura_actionSchema)
     .set(getSchemaId(sf_aura_transportSchema), sf_aura_transportSchema)
+    // sf_automation
     .set(getSchemaId(sf_automation_explorerCardDataSchema), sf_automation_explorerCardDataSchema)
     .set(getSchemaId(sf_automation_explorerInitLoadSchema), sf_automation_explorerInitLoadSchema)
     .set(getSchemaId(sf_automation_explorerReorderSchema), sf_automation_explorerReorderSchema)
     .set(getSchemaId(sf_automation_processBuilderMigrationSchema), sf_automation_processBuilderMigrationSchema)
+    // sf_blockBuilder
     .set(getSchemaId(sf_blockBuilder_actionSchema), sf_blockBuilder_actionSchema)
     .set(getSchemaId(sf_blockBuilder_addBlockSchema), sf_blockBuilder_addBlockSchema)
     .set(getSchemaId(sf_blockBuilder_errorSchema), sf_blockBuilder_errorSchema)
+    // sf_clwr
     .set(getSchemaId(sf_clwr_appPayloadSchema), sf_clwr_appPayloadSchema)
     .set(getSchemaId(sf_clwr_navSchema), sf_clwr_navSchema)
     .set(getSchemaId(sf_clwr_navTransitionSchema), sf_clwr_navTransitionSchema)
     .set(getSchemaId(sf_clwr_pagePayloadSchema), sf_clwr_pagePayloadSchema)
     .set(getSchemaId(sf_clwr_rootSchema), sf_clwr_rootSchema)
+    // sf_commerce
     .set(getSchemaId(sf_commerce_clientSidePaymentSchema), sf_commerce_clientSidePaymentSchema)
     .set(getSchemaId(sf_commerce_suggestionSchema), sf_commerce_suggestionSchema)
+    // sf_contentLayout
     .set(getSchemaId(sf_contentLayout_componentUsageSchema), sf_contentLayout_componentUsageSchema)
     .set(getSchemaId(sf_contentLayout_repeaterUsageSchema), sf_contentLayout_repeaterUsageSchema)
     .set(getSchemaId(sf_contentLayout_tabsUsageSchema), sf_contentLayout_tabsUsageSchema)
+    // sf_enhancedConversation
     .set(getSchemaId(sf_enhancedConversation_interactionEventSchema), sf_enhancedConversation_interactionEventSchema)
-    .set(getSchemaId(sf_instrumentationTest_testActionSchema), sf_instrumentationTest_testActionSchema)
-    .set(getSchemaId(sf_instrumentationTest_testTokenizePayloadSchema), sf_instrumentationTest_testTokenizePayloadSchema)
-    .set(getSchemaId(sf_instrumentationTest_testTransportSchema), sf_instrumentationTest_testTransportSchema)
+    // sf_instrumentation
     .set(getSchemaId(sf_instrumentation_activitySchema), sf_instrumentation_activitySchema)
     .set(getSchemaId(sf_instrumentation_basicPageSchema), sf_instrumentation_basicPageSchema)
     .set(getSchemaId(sf_instrumentation_coreEnvelopeSchema), sf_instrumentation_coreEnvelopeSchema)
@@ -289,6 +295,11 @@ export const schemas = new Map()
     .set(getSchemaId(sf_instrumentation_payloadSchema), sf_instrumentation_payloadSchema)
     .set(getSchemaId(sf_instrumentation_simpleSchema), sf_instrumentation_simpleSchema)
     .set(getSchemaId(sf_instrumentation_webVitalsSchema), sf_instrumentation_webVitalsSchema)
+    // sf_instrumentationTest
+    .set(getSchemaId(sf_instrumentationTest_testActionSchema), sf_instrumentationTest_testActionSchema)
+    .set(getSchemaId(sf_instrumentationTest_testTokenizePayloadSchema), sf_instrumentationTest_testTokenizePayloadSchema)
+    .set(getSchemaId(sf_instrumentationTest_testTransportSchema), sf_instrumentationTest_testTransportSchema)
+    // sf_komaci
     .set(getSchemaId(sf_komaci_adgResolveSchema), sf_komaci_adgResolveSchema)
     .set(getSchemaId(sf_komaci_batchCoordinatorSchema), sf_komaci_batchCoordinatorSchema)
     .set(getSchemaId(sf_komaci_batchSchema), sf_komaci_batchSchema)
@@ -299,6 +310,7 @@ export const schemas = new Map()
     .set(getSchemaId(sf_komaci_prefetchServiceSchema), sf_komaci_prefetchServiceSchema)
     .set(getSchemaId(sf_komaci_totalRoutingSchema), sf_komaci_totalRoutingSchema)
     .set(getSchemaId(sf_komaci_wireContextSchema), sf_komaci_wireContextSchema)
+    // sf_lds
     .set(getSchemaId(sf_lds_adapterUnfulfilledErrorSchema), sf_lds_adapterUnfulfilledErrorSchema)
     .set(getSchemaId(sf_lds_durableStoreEvictSchema), sf_lds_durableStoreEvictSchema)
     .set(getSchemaId(sf_lds_durableStoreGraphqlSchema), sf_lds_durableStoreGraphqlSchema)
@@ -308,6 +320,7 @@ export const schemas = new Map()
     .set(getSchemaId(sf_lds_perfNetworkStatsSchema), sf_lds_perfNetworkStatsSchema)
     .set(getSchemaId(sf_lds_perfSqliteStoreStatsSchema), sf_lds_perfSqliteStoreStatsSchema)
     .set(getSchemaId(sf_lds_perfTotalStatsSchema), sf_lds_perfTotalStatsSchema)
+    // sf_lex
     .set(getSchemaId(sf_lex_appPayloadSchema), sf_lex_appPayloadSchema)
     .set(getSchemaId(sf_lex_bootstrapRequestSchema), sf_lex_bootstrapRequestSchema)
     .set(getSchemaId(sf_lex_bootstrapSchema), sf_lex_bootstrapSchema)
@@ -317,6 +330,7 @@ export const schemas = new Map()
     .set(getSchemaId(sf_lex_pagePayloadSchema), sf_lex_pagePayloadSchema)
     .set(getSchemaId(sf_lex_pageviewSchema), sf_lex_pageviewSchema)
     .set(getSchemaId(sf_lex_scenarioTrackerSchema), sf_lex_scenarioTrackerSchema)
+    // sf_lightningsdk
     .set(getSchemaId(sf_lightningsdk_appPrimingSchema), sf_lightningsdk_appPrimingSchema)
     .set(getSchemaId(sf_lightningsdk_httpSchema), sf_lightningsdk_httpSchema)
     .set(getSchemaId(sf_lightningsdk_launchSchema), sf_lightningsdk_launchSchema)
@@ -327,17 +341,23 @@ export const schemas = new Map()
     .set(getSchemaId(sf_lightningsdk_navigationSchema), sf_lightningsdk_navigationSchema)
     .set(getSchemaId(sf_lightningsdk_resourceDownloadSchema), sf_lightningsdk_resourceDownloadSchema)
     .set(getSchemaId(sf_lightningsdk_routePrimingSchema), sf_lightningsdk_routePrimingSchema)
+    // sf_lists
     .set(getSchemaId(sf_lists_relatedListDrillinSchema), sf_lists_relatedListDrillinSchema)
+    // sf_lol
     .set(getSchemaId(sf_lol_homeOpenedSchema), sf_lol_homeOpenedSchema)
     .set(getSchemaId(sf_lol_moduleOpenedCompletedSchema), sf_lol_moduleOpenedCompletedSchema)
     .set(getSchemaId(sf_lol_sidePanelContentSchema), sf_lol_sidePanelContentSchema)
     .set(getSchemaId(sf_lol_sidePanelSimpleEventSchema), sf_lol_sidePanelSimpleEventSchema)
+    // sf_lwc
     .set(getSchemaId(sf_lwc_lwcRuntimeFeaturesSchema), sf_lwc_lwcRuntimeFeaturesSchema)
+    // sf_lwrjs
     .set(getSchemaId(sf_lwrjs_bootstrapRequestSchema), sf_lwrjs_bootstrapRequestSchema)
     .set(getSchemaId(sf_lwrjs_mappingRequestSchema), sf_lwrjs_mappingRequestSchema)
     .set(getSchemaId(sf_lwrjs_moduleRequestCountSchema), sf_lwrjs_moduleRequestCountSchema)
+    // sf_ms365
     .set(getSchemaId(sf_ms365_clmAddinSchema), sf_ms365_clmAddinSchema)
     .set(getSchemaId(sf_ms365_saveDocumentSchema), sf_ms365_saveDocumentSchema)
+    // sf_nimbus
     .set(getSchemaId(sf_nimbus_appReviewServiceSchema), sf_nimbus_appReviewServiceSchema)
     .set(getSchemaId(sf_nimbus_barcodeScannerSchema), sf_nimbus_barcodeScannerSchema)
     .set(getSchemaId(sf_nimbus_biometricsServiceSchema), sf_nimbus_biometricsServiceSchema)
@@ -347,9 +367,11 @@ export const schemas = new Map()
     .set(getSchemaId(sf_nimbus_geofencingServiceSchema), sf_nimbus_geofencingServiceSchema)
     .set(getSchemaId(sf_nimbus_locationServiceSchema), sf_nimbus_locationServiceSchema)
     .set(getSchemaId(sf_nimbus_nfcServiceSchema), sf_nimbus_nfcServiceSchema)
+    // sf_o11ySample
     .set(getSchemaId(sf_o11ySample_appPayloadSchema), sf_o11ySample_appPayloadSchema)
     .set(getSchemaId(sf_o11ySample_pagePayloadSchema), sf_o11ySample_pagePayloadSchema)
     .set(getSchemaId(sf_o11ySample_userPayloadSchema), sf_o11ySample_userPayloadSchema)
+    // sf_offlineApp
     .set(getSchemaId(sf_offlineApp_errorStatusSchema), sf_offlineApp_errorStatusSchema)
     .set(getSchemaId(sf_offlineApp_eventSchema), sf_offlineApp_eventSchema)
     .set(getSchemaId(sf_offlineApp_mcfSchema), sf_offlineApp_mcfSchema)
@@ -357,16 +379,21 @@ export const schemas = new Map()
     .set(getSchemaId(sf_offlineApp_searchSchema), sf_offlineApp_searchSchema)
     .set(getSchemaId(sf_offlineApp_statusSchema), sf_offlineApp_statusSchema)
     .set(getSchemaId(sf_offlineApp_syncStatusSchema), sf_offlineApp_syncStatusSchema)
+    // sf_payments
     .set(getSchemaId(sf_payments_paymentSheetConfirmSchema), sf_payments_paymentSheetConfirmSchema)
     .set(getSchemaId(sf_payments_paymentSheetRenderSchema), sf_payments_paymentSheetRenderSchema)
+    // sf_records
     .set(getSchemaId(sf_records_detailPanelUsageSchema), sf_records_detailPanelUsageSchema)
+    // sf_searchui
     .set(getSchemaId(sf_searchui_resultClickDemoSchema), sf_searchui_resultClickDemoSchema)
     .set(getSchemaId(sf_searchui_searchImpressionSchema), sf_searchui_searchImpressionSchema)
     .set(getSchemaId(sf_searchui_searchInitiationSchema), sf_searchui_searchInitiationSchema)
     .set(getSchemaId(sf_searchui_searchManagerConfigSchema), sf_searchui_searchManagerConfigSchema)
     .set(getSchemaId(sf_searchui_searchResultClickSchema), sf_searchui_searchResultClickSchema)
     .set(getSchemaId(sf_searchui_searchTrafficSchema), sf_searchui_searchTrafficSchema)
+    // sf_selfService
     .set(getSchemaId(sf_selfService_knowledgeArticleUsageSchema), sf_selfService_knowledgeArticleUsageSchema)
+    // sf_sfs
     .set(getSchemaId(sf_sfs_appInfoSchema), sf_sfs_appInfoSchema)
     .set(getSchemaId(sf_sfs_appStartSchema), sf_sfs_appStartSchema)
     .set(getSchemaId(sf_sfs_bootstrapDownloadInfoSchema), sf_sfs_bootstrapDownloadInfoSchema)
@@ -377,7 +404,9 @@ export const schemas = new Map()
     .set(getSchemaId(sf_sfs_sfsErrorSchema), sf_sfs_sfsErrorSchema)
     .set(getSchemaId(sf_sfs_sfsEventLogSchema), sf_sfs_sfsEventLogSchema)
     .set(getSchemaId(sf_sfs_wireDebugInfoSchema), sf_sfs_wireDebugInfoSchema)
+    // sf_siteSearch
     .set(getSchemaId(sf_siteSearch_resultsLayoutImpressionSchema), sf_siteSearch_resultsLayoutImpressionSchema)
+    // sf_testAiltnPageview
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema10Schema), sf_testAiltnPageview_perfTest0422Schema10Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema11Schema), sf_testAiltnPageview_perfTest0422Schema11Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema12Schema), sf_testAiltnPageview_perfTest0422Schema12Schema)
@@ -400,5 +429,6 @@ export const schemas = new Map()
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema7Schema), sf_testAiltnPageview_perfTest0422Schema7Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema8Schema), sf_testAiltnPageview_perfTest0422Schema8Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema9Schema), sf_testAiltnPageview_perfTest0422Schema9Schema)
+    // sfcore_customCmp
     .set(getSchemaId(sfcore_customCmp_customComponentLogSchema), sfcore_customCmp_customComponentLogSchema)
     .set(getSchemaId(exampleSchema), exampleSchema);

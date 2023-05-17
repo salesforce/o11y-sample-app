@@ -23,6 +23,7 @@
     "license": "MIT",
     "repository": "instrumentation/o11y-sample",
     "scripts": {
+        "init": "lerna run init --concurrency 1",
         "clean": "lerna run clean",
         "clean:deep": "./scripts/deep-clean.sh",
         "build": "lerna run build",
@@ -38,7 +39,8 @@
         "watch:both": "run-p watch:client watch:server",
         "watch:client": "cd packages/client && yarn watch",
         "watch:server": "cd packages/server && yarn watch",
-        "test": "./scripts/check-yarn-lock.sh"
+        "test": "./scripts/check-yarn-lock.sh",
+        "postinstall": "yarn run init"
     },
     "devDependencies": {
         "lerna": "^4.0.0",

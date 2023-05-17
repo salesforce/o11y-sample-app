@@ -37,6 +37,7 @@
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
+        "init": "cp ../_common/generated/o11y_schema.d.ts ./src/typings && node ./scripts/generate-files.js",
         "build": "tsc -b && cp package.json ../../dist-server",
         "clean": "rimraf ../../dist-server",
         "lint": "eslint ./src/**/*.ts",
@@ -45,8 +46,7 @@
         "start": "node --es-module-specifier-resolution=node ../../dist-server/api.js",
         "start:withweb": "O11Y_SERVE_WEB=true yarn start",
         "watch": "nodemon",
-        "watch:withweb": "O11Y_SERVE_WEB=true yarn watch",
-        "postinstall": "node ./scripts/generate-files.js"
+        "watch:withweb": "O11Y_SERVE_WEB=true yarn watch"
     },
     "devDependencies": {
         "@types/cors": "^2.8.12",

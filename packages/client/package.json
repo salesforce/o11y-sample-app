@@ -38,6 +38,7 @@
     },
     "repository": "instrumentation/o11y-sample",
     "scripts": {
+        "init": "cp ../_common/generated/o11y_schema.d.ts ./src/typings",
         "build:production": "NODE_ENV=production webpack",
         "build": "webpack",
         "clean": "rimraf ../../dist-client",
