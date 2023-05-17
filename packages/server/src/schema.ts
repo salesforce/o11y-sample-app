@@ -10,7 +10,6 @@ import {
     coreEnvelopeSchema,
     errorSchema,
     instrumentedEventSchema,
-    scenarioTrackerSchema as deprecated_scenarioTrackerSchema,
     simpleSchema,
     webVitalsSchema
 } from 'o11y_schema/sf_instrumentation';
@@ -33,9 +32,13 @@ import {
 } from 'o11y_schema/sf_lds';
 import {
     appPayloadSchema as lex_appPayloadSchema,
+    //bootstrapSchema,
+    //bootstrapRequestSchema as lex_bootstrapRequestSchema,
+    //bootstrapTimingSchema,
+    //componentLoadSchema,
     pageEndSchema,
     pagePayloadSchema as lex_pagePayloadSchema,
-    pageviewDraftSchema,
+    //pageviewSchema,
     scenarioTrackerSchema
 } from 'o11y_schema/sf_lex';
 import {
@@ -99,7 +102,6 @@ export const schemas = new Map()
     .set(getSchemaId(coreEnvelopeSchema), coreEnvelopeSchema)
     .set(getSchemaId(errorSchema), errorSchema)
     .set(getSchemaId(instrumentedEventSchema), instrumentedEventSchema)
-    .set(getSchemaId(deprecated_scenarioTrackerSchema), deprecated_scenarioTrackerSchema)
     .set(getSchemaId(simpleSchema), simpleSchema)
     .set(getSchemaId(webVitalsSchema), webVitalsSchema)
     // sf_komaci
@@ -121,7 +123,6 @@ export const schemas = new Map()
     .set(getSchemaId(lex_appPayloadSchema), lex_appPayloadSchema)
     .set(getSchemaId(pageEndSchema), pageEndSchema)
     .set(getSchemaId(lex_pagePayloadSchema), lex_pagePayloadSchema)
-    .set(getSchemaId(pageviewDraftSchema), pageviewDraftSchema)
     .set(getSchemaId(scenarioTrackerSchema), scenarioTrackerSchema)
     // sf_lightningsdk
     .set(getSchemaId(appPrimingSchema), appPrimingSchema)

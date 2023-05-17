@@ -85,7 +85,7 @@ export default class App extends LightningElement implements LogCollector {
         appExperience: 'Sample',
         deviceId: 'Unknown',
         deviceModel: 'Unknown',
-        sdkVersion: '242' // Keep this up-to-date with the major version
+        sdkVersion: '246' // Keep this up-to-date with the major version
     };
 
     constructor() {

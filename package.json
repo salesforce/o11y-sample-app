@@ -2,7 +2,7 @@
     "name": "o11y-sample-parent",
     "description": "Sample application to demonstrate the 'o11y' observability platform",
     "private": true,
-    "version": "242.0.0",
+    "version": "246.0.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "engines": {
@@ -23,6 +23,7 @@
     "license": "MIT",
     "repository": "instrumentation/o11y-sample",
     "scripts": {
+        "clean": "lerna run clean",
         "clean:deep": "./scripts/deep-clean.sh",
         "build": "lerna run build",
         "build:client": "cd packages/client && yarn build",
