@@ -1538,10 +1538,10 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@salesforce-ux/design-system@2.17.5":
-  version "2.17.5"
-  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.17.5.tgz#f4d25d85e8f85970698941a076b344cb16cd57fd"
-  integrity sha512-vj1MgAeUHRbg3EeGQUR79QrgIoJI6U84IRCkRVnvgdBJs1iy3zb/chtz71/x4EVTfowY6+3gjR3hG11mJo1h3A==
+"@salesforce-ux/design-system@2.21.0":
+  version "2.21.0"
+  resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.21.0.tgz#5a5284c68d8e184cd87237b96e2bafc0a666450b"
+  integrity sha512-XKpPC7gt4Xj3CSa4NDcqAKsBdv044OHAAP/5YotnlNBTGc1Ivto3bmdqvsr0yC0P7PBLw8sD7g2yTJI9nCtsuw==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
