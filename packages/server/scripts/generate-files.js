@@ -17,6 +17,8 @@ function getAlias(schemaName, parent) {
 
 const allSchemas = schemasJson.schemas;
 
+outSchema.write('// This file is auto-generated\n');
+
 Object.entries(allSchemas).forEach(([parent, schemas]) => {
     if (schemas.length) {
         outSchema.write('import {\n');
@@ -31,7 +33,7 @@ Object.entries(allSchemas).forEach(([parent, schemas]) => {
 outSchema.write(`
 import { exampleSchema } from './schemas/exampleSchema';
 
-import type { Schema } from './interfaces/Schema';
+import type { Schema } from '../../_common/interfaces/Schema';
 
 export function getSchemaId(schema: Schema): string {
     return \`\${schema.namespace}.\${schema.name}\`;

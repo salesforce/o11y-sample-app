@@ -1,4 +1,4 @@
-import { Schema } from '../interfaces/Schema';
+import { Schema } from '../../../_common/interfaces/Schema';
 
 export const exampleSchema: Schema = {
     namespace: 'sf.o11ySample',

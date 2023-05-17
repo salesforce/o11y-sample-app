@@ -1,3 +1,4 @@
+// This file is auto-generated
 import {
     actionBarUsageSchema as sf_actions_actionBarUsageSchema,
 } from 'o11y_schema/sf_actions';
@@ -238,7 +239,7 @@ import {
 
 import { exampleSchema } from './schemas/exampleSchema';
 
-import type { Schema } from './interfaces/Schema';
+import type { Schema } from '../../_common/interfaces/Schema';
 
 export function getSchemaId(schema: Schema): string {
     return `${schema.namespace}.${schema.name}`;

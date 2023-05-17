@@ -2,13 +2,14 @@ import protobuf from 'protobufjs';
 import { coreEnvelopeSchema } from 'o11y_schema/sf_instrumentation';
 import { schemas, getSchemaId, hasUserPayload } from './schema';
 
-import type { CoreEnvelope } from './interfaces/CoreEnvelope';
-import type { EncodedSchematizedPayload } from './interfaces/EncodedSchematizedPayload';
-import type { MetricTag } from './interfaces/MetricTag';
-import type { BucketHistogram } from './interfaces/BucketHistogram';
-import type { ValueRecorder } from './interfaces/ValueRecorder';
-import type { UpCounter } from './interfaces/UpCounter';
-import type { LogMessage } from './interfaces/LogMessage';
+import type { CoreEnvelope } from '../../_common/interfaces/CoreEnvelope';
+import type { EncodedSchematizedPayload } from '../../_common/interfaces/EncodedSchematizedPayload';
+import type { MetricTag } from '../../_common/interfaces/MetricTag';
+import type { BucketHistogram } from '../../_common/interfaces/BucketHistogram';
+import type { ValueRecorder } from '../../_common/interfaces/ValueRecorder';
+import type { UpCounter } from '../../_common/interfaces/UpCounter';
+import type { LogMessage } from '../../_common/interfaces/LogMessage';
+
 import type { CoreEnvelopeProcessingOptions } from './interfaces/CoreEnvelopeProcessingOptions';
 
 function whenText(timestamp: number): string {
@@ -176,7 +177,9 @@ class CoreEnvelopeProcessor {
     populateOptionals(msg: { [k: string]: any }, schemaName: string): void {
         const schema = schemas.get(schemaName);
         const parts = schemaName.split('.');
-        const fields = parts.length === 3 && schema?.pbjsSchema?.nested?.[parts[0]]?.nested?.[parts[1]]?.nested?.[parts[2]]?.fields;
+        const fields =
+            parts.length === 3 &&
+            schema?.pbjsSchema?.nested?.[parts[0]]?.nested?.[parts[1]]?.nested?.[parts[2]]?.fields;
         for (const key of Object.keys(fields)) {
             if (msg[key] === undefined && fields?.[key]?.options?.proto3_optional) {
                 msg[key] = null;
