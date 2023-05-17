@@ -10,7 +10,8 @@
         "lightning-base-components": "1.14.6-alpha",
         "lwc": "2.12.1",
         "o11y": "246.1.0",
-        "o11y_schema": "246.4.0"
+        "o11y_schema": "246.4.0",
+        "protobufjs": "6.11.3"
     },
     "engines": {
         "node": ">=14.16.0",
