@@ -45,7 +45,8 @@
         "start": "node --es-module-specifier-resolution=node ../../dist-server/api.js",
         "start:withweb": "O11Y_SERVE_WEB=true yarn start",
         "watch": "nodemon",
-        "watch:withweb": "O11Y_SERVE_WEB=true yarn watch"
+        "watch:withweb": "O11Y_SERVE_WEB=true yarn watch",
+        "postinstall": "node ./scripts/generate-files.js"
     },
     "devDependencies": {
         "@types/cors": "^2.8.12",
