@@ -252,7 +252,7 @@ export function hasUserPayload(schemaId: string): boolean {
     );
 }
 
-export const schemas = new Map()
+export const schemas = new Map<string, Schema>()
     // sf_actions
     .set(getSchemaId(sf_actions_actionBarUsageSchema), sf_actions_actionBarUsageSchema)
     // sf_aura

@@ -46,7 +46,7 @@ export function hasUserPayload(schemaId: string): boolean {
     );
 }
 
-export const schemas = new Map()`);
+export const schemas = new Map<string, Schema>()`);
 
 Object.entries(allSchemas).forEach(([parent, schemas]) => {
     if (schemas.length) {
