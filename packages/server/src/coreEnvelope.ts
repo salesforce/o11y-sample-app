@@ -1,6 +1,6 @@
 import protobuf from 'protobufjs';
 import { coreEnvelopeSchema } from 'o11y_schema/sf_instrumentation';
-import { schemas, getSchemaId, hasUserPayload } from './schema';
+import { schemas, getSchemaId, hasUserPayload } from '../../_common/generated/schema';
 
 import type { CoreEnvelope } from '../../_common/interfaces/CoreEnvelope';
 import type { EncodedSchematizedPayload } from '../../_common/interfaces/EncodedSchematizedPayload';
@@ -11,6 +11,7 @@ import type { UpCounter } from '../../_common/interfaces/UpCounter';
 import type { LogMessage } from '../../_common/interfaces/LogMessage';
 
 import type { CoreEnvelopeProcessingOptions } from './interfaces/CoreEnvelopeProcessingOptions';
+import { exampleSchema } from './schemas/exampleSchema';
 
 function whenText(timestamp: number): string {
     return timestamp !== undefined ? new Date(timestamp).toLocaleString() : 'UNKNOWN';
@@ -65,6 +66,8 @@ class CoreEnvelopeProcessor {
             options?.maxMessagesPerBundleToProcess || MAX_MESSAGES_PER_BUNDLE_TO_PROCESS;
         this._maxMetrics = options?.maxMetricsPerTypeToProcess || MAX_METRICS_PER_TYPE_TO_PROCESS;
         this._maxTags = options?.maxTagsPerMetric || MAX_TAGS_PER_METRIC;
+
+        schemas.set(getSchemaId(exampleSchema), exampleSchema);
     }
 
     processDiagnostics(envelope: CoreEnvelope): void {

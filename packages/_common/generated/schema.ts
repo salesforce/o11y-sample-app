@@ -237,9 +237,7 @@ import {
 } from 'o11y_schema/sfcore_customCmp';
 
 
-import { exampleSchema } from './schemas/exampleSchema';
-
-import type { Schema } from '../../_common/interfaces/Schema';
+import type { Schema } from '../interfaces/Schema';
 
 export function getSchemaId(schema: Schema): string {
     return `${schema.namespace}.${schema.name}`;
@@ -431,5 +429,4 @@ export const schemas = new Map()
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema8Schema), sf_testAiltnPageview_perfTest0422Schema8Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema9Schema), sf_testAiltnPageview_perfTest0422Schema9Schema)
     // sfcore_customCmp
-    .set(getSchemaId(sfcore_customCmp_customComponentLogSchema), sfcore_customCmp_customComponentLogSchema)
-    .set(getSchemaId(exampleSchema), exampleSchema);
+    .set(getSchemaId(sfcore_customCmp_customComponentLogSchema), sfcore_customCmp_customComponentLogSchema);
