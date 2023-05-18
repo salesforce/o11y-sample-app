@@ -4,13 +4,18 @@
     "private": true,
     "version": "246.0.0",
     "author": "instrumentationteam@salesforce.com",
-    "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
+    "bugs": "https://github.com/salesforce/o11y-sample-app/issues",
     "engines": {
         "node": ">=14.16.0 <17.0.0",
         "npm": ">=7.4.3",
-        "yarn": "1.22.19"
+        "yarn": "~1.22.17"
     },
-    "homepage": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app",
+    "volta": {
+        "node": "16.19.0",
+        "yarn": "1.22.19",
+        "npm": "8.19.3"
+    },
+    "homepage": "https://github.com/salesforce/o11y-sample-app",
     "keywords": [
         "distributed tracing",
         "instrumentation",
@@ -21,7 +26,7 @@
         "lwc"
     ],
     "license": "MIT",
-    "repository": "instrumentation/o11y-sample",
+    "repository": "salesforce/o11y-sample",
     "scripts": {
         "init": "lerna run init --concurrency 1",
         "clean": "lerna run clean",

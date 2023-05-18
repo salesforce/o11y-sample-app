@@ -2,8 +2,6 @@
     "name": "o11y-sample-client",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
     "version": "246.0.0",
-    "author": "instrumentationteam@salesforce.com",
-    "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
     "dependencies": {
         "@lwc/synthetic-shadow": "2.12.1",
         "@salesforce-ux/design-system": "2.21.0",
@@ -15,19 +13,13 @@
     "engines": {
         "node": ">=14.16.0",
         "npm": ">=7.4.3",
-        "yarn": "1.22.19"
+        "yarn": "~1.22.17"
     },
-    "homepage": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app",
-    "keywords": [
-        "distributed tracing",
-        "instrumentation",
-        "o11y",
-        "observability",
-        "olly",
-        "telemetry",
-        "lwc"
-    ],
-    "license": "MIT",
+    "volta": {
+        "node": "16.19.0",
+        "yarn": "1.22.19",
+        "npm": "8.19.3"
+    },
     "lint-staged": {
         "**/*.{css,html,js,json,md,ts,yaml,yml}": [
             "prettier --write"
@@ -36,7 +28,6 @@
             "eslint"
         ]
     },
-    "repository": "instrumentation/o11y-sample",
     "scripts": {
         "init": "cp ../_common/generated/o11y_schema.d.ts ./src/typings",
         "build:production": "NODE_ENV=production webpack",
