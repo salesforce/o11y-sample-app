@@ -9,5 +9,8 @@
         "clean": "rimraf ./generated && mkdir generated"
     },
     "description": "The _ in the name allows lerna to run this project first",
-    "private": true
+    "private": true,
+    "dependencies": {
+        "protobufjs": "6.11.3"
+    }
 }
