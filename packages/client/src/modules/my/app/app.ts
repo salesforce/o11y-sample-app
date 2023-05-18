@@ -65,7 +65,7 @@ export default class App extends LightningElement implements LogCollector {
 
     private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;
-    private _fetchOrig: (input: RequestInfo, init?: RequestInit) => Promise<Response>;
+    private _fetchOrig: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
     private _rootActivity: Activity;
     private _pagePayloadProvider: PagePayloadProvider;
     private _coreCollector: CoreCollectorType;
