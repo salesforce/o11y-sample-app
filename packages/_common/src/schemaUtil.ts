@@ -28,6 +28,17 @@ class SchemaUtil {
             !this.isSimple(schemaId)
         );
     }
+
+    isInternal(schemaId: string): boolean {
+        return (
+            this.isActivity(schemaId) ||
+            this.isError(schemaId) ||
+            this.isInstrumentedEvent(schemaId) ||
+            schemaId === 'sf.instrumentation.CoreEnvelope' ||
+            schemaId === 'sf.instrumentation.MouseEvent' ||
+            schemaId === 'sf.instrumentation.Payload'
+        );
+    }
 }
 
 export const schemaUtil = new SchemaUtil();

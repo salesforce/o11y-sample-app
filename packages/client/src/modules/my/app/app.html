@@ -405,21 +405,33 @@
                         </lightning-tab>
                         <lightning-tab label={labelLogAccumulation} value={sectionLogAccumulation} onactive={handleTabSelect} icon-name="standard:fulfillment_order">
                             <my-app-section label={labelLogAccumulation}>
-                                <div slot="doc"> 
+                                <div slot="doc">
                                     <p>
-                                        Log accumulation is a way for instrumentation clients to avoid calling the log method too frequently and pay a performance and storage cost. 
-                                        Clients can accumulate/aggregate instrumentation data in an internal data structure and choose to log it periodically. 
-                                        In order to avoid losing accumulated data in case of an app-lifecycle event, o11y provides a way for the clients to be notified when that happens. 
-                                        Clients use the 
-                                        <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=Instrumentation+Object#expand-registerForLogPrompt"> registerForLogPrompt </a> 
-                                         method and provide a callback, in which they log their accumulated data and reset their internal data structure. 
-                                        The app uses the 
-                                        <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection"> promptLogCollection </a> 
+                                        Log accumulation is a way for instrumentation clients to avoid calling the log method too frequently and pay a performance and storage cost. Clients can
+                                        accumulate/aggregate instrumentation data in an internal data structure and choose to log it periodically. In order to avoid losing accumulated data in case of
+                                        an app-lifecycle event, o11y provides a way for the clients to be notified when that happens. Clients use the
+                                        <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=Instrumentation+Object#expand-registerForLogPrompt">
+                                            registerForLogPrompt
+                                        </a>
+                                        method and provide a callback, in which they log their accumulated data and reset their internal data structure. The app uses the
+                                        <a href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection">
+                                            promptLogCollection
+                                        </a>
                                         method when an important app-lifecycle event occurs.
                                     </p>
                                 </div>
                                 <div slot="play">
                                     <my-prompt-play onpromptrequest={handlePromptRequest}> </my-prompt-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
+                        <lightning-tab label={labelUtilities} value={sectionUtilities} onactive={handleTabSelect} icon-name="custom:custom44">
+                            <my-app-section label={labelUtilities}>
+                                <div slot="doc">
+                                    <p> Utilities </p>
+                                </div>
+                                <div slot="play">
+                                    <my-utility></my-utility>
                                 </div>
                             </my-app-section>
                         </lightning-tab>

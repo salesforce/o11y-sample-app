@@ -1,7 +1,6 @@
-import protobuf from 'protobufjs';
 import { coreEnvelopeSchema } from 'o11y_schema/sf_instrumentation';
 import { schemas, getSchemaId, hasUserPayload } from '../../_common/generated/schema';
-
+import { decode, getDecodedMessage } from '../../_common/src/protoUtils';
 import type { CoreEnvelope } from '../../_common/interfaces/CoreEnvelope';
 import type { EncodedSchematizedPayload } from '../../_common/interfaces/EncodedSchematizedPayload';
 import type { MetricTag } from '../../_common/interfaces/MetricTag';
@@ -15,17 +14,6 @@ import { exampleSchema } from './schemas/exampleSchema';
 
 function whenText(timestamp: number): string {
     return timestamp !== undefined ? new Date(timestamp).toLocaleString() : 'UNKNOWN';
-}
-
-function decode(logType: string, encoded: Uint8Array) {
-    const schema = schemas.get(logType);
-    const schemaInstance = protobuf.Root.fromJSON(schema.pbjsSchema);
-    const type = schemaInstance.lookupType(logType);
-    const message = type.decode(new Uint8Array(encoded));
-    const pojo = type.toObject(message, {
-        longs: Number
-    });
-    return { type, message: pojo };
 }
 
 const MAX_BUNDLES_TO_PROCESS = 100;
@@ -128,19 +116,10 @@ class CoreEnvelopeProcessor {
         }
     }
 
-    getDecodedMessage(schemaName: string, encoded: Uint8Array): { [k: string]: any } {
-        const { type, message } = decode(schemaName, encoded);
-        const errorMsg: string | null = type.verify(message);
-        if (errorMsg) {
-            throw errorMsg;
-        }
-        return message;
-    }
-
     processEncodedMessage(label: string, schemaName: string, encoded: Uint8Array): boolean {
         let message;
         try {
-            message = this.getDecodedMessage(schemaName, encoded);
+            message = getDecodedMessage(schemaName, encoded);
         } catch (errorMsg) {
             this._error(`${label} is INVALID.`, errorMsg);
             return false;
@@ -154,7 +133,7 @@ class CoreEnvelopeProcessor {
                 if (schemas.has(userSchemaName)) {
                     let data;
                     try {
-                        data = this.getDecodedMessage(
+                        data = getDecodedMessage(
                             message.userPayload.schemaName,
                             message.userPayload.payload
                         );
@@ -182,7 +161,8 @@ class CoreEnvelopeProcessor {
         const parts = schemaName.split('.');
         const fields =
             parts.length === 3 &&
-            schema?.pbjsSchema?.nested?.[parts[0]]?.nested?.[parts[1]]?.nested?.[parts[2]]?.fields;
+            (schema?.pbjsSchema?.nested?.[parts[0]] as any)?.nested?.[parts[1]]?.nested?.[parts[2]]
+                ?.fields;
         for (const key of Object.keys(fields)) {
             if (msg[key] === undefined && fields?.[key]?.options?.proto3_optional) {
                 msg[key] = null;

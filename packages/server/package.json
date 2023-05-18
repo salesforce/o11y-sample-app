@@ -43,7 +43,7 @@
         "lint": "eslint ./src/**/*.ts",
         "prettier": "prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
         "prettier:verify": "prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"",
-        "start": "node --es-module-specifier-resolution=node ../../dist-server/api.js",
+        "start": "node --es-module-specifier-resolution=node ../../dist-server/server/src/api.js",
         "start:withweb": "O11Y_SERVE_WEB=true yarn start",
         "watch": "nodemon",
         "watch:withweb": "O11Y_SERVE_WEB=true yarn watch"
