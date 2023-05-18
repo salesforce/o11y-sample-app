@@ -16,7 +16,7 @@ const PORT = process.env.API_PORT || process.env.PORT || 3002;
 const SERVE_WEB = process.env.O11Y_SERVE_WEB === 'true' || false;
 const LOG_HEADERS = process.env.O11Y_LOG_HEADERS === 'true' || false;
 const __dirname = new URL('.', import.meta.url).pathname;
-const DIST_DIR = path.resolve(__dirname, '..', 'dist-client');
+const DIST_DIR = path.resolve(__dirname, '..', '..', '..', 'dist-client');
 
 const helmetOptions: HelmetOptions = {};
 if (SERVE_WEB) {

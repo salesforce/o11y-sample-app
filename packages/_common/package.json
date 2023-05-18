@@ -1,0 +1,16 @@
+{
+    "name": "common",
+    "version": "246.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+        "init": "node ./scripts/generate-files.js && node ./scripts/generate-files2.js",
+        "clean": "rimraf ./generated && mkdir generated"
+    },
+    "description": "The _ in the name allows lerna to run this project first",
+    "private": true,
+    "dependencies": {
+        "protobufjs": "6.11.3"
+    }
+}

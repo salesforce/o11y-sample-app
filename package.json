@@ -2,15 +2,20 @@
     "name": "o11y-sample-parent",
     "description": "Sample application to demonstrate the 'o11y' observability platform",
     "private": true,
-    "version": "242.0.0",
+    "version": "246.0.0",
     "author": "instrumentationteam@salesforce.com",
-    "bugs": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app/issues",
+    "bugs": "https://github.com/salesforce/o11y-sample-app/issues",
     "engines": {
         "node": ">=14.16.0 <17.0.0",
         "npm": ">=7.4.3",
-        "yarn": ">=1.22.4"
+        "yarn": "~1.22.17"
     },
-    "homepage": "https://git.soma.salesforce.com/instrumentation/o11y-sample-app",
+    "volta": {
+        "node": "16.19.0",
+        "yarn": "1.22.19",
+        "npm": "8.19.3"
+    },
+    "homepage": "https://github.com/salesforce/o11y-sample-app",
     "keywords": [
         "distributed tracing",
         "instrumentation",
@@ -21,8 +26,10 @@
         "lwc"
     ],
     "license": "MIT",
-    "repository": "instrumentation/o11y-sample",
+    "repository": "salesforce/o11y-sample",
     "scripts": {
+        "init": "lerna run init --concurrency 1",
+        "clean": "lerna run clean",
         "clean:deep": "./scripts/deep-clean.sh",
         "build": "lerna run build",
         "build:client": "cd packages/client && yarn build",
@@ -37,7 +44,8 @@
         "watch:both": "run-p watch:client watch:server",
         "watch:client": "cd packages/client && yarn watch",
         "watch:server": "cd packages/server && yarn watch",
-        "test": "./scripts/check-yarn-lock.sh"
+        "test": "./scripts/check-yarn-lock.sh",
+        "postinstall": "yarn run init"
     },
     "devDependencies": {
         "lerna": "^4.0.0",
