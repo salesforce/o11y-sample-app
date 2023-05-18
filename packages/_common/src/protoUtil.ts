@@ -10,13 +10,21 @@ export type DecodedValue = {
     message: DecodedMsg;
 };
 
-export function decode(schemaId: string, encoded: Uint8Array): DecodedValue {
+export function getType(schemaId: string): protobuf.Type {
     const schema = schemas.get(schemaId);
-    if (schema === null) {
+    if (!schema) {
         return undefined;
     }
     const schemaInstance = protobuf.Root.fromJSON(schema.pbjsSchema);
     const type = schemaInstance.lookupType(schemaId);
+    return type;
+}
+
+export function decode(schemaId: string, encoded: Uint8Array): DecodedValue {
+    const type = getType(schemaId);
+    if (!type) {
+        return undefined;
+    }
     const message = type.decode(new Uint8Array(encoded));
     const pojo = type.toObject(message, {
         longs: Number

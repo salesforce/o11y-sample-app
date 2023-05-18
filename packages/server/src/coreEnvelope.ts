@@ -1,6 +1,6 @@
 import { coreEnvelopeSchema } from 'o11y_schema/sf_instrumentation';
 import { schemas, getSchemaId, hasUserPayload } from '../../_common/generated/schema';
-import { decode, getDecodedMessage } from '../../_common/src/protoUtils';
+import { decode, getDecodedMessage } from '../../_common/src/protoUtil';
 import type { CoreEnvelope } from '../../_common/interfaces/CoreEnvelope';
 import type { EncodedSchematizedPayload } from '../../_common/interfaces/EncodedSchematizedPayload';
 import type { MetricTag } from '../../_common/interfaces/MetricTag';

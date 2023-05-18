@@ -1,5 +1,6 @@
 import { LightningElement, track } from 'lwc';
 import { schemas } from '../../../../../_common/generated/schema';
+// import { getType } from '../../../../../_common/src/protoUtil';
 import { schemaUtil } from '../../../../../_common/src/schemaUtil';
 
 type ComboBoxOption = {
