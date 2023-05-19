@@ -1,14 +1,43 @@
 <template>
+    <p class="slds-form-element__label" if:true={selectedSchemaUrl}>
+        <a target="_blank" rel="noopener noreferrer" href={selectedSchemaUrl}
+            >Click to open schema source</a
+        >.</p
+    >
     <template for:each={fields} for:item="field">
         <div key={field.key}>
             <form class="slds-p-around_x-small lastpass-search">
                 <div style="display: flex; justify-content: space-between">
                     <label id={field.id} class="slds-form-element__label">{field.label}</label>
                     <span>
-                        <lightning-icon if:true={field.repeated} icon-name="utility:picklist_type" size="xx-small" title="Repeated Field" style="padding-right: 6px"></lightning-icon>
-                        <lightning-icon if:true={field.isBoolean} icon-name="utility:toggle" size="xx-small" title={field.type} style="padding-right: 6px"></lightning-icon>
-                        <lightning-icon if:true={field.isNumber} icon-name="utility:number_input" size="xx-small" title={field.type} style="padding-right: 6px"></lightning-icon>
-                        <lightning-icon if:true={field.isString} icon-name="utility:text" size="xx-small" title={field.type} style="padding-right: 6px"></lightning-icon>
+                        <lightning-icon
+                            if:true={field.repeated}
+                            icon-name="utility:picklist_type"
+                            size="xx-small"
+                            title="Repeated Field"
+                            style="padding-right: 6px"
+                        ></lightning-icon>
+                        <lightning-icon
+                            if:true={field.isBoolean}
+                            icon-name="utility:toggle"
+                            size="xx-small"
+                            title={field.type}
+                            style="padding-right: 6px"
+                        ></lightning-icon>
+                        <lightning-icon
+                            if:true={field.isNumber}
+                            icon-name="utility:number_input"
+                            size="xx-small"
+                            title={field.type}
+                            style="padding-right: 6px"
+                        ></lightning-icon>
+                        <lightning-icon
+                            if:true={field.isString}
+                            icon-name="utility:text"
+                            size="xx-small"
+                            title={field.type}
+                            style="padding-right: 6px"
+                        ></lightning-icon>
                     </span>
                 </div>
                 <lightning-input
@@ -22,7 +51,14 @@
                     autocomplete="off"
                 >
                 </lightning-input>
-                <lightning-textarea if:true={field.repeated} variant="label-hidden" name={field.name} label={field.label} onchange={handleChangeTextArea}> </lightning-textarea>
+                <lightning-textarea
+                    if:true={field.repeated}
+                    variant="label-hidden"
+                    name={field.name}
+                    label={field.label}
+                    onchange={handleChangeTextArea}
+                >
+                </lightning-textarea>
             </form>
         </div>
     </template>

@@ -4,11 +4,16 @@ import { getType } from '../../../../../_common/src/protoUtil';
 import { schemaUtil } from '../../../../../_common/src/schemaUtil';
 import type { Data } from '../schemaInput/schemaInput';
 import { EventDetail } from '../../models/eventDetail';
+import { getInstrumentation } from 'o11y/client';
+import { Schema } from '../../../../../_common/interfaces/Schema';
 
 type ComboBoxOption = {
     label: string;
     value: string;
 };
+
+const loggerName = 'logger name';
+const activityName = 'activity name';
 
 export default class Utility extends LightningElement {
     @track
@@ -20,6 +25,9 @@ export default class Utility extends LightningElement {
     @track
     selectedSchema: string;
 
+    currentSchema: Schema;
+    data: Data;
+
     constructor() {
         super();
         this.schemaOptions = Array.from(schemas.keys())
@@ -28,33 +36,32 @@ export default class Utility extends LightningElement {
                 label: name,
                 value: name
             }));
-
-        // @ts-ignore
-        window.type = getType('sf.o11ySample.UserPayload');
     }
 
     handleSchemaChange(event: CustomEvent) {
         this.selectedSchema = event.detail.value;
+        this.currentSchema = schemas.get(this.selectedSchema);
     }
 
     handleDataChange(event: CustomEvent<EventDetail<Data>>) {
-        const json = JSON.stringify(event.detail.value, undefined, 4);
-        const schema = schemas.get(this.selectedSchema);
-        const schemaName = `${schema.name[0].toLowerCase()}${schema.name.substring(1)}Schema`;
-        const moduleName = schema.namespace.replace(/\./g, '_');
+        const cs = this.currentSchema;
+        const schemaName = schemaUtil.getSchemaName(cs);
+        const importName = schemaUtil.getImportName(cs);
 
+        this.data = event.detail.value;
+        const json = JSON.stringify(this.data, undefined, 4);
         const jsCode = `
 import { getInstrumentation } from 'o11y';
 
-import { ${schemaName} } from 'o11y_schema/${moduleName}';
+import { ${schemaName} } from '${importName}';
 
-const instr = getInstrumentation('logger name');
+const instr = getInstrumentation(${loggerName});
 
 const data = ${json};
 instr.log(${schemaName}, data);
 
 // Alternatively, use instr.activity() or instr.activityAsync()
-const activity = instr.startActivity('activity name');
+const activity = instr.startActivity(${activityName});
 try {
     // your code here
 } finally {
@@ -81,5 +88,24 @@ try {
             .replace(/>/g, '&gt;')
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#39;');
+    }
+
+    handleLog() {
+        const instr = getInstrumentation(loggerName);
+        try {
+            instr.log(this.currentSchema, this.data);
+        } catch (ex) {
+            instr.error(ex, 'Check value types.');
+        }
+    }
+
+    handleActivity() {
+        const instr = getInstrumentation(loggerName);
+        const act = instr.startActivity(activityName);
+        try {
+            act.stop(this.currentSchema, this.data);
+        } catch (ex) {
+            instr.error(ex, 'Check value types.');
+        }
     }
 }
