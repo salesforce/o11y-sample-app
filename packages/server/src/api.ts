@@ -23,7 +23,8 @@ if (SERVE_WEB) {
     // NOTE: Make sure to test any changes you make to these options by
     // hard-reloading the web page, even if it seems to work otherwise.
     Object.assign(helmetOptions, {
-        contentSecurityPolicy: false
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false
     } as HelmetOptions);
 }
 

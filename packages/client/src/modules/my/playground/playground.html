@@ -1,0 +1,30 @@
+<template>
+    <lightning-combobox
+        name="progress"
+        label="Schemas:"
+        value={selectedSchema}
+        placeholder="Select Schema"
+        options={schemaOptions}
+        onchange={handleSchemaChange}
+    >
+    </lightning-combobox>
+    <my-schema-input schema={selectedSchema} ondatachange={handleDataChange}></my-schema-input>
+
+    <template if:true={selectedSchema}>
+        <div class="hljs" lwc:dom="manual"></div>
+        <lightning-button
+            variant="brand"
+            label="Log"
+            title="Calls the log method as shown."
+            onclick={handleLog}
+            class="slds-m-around_medium"
+        ></lightning-button>
+        <lightning-button
+            variant="brand"
+            label="Activity"
+            title="Calls the activity methods as shown"
+            onclick={handleActivity}
+            class="slds-m-around_medium"
+        ></lightning-button>
+    </template>
+</template>
