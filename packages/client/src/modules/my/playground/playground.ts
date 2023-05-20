@@ -15,7 +15,7 @@ type ComboBoxOption = {
 const loggerName = 'logger name';
 const activityName = 'activity name';
 
-export default class Utility extends LightningElement {
+export default class Playground extends LightningElement {
     @track
     schemaOptions: ComboBoxOption[];
 
@@ -55,13 +55,13 @@ import { getInstrumentation } from 'o11y';
 
 import { ${schemaName} } from '${importName}';
 
-const instr = getInstrumentation(${loggerName});
+const instr = getInstrumentation('${loggerName}');
 
 const data = ${json};
 instr.log(${schemaName}, data);
 
 // Alternatively, use instr.activity() or instr.activityAsync()
-const activity = instr.startActivity(${activityName});
+const activity = instr.startActivity('${activityName}');
 try {
     // your code here
 } finally {
