@@ -44,7 +44,7 @@
         "watch:both": "run-p watch:client watch:server",
         "watch:client": "cd packages/client && yarn watch",
         "watch:server": "cd packages/server && yarn watch",
-        "test": "./scripts/check-yarn-lock.sh",
+        "test:lockfile": "./scripts/check-yarn-lock.sh",
         "postinstall": "yarn run init"
     },
     "devDependencies": {

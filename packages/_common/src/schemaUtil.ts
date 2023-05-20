@@ -1,3 +1,5 @@
+import { Schema } from '../interfaces/Schema';
+
 class SchemaUtil {
     isActivity(schemaId: string): boolean {
         return schemaId === 'sf.instrumentation.Activity';
@@ -38,6 +40,16 @@ class SchemaUtil {
             schemaId === 'sf.instrumentation.MouseEvent' ||
             schemaId === 'sf.instrumentation.Payload'
         );
+    }
+
+    getImportName(schema: Schema): string {
+        const moduleName = schema.namespace.replace(/\./g, '_');
+
+        return `o11y_schema/${moduleName}`;
+    }
+
+    getSchemaName(schema: Schema): string {
+        return `${schema.name[0].toLowerCase()}${schema.name.substring(1)}Schema`;
     }
 }
 

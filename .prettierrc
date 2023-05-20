@@ -9,7 +9,7 @@
             "files": "**/*.html",
             "options": {
                 "parser": "lwc",
-                "printWidth": 200
+                "printWidth": 100
             }
         }
     ]
