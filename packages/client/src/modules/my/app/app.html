@@ -156,10 +156,8 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                     <span class="header">In general, to log a custom message:</span>
                                     <ol>
                                         <li>
-                                            <span
-                                                >First define the structure of your message as a
-                                                schema, and create a PR to add it to the
-                                            </span>
+                                            First define the structure of your message as a schema,
+                                            and create a PR to add it to the&nbsp;
                                             <a
                                                 href="https://git.soma.salesforce.com/instrumentation/ui-telemetry-schema"
                                                 target="_blank"
@@ -169,19 +167,14 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                         </li>
                                         <li>
                                             If applicable, add or update the dependency on the NPM
-                                            module
-                                            <strong> o11y_schema</strong>. Core scenarios will
-                                            always use the latest available.
+                                            module&nbsp;<strong>o11y_schema</strong>. Core scenarios
+                                            will always use the latest available.
                                         </li>
                                         <li>In your code, add an import for your schema.</li>
                                         <li>
-                                            <span
-                                                >Pass the schema object as the first argument to the
-                                            </span>
-                                            <code>log</code
-                                            ><span>
-                                                method and a compliant data as the second.</span
-                                            >
+                                            Pass the schema object as the first argument to
+                                            the&nbsp;<code>log</code>&nbsp;method and a compliant
+                                            data as the second.
                                         </li>
                                     </ol>
                                     <pre>
@@ -191,13 +184,13 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                     </pre>
                                     <span class="header">To log a sample message:</span>
                                     <p>
-                                        This page logs data that complies with the
+                                        This page logs data that complies with the&nbsp;
                                         <a
                                             href="https://git.soma.salesforce.com/instrumentation/o11y-schema/blob/master/src/main/proto/sf/o11ySample/user_payload.proto"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             >sample schema</a
-                                        >. Schemas are defined using
+                                        >. Schemas are defined using&nbsp;
                                         <a
                                             href="https://developers.google.com/protocol-buffers/docs/proto3"
                                             target="_blank"
@@ -205,7 +198,7 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                         >
                                             proto3</a
                                         >
-                                        syntax. A snapshot of this schema is as follows:
+                                        &nbsp;syntax. A snapshot of this schema is as follows:
                                     </p>
                                     <pre class="proto3">
                                         syntax = "proto3";<br>
@@ -311,14 +304,12 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                             <my-app-section label={labelEvents}>
                                 <div slot="doc">
                                     <p>
-                                        <span
-                                            >The o11y module comes with an
-                                            <em>Automatic Click Tracker (ACT)</em>. If it is
-                                            activated by the app, mouse-clicks on certain elements
-                                            (<strong>buttons</strong>,<strong> anchors </strong>and
-                                            <strong> inputs </strong>of type=button) will be
-                                            captured in logs.</span
-                                        >
+                                        The o11y module comes with an&nbsp;
+                                        <em>Automatic Click Tracker (ACT)</em>. If it is activated
+                                        by the app, mouse-clicks on certain elements
+                                        (<strong>buttons</strong>,<strong> anchors </strong>and
+                                        <strong> inputs </strong>of type=button) will be captured in
+                                        logs.
                                     </p>
                                     <p>
                                         A developer can choose to log clicks or other DOM events in
@@ -429,17 +420,15 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                     >
                                     <pre>this.instrApp.networkInstrumentation(true);</pre>
                                     <p>
-                                        <span>Note: This is an </span>
+                                        Note: This is an&nbsp;
                                         <a
                                             href="https://confluence.internal.salesforce.com/display/LIGHTINS/InstrumentedAppMethods+object"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             >app-level method</a
                                         >
-                                        <span>
-                                            obtained by the app via a call to
-                                            registerInstrumentedApp.</span
-                                        >
+                                        &nbsp;obtained by the app via a call to
+                                        registerInstrumentedApp.
                                     </p>
                                     <p>
                                         <span>For more info, please refer to the </span>
@@ -489,7 +478,7 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                             <my-app-section label={labelIdleDetector}>
                                 <div slot="doc">
                                     <p>
-                                        The o11y library includes an
+                                        The o11y library includes an&nbsp;
                                         <a
                                             href="https://confluence.internal.salesforce.com/display/LIGHTINS/IdleDetector"
                                             target="_blank"
@@ -544,8 +533,8 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                             schemas</li
                                         >
                                         <li
-                                            >Ability to encode logs and metrics into the
-                                            <code>CoreEnvelope</code> proto format.</li
+                                            >Ability to encode logs and metrics into the&nbsp;
+                                            <code>CoreEnvelope</code>&nbsp;proto format.</li
                                         >
                                         <li
                                             >Periodic automatic uploading, where the interval is
@@ -570,17 +559,15 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                         >
                                     </ul>
                                     <p>
-                                        <span
-                                            >For details on the Salesforce server end-point, please
-                                            refer to the
-                                        </span>
+                                        For details on the Salesforce server end-point, please refer
+                                        to the&nbsp;
                                         <a
                                             href="https://confluence.internal.salesforce.com/display/LIGHTINS/Olly+Server+Endpoint"
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             >Server Endpoint</a
                                         >
-                                        <span> documentation.</span>
+                                        &nbsp;documentation.
                                     </p>
                                     <p>
                                         Salesforce server end points typically enforce CORS and CSP.
@@ -590,14 +577,14 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                     </p>
                                     <ol>
                                         <li>
-                                            <span>Configure CORS on the server (</span>
+                                            Configure CORS on the server (
                                             <a
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                                 href="https://developer.salesforce.com/docs/atlas.en-us.chatterapi.meta/chatterapi/extend_code_cors.htm#"
                                                 >Official Documentation</a
                                             >
-                                            <span>)</span>
+                                            )
                                             <ol>
                                                 <li
                                                     >From Setup, enter CORS in the Quick Find box,
@@ -673,21 +660,21 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                         data structure and choose to log it periodically. In order
                                         to avoid losing accumulated data in case of an app-lifecycle
                                         event, o11y provides a way for the clients to be notified
-                                        when that happens. Clients use the
+                                        when that happens. Clients use the&nbsp;
                                         <a
                                             href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=Instrumentation+Object#expand-registerForLogPrompt"
                                         >
                                             registerForLogPrompt
                                         </a>
-                                        method and provide a callback, in which they log their
+                                        &nbsp;method and provide a callback, in which they log their
                                         accumulated data and reset their internal data structure.
-                                        The app uses the
+                                        The app uses the&nbsp;
                                         <a
                                             href="https://confluence.internal.salesforce.com/pages/viewpage.action?spaceKey=LIGHTINS&title=InstrumentedAppMethods+object#expand-promptLogCollection"
                                         >
                                             promptLogCollection
                                         </a>
-                                        method when an important app-lifecycle event occurs.
+                                        &nbsp;method when an important app-lifecycle event occurs.
                                     </p>
                                 </div>
                                 <div slot="play">
