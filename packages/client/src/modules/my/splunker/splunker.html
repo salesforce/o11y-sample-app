@@ -1,0 +1,17 @@
+<template>
+    <lightning-combobox
+        name="schemas"
+        label="Schemas:"
+        value={selectedSchema}
+        placeholder="Select Schema"
+        options={schemaOptions}
+        onchange={handleSchemaChange}
+    >
+    </lightning-combobox>
+
+    <lightning-accordion if:true={selectedSchemaId}>
+        <lightning-accordion-section name="Simple" label="Table all Schema Fields">
+            <my-query-simple schema-id={selectedSchemaId}></my-query-simple>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

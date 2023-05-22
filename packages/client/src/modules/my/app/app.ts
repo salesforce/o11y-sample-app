@@ -36,6 +36,7 @@ export default class App extends LightningElement implements LogCollector {
     @track labelMetrics = 'Metrics';
     @track labelLogAccumulation = 'Log Accumulation';
     @track labelPlayground = 'Playground';
+    @track labelSplunker = 'Splunker';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 
     @track sectionIntro = 'section_intro';
@@ -49,6 +50,7 @@ export default class App extends LightningElement implements LogCollector {
     @track sectionMetrics = 'section_metrics';
     @track sectionLogAccumulation = 'section_log_accumulation';
     @track sectionPlayground = 'section_utilities';
+    @track sectionSplunker = 'section_splunker';
 
     private readonly _sectionToLabelMap = new Map<string, string>()
         .set(this.sectionIntro, this.labelIntro)
@@ -61,7 +63,8 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionNetwork, this.labelNetwork)
         .set(this.sectionMetrics, this.labelMetrics)
         .set(this.sectionLogAccumulation, this.labelLogAccumulation)
-        .set(this.sectionPlayground, this.labelPlayground);
+        .set(this.sectionPlayground, this.labelPlayground)
+        .set(this.sectionSplunker, this.labelSplunker);
 
     private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;

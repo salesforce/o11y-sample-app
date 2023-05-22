@@ -1,16 +1,13 @@
 import { LightningElement, track } from 'lwc';
-import { schemas } from '../../../../../_common/generated/schema';
-import { getType } from '../../../../../_common/src/protoUtil';
-import { schemaUtil } from '../../../../../_common/src/schemaUtil';
-import type { Data } from '../schemaInput/schemaInput';
-import { EventDetail } from '../../models/eventDetail';
 import { getInstrumentation } from 'o11y/client';
-import { Schema } from '../../../../../_common/interfaces/Schema';
 
-type ComboBoxOption = {
-    label: string;
-    value: string;
-};
+import { schemas } from '../../../../../_common/generated/schema';
+import { Schema } from '../../../../../_common/interfaces/Schema';
+import { schemaUtil } from '../../../../../_common/src/schemaUtil';
+import { EventDetail } from '../../models/eventDetail';
+import { setCode } from '../../shared/htmlUtils';
+import type { Data } from '../schemaInput/schemaInput';
+import type { ComboBoxOption } from '../../types/ComboBoxOption';
 
 const loggerName = 'logger name';
 const activityName = 'activity name';
@@ -18,9 +15,6 @@ const activityName = 'activity name';
 export default class Playground extends LightningElement {
     @track
     schemaOptions: ComboBoxOption[];
-
-    @track
-    names: string;
 
     @track
     selectedSchema: string;
@@ -67,27 +61,9 @@ try {
 } finally {
     activity.stop(${schemaName}, data);
 }
-`;
+`.substring(1); // skip the first new line
 
-        const div = this.template.querySelector('.hljs') as HTMLDivElement;
-        const pre = document.createElement('pre');
-        const code = document.createElement('code');
-        pre.appendChild(code);
-        // skip the first new line
-        code.innerHTML = this._escape(jsCode.substring(1));
-        div.replaceChildren(pre);
-
-        // @ts-ignore
-        globalThis.hljs?.highlightElement(code);
-    }
-
-    _escape(htmlStr: string): string {
-        return htmlStr
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+        setCode(this.template.querySelector('.hljs') as HTMLDivElement, jsCode, true);
     }
 
     handleLog() {

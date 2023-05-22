@@ -716,6 +716,19 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                 </div>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab
+                            label={labelSplunker}
+                            value={sectionSplunker}
+                            onactive={handleTabSelect}
+                            icon-name="standard:record_lookup"
+                        >
+                            <my-app-section label={labelSplunker}>
+                                <div slot="doc"> </div>
+                                <div slot="play">
+                                    <my-splunker></my-splunker>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
                     </lightning-tabset>
                 </div>
                 <div class="slds-col slds-size_4-of-12">
