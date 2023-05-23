@@ -11,12 +11,14 @@
     <lightning-combobox
         name="schemas"
         label="Schemas:"
-        value={selectedSchema}
+        value={selectedSchemaId}
         placeholder="Select Schema"
         options={schemaOptions}
         onchange={handleSchemaChange}
     >
     </lightning-combobox>
+
+    <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
 
     <lightning-accordion if:true={areInputsValid}>
         <lightning-accordion-section name="Simple" label="Table all Schema Fields">

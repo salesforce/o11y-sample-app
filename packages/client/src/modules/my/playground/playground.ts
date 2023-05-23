@@ -58,6 +58,8 @@ instr.log(${schemaName}, data);
 const activity = instr.startActivity('${activityName}');
 try {
     // your code here
+} catch (ex) {
+    activity.error(ex);
 } finally {
     activity.stop(${schemaName}, data);
 }
