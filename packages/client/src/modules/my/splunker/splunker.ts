@@ -1,11 +1,8 @@
 import { LightningElement, track } from 'lwc';
 
 import { schemas } from '../../../../../_common/generated/schema';
-import { getType } from '../../../../../_common/src/protoUtil';
 import { schemaUtil } from '../../../../../_common/src/schemaUtil';
-import { Schema } from '../../../../../_common/interfaces/Schema';
 import type { ComboBoxOption } from '../../types/ComboBoxOption';
-import { setCode } from '../../shared/htmlUtils';
 
 type Query = {
     key: string;
@@ -23,6 +20,21 @@ export default class Splunker extends LightningElement {
     selectedSchemaId: string;
 
     @track
+    splunkTypes: ComboBoxOption[] = [
+        {
+            value: 'preprod',
+            label: 'Pre-production (use this one for test environments)'
+        },
+        {
+            value: 'prod',
+            label: 'Production (use this one for org62, gus and other production environments)'
+        }
+    ];
+
+    @track
+    selectedSplunkType: string;
+
+    @track
     queries: Query[];
 
     constructor() {
@@ -35,7 +47,15 @@ export default class Splunker extends LightningElement {
             }));
     }
 
+    get areInputsValid(): boolean {
+        return this.selectedSplunkType !== undefined && this.selectedSchemaId !== undefined;
+    }
+
     handleSchemaChange(event: CustomEvent) {
         this.selectedSchemaId = event.detail.value;
+    }
+
+    handleSplunkTypeChange(event: CustomEvent) {
+        this.selectedSplunkType = event.detail.value;
     }
 }

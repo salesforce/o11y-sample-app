@@ -1,5 +1,14 @@
 <template>
     <lightning-combobox
+        name="splunk_types"
+        label="Splunks Types:"
+        value={selectedSplunkType}
+        placeholder="Select a Splunk"
+        options={splunkTypes}
+        onchange={handleSplunkTypeChange}
+    >
+    </lightning-combobox>
+    <lightning-combobox
         name="schemas"
         label="Schemas:"
         value={selectedSchema}
@@ -9,9 +18,17 @@
     >
     </lightning-combobox>
 
-    <lightning-accordion if:true={selectedSchemaId}>
+    <lightning-accordion if:true={areInputsValid}>
         <lightning-accordion-section name="Simple" label="Table all Schema Fields">
-            <my-query-simple schema-id={selectedSchemaId}></my-query-simple>
+            <my-query-simple
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+            ></my-query-simple>
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="Count"
+            label="Usage of Schemas by app over the last few days"
+        >
         </lightning-accordion-section>
     </lightning-accordion>
 </template>

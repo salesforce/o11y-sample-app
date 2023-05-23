@@ -1,3 +1,5 @@
 <template>
+    <!-- This hidden input is required to make renderCallback get called when query changes -->
+    <input type="hidden" value={query} />
     <div class="hljs" lwc:dom="manual"></div>
 </template>
