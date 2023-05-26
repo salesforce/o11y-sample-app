@@ -2,7 +2,7 @@ import QueryBase from '../../shared/queryBase';
 
 export default class QuerySimple extends QueryBase {
     handleInputChange(): void {
-        const index = this.splunkType === 'preprod' ? 'prod' : 'prod' ? 'coreprod' : undefined;
+        const index = this.defaultIndex;
 
         this.setQuery(
             index

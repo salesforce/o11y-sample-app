@@ -21,15 +21,41 @@
     <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
 
     <lightning-accordion if:true={areInputsValid}>
-        <lightning-accordion-section name="Simple" label="Table all Schema Fields">
+        <lightning-accordion-section
+            name="TableOfFields"
+            label="Latest entries showing all schema fields"
+        >
             <my-query-simple
                 schema-id={selectedSchemaId}
                 splunk-type={selectedSplunkType}
             ></my-query-simple>
         </lightning-accordion-section>
+        <lightning-accordion-section name="LatestEntriesOnLex" label="Latest entries on LEX">
+        </lightning-accordion-section>
+        <lightning-accordion-section name="LatestEntriesOnClwr" label="Latest entries on CLWR">
+        </lightning-accordion-section>
+        <lightning-accordion-section name="LatestEntriesOnSfs" label="Latest entries on SFS">
+        </lightning-accordion-section>
         <lightning-accordion-section
-            name="Count"
-            label="Usage of Schemas by app over the last few days"
+            name="UsageByApp"
+            label="Schema usage by app and logger (client) names"
+        >
+        </lightning-accordion-section>
+        <lightning-accordion-section name="UsageByRelease" label="Schema usage by release">
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="Top10Errors"
+            label="Top 10 error messages using this schema"
+        >
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="ActivityStatsByApp"
+            label="Stats on activity durations using this schema"
+        >
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="timeChartClientCounts"
+            label="Timechart of count of unique clients using this schema"
         >
         </lightning-accordion-section>
     </lightning-accordion>

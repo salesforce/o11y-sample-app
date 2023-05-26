@@ -46,6 +46,10 @@ export default abstract class QueryBase extends LightningElement {
     protected importName: string;
     protected schemaType: protobuf.Type;
 
+    get defaultIndex(): string {
+        return this.splunkType === 'preprod' ? 'prod' : 'prod' ? 'coreprod' : undefined;
+    }
+
     @track
     query: string;
 
