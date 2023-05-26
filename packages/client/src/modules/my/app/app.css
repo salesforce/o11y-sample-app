@@ -161,3 +161,13 @@ lightning-badge {
     font-weight: bold;
     margin: 0 10px;
 }
+
+.main-pane {
+    position: relative;
+}
+
+.toggle-button-container {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

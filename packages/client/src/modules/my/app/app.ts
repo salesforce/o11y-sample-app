@@ -84,6 +84,7 @@ export default class App extends LightningElement implements LogCollector {
     @track ccUploadMode: UploadMode = 0; // TODO: Use UploadMode.fetchBinary directly when it's exported
     @track ccUploadEndpoint: string = endpoints.sampleTelemetryEndpoint;
     @track showCoreCollectorStats: boolean;
+    @track isRightPaneCollapsed = false;
 
     @track readonly environment = {
         appName: 'o11y-sample-app',
@@ -305,5 +306,11 @@ export default class App extends LightningElement implements LogCollector {
 
     handlePromptRequest() {
         this._instrApp.promptLogCollection('Prompt Requested');
+    }
+
+    handleToggleRightPaneClick() {
+        this.isRightPaneCollapsed = !this.isRightPaneCollapsed;
+        const mainPane = this.template.querySelector('.main-pane');
+        mainPane.classList.toggle('slds-size_8-of-12', !this.isRightPaneCollapsed);
     }
 }

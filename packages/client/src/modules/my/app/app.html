@@ -7,7 +7,8 @@
                 size="medium"
             ></lightning-icon>
             <span class="app-title"
-                >Observability (o11y) Sample App<span class="app-version">
+                >Observability (o11y) Sample App&nbsp;
+                <span class="app-version">
                     {environment.sdkVersion}.{environment.appVersion}</span
                 ></span
             >
@@ -43,7 +44,23 @@
         </div>
         <div class="row2">
             <div class="slds-grid slds-wrap">
-                <div class="slds-col slds-size_8-of-12">
+                <div class="main-pane slds-col slds-size_8-of-12">
+                    <div class="toggle-button-container">
+                        <lightning-button-icon
+                            if:true={isRightPaneCollapsed}
+                            variant="border-filled"
+                            icon-name="utility:left"
+                            onclick={handleToggleRightPaneClick}
+                            alternative-text="Expand Right Pane"
+                        ></lightning-button-icon>
+                        <lightning-button-icon
+                            if:false={isRightPaneCollapsed}
+                            variant="border-filled"
+                            icon-name="utility:right"
+                            onclick={handleToggleRightPaneClick}
+                            alternative-text="Collapse Right Pane"
+                        ></lightning-button-icon>
+                    </div>
                     <lightning-tabset variant="vertical" active-tab-value={selectedSection}>
                         <lightning-tab
                             label={labelIntro}
@@ -731,7 +748,7 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                         </lightning-tab>
                     </lightning-tabset>
                 </div>
-                <div class="slds-col slds-size_4-of-12">
+                <div class="slds-col slds-size_4-of-12" if:false={isRightPaneCollapsed}>
                     <div class="collector-pane">
                         <div class="collector-header">
                             <span class="collector-header-title">Visual Collector Logs</span>
