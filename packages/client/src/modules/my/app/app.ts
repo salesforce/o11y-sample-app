@@ -1,5 +1,9 @@
 import { LightningElement, track } from 'lwc';
-import { registerInstrumentedApp, ConsoleCollector } from 'o11y/client';
+import {
+    registerInstrumentedApp,
+    ConsoleCollector,
+    _version as o11yClientVersion
+} from 'o11y/client';
 import { CoreCollector } from 'o11y/collectors';
 import { webVitals } from 'o11y/web_vitals';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
@@ -7,6 +11,8 @@ import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
 import { utility } from '../../../utility';
 import { schemaUtil } from '../../../../../_common/src/schemaUtil';
+import { version as o11ySchemaVersion } from 'o11y_schema/version';
+import { version as appVersion } from '../../../version';
 
 import {
     Activity,
@@ -36,6 +42,7 @@ export default class App extends LightningElement implements LogCollector {
     @track labelMetrics = 'Metrics';
     @track labelLogAccumulation = 'Log Accumulation';
     @track labelPlayground = 'Playground';
+    @track labelSplunker = 'Splunker';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 
     @track sectionIntro = 'section_intro';
@@ -49,6 +56,7 @@ export default class App extends LightningElement implements LogCollector {
     @track sectionMetrics = 'section_metrics';
     @track sectionLogAccumulation = 'section_log_accumulation';
     @track sectionPlayground = 'section_utilities';
+    @track sectionSplunker = 'section_splunker';
 
     private readonly _sectionToLabelMap = new Map<string, string>()
         .set(this.sectionIntro, this.labelIntro)
@@ -61,7 +69,8 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionNetwork, this.labelNetwork)
         .set(this.sectionMetrics, this.labelMetrics)
         .set(this.sectionLogAccumulation, this.labelLogAccumulation)
-        .set(this.sectionPlayground, this.labelPlayground);
+        .set(this.sectionPlayground, this.labelPlayground)
+        .set(this.sectionSplunker, this.labelSplunker);
 
     private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;
@@ -81,15 +90,19 @@ export default class App extends LightningElement implements LogCollector {
     @track ccUploadMode: UploadMode = 0; // TODO: Use UploadMode.fetchBinary directly when it's exported
     @track ccUploadEndpoint: string = endpoints.sampleTelemetryEndpoint;
     @track showCoreCollectorStats: boolean;
+    @track isRightPaneCollapsed = false;
 
     @track readonly environment = {
         appName: 'o11y-sample-app',
-        appVersion: '0.0', // Keep this up-to-date with minor build in package.json
+        appVersion,
         appExperience: 'Sample',
         deviceId: 'Unknown',
         deviceModel: 'Unknown',
-        sdkVersion: '246' // Keep this up-to-date with the major version
+        sdkVersion: `${o11yClientVersion}:${o11ySchemaVersion}`
     };
+
+    @track
+    versionInfo = `App: v${appVersion}, Client: v${o11yClientVersion}, Schema: v${o11ySchemaVersion}`;
 
     constructor() {
         super();
@@ -302,5 +315,11 @@ export default class App extends LightningElement implements LogCollector {
 
     handlePromptRequest() {
         this._instrApp.promptLogCollection('Prompt Requested');
+    }
+
+    handleToggleRightPaneClick() {
+        this.isRightPaneCollapsed = !this.isRightPaneCollapsed;
+        const mainPane = this.template.querySelector('.main-pane');
+        mainPane.classList.toggle('slds-size_8-of-12', !this.isRightPaneCollapsed);
     }
 }

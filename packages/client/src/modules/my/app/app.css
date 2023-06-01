@@ -48,10 +48,6 @@ code {
     font-weight: bold;
 }
 
-.app-version {
-    font-weight: lighter;
-}
-
 .no-stats {
     font-size: 8pt;
     font-weight: lighter;
@@ -160,4 +156,14 @@ lightning-badge {
 .stat-label {
     font-weight: bold;
     margin: 0 10px;
+}
+
+.main-pane {
+    position: relative;
+}
+
+.toggle-button-container {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

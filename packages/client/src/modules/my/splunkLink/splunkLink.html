@@ -1,0 +1,13 @@
+<template>
+    <p class="slds-form-element__label" if:true={url}> </p
+    ><div style="display: flex; justify-content: end">
+        <lightning-button
+            variant="brand"
+            icon-name="standard:output"
+            icon-position="right"
+            onclick={handleClick}
+            label="Open in Splunk"
+        ></lightning-button>
+    </div>
+    <!-- <a target="_blank" rel="noopener noreferrer" href={url}>Click to open query in Splunk</a>. -->
+</template>

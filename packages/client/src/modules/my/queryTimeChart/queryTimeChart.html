@@ -1,0 +1,11 @@
+<template>
+    <!-- This hidden input is required to make renderCallback get called when query changes -->
+    <input type="hidden" value={query} />
+    <div class="hljs" lwc:dom="manual"></div>
+    <my-splunk-link
+        if:true={query}
+        splunk-type={splunkType}
+        query={query}
+        tab="visualization"
+    ></my-splunk-link>
+</template>

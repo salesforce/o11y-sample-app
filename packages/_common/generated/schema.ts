@@ -41,6 +41,12 @@ import {
 } from 'o11y_schema/sf_contentLayout';
 
 import {
+    currentStateSchema as sf_embeddedMessaging_currentStateSchema,
+    failureEventSchema as sf_embeddedMessaging_failureEventSchema,
+    interactionEventSchema as sf_embeddedMessaging_interactionEventSchema,
+} from 'o11y_schema/sf_embeddedMessaging';
+
+import {
     interactionEventSchema as sf_enhancedConversation_interactionEventSchema,
 } from 'o11y_schema/sf_enhancedConversation';
 
@@ -169,6 +175,8 @@ import {
 } from 'o11y_schema/sf_offlineApp';
 
 import {
+    paymentByLinkRenderSchema as sf_payments_paymentByLinkRenderSchema,
+    paymentByLinkSubmitSchema as sf_payments_paymentByLinkSubmitSchema,
     paymentSheetConfirmSchema as sf_payments_paymentSheetConfirmSchema,
     paymentSheetRenderSchema as sf_payments_paymentSheetRenderSchema,
 } from 'o11y_schema/sf_payments';
@@ -198,6 +206,7 @@ import {
     fileInfoSchema as sf_sfs_fileInfoSchema,
     loaderInfoSchema as sf_sfs_loaderInfoSchema,
     screenInfoSchema as sf_sfs_screenInfoSchema,
+    serviceDocumentPreviewLoadSchema as sf_sfs_serviceDocumentPreviewLoadSchema,
     sfsErrorSchema as sf_sfs_sfsErrorSchema,
     sfsEventLogSchema as sf_sfs_sfsEventLogSchema,
     wireDebugInfoSchema as sf_sfs_wireDebugInfoSchema,
@@ -280,6 +289,10 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_contentLayout_componentUsageSchema), sf_contentLayout_componentUsageSchema)
     .set(getSchemaId(sf_contentLayout_repeaterUsageSchema), sf_contentLayout_repeaterUsageSchema)
     .set(getSchemaId(sf_contentLayout_tabsUsageSchema), sf_contentLayout_tabsUsageSchema)
+    // sf_embeddedMessaging
+    .set(getSchemaId(sf_embeddedMessaging_currentStateSchema), sf_embeddedMessaging_currentStateSchema)
+    .set(getSchemaId(sf_embeddedMessaging_failureEventSchema), sf_embeddedMessaging_failureEventSchema)
+    .set(getSchemaId(sf_embeddedMessaging_interactionEventSchema), sf_embeddedMessaging_interactionEventSchema)
     // sf_enhancedConversation
     .set(getSchemaId(sf_enhancedConversation_interactionEventSchema), sf_enhancedConversation_interactionEventSchema)
     // sf_instrumentation
@@ -379,6 +392,8 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_offlineApp_statusSchema), sf_offlineApp_statusSchema)
     .set(getSchemaId(sf_offlineApp_syncStatusSchema), sf_offlineApp_syncStatusSchema)
     // sf_payments
+    .set(getSchemaId(sf_payments_paymentByLinkRenderSchema), sf_payments_paymentByLinkRenderSchema)
+    .set(getSchemaId(sf_payments_paymentByLinkSubmitSchema), sf_payments_paymentByLinkSubmitSchema)
     .set(getSchemaId(sf_payments_paymentSheetConfirmSchema), sf_payments_paymentSheetConfirmSchema)
     .set(getSchemaId(sf_payments_paymentSheetRenderSchema), sf_payments_paymentSheetRenderSchema)
     // sf_records
@@ -400,6 +415,7 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_sfs_fileInfoSchema), sf_sfs_fileInfoSchema)
     .set(getSchemaId(sf_sfs_loaderInfoSchema), sf_sfs_loaderInfoSchema)
     .set(getSchemaId(sf_sfs_screenInfoSchema), sf_sfs_screenInfoSchema)
+    .set(getSchemaId(sf_sfs_serviceDocumentPreviewLoadSchema), sf_sfs_serviceDocumentPreviewLoadSchema)
     .set(getSchemaId(sf_sfs_sfsErrorSchema), sf_sfs_sfsErrorSchema)
     .set(getSchemaId(sf_sfs_sfsEventLogSchema), sf_sfs_sfsEventLogSchema)
     .set(getSchemaId(sf_sfs_wireDebugInfoSchema), sf_sfs_wireDebugInfoSchema)

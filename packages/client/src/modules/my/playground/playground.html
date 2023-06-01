@@ -1,6 +1,6 @@
 <template>
     <lightning-combobox
-        name="progress"
+        name="schemas"
         label="Schemas:"
         value={selectedSchema}
         placeholder="Select Schema"
@@ -8,10 +8,14 @@
         onchange={handleSchemaChange}
     >
     </lightning-combobox>
-    <my-schema-input schema={selectedSchema} ondatachange={handleDataChange}></my-schema-input>
 
     <template if:true={selectedSchema}>
+        <my-schema-link schema={selectedSchema}></my-schema-link>
+        <my-schema-input schema={selectedSchema} ondatachange={handleDataChange}></my-schema-input>
+
+        <p class="header">Sample Code</p>
         <div class="hljs" lwc:dom="manual"></div>
+
         <lightning-button
             variant="brand"
             label="Log"

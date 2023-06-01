@@ -1,26 +1,24 @@
 import { LightningElement, track } from 'lwc';
-import { schemas } from '../../../../../_common/generated/schema';
-import { getType } from '../../../../../_common/src/protoUtil';
-import { schemaUtil } from '../../../../../_common/src/schemaUtil';
-import type { Data } from '../schemaInput/schemaInput';
-import { EventDetail } from '../../models/eventDetail';
 import { getInstrumentation } from 'o11y/client';
-import { Schema } from '../../../../../_common/interfaces/Schema';
 
-type ComboBoxOption = {
-    label: string;
-    value: string;
-};
+import { schemas } from '../../../../../_common/generated/schema';
+import { Schema } from '../../../../../_common/interfaces/Schema';
+import { schemaUtil } from '../../../../../_common/src/schemaUtil';
+import { EventDetail } from '../../models/eventDetail';
+import { setCode } from '../../shared/htmlUtils';
+import type { Data } from '../schemaInput/schemaInput';
+import type { ComboBoxOption } from '../../types/ComboBoxOption';
 
 const loggerName = 'logger name';
 const activityName = 'activity name';
 
+const initialSchemaId = 'sf.instrumentation.Simple';
+
 export default class Playground extends LightningElement {
-    @track
-    schemaOptions: ComboBoxOption[];
+    private _hasRendered = false;
 
     @track
-    names: string;
+    schemaOptions: ComboBoxOption[];
 
     @track
     selectedSchema: string;
@@ -38,8 +36,22 @@ export default class Playground extends LightningElement {
             }));
     }
 
+    renderedCallback(): void {
+        if (!this._hasRendered) {
+            this._hasRendered = true;
+            const initialSchema = this.schemaOptions.find(
+                (option) => option.value === initialSchemaId
+            );
+            this._selectSchema(initialSchema.value);
+        }
+    }
+
     handleSchemaChange(event: CustomEvent) {
-        this.selectedSchema = event.detail.value;
+        this._selectSchema(event.detail.value);
+    }
+
+    private _selectSchema(id: string) {
+        this.selectedSchema = id;
         this.currentSchema = schemas.get(this.selectedSchema);
     }
 
@@ -64,30 +76,14 @@ instr.log(${schemaName}, data);
 const activity = instr.startActivity('${activityName}');
 try {
     // your code here
+} catch (ex) {
+    activity.error(ex);
 } finally {
     activity.stop(${schemaName}, data);
 }
-`;
+`.substring(1); // skip the first new line
 
-        const div = this.template.querySelector('.hljs') as HTMLDivElement;
-        const pre = document.createElement('pre');
-        const code = document.createElement('code');
-        pre.appendChild(code);
-        // skip the first new line
-        code.innerHTML = this._escape(jsCode.substring(1));
-        div.replaceChildren(pre);
-
-        // @ts-ignore
-        globalThis.hljs?.highlightElement(code);
-    }
-
-    _escape(htmlStr: string): string {
-        return htmlStr
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#39;');
+        setCode(this.template.querySelector('.hljs') as HTMLDivElement, jsCode);
     }
 
     handleLog() {
