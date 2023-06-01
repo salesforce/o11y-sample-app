@@ -1,0 +1,13 @@
+.highlight {
+    background-color: rgba(255,255,255,0.5);
+    border: 1px solid #ccc;
+}
+
+.queries {
+    margin: 1em 0;
+}
+
+h2 {
+    margin-top: 1em;
+    font-size: x-large;
+}

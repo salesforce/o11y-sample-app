@@ -12,6 +12,8 @@ type Query = {
     cssClass?: string;
 };
 
+const initialSchemaId = 'sf.instrumentation.Simple';
+
 export default class Splunker extends LightningElement {
     @track
     schemaOptions: ComboBoxOption[];
@@ -23,7 +25,7 @@ export default class Splunker extends LightningElement {
     splunkTypes: ComboBoxOption[] = [
         {
             value: 'preprod',
-            label: 'Pre-production (use this one for test environments)'
+            label: 'Pre-production (use this one for steam, vpod and other test environments)'
         },
         {
             value: 'prod',
@@ -32,10 +34,16 @@ export default class Splunker extends LightningElement {
     ];
 
     @track
-    selectedSplunkType: string;
+    selectedSplunkType: string = this.splunkTypes[0].value;
 
     @track
     queries: Query[];
+
+    @track
+    classes: Record<string, string> = {};
+
+    @track
+    selectedLoggerAppName: string;
 
     constructor() {
         super();
@@ -45,6 +53,9 @@ export default class Splunker extends LightningElement {
                 label: name,
                 value: name
             }));
+        this.selectedSchemaId = this.schemaOptions.find(
+            (option) => option.value === initialSchemaId
+        ).value;
     }
 
     get areInputsValid(): boolean {
@@ -57,5 +68,14 @@ export default class Splunker extends LightningElement {
 
     handleSplunkTypeChange(event: CustomEvent) {
         this.selectedSplunkType = event.detail.value;
+    }
+
+    handleLoggerAppNameChange(event: CustomEvent) {
+        this.selectedLoggerAppName = event.detail.value;
+    }
+
+    handleToggleSection(event: CustomEvent) {
+        this.classes = {};
+        this.classes[event.detail.openSections] = 'highlight';
     }
 }

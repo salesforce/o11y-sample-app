@@ -5,13 +5,7 @@ import { schemas } from '../../../../_common/generated/schema';
 import { getType } from '../../../../_common/src/protoUtil';
 import { schemaUtil } from '../../../../_common/src/schemaUtil';
 import { Schema } from '../../../../_common/interfaces/Schema';
-
-type SplunkType = 'preprod' | 'prod';
-
-const splunkHosts = {
-    preprod: 'https://splunk-web-preprod.log-analytics.monitoring.aws-esvc1-useast2.aws.sfdc.is',
-    prod: 'https://splunk-web.log-analytics.monitoring.aws-esvc1-useast2.aws.sfdc.is'
-};
+import type { SplunkType } from '../types/Shared';
 
 export default abstract class QueryBase extends LightningElement {
     private _schemaId: string;
@@ -20,14 +14,16 @@ export default abstract class QueryBase extends LightningElement {
         return this._schemaId;
     }
     set schemaId(value: string) {
-        this._schemaId = value;
+        if (this._schemaId !== value) {
+            this._schemaId = value;
 
-        const cs: Schema = schemas.get(this.schemaId);
-        this.schemaName = schemaUtil.getSchemaName(cs);
-        this.importName = schemaUtil.getImportName(cs);
+            const cs: Schema = schemas.get(this.schemaId);
+            this.schemaName = schemaUtil.getSchemaName(cs);
+            this.importName = schemaUtil.getImportName(cs);
 
-        this.schemaType = getType(this.schemaId);
-        this.handleInputChange();
+            this.schemaType = getType(this.schemaId);
+            this.handleInputChange();
+        }
     }
 
     private _splunkType: SplunkType;
@@ -38,6 +34,18 @@ export default abstract class QueryBase extends LightningElement {
     set splunkType(value: SplunkType) {
         if (this._splunkType !== value) {
             this._splunkType = value;
+            this.handleInputChange();
+        }
+    }
+
+    private _loggerAppName: string;
+    @api
+    get loggerAppName(): string {
+        return this._loggerAppName;
+    }
+    set loggerAppName(value: string) {
+        if (this._loggerAppName !== value) {
+            this._loggerAppName = value;
             this.handleInputChange();
         }
     }
@@ -56,29 +64,24 @@ export default abstract class QueryBase extends LightningElement {
     @track
     linkHref: string;
 
-    private _oldQuery: string;
-
-    setQuery(value: string) {
-        if (this.query !== value) {
-            this._oldQuery = this.query;
-            this.query = value;
-            this._setLinkHref();
-        }
+    handleInputChange(): void {
+        this.updateQuery();
     }
-
-    abstract handleInputChange(): void;
 
     renderedCallback(): void {
-        setCode(this.template.querySelector('div.hljs'), this.query, true);
+        setCode(this.template.querySelector('div.hljs'), this.query, '0');
     }
 
-    private _setLinkHref(): void {
-        const splunkHost = splunkHosts[this.splunkType];
-        if (splunkHost && this.query) {
-            const q = encodeURIComponent(this.query);
-            this.linkHref = `https://${splunkHost}/en-US/app/search/search?q=${q}`;
-        } else {
-            this.linkHref = undefined;
+    protected updateQuery(): void {
+        let query = this.getQuery(this.defaultIndex, this.schemaId, this.loggerAppName);
+        if (this.query !== query) {
+            if (query) {
+                // Get rid of leading whitespace
+                query = query.replace(/(?<=\r\n|\n|\r)(^\s+)/gm, ' ').trim();
+            }
+            this.query = query;
         }
     }
+
+    protected abstract getQuery(index: string, schemaId: string, loggerAppName: string): string;
 }

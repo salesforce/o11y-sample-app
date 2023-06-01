@@ -1,62 +1,110 @@
 <template>
     <lightning-combobox
         name="splunk_types"
-        label="Splunks Types:"
+        label="Splunk Instance:"
         value={selectedSplunkType}
-        placeholder="Select a Splunk"
+        placeholder="Select a Splunk instance"
         options={splunkTypes}
         onchange={handleSplunkTypeChange}
     >
     </lightning-combobox>
+
+    <my-logger-app-name-selector onselect={handleLoggerAppNameChange}></my-logger-app-name-selector>
+
     <lightning-combobox
         name="schemas"
-        label="Schemas:"
+        label="Schema:"
         value={selectedSchemaId}
-        placeholder="Select Schema"
+        placeholder="Select your schema"
         options={schemaOptions}
         onchange={handleSchemaChange}
     >
     </lightning-combobox>
-
     <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
 
-    <lightning-accordion if:true={areInputsValid}>
+    <h2>Sample Queries (auto-generated)</h2>
+
+    <lightning-accordion
+        if:true={areInputsValid}
+        onsectiontoggle={handleToggleSection}
+        class="queries"
+    >
         <lightning-accordion-section
             name="TableOfFields"
-            label="Latest entries showing all schema fields"
+            label="Table of schema fields on latest events"
+            class={classes.TableOfFields}
         >
-            <my-query-schema-fields
+            <my-query-fields
                 schema-id={selectedSchemaId}
                 splunk-type={selectedSplunkType}
-            ></my-query-schema-fields>
+                logger-app-name={selectedLoggerAppName}
+            ></my-query-fields>
         </lightning-accordion-section>
-        <lightning-accordion-section name="LatestEntriesOnLex" label="Latest entries on LEX">
-        </lightning-accordion-section>
-        <lightning-accordion-section name="LatestEntriesOnClwr" label="Latest entries on CLWR">
-        </lightning-accordion-section>
-        <lightning-accordion-section name="LatestEntriesOnSfs" label="Latest entries on SFS">
+        <lightning-accordion-section
+            name="LatestEvents"
+            label="Latest events on specified app"
+            class={classes.LatestEvents}
+        >
+            <my-query-events
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+                logger-app-name={selectedLoggerAppName}
+            ></my-query-events>
         </lightning-accordion-section>
         <lightning-accordion-section
             name="UsageByApp"
-            label="Schema usage by app and logger (client) names"
+            label="Usage by appName, loggerAppName and loggerName"
+            class={classes.UsageByApp}
         >
-        </lightning-accordion-section>
-        <lightning-accordion-section name="UsageByRelease" label="Schema usage by release">
-        </lightning-accordion-section>
-        <lightning-accordion-section
-            name="Top10Errors"
-            label="Top 10 error messages using this schema"
-        >
-        </lightning-accordion-section>
-        <lightning-accordion-section
-            name="ActivityStatsByApp"
-            label="Stats on activity durations using this schema"
-        >
+            <my-query-usage
+                by="appName, loggerAppName, loggerName"
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+                logger-app-name={selectedLoggerAppName}
+            ></my-query-usage>
         </lightning-accordion-section>
         <lightning-accordion-section
-            name="timeChartClientCounts"
-            label="Timechart of count of unique clients using this schema"
+            name="UsageByRelease"
+            label="Usage by release version"
+            class={classes.UsageByRelease}
         >
+            <my-query-usage
+                by="gdpr"
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+                logger-app-name={selectedLoggerAppName}
+            ></my-query-usage>
+        </lightning-accordion-section>
+        <lightning-accordion-section name="TopErrors" label="Top Errors" class={classes.TopErrors}>
+            <my-query-top-errors
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+                logger-app-name={selectedLoggerAppName}
+            ></my-query-top-errors>
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="ActivityStats"
+            label="Activity Stats"
+            class={classes.ActivityStats}
+        >
+            <my-query-activity-stats
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+                logger-app-name={selectedLoggerAppName}
+            >
+            </my-query-activity-stats>
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="TimeChart"
+            label="Time chart of usage by loggerName"
+            class={classes.TimeChart}
+        >
+            <my-query-time-chart
+                schema-id={selectedSchemaId}
+                splunk-type={selectedSplunkType}
+                logger-app-name={selectedLoggerAppName}
+            >
+            </my-query-time-chart>
         </lightning-accordion-section>
     </lightning-accordion>
 </template>

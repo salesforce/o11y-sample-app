@@ -12,7 +12,11 @@ import type { ComboBoxOption } from '../../types/ComboBoxOption';
 const loggerName = 'logger name';
 const activityName = 'activity name';
 
+const initialSchemaId = 'sf.instrumentation.Simple';
+
 export default class Playground extends LightningElement {
+    private _hasRendered = false;
+
     @track
     schemaOptions: ComboBoxOption[];
 
@@ -32,8 +36,22 @@ export default class Playground extends LightningElement {
             }));
     }
 
+    renderedCallback(): void {
+        if (!this._hasRendered) {
+            this._hasRendered = true;
+            const initialSchema = this.schemaOptions.find(
+                (option) => option.value === initialSchemaId
+            );
+            this._selectSchema(initialSchema.value);
+        }
+    }
+
     handleSchemaChange(event: CustomEvent) {
-        this.selectedSchema = event.detail.value;
+        this._selectSchema(event.detail.value);
+    }
+
+    private _selectSchema(id: string) {
+        this.selectedSchema = id;
         this.currentSchema = schemas.get(this.selectedSchema);
     }
 
@@ -65,7 +83,7 @@ try {
 }
 `.substring(1); // skip the first new line
 
-        setCode(this.template.querySelector('.hljs') as HTMLDivElement, jsCode, true);
+        setCode(this.template.querySelector('.hljs') as HTMLDivElement, jsCode);
     }
 
     handleLog() {

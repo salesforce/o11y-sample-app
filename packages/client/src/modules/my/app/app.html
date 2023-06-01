@@ -740,7 +740,10 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                             icon-name="standard:record_lookup"
                         >
                             <my-app-section label={labelSplunker}>
-                                <div slot="doc"> </div>
+                                <div slot="doc"
+                                    >Here you can generate sample Splunk queries for preprod and
+                                    prod instances for your schema.</div
+                                >
                                 <div slot="play">
                                     <my-splunker></my-splunker>
                                 </div>
