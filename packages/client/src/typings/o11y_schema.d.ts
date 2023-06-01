@@ -5,6 +5,7 @@ declare module 'o11y_schema/sf_blockBuilder';
 declare module 'o11y_schema/sf_clwr';
 declare module 'o11y_schema/sf_commerce';
 declare module 'o11y_schema/sf_contentLayout';
+declare module 'o11y_schema/sf_embeddedMessaging';
 declare module 'o11y_schema/sf_enhancedConversation';
 declare module 'o11y_schema/sf_instrumentation';
 declare module 'o11y_schema/sf_instrumentationTest';

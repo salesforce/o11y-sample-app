@@ -6,12 +6,8 @@
                 icon-name="standard:metrics"
                 size="medium"
             ></lightning-icon>
-            <span class="app-title"
-                >Observability (o11y) Sample App&nbsp;
-                <span class="app-version">
-                    {environment.sdkVersion}.{environment.appVersion}</span
-                ></span
-            >
+            <span class="app-title">Observability (o11y) Sample App</span>
+            <lightning-helptext content={versionInfo}></lightning-helptext>
             <a
                 class="doc-link slds-m-horizontal_medium"
                 href="https://confluence.internal.salesforce.com/display/LIGHTINS/Lightning+Instrumentation+Home"

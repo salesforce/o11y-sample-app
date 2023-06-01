@@ -1,5 +1,9 @@
 import { LightningElement, track } from 'lwc';
-import { registerInstrumentedApp, ConsoleCollector } from 'o11y/client';
+import {
+    registerInstrumentedApp,
+    ConsoleCollector,
+    _version as o11yClientVersion
+} from 'o11y/client';
 import { CoreCollector } from 'o11y/collectors';
 import { webVitals } from 'o11y/web_vitals';
 import { AppPayloadProvider } from '../../../appPayloadProvider';
@@ -7,6 +11,8 @@ import { PagePayloadProvider } from '../../../pagePayloadProvider';
 import { NetworkOptions } from '../../models/networkOptions';
 import { utility } from '../../../utility';
 import { schemaUtil } from '../../../../../_common/src/schemaUtil';
+import { version as o11ySchemaVersion } from 'o11y_schema/version';
+import { version as appVersion } from '../../../version';
 
 import {
     Activity,
@@ -88,12 +94,15 @@ export default class App extends LightningElement implements LogCollector {
 
     @track readonly environment = {
         appName: 'o11y-sample-app',
-        appVersion: '0.0', // Keep this up-to-date with minor build in package.json
+        appVersion,
         appExperience: 'Sample',
         deviceId: 'Unknown',
         deviceModel: 'Unknown',
-        sdkVersion: '246' // Keep this up-to-date with the major version
+        sdkVersion: `${o11yClientVersion}:${o11ySchemaVersion}`
     };
+
+    @track
+    versionInfo = `App: v${appVersion}, Client: v${o11yClientVersion}, Schema: v${o11ySchemaVersion}`;
 
     constructor() {
         super();
