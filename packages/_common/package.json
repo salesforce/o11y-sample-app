@@ -11,6 +11,6 @@
     "description": "The _ in the name allows lerna to run this project first",
     "private": true,
     "dependencies": {
-        "protobufjs": "6.11.3"
+        "protobufjs": "7.2.4"
     }
 }
