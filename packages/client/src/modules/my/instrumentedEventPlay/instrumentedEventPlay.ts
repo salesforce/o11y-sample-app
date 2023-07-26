@@ -1,6 +1,6 @@
 import { LightningElement, api } from 'lwc';
 import { getInstrumentation } from 'o11y/client';
-import { Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
+import { DomEventApiOptions, Instrumentation } from 'o11y/dist/modules/o11y/client/interfaces';
 import { userPayloadSchema } from 'o11y_schema/sf_o11ySample';
 
 export default class InstrumentedEventPlay extends LightningElement {
@@ -72,6 +72,13 @@ export default class InstrumentedEventPlay extends LightningElement {
         this.logEvent(event);
     }
 
+    handleLwcButtonLogWithMouseEventsClick(event: CustomEvent): void {
+        this.notifyNoAct('lightning-button');
+        this.logEvent(event, {
+            captureMouseData: true
+        });
+    }
+
     handleDivClick(event: MouseEvent): void {
         this.updateDivColor(event.target as HTMLDivElement, this.newColor());
     }
@@ -89,7 +96,7 @@ export default class InstrumentedEventPlay extends LightningElement {
         return Math.floor(Math.random() * 0x1000000);
     }
 
-    logEvent(event: Event): void {
+    logEvent(event: Event, options?: DomEventApiOptions): void {
         const actualColor = window.getComputedStyle(event.target as Element).backgroundColor;
         // Convert actualColor text, which comes back in the form of "rgb(x, y, z)" or "rgba(x, y, z, a)", into an actual value.
         const colorValue = actualColor
@@ -99,9 +106,15 @@ export default class InstrumentedEventPlay extends LightningElement {
             .map((s) => parseInt(s))
             .reduce((a, b) => a * 256 + b);
 
-        this._instr.domEvent(event, this, userPayloadSchema, {
-            string: actualColor,
-            uint32: colorValue
-        });
+        this._instr.domEvent(
+            event,
+            this,
+            userPayloadSchema,
+            {
+                string: actualColor,
+                uint32: colorValue
+            },
+            options
+        );
     }
 }

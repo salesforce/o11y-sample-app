@@ -7175,10 +7175,10 @@ o11y_schema@246.0.0:
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-246.0.0.tgz#f76b839f153bb96968e75ce0dbc0a050a7cbb204"
   integrity sha512-ETfxv0HLpCAqxQfEN8wph2a6ZfVcCQ8/ET5yRLY5z2qrVyNwDadFPBjdZi49xTjBP25LvL1/XqiHdG1tG8UiGA==
 
-o11y_schema@246.8.0:
-  version "246.8.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-246.8.0.tgz#ab32473719f435a99ed5441d0fefb32fbb8fb2fb"
-  integrity sha512-YeDC+ZfXSwdXn9Bqpmv5WikyTVigt7/JtfjUBYX5lvqjZChCfDMUbtcjMBLTFH1byDoZLPyyQGLh6/b13hbtNw==
+o11y_schema@248.0.1:
+  version "248.0.1"
+  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.0.1.tgz#728127f296aa853abf614c93ce240f61942ba6dc"
+  integrity sha512-+7XsAr0+qFg9RrDgur1t0fadYpjg68Am9M7Dplq5xwxPWB0I7LLbabUgMXwVZ02zMWXEfJRz1fyC8y48AEneVw==
 
 o11y_schema@248.11.0:
   version "248.11.0"
