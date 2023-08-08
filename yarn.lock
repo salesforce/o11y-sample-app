@@ -6316,6 +6316,11 @@ long@^4.0.0:
   resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
   integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
 
+long@^5.0.0:
+  version "5.2.3"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/long/-/long-5.2.3.tgz#a3ba97f3877cf1d778eccbcb048525ebb77499e1"
+  integrity sha512-lcHwpNoggQTObv5apGNCTdJrO69eHOZMi4BNC+rTLER8iHAqGrUVeLh/irVIM7zTw2bOXA8T6uNPeujwOLg/2Q==
+
 lower-case@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/lower-case/-/lower-case-2.0.2.tgz#6fa237c63dbdc4a82ca0fd882e4722dc5e634e28"
@@ -7147,24 +7152,24 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==
 
-o11y@246.2.0:
-  version "246.2.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-246.2.0.tgz#4d86df2c3044c8e791af8d361c1d48c355cfba1a"
-  integrity sha512-sTU9MmZ+pkCdg/o7fgJ5jzMJuT75ioichuennPra6Hh2y3Ljw+32FR6MUEAqxNqackYYIDdrO4NL8HfwgLsypg==
+o11y@248.4.0:
+  version "248.4.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y/-/o11y-248.4.0.tgz#f63ef270849ee3fb3b861940405500aef2d1b7ba"
+  integrity sha512-4dyU23w3H7EAKMa26zd7xYwu0AUOiWJvYPBeueleX+VDNQmndMmSXWwbylEUryv0PjWr8I7Vl+jNbWCJDJtQQg==
   dependencies:
-    o11y_schema "246.0.0"
-    protobufjs "6.11.3"
+    o11y_schema "248.3.0"
+    protobufjs "7.2.4"
     web-vitals "2.1.4"
-
-o11y_schema@246.0.0:
-  version "246.0.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-246.0.0.tgz#f76b839f153bb96968e75ce0dbc0a050a7cbb204"
-  integrity sha512-ETfxv0HLpCAqxQfEN8wph2a6ZfVcCQ8/ET5yRLY5z2qrVyNwDadFPBjdZi49xTjBP25LvL1/XqiHdG1tG8UiGA==
 
 o11y_schema@246.8.0:
   version "246.8.0"
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-246.8.0.tgz#ab32473719f435a99ed5441d0fefb32fbb8fb2fb"
   integrity sha512-YeDC+ZfXSwdXn9Bqpmv5WikyTVigt7/JtfjUBYX5lvqjZChCfDMUbtcjMBLTFH1byDoZLPyyQGLh6/b13hbtNw==
+
+o11y_schema@248.3.0:
+  version "248.3.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-248.3.0.tgz#e7d5c229dbb488782e8dc01a7033bc56fb560030"
+  integrity sha512-riaBpRdkVmXrPdwbAGVXEqK11uTuOM/3GUxmKZTo1PsBAqTbqaAqxK9xYoDL4WYhP+GpcP8I1XWB1a79Y9cpHw==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
@@ -7851,6 +7856,24 @@ protobufjs@6.11.3:
     "@types/long" "^4.0.1"
     "@types/node" ">=13.7.0"
     long "^4.0.0"
+
+protobufjs@7.2.4:
+  version "7.2.4"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/protobufjs/-/protobufjs-7.2.4.tgz#3fc1ec0cdc89dd91aef9ba6037ba07408485c3ae"
+  integrity sha512-AT+RJgD2sH8phPmCf7OUZR8xGdcJRga4+1cOaXJ64hvcSkVhNcRHOwIxUatPH15+nj59WAGTDv3LSGZPEQbJaQ==
+  dependencies:
+    "@protobufjs/aspromise" "^1.1.2"
+    "@protobufjs/base64" "^1.1.2"
+    "@protobufjs/codegen" "^2.0.4"
+    "@protobufjs/eventemitter" "^1.1.0"
+    "@protobufjs/fetch" "^1.1.0"
+    "@protobufjs/float" "^1.0.2"
+    "@protobufjs/inquire" "^1.1.0"
+    "@protobufjs/path" "^1.1.2"
+    "@protobufjs/pool" "^1.1.0"
+    "@protobufjs/utf8" "^1.1.0"
+    "@types/node" ">=13.7.0"
+    long "^5.0.0"
 
 protocols@^1.4.0:
   version "1.4.8"
