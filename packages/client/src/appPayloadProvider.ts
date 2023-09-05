@@ -33,10 +33,13 @@ export class AppPayloadProvider {
             payload: {
                 language: navigator.language,
                 frameRate: this._lastFrameRate,
-                clientSessionId: args.logMeta.clientSessionId,
 
-                // We can access the pagePayload from the appPayloadProvider
-                url: args.logMeta.pagePayload.payload.url
+                /* Here is an example of accessing one of the fields on the arguments
+                LOG_META_FIELD: args.logMeta.<LOG_META_FIELD> */
+
+                /* We can access the pagePayload from the appPayloadProvider, so here is an
+                   example of accessing a field from the pagePayload
+                PAGE_PAYLOAD_FIELD: args.logMeta.pagePayload.payload.<PAGE_PAYLOAD_FIELD> */
             }
         };
     }

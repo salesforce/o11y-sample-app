@@ -23,13 +23,14 @@ export class PagePayloadProvider {
             payload: {
                 url: window.location.href,
                 entityId: this._entityId,
-                entityType: this._entityType,
-                connectionType: args.logMeta.connectionType
+                entityType: this._entityType
+                
+                /* Here is an example of accessing one of the fields on the arguments
+                LOG_META_FIELD: args.logMeta.<LOG_META_FIELD> */
 
-                /* Note that the below field would not work, since appPayload is not created
+                /* Note that the below field would NOT work, since appPayload is not created
                 until after pagePayload
-
-                language: args.logMeta.appPayload.payload.language*/
+                APP_PAYLOAD_FIELD: args.logMeta.appPayload.payload.<APP_PAYLOAD_FIELD> */
             }
         };
     }
