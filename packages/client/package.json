@@ -8,7 +8,7 @@
         "lightning-base-components": "1.18.1-alpha",
         "lwc": "2.45.2",
         "o11y": "248.7.0",
-        "o11y_schema": "248.11.0"
+        "o11y_schema": "248.18.0"
     },
     "engines": {
         "node": ">=14.16.0",
