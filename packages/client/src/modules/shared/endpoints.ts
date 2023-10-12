@@ -6,6 +6,7 @@ const QUERY_RETURN_LOGS_AS_JSON = 'returnlogsasjson';
 class Endpoints {
     private readonly _coreDefaultVersion = 'v52.0';
     private readonly _coreTelemetryEndpointFormat = `/services/data/${PLACEHOLDER}/connect/proxy/ui-telemetry`;
+    private readonly _sampleCsvEndpoint = '/api/uitelemetry_csv';
     private readonly _sampleTelemetryEndpoint = '/api/uitelemetry';
     private readonly _sampleIsoDateEndpoint = '/api/isodate';
     private readonly _coreGetUserSessionEndpoint = '/qa/getUserSession.jsp';
@@ -75,6 +76,32 @@ class Endpoints {
             this._hostname,
             this._runtimeApiPort,
             this._sampleTelemetryEndpoint,
+            qp
+        );
+    }
+
+    get sampleCsvEndpointWithJsonReturn(): string {
+        const qp: Record<string, string> = {};
+        qp[QUERY_RETURN_LOGS_AS_JSON] = 'true';
+
+        return this._getHttpUrl(
+            this._isOriginSecure,
+            this._hostname,
+            this._runtimeApiPort,
+            this._sampleCsvEndpoint,
+            qp
+        );
+    }
+
+    get sampleCsvEndpointWithTextReturn(): string {
+        const qp: Record<string, string> = {};
+        qp[QUERY_RETURN_LOGS] = 'true';
+
+        return this._getHttpUrl(
+            this._isOriginSecure,
+            this._hostname,
+            this._runtimeApiPort,
+            this._sampleCsvEndpoint,
             qp
         );
     }

@@ -43,6 +43,7 @@ export default class App extends LightningElement implements LogCollector {
     @track labelLogAccumulation = 'Log Accumulation';
     @track labelPlayground = 'Playground';
     @track labelSplunker = 'Splunker';
+    @track labelUtility = 'Utility';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 
     @track sectionIntro = 'section_intro';
@@ -57,6 +58,7 @@ export default class App extends LightningElement implements LogCollector {
     @track sectionLogAccumulation = 'section_log_accumulation';
     @track sectionPlayground = 'section_utilities';
     @track sectionSplunker = 'section_splunker';
+    @track sectionUtility = 'section_utility';
 
     private readonly _sectionToLabelMap = new Map<string, string>()
         .set(this.sectionIntro, this.labelIntro)
@@ -70,7 +72,8 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionMetrics, this.labelMetrics)
         .set(this.sectionLogAccumulation, this.labelLogAccumulation)
         .set(this.sectionPlayground, this.labelPlayground)
-        .set(this.sectionSplunker, this.labelSplunker);
+        .set(this.sectionSplunker, this.labelSplunker)
+        .set(this.sectionUtility, this.labelUtility);
 
     private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;
@@ -78,6 +81,7 @@ export default class App extends LightningElement implements LogCollector {
     private _rootActivity: Activity;
     private _pagePayloadProvider: PagePayloadProvider;
     private _coreCollector: CoreCollectorType;
+    private _lastRootActivityName: string;
 
     @track clickTrackActive = false;
     @track selectedSection = this.sectionIntro;
@@ -107,9 +111,15 @@ export default class App extends LightningElement implements LogCollector {
     constructor() {
         super();
         this._initializeInstrumentation();
-        window.addEventListener('beforeunload', () => {
-            if (this._rootActivity) {
-                this._rootActivity.stop();
+        window.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden') {
+                if (this._rootActivity) {
+                    this._rootActivity.stop();
+                }
+            } else {
+                if (this._lastRootActivityName) {
+                    this._startRootActivity(this._lastRootActivityName);
+                }
             }
         });
     }
@@ -253,6 +263,7 @@ export default class App extends LightningElement implements LogCollector {
             this._rootActivity.stop();
         }
         const label = this._sectionToLabelMap.get(section) || 'Unknown Section';
+        this._lastRootActivityName = label;
         const isSampled = this.network.sampleRate > Math.random() * 100;
         this._rootActivity = this._instrApp.startRootActivity(label, undefined, isSampled);
     }

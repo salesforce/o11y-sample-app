@@ -1,0 +1,60 @@
+<template>
+    <div>
+        Enter the base64-encoded protobuf binary which represents the CoreEnvelope here:
+        <lightning-textarea
+            name="base64Text"
+            label="Base64-Encoded text"
+            onchange={handleBase64TextChange}
+            value={base64Text}
+        >
+        </lightning-textarea>
+        <p if:true={errorMsg} class="error">{errorMsg}</p>
+    </div>
+    <div>
+        <lightning-textarea name="csvText" label="CSV representation" value={csvText} read-only>
+        </lightning-textarea>
+    </div>
+
+    <div>
+        <p class="header">Upload Options</p>
+        <lightning-layout>
+            <lightning-layout-item>
+                <lightning-combobox
+                    name="uploadEndpointPicker"
+                    label="Upload Endpoint"
+                    value={uploadEndpoint}
+                    options={uploadEndpointOptions}
+                    onchange={handleUploadEndpointChange}
+                    placeholder="Custom URL"
+                ></lightning-combobox>
+            </lightning-layout-item>
+            <lightning-layout-item flexibility="auto">
+                <lightning-input
+                    type="url"
+                    name="uploadEndpoint"
+                    label="&nbsp;"
+                    value={uploadEndpoint}
+                    onchange={handleUploadEndpointChange}
+                    placeholder="http://localhost:3002/api/uitelemetry_csv"
+                >
+                </lightning-input>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+    <lightning-button
+        variant="brand"
+        label="Upload"
+        title="Uploads the CSV to the server"
+        onclick={handleUploadCall}
+    ></lightning-button>
+
+    <div>
+        <lightning-textarea
+            name="lastResponse"
+            label="Last Response from the Server"
+            value={lastResponse}
+            read-only
+        >
+        </lightning-textarea>
+    </div>
+</template>
