@@ -7152,15 +7152,6 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==
 
-o11y@246.2.0:
-  version "246.2.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-246.2.0.tgz#4d86df2c3044c8e791af8d361c1d48c355cfba1a"
-  integrity sha512-sTU9MmZ+pkCdg/o7fgJ5jzMJuT75ioichuennPra6Hh2y3Ljw+32FR6MUEAqxNqackYYIDdrO4NL8HfwgLsypg==
-  dependencies:
-    o11y_schema "246.0.0"
-    protobufjs "6.11.3"
-    web-vitals "2.1.4"
-
 o11y@248.7.0:
   version "248.7.0"
   resolved "https://registry.yarnpkg.com/o11y/-/o11y-248.7.0.tgz#d050b42843bd65766710f2d2c7f2b54a6befd857"
@@ -7170,25 +7161,15 @@ o11y@248.7.0:
     protobufjs "7.2.4"
     web-vitals "2.1.4"
 
-o11y_schema@246.0.0:
-  version "246.0.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-246.0.0.tgz#f76b839f153bb96968e75ce0dbc0a050a7cbb204"
-  integrity sha512-ETfxv0HLpCAqxQfEN8wph2a6ZfVcCQ8/ET5yRLY5z2qrVyNwDadFPBjdZi49xTjBP25LvL1/XqiHdG1tG8UiGA==
-
-o11y_schema@246.8.0:
-  version "246.8.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-246.8.0.tgz#ab32473719f435a99ed5441d0fefb32fbb8fb2fb"
-  integrity sha512-YeDC+ZfXSwdXn9Bqpmv5WikyTVigt7/JtfjUBYX5lvqjZChCfDMUbtcjMBLTFH1byDoZLPyyQGLh6/b13hbtNw==
-
-o11y_schema@248.11.0:
-  version "248.11.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.11.0.tgz#b99cfe5b1f02a36f03fde27d374f2c1a037a0f96"
-  integrity sha512-tm+jsYSo4g8fVblEyUb2kIPCHTLKnkh0Jr1S5M1PEjUanB7meEMDlYABkA/LACsfL+qNBdbNB38WxUYBJQnM9A==
-
 o11y_schema@248.3.0:
   version "248.3.0"
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.3.0.tgz#e7d5c229dbb488782e8dc01a7033bc56fb560030"
   integrity sha512-riaBpRdkVmXrPdwbAGVXEqK11uTuOM/3GUxmKZTo1PsBAqTbqaAqxK9xYoDL4WYhP+GpcP8I1XWB1a79Y9cpHw==
+
+o11y_schema@248.35.0:
+  version "248.35.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-248.35.0.tgz#2eeff54e3ff9cef9b6f94d8c736bf87b2114b372"
+  integrity sha512-ACGiS49pf5eKLW+sMFtTCqCdm76rf1ZGbpqdWJ+MovrceVG60xtDm4CsCQ5xF/z/1UkVIfKHEc/KvOIE1VOAPQ==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
