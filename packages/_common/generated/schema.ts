@@ -32,6 +32,7 @@ import {
 import {
     bulkSuggestionSchema as sf_commerce_bulkSuggestionSchema,
     clientSidePaymentSchema as sf_commerce_clientSidePaymentSchema,
+    storefrontBrandingModalSchema as sf_commerce_storefrontBrandingModalSchema,
     suggestionSchema as sf_commerce_suggestionSchema,
 } from 'o11y_schema/sf_commerce';
 
@@ -345,6 +346,7 @@ export const schemas = new Map<string, Schema>()
     // sf_commerce
     .set(getSchemaId(sf_commerce_bulkSuggestionSchema), sf_commerce_bulkSuggestionSchema)
     .set(getSchemaId(sf_commerce_clientSidePaymentSchema), sf_commerce_clientSidePaymentSchema)
+    .set(getSchemaId(sf_commerce_storefrontBrandingModalSchema), sf_commerce_storefrontBrandingModalSchema)
     .set(getSchemaId(sf_commerce_suggestionSchema), sf_commerce_suggestionSchema)
     // sf_contentLayout
     .set(getSchemaId(sf_contentLayout_componentUsageSchema), sf_contentLayout_componentUsageSchema)

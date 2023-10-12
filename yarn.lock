@@ -7166,10 +7166,10 @@ o11y_schema@248.25.0:
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.25.0.tgz#59b67ba038a209968ae8b71c2464fbb6ce277084"
   integrity sha512-MYvecFevvYiEWcedz4SSOUdF4RoWAp0jVTMPNdvOi+1XlcCCl/N7ZRXQWAOg1DPCLSXoPubEb6wbxL7nEO4FFg==
 
-o11y_schema@248.34.0:
-  version "248.34.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.34.0.tgz#d335df8343f4f789b6c8404288e56b28bbdee425"
-  integrity sha512-1EbOTlQVF/rVDubJ3j+EEhyq5wIMSp2b3N8SEbSMTDE33eqtFP+PvChZF5MUzNp6wSra09VxyLV5FTo/fAeaig==
+o11y_schema@248.35.0:
+  version "248.35.0"
+  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.35.0.tgz#2eeff54e3ff9cef9b6f94d8c736bf87b2114b372"
+  integrity sha512-ACGiS49pf5eKLW+sMFtTCqCdm76rf1ZGbpqdWJ+MovrceVG60xtDm4CsCQ5xF/z/1UkVIfKHEc/KvOIE1VOAPQ==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
