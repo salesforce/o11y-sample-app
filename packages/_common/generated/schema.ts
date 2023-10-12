@@ -30,6 +30,7 @@ import {
 } from 'o11y_schema/sf_clwr';
 
 import {
+    bulkSuggestionSchema as sf_commerce_bulkSuggestionSchema,
     clientSidePaymentSchema as sf_commerce_clientSidePaymentSchema,
     suggestionSchema as sf_commerce_suggestionSchema,
 } from 'o11y_schema/sf_commerce';
@@ -53,6 +54,10 @@ import {
 import {
     interactionEventSchema as sf_enhancedConversation_interactionEventSchema,
 } from 'o11y_schema/sf_enhancedConversation';
+
+import {
+    formulaEinsteinSchema as sf_formula_formulaEinsteinSchema,
+} from 'o11y_schema/sf_formula';
 
 import {
     incidentAlertUtilityComponentSchema as sf_incidentManagement_incidentAlertUtilityComponentSchema,
@@ -191,22 +196,32 @@ import {
 } from 'o11y_schema/sf_payments';
 
 import {
+    adminSchema as sf_promptStudio_adminSchema,
     fieldGptSchema as sf_promptStudio_fieldGptSchema,
 } from 'o11y_schema/sf_promptStudio';
+
+import {
+    initSchema as sf_recordPicker_initSchema,
+    querySchema as sf_recordPicker_querySchema,
+} from 'o11y_schema/sf_recordPicker';
 
 import {
     detailPanelUsageSchema as sf_records_detailPanelUsageSchema,
 } from 'o11y_schema/sf_records';
 
 import {
+    conversationFileUploadSchema as sf_scrt_conversationFileUploadSchema,
     conversationMessageSchema as sf_scrt_conversationMessageSchema,
+    conversationTransferSchema as sf_scrt_conversationTransferSchema,
     conversationUserInteractionSchema as sf_scrt_conversationUserInteractionSchema,
     messagingComponentSchema as sf_scrt_messagingComponentSchema,
+    systemSchema as sf_scrt_systemSchema,
     voiceMessageSchema as sf_scrt_voiceMessageSchema,
 } from 'o11y_schema/sf_scrt';
 
 import {
     resultClickDemoSchema as sf_searchui_resultClickDemoSchema,
+    searchAnswerFeedbackSchema as sf_searchui_searchAnswerFeedbackSchema,
     searchImpressionSchema as sf_searchui_searchImpressionSchema,
     searchInitiationSchema as sf_searchui_searchInitiationSchema,
     searchManagerConfigSchema as sf_searchui_searchManagerConfigSchema,
@@ -219,6 +234,12 @@ import {
 import {
     knowledgeArticleUsageSchema as sf_selfService_knowledgeArticleUsageSchema,
 } from 'o11y_schema/sf_selfService';
+
+import {
+    mapsLiteConfigSchema as sf_sfMaps_mapsLiteConfigSchema,
+    mapsLiteGeocodingSchema as sf_sfMaps_mapsLiteGeocodingSchema,
+    mapsLiteOnLoadSchema as sf_sfMaps_mapsLiteOnLoadSchema,
+} from 'o11y_schema/sf_sfMaps';
 
 import {
     appInfoSchema as sf_sfs_appInfoSchema,
@@ -241,6 +262,10 @@ import {
 import {
     resultsLayoutImpressionSchema as sf_siteSearch_resultsLayoutImpressionSchema,
 } from 'o11y_schema/sf_siteSearch';
+
+import {
+    relatedRecordUsageSchema as sf_support_relatedRecordUsageSchema,
+} from 'o11y_schema/sf_support';
 
 import {
     perfTest0422Schema10Schema as sf_testAiltnPageview_perfTest0422Schema10Schema,
@@ -270,6 +295,15 @@ import {
 import {
     customComponentLogSchema as sfcore_customCmp_customComponentLogSchema,
 } from 'o11y_schema/sfcore_customCmp';
+
+import {
+    networkRequestSchema as sfcore_network_networkRequestSchema,
+} from 'o11y_schema/sfcore_network';
+
+import {
+    navigationTimingSchema as sfcore_performance_navigationTimingSchema,
+    resourceTimingSchema as sfcore_performance_resourceTimingSchema,
+} from 'o11y_schema/sfcore_performance';
 
 
 import type { Schema } from '../interfaces/Schema';
@@ -309,6 +343,7 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_clwr_pagePayloadSchema), sf_clwr_pagePayloadSchema)
     .set(getSchemaId(sf_clwr_rootSchema), sf_clwr_rootSchema)
     // sf_commerce
+    .set(getSchemaId(sf_commerce_bulkSuggestionSchema), sf_commerce_bulkSuggestionSchema)
     .set(getSchemaId(sf_commerce_clientSidePaymentSchema), sf_commerce_clientSidePaymentSchema)
     .set(getSchemaId(sf_commerce_suggestionSchema), sf_commerce_suggestionSchema)
     // sf_contentLayout
@@ -323,6 +358,8 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_embeddedMessaging_interactionEventSchema), sf_embeddedMessaging_interactionEventSchema)
     // sf_enhancedConversation
     .set(getSchemaId(sf_enhancedConversation_interactionEventSchema), sf_enhancedConversation_interactionEventSchema)
+    // sf_formula
+    .set(getSchemaId(sf_formula_formulaEinsteinSchema), sf_formula_formulaEinsteinSchema)
     // sf_incidentManagement
     .set(getSchemaId(sf_incidentManagement_incidentAlertUtilityComponentSchema), sf_incidentManagement_incidentAlertUtilityComponentSchema)
     // sf_instrumentation
@@ -428,16 +465,24 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_payments_paymentSheetConfirmSchema), sf_payments_paymentSheetConfirmSchema)
     .set(getSchemaId(sf_payments_paymentSheetRenderSchema), sf_payments_paymentSheetRenderSchema)
     // sf_promptStudio
+    .set(getSchemaId(sf_promptStudio_adminSchema), sf_promptStudio_adminSchema)
     .set(getSchemaId(sf_promptStudio_fieldGptSchema), sf_promptStudio_fieldGptSchema)
+    // sf_recordPicker
+    .set(getSchemaId(sf_recordPicker_initSchema), sf_recordPicker_initSchema)
+    .set(getSchemaId(sf_recordPicker_querySchema), sf_recordPicker_querySchema)
     // sf_records
     .set(getSchemaId(sf_records_detailPanelUsageSchema), sf_records_detailPanelUsageSchema)
     // sf_scrt
+    .set(getSchemaId(sf_scrt_conversationFileUploadSchema), sf_scrt_conversationFileUploadSchema)
     .set(getSchemaId(sf_scrt_conversationMessageSchema), sf_scrt_conversationMessageSchema)
+    .set(getSchemaId(sf_scrt_conversationTransferSchema), sf_scrt_conversationTransferSchema)
     .set(getSchemaId(sf_scrt_conversationUserInteractionSchema), sf_scrt_conversationUserInteractionSchema)
     .set(getSchemaId(sf_scrt_messagingComponentSchema), sf_scrt_messagingComponentSchema)
+    .set(getSchemaId(sf_scrt_systemSchema), sf_scrt_systemSchema)
     .set(getSchemaId(sf_scrt_voiceMessageSchema), sf_scrt_voiceMessageSchema)
     // sf_searchui
     .set(getSchemaId(sf_searchui_resultClickDemoSchema), sf_searchui_resultClickDemoSchema)
+    .set(getSchemaId(sf_searchui_searchAnswerFeedbackSchema), sf_searchui_searchAnswerFeedbackSchema)
     .set(getSchemaId(sf_searchui_searchImpressionSchema), sf_searchui_searchImpressionSchema)
     .set(getSchemaId(sf_searchui_searchInitiationSchema), sf_searchui_searchInitiationSchema)
     .set(getSchemaId(sf_searchui_searchManagerConfigSchema), sf_searchui_searchManagerConfigSchema)
@@ -447,6 +492,10 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_searchui_searchTrafficSchema), sf_searchui_searchTrafficSchema)
     // sf_selfService
     .set(getSchemaId(sf_selfService_knowledgeArticleUsageSchema), sf_selfService_knowledgeArticleUsageSchema)
+    // sf_sfMaps
+    .set(getSchemaId(sf_sfMaps_mapsLiteConfigSchema), sf_sfMaps_mapsLiteConfigSchema)
+    .set(getSchemaId(sf_sfMaps_mapsLiteGeocodingSchema), sf_sfMaps_mapsLiteGeocodingSchema)
+    .set(getSchemaId(sf_sfMaps_mapsLiteOnLoadSchema), sf_sfMaps_mapsLiteOnLoadSchema)
     // sf_sfs
     .set(getSchemaId(sf_sfs_appInfoSchema), sf_sfs_appInfoSchema)
     .set(getSchemaId(sf_sfs_appStartSchema), sf_sfs_appStartSchema)
@@ -465,6 +514,8 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_sfs_wireDebugInfoSchema), sf_sfs_wireDebugInfoSchema)
     // sf_siteSearch
     .set(getSchemaId(sf_siteSearch_resultsLayoutImpressionSchema), sf_siteSearch_resultsLayoutImpressionSchema)
+    // sf_support
+    .set(getSchemaId(sf_support_relatedRecordUsageSchema), sf_support_relatedRecordUsageSchema)
     // sf_testAiltnPageview
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema10Schema), sf_testAiltnPageview_perfTest0422Schema10Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema11Schema), sf_testAiltnPageview_perfTest0422Schema11Schema)
@@ -489,4 +540,9 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema8Schema), sf_testAiltnPageview_perfTest0422Schema8Schema)
     .set(getSchemaId(sf_testAiltnPageview_perfTest0422Schema9Schema), sf_testAiltnPageview_perfTest0422Schema9Schema)
     // sfcore_customCmp
-    .set(getSchemaId(sfcore_customCmp_customComponentLogSchema), sfcore_customCmp_customComponentLogSchema);
+    .set(getSchemaId(sfcore_customCmp_customComponentLogSchema), sfcore_customCmp_customComponentLogSchema)
+    // sfcore_network
+    .set(getSchemaId(sfcore_network_networkRequestSchema), sfcore_network_networkRequestSchema)
+    // sfcore_performance
+    .set(getSchemaId(sfcore_performance_navigationTimingSchema), sfcore_performance_navigationTimingSchema)
+    .set(getSchemaId(sfcore_performance_resourceTimingSchema), sfcore_performance_resourceTimingSchema);
