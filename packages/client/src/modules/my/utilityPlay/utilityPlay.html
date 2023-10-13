@@ -8,6 +8,18 @@
             value={base64Text}
         >
         </lightning-textarea>
+        <lightning-layout horizontal-align="end">
+            <lightning-layout-item>
+                <lightning-button
+                    label="Clear"
+                    title="Clear the base64-encoded value"
+                    onclick={handleClear}
+                    icon-name="utility:delete"
+                    class="collector-button slds-m-left_x-small slds-m-vertical_small"
+                >
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
         <p if:true={errorMsg} class="error">{errorMsg}</p>
     </div>
     <div>
@@ -15,38 +27,38 @@
         </lightning-textarea>
     </div>
 
-    <div>
-        <p class="header">Upload Options</p>
-        <lightning-layout>
-            <lightning-layout-item>
-                <lightning-combobox
-                    name="uploadEndpointPicker"
-                    label="Upload Endpoint"
-                    value={uploadEndpoint}
-                    options={uploadEndpointOptions}
-                    onchange={handleUploadEndpointChange}
-                    placeholder="Custom URL"
-                ></lightning-combobox>
-            </lightning-layout-item>
-            <lightning-layout-item flexibility="auto">
-                <lightning-input
-                    type="url"
-                    name="uploadEndpoint"
-                    label="&nbsp;"
-                    value={uploadEndpoint}
-                    onchange={handleUploadEndpointChange}
-                    placeholder="http://localhost:3002/api/uitelemetry_csv"
-                >
-                </lightning-input>
-            </lightning-layout-item>
-        </lightning-layout>
-    </div>
-    <lightning-button
-        variant="brand"
-        label="Upload"
-        title="Uploads the CSV to the server"
-        onclick={handleUploadCall}
-    ></lightning-button>
+    <lightning-layout vertical-align="end">
+        <lightning-layout-item>
+            <lightning-combobox
+                name="uploadEndpointPicker"
+                label="Upload Endpoint"
+                value={uploadEndpoint}
+                options={uploadEndpointOptions}
+                onchange={handleUploadEndpointChange}
+                placeholder="Custom URL"
+            ></lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+            <lightning-input
+                type="url"
+                name="uploadEndpoint"
+                label="&nbsp;"
+                value={uploadEndpoint}
+                onchange={handleUploadEndpointChange}
+                placeholder="http://localhost:3002/api/uitelemetry_csv"
+            >
+            </lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-m-left_x-small">
+            <lightning-button
+                variant="brand"
+                label="Upload"
+                title="Uploads the CSV to the server"
+                icon-name="utility:send"
+                onclick={handleUploadCall}
+            ></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
 
     <div if:false={showJsonResponse}>
         <lightning-textarea
@@ -59,7 +71,7 @@
     </div>
 
     <lightning-layout class="buttons">
-        <lightning-layout-item padding="horizontal-small">
+        <lightning-layout-item>
             <lightning-button-group>
                 <lightning-button if:true={showJsonResponse} label="JSON" disabled>
                 </lightning-button>

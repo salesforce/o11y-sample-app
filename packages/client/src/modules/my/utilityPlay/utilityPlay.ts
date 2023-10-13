@@ -39,9 +39,7 @@ export default class UtilityPlay extends LightningElement {
         this.showJsonResponse = this.uploadEndpoint === endpoints.sampleCsvEndpointWithJsonReturn;
     }
 
-    handleBase64TextChange(event: CustomEvent) {
-        // const name = (event.target as HTMLTextAreaElement).name;
-        let base64 = event.detail.value;
+    private _setBase64Text(base64: string): void {
         try {
             if (
                 (base64.startsWith("'") && base64.endsWith("'")) ||
@@ -54,10 +52,13 @@ export default class UtilityPlay extends LightningElement {
             this.csvText = base64BinToCSV(base64);
             this.errorMsg = undefined;
         } catch (err) {
-            this.errorMsg =
-                'Failed to convert base64 to CSV - remove any quotes if any. ' +
-                (err as any)?.message?.toString();
+            this.errorMsg = 'Failed to convert base64 to CSV' + (err as any)?.message?.toString();
         }
+    }
+
+    handleBase64TextChange(event: CustomEvent) {
+        // const name = (event.target as HTMLTextAreaElement).name;
+        this._setBase64Text(event.detail.value);
     }
 
     async handleUploadCall() {
@@ -114,5 +115,9 @@ export default class UtilityPlay extends LightningElement {
 
     handleCollapseAllClick(): void {
         (this.jv as any)?.collapseAll();
+    }
+
+    handleClear(): void {
+        this._setBase64Text('');
     }
 }
