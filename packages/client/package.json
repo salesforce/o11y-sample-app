@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample-client",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
-    "version": "248.3.0",
+    "version": "248.4.0",
     "dependencies": {
         "@lwc/synthetic-shadow": "2.12.1",
         "@salesforce-ux/design-system": "2.21.0",
@@ -11,9 +11,9 @@
         "o11y_schema": "248.35.0"
     },
     "engines": {
-        "node": ">=18",
+        "node": "18.x",
         "npm": ">=7.4.3",
-        "yarn": "~1.22.17"
+        "yarn": "~1.22.19"
     },
     "volta": {
         "node": "18.17.1",

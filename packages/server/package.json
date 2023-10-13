@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample-node-server",
     "description": "Sample server endpoint that consume 'o11y' payloads",
-    "version": "248.3.0",
+    "version": "248.4.0",
     "dependencies": {
         "cors": "2.8.5",
         "express": "4.17.3",
@@ -10,9 +10,9 @@
         "o11y_schema": "248.35.0"
     },
     "engines": {
-        "node": ">=18",
+        "node": "18.x",
         "npm": ">=7.4.3",
-        "yarn": "~1.22.17"
+        "yarn": "~1.22.19"
     },
     "volta": {
         "node": "18.17.1",
