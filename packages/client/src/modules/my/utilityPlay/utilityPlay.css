@@ -11,3 +11,13 @@ p {
 .error {
     color: red;
 }
+
+.json-viewer-host {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

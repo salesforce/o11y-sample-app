@@ -48,7 +48,7 @@
         onclick={handleUploadCall}
     ></lightning-button>
 
-    <div>
+    <div if:false={showJsonResponse}>
         <lightning-textarea
             name="lastResponse"
             label="Last Response from the Server"
@@ -57,4 +57,37 @@
         >
         </lightning-textarea>
     </div>
+
+    <lightning-layout class="buttons">
+        <lightning-layout-item padding="horizontal-small">
+            <lightning-button-group>
+                <lightning-button if:true={showJsonResponse} label="JSON" disabled>
+                </lightning-button>
+                <lightning-button
+                    if:false={showJsonResponse}
+                    label="JSON"
+                    onclick={handleToggleClick}
+                >
+                </lightning-button>
+                <lightning-button
+                    if:true={showJsonResponse}
+                    label="Raw"
+                    onclick={handleToggleClick}
+                >
+                </lightning-button>
+                <lightning-button if:false={showJsonResponse} label="Raw" disabled>
+                </lightning-button>
+            </lightning-button-group>
+        </lightning-layout-item>
+        <lightning-layout-item if:true={showJsonResponse} padding="horizontal-small">
+            <lightning-button-group>
+                <lightning-button label="Expand All" onclick={handleExpandAllClick}>
+                </lightning-button>
+                <lightning-button label="Collapse All" onclick={handleCollapseAllClick}>
+                </lightning-button>
+            </lightning-button-group>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <div class="json-viewer-host" lwc:dom="manual"></div>
 </template>
