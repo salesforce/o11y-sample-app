@@ -6,9 +6,9 @@
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://github.com/salesforce/o11y-sample-app/issues",
     "engines": {
-        "node": ">=18",
+        "node": "18.x",
         "npm": ">=7.4.3",
-        "yarn": "~1.22.17"
+        "yarn": "~1.22.19"
     },
     "volta": {
         "node": "18.17.1",
