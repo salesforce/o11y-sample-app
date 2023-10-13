@@ -745,6 +745,21 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                                 </div>
                             </my-app-section>
                         </lightning-tab>
+                        <lightning-tab
+                            label={labelUtility}
+                            value={sectionUtility}
+                            onactive={handleTabSelect}
+                            icon-name="custom:custom19"
+                        >
+                            <my-app-section label={labelUtility}>
+                                <div slot="doc"
+                                    >This is an advanced section to help with o11y debugging.</div
+                                >
+                                <div slot="play">
+                                    <my-utility-play></my-utility-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
                     </lightning-tabset>
                 </div>
                 <div class="slds-col slds-size_4-of-12" if:false={isRightPaneCollapsed}>

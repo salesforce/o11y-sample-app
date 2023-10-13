@@ -2,16 +2,16 @@
     "name": "o11y-sample-parent",
     "description": "Sample application to demonstrate the 'o11y' observability platform",
     "private": true,
-    "version": "248.0.0",
+    "version": "248.3.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://github.com/salesforce/o11y-sample-app/issues",
     "engines": {
-        "node": ">=14.16.0 <17.0.0",
+        "node": ">=18",
         "npm": ">=7.4.3",
         "yarn": "~1.22.17"
     },
     "volta": {
-        "node": "16.19.0",
+        "node": "18.17.1",
         "yarn": "1.22.19",
         "npm": "8.19.3"
     },
@@ -50,7 +50,8 @@
         "watch:server": "cd packages/server && yarn watch",
         "test:lockfile": "./scripts/check-yarn-lock.sh",
         "postinstall": "yarn run init",
-        "test": "echo 'No Tests'"
+        "test": "echo 'No Tests'",
+        "version:minor": "node ./scripts/version.js minor"
     },
     "devDependencies": {
         "lerna": "^4.0.0",

@@ -1,0 +1,23 @@
+p {
+    margin-bottom: 1em;
+}
+
+.header {
+    margin: 10px 0;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+}
+
+.json-viewer-host {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.buttons {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

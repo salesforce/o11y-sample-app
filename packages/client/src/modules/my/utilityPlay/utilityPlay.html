@@ -1,0 +1,105 @@
+<template>
+    <div>
+        Enter the base64-encoded protobuf binary which represents the CoreEnvelope here:
+        <lightning-textarea
+            name="base64Text"
+            label="Base64-Encoded text"
+            onchange={handleBase64TextChange}
+            value={base64Text}
+        >
+        </lightning-textarea>
+        <lightning-layout horizontal-align="end">
+            <lightning-layout-item>
+                <lightning-button
+                    label="Clear"
+                    title="Clear the base64-encoded value"
+                    onclick={handleClear}
+                    icon-name="utility:delete"
+                    class="collector-button slds-m-left_x-small slds-m-vertical_small"
+                >
+                </lightning-button>
+            </lightning-layout-item>
+        </lightning-layout>
+        <p if:true={errorMsg} class="error">{errorMsg}</p>
+    </div>
+    <div>
+        <lightning-textarea name="csvText" label="CSV representation" value={csvText} read-only>
+        </lightning-textarea>
+    </div>
+
+    <lightning-layout vertical-align="end">
+        <lightning-layout-item>
+            <lightning-combobox
+                name="uploadEndpointPicker"
+                label="Upload Endpoint"
+                value={uploadEndpoint}
+                options={uploadEndpointOptions}
+                onchange={handleUploadEndpointChange}
+                placeholder="Custom URL"
+            ></lightning-combobox>
+        </lightning-layout-item>
+        <lightning-layout-item flexibility="auto">
+            <lightning-input
+                type="url"
+                name="uploadEndpoint"
+                label="&nbsp;"
+                value={uploadEndpoint}
+                onchange={handleUploadEndpointChange}
+                placeholder="http://localhost:3002/api/uitelemetry_csv"
+            >
+            </lightning-input>
+        </lightning-layout-item>
+        <lightning-layout-item class="slds-m-left_x-small">
+            <lightning-button
+                variant="brand"
+                label="Upload"
+                title="Uploads the CSV to the server"
+                icon-name="utility:send"
+                onclick={handleUploadCall}
+            ></lightning-button>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <div if:false={showJsonResponse}>
+        <lightning-textarea
+            name="lastResponse"
+            label="Last Response from the Server"
+            value={lastResponse}
+            read-only
+        >
+        </lightning-textarea>
+    </div>
+
+    <lightning-layout class="buttons">
+        <lightning-layout-item>
+            <lightning-button-group>
+                <lightning-button if:true={showJsonResponse} label="JSON" disabled>
+                </lightning-button>
+                <lightning-button
+                    if:false={showJsonResponse}
+                    label="JSON"
+                    onclick={handleToggleClick}
+                >
+                </lightning-button>
+                <lightning-button
+                    if:true={showJsonResponse}
+                    label="Raw"
+                    onclick={handleToggleClick}
+                >
+                </lightning-button>
+                <lightning-button if:false={showJsonResponse} label="Raw" disabled>
+                </lightning-button>
+            </lightning-button-group>
+        </lightning-layout-item>
+        <lightning-layout-item if:true={showJsonResponse} padding="horizontal-small">
+            <lightning-button-group>
+                <lightning-button label="Expand All" onclick={handleExpandAllClick}>
+                </lightning-button>
+                <lightning-button label="Collapse All" onclick={handleCollapseAllClick}>
+                </lightning-button>
+            </lightning-button-group>
+        </lightning-layout-item>
+    </lightning-layout>
+
+    <div class="json-viewer-host" lwc:dom="manual"></div>
+</template>
