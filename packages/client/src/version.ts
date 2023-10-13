@@ -1,2 +1,2 @@
 // auto-generated
-export const version = '248.3.0';
+export const version = '248.4.0';

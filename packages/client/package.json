@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample-client",
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
-    "version": "248.3.0",
+    "version": "248.4.0",
     "dependencies": {
         "@lwc/synthetic-shadow": "2.12.1",
         "@salesforce-ux/design-system": "2.21.0",

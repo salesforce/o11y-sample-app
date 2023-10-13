@@ -2,7 +2,7 @@
     "name": "o11y-sample-parent",
     "description": "Sample application to demonstrate the 'o11y' observability platform",
     "private": true,
-    "version": "248.3.0",
+    "version": "248.4.0",
     "author": "instrumentationteam@salesforce.com",
     "bugs": "https://github.com/salesforce/o11y-sample-app/issues",
     "engines": {

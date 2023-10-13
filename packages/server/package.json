@@ -1,7 +1,7 @@
 {
     "name": "o11y-sample-node-server",
     "description": "Sample server endpoint that consume 'o11y' payloads",
-    "version": "248.3.0",
+    "version": "248.4.0",
     "dependencies": {
         "cors": "2.8.5",
         "express": "4.17.3",
