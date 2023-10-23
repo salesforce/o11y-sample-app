@@ -7,7 +7,7 @@
         "express": "4.17.3",
         "helmet": "5.0.2",
         "o11y": "248.9.0",
-        "o11y_schema": "248.35.0"
+        "o11y_schema": "248.40.0"
     },
     "engines": {
         "node": "18.x",
