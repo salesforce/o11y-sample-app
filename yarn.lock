@@ -7152,24 +7152,24 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==
 
-o11y@248.9.0:
-  version "248.9.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-248.9.0.tgz#75ca9ff29ca50382867fc4a11366551f507fa91f"
-  integrity sha512-vMwG8qF4ZKdTScY1QbIuZSt2gZwLAvqr98VPw8p+xZ6Xzg4wWc2f1oI7cxLpVZIMqyOU3uBxNhg3Ah5XKfXgjQ==
+o11y@252.4.0:
+  version "252.4.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y/-/o11y-252.4.0.tgz#fa47d050df936b0ef5e2539f413cd2b14e0d7922"
+  integrity sha512-3DmDlvm+9vanmBQ0OLmomO1pbp0R5dGN6lGgt+FtwglouphkId4Nv9tSBs+n8zFgN4BhlGOX52FtoHaGwxlcsg==
   dependencies:
-    o11y_schema "248.25.0"
+    o11y_schema "252.5.0"
     protobufjs "7.2.4"
     web-vitals "2.1.4"
-
-o11y_schema@248.25.0:
-  version "248.25.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.25.0.tgz#59b67ba038a209968ae8b71c2464fbb6ce277084"
-  integrity sha512-MYvecFevvYiEWcedz4SSOUdF4RoWAp0jVTMPNdvOi+1XlcCCl/N7ZRXQWAOg1DPCLSXoPubEb6wbxL7nEO4FFg==
 
 o11y_schema@248.35.0:
   version "248.35.0"
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-248.35.0.tgz#2eeff54e3ff9cef9b6f94d8c736bf87b2114b372"
   integrity sha512-ACGiS49pf5eKLW+sMFtTCqCdm76rf1ZGbpqdWJ+MovrceVG60xtDm4CsCQ5xF/z/1UkVIfKHEc/KvOIE1VOAPQ==
+
+o11y_schema@252.5.0:
+  version "252.5.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-252.5.0.tgz#a2c0246f60f639485529205a77fa8226da01f9f7"
+  integrity sha512-h9bN7VwNuEZXL3s8k8suGyfdilJ0jpSPfSMKgvBR6OUcEeLw0n2MxkIn6THKFobcC2nUvg2WSAZPS/x2DemflA==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
