@@ -1,5 +1,9 @@
 // This file is auto-generated
 import {
+    relMapUserInteractionSchema as sf_actExp_relMapUserInteractionSchema,
+} from 'o11y_schema/sf_actExp';
+
+import {
     actionBarUsageSchema as sf_actions_actionBarUsageSchema,
 } from 'o11y_schema/sf_actions';
 
@@ -14,6 +18,10 @@ import {
     explorerReorderSchema as sf_automation_explorerReorderSchema,
     processBuilderMigrationSchema as sf_automation_processBuilderMigrationSchema,
 } from 'o11y_schema/sf_automation';
+
+import {
+    actionSchema as sf_bfwk_actionSchema,
+} from 'o11y_schema/sf_bfwk';
 
 import {
     actionSchema as sf_blockBuilder_actionSchema,
@@ -32,6 +40,8 @@ import {
 import {
     bulkSuggestionSchema as sf_commerce_bulkSuggestionSchema,
     clientSidePaymentSchema as sf_commerce_clientSidePaymentSchema,
+    compositeAddProductSchema as sf_commerce_compositeAddProductSchema,
+    gnrSeoTitleTileSchema as sf_commerce_gnrSeoTitleTileSchema,
     storefrontBrandingModalSchema as sf_commerce_storefrontBrandingModalSchema,
     suggestionSchema as sf_commerce_suggestionSchema,
 } from 'o11y_schema/sf_commerce';
@@ -48,7 +58,13 @@ import {
 } from 'o11y_schema/sf_digitalwallet';
 
 import {
+    salesMiningInteractionSchema as sf_eciExp_salesMiningInteractionSchema,
+} from 'o11y_schema/sf_eciExp';
+
+import {
     copilotEventSchema as sf_einstein_copilotEventSchema,
+    copilotPerfSchema as sf_einstein_copilotPerfSchema,
+    trustLayerSetupEventSchema as sf_einstein_trustLayerSetupEventSchema,
 } from 'o11y_schema/sf_einstein';
 
 import {
@@ -66,7 +82,12 @@ import {
 } from 'o11y_schema/sf_enhancedConversation';
 
 import {
+    engagementEventSchema as sf_evf_engagementEventSchema,
+} from 'o11y_schema/sf_evf';
+
+import {
     formulaEinsteinSchema as sf_formula_formulaEinsteinSchema,
+    formulaSyntaxViewerSchema as sf_formula_formulaSyntaxViewerSchema,
 } from 'o11y_schema/sf_formula';
 
 import {
@@ -160,6 +181,10 @@ import {
 } from 'o11y_schema/sf_lol';
 
 import {
+    recordSelectionSchema as sf_lookup_recordSelectionSchema,
+} from 'o11y_schema/sf_lookup';
+
+import {
     lwcRuntimeFeaturesSchema as sf_lwc_lwcRuntimeFeaturesSchema,
 } from 'o11y_schema/sf_lwc';
 
@@ -205,6 +230,8 @@ import {
 import {
     myAccountPaymentSheetRenderSchema as sf_payments_myAccountPaymentSheetRenderSchema,
     myAccountPaymentSheetSubmitSchema as sf_payments_myAccountPaymentSheetSubmitSchema,
+    paymentByExpressConfirmSchema as sf_payments_paymentByExpressConfirmSchema,
+    paymentByExpressRenderSchema as sf_payments_paymentByExpressRenderSchema,
     paymentByLinkRenderSchema as sf_payments_paymentByLinkRenderSchema,
     paymentByLinkSubmitSchema as sf_payments_paymentByLinkSubmitSchema,
     paymentSheetConfirmSchema as sf_payments_paymentSheetConfirmSchema,
@@ -226,10 +253,20 @@ import {
 } from 'o11y_schema/sf_records';
 
 import {
+    configuratorSessionSchema as sf_revenue_configuratorSessionSchema,
+    configuratorToggleSchema as sf_revenue_configuratorToggleSchema,
     tltInstantPriceSchema as sf_revenue_tltInstantPriceSchema,
 } from 'o11y_schema/sf_revenue';
 
 import {
+    copilotBootstrapSchema as sf_sApp_copilotBootstrapSchema,
+    errorSchema as sf_sApp_errorSchema,
+    mcfLoadSchema as sf_sApp_mcfLoadSchema,
+    requestStatusSchema as sf_sApp_requestStatusSchema,
+} from 'o11y_schema/sf_sApp';
+
+import {
+    componentRenderSchema as sf_scrt_componentRenderSchema,
     conversationFileUploadSchema as sf_scrt_conversationFileUploadSchema,
     conversationMessageSchema as sf_scrt_conversationMessageSchema,
     conversationTransferSchema as sf_scrt_conversationTransferSchema,
@@ -257,8 +294,13 @@ import {
 } from 'o11y_schema/sf_selfService';
 
 import {
+    dataPrismMetadataStudioMonitoringSchema as sf_semanticDataPrism_dataPrismMetadataStudioMonitoringSchema,
     dataPrismSetupMonitoringSchema as sf_semanticDataPrism_dataPrismSetupMonitoringSchema,
 } from 'o11y_schema/sf_semanticDataPrism';
+
+import {
+    semanticModelMonitoringSchema as sf_semanticModel_semanticModelMonitoringSchema,
+} from 'o11y_schema/sf_semanticModel';
 
 import {
     mapsLiteConfigSchema as sf_sfMaps_mapsLiteConfigSchema,
@@ -282,6 +324,7 @@ import {
     sfsEventLogSchema as sf_sfs_sfsEventLogSchema,
     tracerNotificationSchema as sf_sfs_tracerNotificationSchema,
     wireDebugInfoSchema as sf_sfs_wireDebugInfoSchema,
+    workStepUpdateStatusCategorySchema as sf_sfs_workStepUpdateStatusCategorySchema,
 } from 'o11y_schema/sf_sfs';
 
 import {
@@ -351,6 +394,8 @@ export function hasUserPayload(schemaId: string): boolean {
 }
 
 export const schemas = new Map<string, Schema>()
+    // sf_actExp
+    .set(getSchemaId(sf_actExp_relMapUserInteractionSchema), sf_actExp_relMapUserInteractionSchema)
     // sf_actions
     .set(getSchemaId(sf_actions_actionBarUsageSchema), sf_actions_actionBarUsageSchema)
     // sf_aura
@@ -361,6 +406,8 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_automation_explorerInitLoadSchema), sf_automation_explorerInitLoadSchema)
     .set(getSchemaId(sf_automation_explorerReorderSchema), sf_automation_explorerReorderSchema)
     .set(getSchemaId(sf_automation_processBuilderMigrationSchema), sf_automation_processBuilderMigrationSchema)
+    // sf_bfwk
+    .set(getSchemaId(sf_bfwk_actionSchema), sf_bfwk_actionSchema)
     // sf_blockBuilder
     .set(getSchemaId(sf_blockBuilder_actionSchema), sf_blockBuilder_actionSchema)
     .set(getSchemaId(sf_blockBuilder_addBlockSchema), sf_blockBuilder_addBlockSchema)
@@ -374,6 +421,8 @@ export const schemas = new Map<string, Schema>()
     // sf_commerce
     .set(getSchemaId(sf_commerce_bulkSuggestionSchema), sf_commerce_bulkSuggestionSchema)
     .set(getSchemaId(sf_commerce_clientSidePaymentSchema), sf_commerce_clientSidePaymentSchema)
+    .set(getSchemaId(sf_commerce_compositeAddProductSchema), sf_commerce_compositeAddProductSchema)
+    .set(getSchemaId(sf_commerce_gnrSeoTitleTileSchema), sf_commerce_gnrSeoTitleTileSchema)
     .set(getSchemaId(sf_commerce_storefrontBrandingModalSchema), sf_commerce_storefrontBrandingModalSchema)
     .set(getSchemaId(sf_commerce_suggestionSchema), sf_commerce_suggestionSchema)
     // sf_contentLayout
@@ -383,8 +432,12 @@ export const schemas = new Map<string, Schema>()
     // sf_digitalwallet
     .set(getSchemaId(sf_digitalwallet_digitalWalletViewSchema), sf_digitalwallet_digitalWalletViewSchema)
     .set(getSchemaId(sf_digitalwallet_interactionEventSchema), sf_digitalwallet_interactionEventSchema)
+    // sf_eciExp
+    .set(getSchemaId(sf_eciExp_salesMiningInteractionSchema), sf_eciExp_salesMiningInteractionSchema)
     // sf_einstein
     .set(getSchemaId(sf_einstein_copilotEventSchema), sf_einstein_copilotEventSchema)
+    .set(getSchemaId(sf_einstein_copilotPerfSchema), sf_einstein_copilotPerfSchema)
+    .set(getSchemaId(sf_einstein_trustLayerSetupEventSchema), sf_einstein_trustLayerSetupEventSchema)
     // sf_einsteinGptSegmentation
     .set(getSchemaId(sf_einsteinGptSegmentation_gptSegmentMonitoringSchema), sf_einsteinGptSegmentation_gptSegmentMonitoringSchema)
     // sf_embeddedMessaging
@@ -393,8 +446,11 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_embeddedMessaging_interactionEventSchema), sf_embeddedMessaging_interactionEventSchema)
     // sf_enhancedConversation
     .set(getSchemaId(sf_enhancedConversation_interactionEventSchema), sf_enhancedConversation_interactionEventSchema)
+    // sf_evf
+    .set(getSchemaId(sf_evf_engagementEventSchema), sf_evf_engagementEventSchema)
     // sf_formula
     .set(getSchemaId(sf_formula_formulaEinsteinSchema), sf_formula_formulaEinsteinSchema)
+    .set(getSchemaId(sf_formula_formulaSyntaxViewerSchema), sf_formula_formulaSyntaxViewerSchema)
     // sf_incidentManagement
     .set(getSchemaId(sf_incidentManagement_incidentAlertUtilityComponentSchema), sf_incidentManagement_incidentAlertUtilityComponentSchema)
     // sf_instrumentation
@@ -467,6 +523,8 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_lol_moduleOpenedCompletedSchema), sf_lol_moduleOpenedCompletedSchema)
     .set(getSchemaId(sf_lol_sidePanelContentSchema), sf_lol_sidePanelContentSchema)
     .set(getSchemaId(sf_lol_sidePanelSimpleEventSchema), sf_lol_sidePanelSimpleEventSchema)
+    // sf_lookup
+    .set(getSchemaId(sf_lookup_recordSelectionSchema), sf_lookup_recordSelectionSchema)
     // sf_lwc
     .set(getSchemaId(sf_lwc_lwcRuntimeFeaturesSchema), sf_lwc_lwcRuntimeFeaturesSchema)
     // sf_lwrjs
@@ -501,6 +559,8 @@ export const schemas = new Map<string, Schema>()
     // sf_payments
     .set(getSchemaId(sf_payments_myAccountPaymentSheetRenderSchema), sf_payments_myAccountPaymentSheetRenderSchema)
     .set(getSchemaId(sf_payments_myAccountPaymentSheetSubmitSchema), sf_payments_myAccountPaymentSheetSubmitSchema)
+    .set(getSchemaId(sf_payments_paymentByExpressConfirmSchema), sf_payments_paymentByExpressConfirmSchema)
+    .set(getSchemaId(sf_payments_paymentByExpressRenderSchema), sf_payments_paymentByExpressRenderSchema)
     .set(getSchemaId(sf_payments_paymentByLinkRenderSchema), sf_payments_paymentByLinkRenderSchema)
     .set(getSchemaId(sf_payments_paymentByLinkSubmitSchema), sf_payments_paymentByLinkSubmitSchema)
     .set(getSchemaId(sf_payments_paymentSheetConfirmSchema), sf_payments_paymentSheetConfirmSchema)
@@ -514,8 +574,16 @@ export const schemas = new Map<string, Schema>()
     // sf_records
     .set(getSchemaId(sf_records_detailPanelUsageSchema), sf_records_detailPanelUsageSchema)
     // sf_revenue
+    .set(getSchemaId(sf_revenue_configuratorSessionSchema), sf_revenue_configuratorSessionSchema)
+    .set(getSchemaId(sf_revenue_configuratorToggleSchema), sf_revenue_configuratorToggleSchema)
     .set(getSchemaId(sf_revenue_tltInstantPriceSchema), sf_revenue_tltInstantPriceSchema)
+    // sf_sApp
+    .set(getSchemaId(sf_sApp_copilotBootstrapSchema), sf_sApp_copilotBootstrapSchema)
+    .set(getSchemaId(sf_sApp_errorSchema), sf_sApp_errorSchema)
+    .set(getSchemaId(sf_sApp_mcfLoadSchema), sf_sApp_mcfLoadSchema)
+    .set(getSchemaId(sf_sApp_requestStatusSchema), sf_sApp_requestStatusSchema)
     // sf_scrt
+    .set(getSchemaId(sf_scrt_componentRenderSchema), sf_scrt_componentRenderSchema)
     .set(getSchemaId(sf_scrt_conversationFileUploadSchema), sf_scrt_conversationFileUploadSchema)
     .set(getSchemaId(sf_scrt_conversationMessageSchema), sf_scrt_conversationMessageSchema)
     .set(getSchemaId(sf_scrt_conversationTransferSchema), sf_scrt_conversationTransferSchema)
@@ -537,7 +605,10 @@ export const schemas = new Map<string, Schema>()
     // sf_selfService
     .set(getSchemaId(sf_selfService_knowledgeArticleUsageSchema), sf_selfService_knowledgeArticleUsageSchema)
     // sf_semanticDataPrism
+    .set(getSchemaId(sf_semanticDataPrism_dataPrismMetadataStudioMonitoringSchema), sf_semanticDataPrism_dataPrismMetadataStudioMonitoringSchema)
     .set(getSchemaId(sf_semanticDataPrism_dataPrismSetupMonitoringSchema), sf_semanticDataPrism_dataPrismSetupMonitoringSchema)
+    // sf_semanticModel
+    .set(getSchemaId(sf_semanticModel_semanticModelMonitoringSchema), sf_semanticModel_semanticModelMonitoringSchema)
     // sf_sfMaps
     .set(getSchemaId(sf_sfMaps_mapsLiteConfigSchema), sf_sfMaps_mapsLiteConfigSchema)
     .set(getSchemaId(sf_sfMaps_mapsLiteGeocodingSchema), sf_sfMaps_mapsLiteGeocodingSchema)
@@ -558,6 +629,7 @@ export const schemas = new Map<string, Schema>()
     .set(getSchemaId(sf_sfs_sfsEventLogSchema), sf_sfs_sfsEventLogSchema)
     .set(getSchemaId(sf_sfs_tracerNotificationSchema), sf_sfs_tracerNotificationSchema)
     .set(getSchemaId(sf_sfs_wireDebugInfoSchema), sf_sfs_wireDebugInfoSchema)
+    .set(getSchemaId(sf_sfs_workStepUpdateStatusCategorySchema), sf_sfs_workStepUpdateStatusCategorySchema)
     // sf_sfsMobileHybrid
     .set(getSchemaId(sf_sfsMobileHybrid_quoteSchema), sf_sfsMobileHybrid_quoteSchema)
     // sf_siteSearch
