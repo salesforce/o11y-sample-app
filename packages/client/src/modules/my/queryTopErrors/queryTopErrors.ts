@@ -1,6 +1,6 @@
-import QueryBase from '../../shared/queryBase';
+import SplunkQueryBase from '../../shared/splunkQueryBase';
 
-export default class QueryTopErrors extends QueryBase {
+export default class QueryTopErrors extends SplunkQueryBase {
     protected getQuery(index: string, schemaId: string, loggerAppName: string): string {
         return `
 index=${index} \`logRecordType(uxerr)\` userPayloadSchemaName=TERM(${schemaId}) loggerAppName=${loggerAppName} earliest=-1d

@@ -1,0 +1,250 @@
+<template>
+    <lightning-combobox
+        name="presets"
+        label="Presets"
+        value={selectedPreset}
+        placeholder="Use a preset to auto-fill input fields below for example metrics"
+        options={presetOptions}
+        onchange={handlePresetChange}
+    >
+    </lightning-combobox>
+
+    <my-logger-app-name-selector
+        value={selectedLoggerAppName}
+        onselect={handleLoggerAppNameChange}
+    ></my-logger-app-name-selector>
+
+    <lightning-input
+        class="slds-p-vertical_xx-small"
+        type="text"
+        name="loggerName"
+        label="Logger Name"
+        value={selectedLoggerName}
+        placeholder="e.g. WebVitals"
+        onchange={handleLoggerNameChange}
+    >
+    </lightning-input>
+
+    <lightning-input
+        class="slds-p-vertical_xx-small"
+        type="text"
+        name="activityName"
+        label="Activity Name"
+        value={selectedActivityName}
+        placeholder="e.g. LCP"
+        onchange={handleActivityNameChange}
+    >
+    </lightning-input>
+
+    <lightning-combobox
+        name="schemas"
+        label="Schema:"
+        value={selectedSchemaId}
+        placeholder="Select your schema"
+        options={schemaOptions}
+        onchange={handleSchemaChange}
+    >
+    </lightning-combobox>
+    <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
+
+    <div class="slds-p-vertical_x-small">
+        <lightning-button
+            label="Cycle through different states of hasError"
+            onclick={handleHasErrorClick}
+            class="has-error-cycle-button"
+        >
+        </lightning-button>
+        <span>Current state: <code>{hasErrorLabel}</code></span>
+    </div>
+
+    <lightning-input
+        class="slds-p-vertical_xx-small"
+        type="checkbox"
+        name="useGrouper"
+        label="Group multiple timeseries into one"
+        checked={useGrouper}
+        onchange={handleUseGrouperChange}
+    >
+    </lightning-input>
+
+    <h2>Sample Queries (auto-generated)</h2>
+
+    <lightning-accordion onsectiontoggle={handleToggleSection} class="queries">
+        <lightning-accordion-section
+            name="CountOfLogCalls"
+            label="Count of log method calls"
+            class={classes.CountOfLogCalls}
+        >
+            <my-argus-query
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-type="log.COUNT.Count"
+                has-error={hasError}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="CountOfErrorCalls"
+            label="Count of error method calls (hasError=true by design)"
+            class={classes.CountOfErrorCalls}
+        >
+            <my-argus-query
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-type="error.COUNT.Count"
+                has-error="true"
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="CountOfDomEventCalls"
+            label="Count of domEvent method calls"
+            class={classes.CountOfErrorCalls}
+        >
+            <my-argus-query
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-type="domEvent.COUNT.Count"
+                has-error="true"
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="ActivityStandardCount"
+            label="Count of activities"
+            class={classes.ActivityStandardCount}
+        >
+            <my-argus-activity-query
+                metric-type="STANDARD.Count"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="CountAverage"
+            label="Average count of activities"
+            class={classes.CountAverage}
+        >
+            <my-argus-activity-query
+                metric-type="STANDARD.Average"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="CountMaximum"
+            label="Maximum count of activities"
+            class={classes.CountMaximum}
+        >
+            <my-argus-activity-query
+                metric-type="STANDARD.Max"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="max"
+                downsampler="max"
+                grouper={grouperMax}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="PercentileErrorCount"
+            label="Count of errors in activities"
+            class={classes.PercentileErrorCount}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.Error.Count"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="Percentile90"
+            label="P95 Duration in activities"
+            class={classes.Percentile90}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.p90th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="Percentile95"
+            label="P95 Duration in activities"
+            class={classes.Percentile95}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.p95th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="Percentile99"
+            label="P99 Duration in activities"
+            class={classes.Percentile99}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.p99th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

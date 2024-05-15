@@ -1,7 +1,7 @@
 import { api } from 'lwc';
-import QueryBase from '../../shared/queryBase';
+import SplunkQueryBase from '../../shared/splunkQueryBase';
 
-export default class QueryUsage extends QueryBase {
+export default class QueryUsage extends SplunkQueryBase {
     private _by: string;
     @api
     get by(): string {

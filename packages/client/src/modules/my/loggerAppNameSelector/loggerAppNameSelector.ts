@@ -1,13 +1,22 @@
-import { LightningElement, track } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
 import { ComboBoxOption } from '../../types/ComboBoxOption';
 import { ComponentUtils } from '../../shared/componentUtils';
 
 export default class LoggerAppNameSelector extends LightningElement {
-    @track
-    loggerAppNames: ComboBoxOption[];
+    private _value: string;
+    get value(): string {
+        return this._value;
+    }
+    @api
+    set value(value: string) {
+        if (this._value !== value) {
+            this._value = value;
+            this._raiseSelectEvent(this.value);
+        }
+    }
 
     @track
-    selectedLoggerAppName: string;
+    loggerAppNames: ComboBoxOption[];
 
     constructor() {
         super();
@@ -15,16 +24,15 @@ export default class LoggerAppNameSelector extends LightningElement {
     }
 
     connectedCallback(): void {
-        this._raiseSelectEvent();
+        this._raiseSelectEvent(this.value);
     }
 
     handleLoggerAppNameChange(event: CustomEvent) {
-        this.selectedLoggerAppName = event.detail.value;
-        this._raiseSelectEvent();
+        this._raiseSelectEvent(event.detail.value);
     }
 
-    private _raiseSelectEvent() {
-        ComponentUtils.raiseEvent(this, 'select', this.selectedLoggerAppName);
+    private _raiseSelectEvent(newValue: string) {
+        ComponentUtils.raiseEvent(this, 'select', newValue);
     }
 
     private _init(): void {
@@ -106,6 +114,8 @@ export default class LoggerAppNameSelector extends LightningElement {
         });
 
         this.loggerAppNames = loggerAppNames;
-        this.selectedLoggerAppName = '*';
+        if (!this.value || !this.loggerAppNames.find((option) => option.value === this.value)) {
+            this.value = '*';
+        }
     }
 }

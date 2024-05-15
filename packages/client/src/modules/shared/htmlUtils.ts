@@ -9,14 +9,22 @@ export function escapeForHtml(htmlStr: string): string {
         : htmlStr;
 }
 
-export function setCode(parentDiv: HTMLDivElement, codeText: string, margin?: string): HTMLElement {
+export function setCode(
+    parentDiv: HTMLDivElement,
+    codeText: string,
+    margin?: string,
+    language?: string
+): HTMLElement {
     const pre = document.createElement('pre');
     if (margin !== undefined) {
         pre.style.margin = margin;
     }
     const code = document.createElement('code');
-    pre.appendChild(code);
     code.innerHTML = escapeForHtml(codeText);
+    if (language) {
+        code.classList.add(language);
+    }
+    pre.appendChild(code);
     parentDiv.replaceChildren(pre);
 
     // @ts-ignore

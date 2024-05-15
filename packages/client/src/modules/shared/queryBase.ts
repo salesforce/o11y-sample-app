@@ -5,7 +5,6 @@ import { schemas } from '../../../../_common/generated/schema';
 import { getType } from '../../../../_common/src/protoUtil';
 import { schemaUtil } from '../../../../_common/src/schemaUtil';
 import { Schema } from '../../../../_common/interfaces/Schema';
-import type { SplunkType } from '../types/Shared';
 
 export default abstract class QueryBase extends LightningElement {
     private _schemaId: string;
@@ -18,22 +17,15 @@ export default abstract class QueryBase extends LightningElement {
             this._schemaId = value;
 
             const cs: Schema = schemas.get(this.schemaId);
-            this.schemaName = schemaUtil.getSchemaName(cs);
-            this.importName = schemaUtil.getImportName(cs);
-
-            this.schemaType = getType(this.schemaId);
-            this.handleInputChange();
-        }
-    }
-
-    private _splunkType: SplunkType;
-    @api
-    get splunkType(): SplunkType {
-        return this._splunkType;
-    }
-    set splunkType(value: SplunkType) {
-        if (this._splunkType !== value) {
-            this._splunkType = value;
+            if (cs) {
+                this.schemaName = schemaUtil.getSchemaName(cs);
+                this.importName = schemaUtil.getImportName(cs);
+                this.schemaType = getType(this.schemaId);
+            } else {
+                this.schemaName = undefined;
+                this.importName = undefined;
+                this.schemaType = undefined;
+            }
             this.handleInputChange();
         }
     }
@@ -50,38 +42,54 @@ export default abstract class QueryBase extends LightningElement {
         }
     }
 
+    private _loggerName: string;
+    @api
+    get loggerName(): string {
+        return this._loggerName;
+    }
+    set loggerName(value: string) {
+        if (this._loggerName !== value) {
+            this._loggerName = value;
+            this.handleInputChange();
+        }
+    }
+
+    private _language: string;
+    @api
+    get language(): string {
+        return this._language;
+    }
+    set language(value: string) {
+        if (this._language !== value) {
+            this._language = value;
+            this.handleInputChange();
+        }
+    }
+
     protected schemaName: string;
     protected importName: string;
     protected schemaType: protobuf.Type;
 
-    get defaultIndex(): string {
-        return this.splunkType === 'preprod' ? 'prod' : 'prod' ? 'coreprod' : undefined;
-    }
-
     @track
     query: string;
 
-    @track
-    linkHref: string;
+    private _earliest: string;
+    @api
+    get earliest(): string {
+        return this._earliest;
+    }
+    set earliest(value: string) {
+        this._earliest = value;
+        this.updateQuery();
+    }
 
     handleInputChange(): void {
         this.updateQuery();
     }
 
     renderedCallback(): void {
-        setCode(this.template.querySelector('div.hljs'), this.query, '0');
+        setCode(this.template.querySelector('div.hljs'), this.query, '0', this.language);
     }
 
-    protected updateQuery(): void {
-        let query = this.getQuery(this.defaultIndex, this.schemaId, this.loggerAppName);
-        if (this.query !== query) {
-            if (query) {
-                // Get rid of leading whitespace
-                query = query.replace(/(?<=\r\n|\n|\r)(^\s+)/gm, ' ').trim();
-            }
-            this.query = query;
-        }
-    }
-
-    protected abstract getQuery(index: string, schemaId: string, loggerAppName: string): string;
+    protected abstract updateQuery(): void;
 }

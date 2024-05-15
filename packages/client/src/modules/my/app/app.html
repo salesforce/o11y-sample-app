@@ -746,6 +746,22 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                             </my-app-section>
                         </lightning-tab>
                         <lightning-tab
+                            label={labelMetricsQueries}
+                            value={sectionMetricsQueries}
+                            onactive={handleTabSelect}
+                            icon-name="standard:lightning_usage"
+                        >
+                            <my-app-section label={labelMetricsQueries}>
+                                <div slot="doc"
+                                    >Here you can generate sample Argus queries for your
+                                    instrumentation instance / schema.</div
+                                >
+                                <div slot="play">
+                                    <my-metrics-queries-play></my-metrics-queries-play>
+                                </div>
+                            </my-app-section>
+                        </lightning-tab>
+                        <lightning-tab
                             label={labelUtility}
                             value={sectionUtility}
                             onactive={handleTabSelect}
