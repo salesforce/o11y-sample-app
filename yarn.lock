@@ -7166,10 +7166,10 @@ o11y_schema@250.130.0:
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-250.130.0.tgz#0f2e03ab32620b9a6cf6b91593a8e9ee22d9368a"
   integrity sha512-oo/GYFM4rIQCtJLj9i5XJNZyr8v6klx/NJQqVYsyJdvAHxI/hfFEeh3JmjpYuxNqG0Sgqs/97M/RGyqAdVWcjQ==
 
-o11y_schema@250.137.0:
-  version "250.137.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-250.137.0.tgz#f76c3e8abeec1eb9a2011781816a49cabec350c1"
-  integrity sha512-DVuDyGBInEyp8D0jVAhSOF1KYg8/XzNbT5fKCsgc60cfjux5HY4yOHRtkesueBDRPNyJgTgjGUxKB1Z85tyz2g==
+o11y_schema@252.15.0:
+  version "252.15.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-252.15.0.tgz#5fe4d110485c266fbb54fc212c2dca6bd7539722"
+  integrity sha512-a+9upvNA6EidJ8QuAFHnh1sHZ8Z6QpcjKqa9SYKmvQqowN/ViVCq/7Gfxhiz6bqHN/mT2/4DM8aBehdY1rNTUw==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
