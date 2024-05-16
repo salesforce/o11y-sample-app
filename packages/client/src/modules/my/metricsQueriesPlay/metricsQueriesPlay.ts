@@ -13,17 +13,30 @@ type Query = {
 };
 
 const enum presets {
-    lexRootActivity = 'lexRootActivity',
-    webVitalsFCP = 'webVitalsFCP',
-    webVitalsINP = 'webVitalsINP',
-    webVitalsLCP = 'webVitalsLCP',
-    webVitalsTTFB = 'webVitalsTTFB',
-    navigationTimingLegacy = 'navigationTimingLegacy',
-    resourceTimingLegacy = 'resourceTimingLegacy',
-    navigationTiming = 'navigationTiming',
-    resourceTiming = 'resourceTiming',
-    xhrSend = 'xhrSend',
-    fetch = 'fetch'
+    oneRootActivity = 'oneRootActivity',
+    oneWebVitalsFCP = 'oneWebVitalsFCP',
+    oneWebVitalsINP = 'oneWebVitalsINP',
+    oneWebVitalsLCP = 'oneWebVitalsLCP',
+    oneWebVitalsTTFB = 'oneWebVitalsTTFB',
+    oneNavigationTimingLegacy = 'oneNavigationTimingLegacy',
+    oneResourceTimingLegacy = 'oneResourceTimingLegacy',
+    oneNavigationTiming = 'oneNavigationTiming',
+    oneResourceTiming = 'oneResourceTiming',
+    oneXhrSend = 'oneXhrSend',
+    oneFetch = 'oneFetch',
+    clwrRootActivity = 'clwrRootActivity',
+    clwrNav = 'clwrNav',
+    clwrNavTansition = 'clwrNavTansition',
+    clwrWebVitalsFCP = 'clwrWebVitalsFCP',
+    clwrWebVitalsINP = 'clwrWebVitalsINP',
+    clwrWebVitalsLCP = 'clwrWebVitalsLCP',
+    clwrWebVitalsTTFB = 'clwrWebVitalsTTFB',
+    clwrNavigationTimingLegacy = 'clwrNavigationTimingLegacy',
+    clwrResourceTimingLegacy = 'clwrResourceTimingLegacy',
+    clwrNavigationTiming = 'clwrNavigationTiming',
+    clwrResourceTiming = 'clwrResourceTiming',
+    clwrXhrSend = 'clwrXhrSend',
+    clwrFetch = 'clwrFetch'
 }
 
 // The array values are positioned based on the following order:
@@ -36,17 +49,30 @@ const enum presets {
 // 6. useGrouper (true/false)
 // prettier-ignore
 const presetValues = new Map<string, Array<string | boolean | null>>([
-    [presets.lexRootActivity,       ['one:one, LexRootActivity',          'one:one', 'one:one',   'LexRootActivity', 'sf.instrumentation.ScenarioTracker',   null,  true]],    
-    [presets.webVitalsFCP,          ['one:one, WebVitals, FCP',           'one:one', 'WebVitals', 'FCP',             'sf.instrumentation.WebVitals',         null,  true]],
-    [presets.webVitalsINP,          ['one:one, WebVitals, INP',           'one:one', 'WebVitals', 'INP',             'sf.instrumentation.WebVitals',         null,  true]],
-    [presets.webVitalsLCP,          ['one:one, WebVitals, LCP',           'one:one', 'WebVitals', 'LCP',             'sf.instrumentation.WebVitals',         null,  true]],
-    [presets.webVitalsTTFB,         ['one:one, WebVitals, TTFB',          'one:one', 'WebVitals', 'TTFB',            'sf.instrumentation.WebVitals',         null,  true]],
-    [presets.navigationTimingLegacy,['one:one, navigation timing (-248)', 'one:one', 'Network',   'perf_timing',     'sfcore.performance.NavigationTiming',  null,  true]],
-    [presets.navigationTiming,      ['one:one, navigation timing (250-)', 'one:one', 'Network',   'network',         'sfcore.performance.NavigationTiming',  null,  true]],
-    [presets.resourceTimingLegacy,  ['one:one, resource timing (-248)',   'one:one', 'Network',   'perf_timing',     'sfcore.performance.ResourceTiming',    null,  true]],
-    [presets.resourceTiming,        ['one:one, resource timing (250-)',   'one:one', 'Network',   'network',         'sfcore.performance.ResourceTiming',    null,  true]],
-    [presets.xhrSend,               ['one:one, XMLHttpRequest send',      'one:one', 'Network',   'xhr_send',        'sf.instrumentation.Network',           null,  true]],    
-    [presets.fetch,                 ['one:one, fetch',                    'one:one', 'Network',   'fetch',           'sf.instrumentation.Network',           null,  true]],
+    // key                              label                                loggerAppName     loggerName        activityName             schemaId                                hasError useGrouper                                    
+    [presets.oneRootActivity,          ['LEX, root activity',               'one:one',        'one:one',        'LexRootActivity',       'sf.lex.ScenarioTracker',               null,    true]],    
+    [presets.oneWebVitalsFCP,          ['LEX, WebVitals, FCP',              'one:one',        'WebVitals',      'FCP',                   'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.oneWebVitalsINP,          ['LEX, WebVitals, INP',              'one:one',        'WebVitals',      'INP',                   'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.oneWebVitalsLCP,          ['LEX, WebVitals, LCP',              'one:one',        'WebVitals',      'LCP',                   'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.oneWebVitalsTTFB,         ['LEX, WebVitals, TTFB',             'one:one',        'WebVitals',      'TTFB',                  'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.oneNavigationTimingLegacy,['LEX, navigation timing (-248)',    'one:one',        'Network',        'perf_timing',           'sfcore.performance.NavigationTiming',  null,    true]],
+    [presets.oneNavigationTiming,      ['LEX, navigation timing (250-)',    'one:one',        'Network',        'network',               'sfcore.performance.NavigationTiming',  null,    true]],
+    [presets.oneResourceTimingLegacy,  ['LEX, resource timing (-248)',      'one:one',        'Network',        'perf_timing',           'sfcore.performance.ResourceTiming',    null,    true]],
+    [presets.oneResourceTiming,        ['LEX, resource timing (250-)',      'one:one',        'Network',        'network',               'sfcore.performance.ResourceTiming',    null,    true]],
+    [presets.oneXhrSend,               ['LEX, XMLHttpRequest send',         'one:one',        'Network',        'xhr_send',              'sf.instrumentation.Network',           null,    true]],    
+    [presets.oneFetch,                 ['LEX, fetch',                       'one:one',        'Network',        'fetch',                 'sf.instrumentation.Network',           null,    true]],
+    [presets.clwrRootActivity,         ['CLWR, root activity',              'lwr_experience', 'lwr_experience', 'root',                  'sf.clwr.Root',                         null,    true]],
+    [presets.clwrNav,                  ['CLWR, page navigation',            'lwr_experience', 'lwr_experience', 'navigation',            'sf.clwr.Nav',                          null,    true]],          
+    [presets.clwrNavTansition,         ['CLWR, page navigation transition', 'lwr_experience', 'lwr_experience', 'navigation transition', 'sf.clwr.NavTransition',                null,    true]],          
+    [presets.clwrWebVitalsFCP,         ['CLWR, WebVitals, FCP',             'lwr_experience', 'WebVitals',      'FCP',                   'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.clwrWebVitalsINP,         ['CLWR, WebVitals, INP',             'lwr_experience', 'WebVitals',      'INP',                   'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.clwrWebVitalsLCP,         ['CLWR, WebVitals, LCP',             'lwr_experience', 'WebVitals',      'LCP',                   'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.clwrWebVitalsTTFB,        ['CLWR, WebVitals, TTFB',            'lwr_experience', 'WebVitals',      'TTFB',                  'sf.instrumentation.WebVitals',         null,    true]],
+    [presets.clwrNavigationTiming,     ['CLWR, navigation timing',          'lwr_experience', 'Network',        'perf_timing',           'sfcore.performance.NavigationTiming',  null,    true]],
+    [presets.clwrResourceTiming,       ['CLWR, resource timing',            'lwr_experience', 'Network',        'perf_timing',           'sfcore.performance.ResourceTiming',    null,    true]],
+    [presets.clwrXhrSend,              ['CLWR, XMLHttpRequest send',        'lwr_experience', 'Network',        'xhr_send',              'sf.instrumentation.Network',           null,    true]],    
+    [presets.clwrFetch,                ['CLWR, fetch',                      'lwr_experience', 'Network',        'fetch',                 'sf.instrumentation.Network',           null,    true]],
+       
 ]);
 
 export default class MetricsQueriesPlay extends LightningElement {
@@ -63,7 +89,7 @@ export default class MetricsQueriesPlay extends LightningElement {
     classes: Record<string, string> = {};
 
     @track
-    selectedLoggerAppName: string = 'one:one';
+    selectedLoggerAppName: string;
 
     @track
     selectedLoggerName: string;
@@ -110,6 +136,12 @@ export default class MetricsQueriesPlay extends LightningElement {
     @track
     selectedPreset: string;
 
+    @track
+    daysOptions: ComboBoxOption[];
+
+    @track
+    selectedDays: string;
+
     constructor() {
         super();
         this.schemaOptions = Array.from(schemas.keys())
@@ -120,15 +152,61 @@ export default class MetricsQueriesPlay extends LightningElement {
             }));
         this.schemaOptions.unshift({ label: '(None)', value: undefined });
 
-        this.presetOptions = Array.from(presetValues.entries()).map(([key, value]) => ({
-            value: key,
-            label: value[0] as string
-        }));
+        this.presetOptions = Array.from(presetValues.entries())
+            .map(([key, value]) => ({
+                value: key,
+                label: value[0] as string
+            }))
+            .sort((a, b) => a.label.localeCompare(b.label));
         this.presetOptions.unshift({ label: '(None)', value: undefined });
+
+        this.daysOptions = [
+            {
+                label: 'Last 1 day',
+                value: '-1d'
+            },
+            {
+                label: 'Last 2 days',
+                value: '-2d'
+            },
+            {
+                label: 'Last 3 days',
+                value: '-3d'
+            },
+            {
+                label: 'Last 4 days',
+                value: '-4d'
+            },
+            {
+                label: 'Last 5 days',
+                value: '-5d'
+            },
+            {
+                label: 'Last 6 days',
+                value: '-6d'
+            },
+            {
+                label: 'Last 7 days',
+                value: '-7d'
+            },
+            {
+                label: 'Last 10 days',
+                value: '-10d'
+            },
+            {
+                label: 'Last 15 days',
+                value: '-15d'
+            }
+        ];
+        this.selectedDays = '-2d';
     }
 
     private unsetPreset() {
         this.selectedPreset = undefined;
+    }
+
+    handleDaysChange(event: CustomEvent) {
+        this.selectedDays = event.detail.value;
     }
 
     handleToggleSection(event: CustomEvent) {

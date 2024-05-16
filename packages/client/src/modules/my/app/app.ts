@@ -40,10 +40,10 @@ export default class App extends LightningElement implements LogCollector {
     @track labelServer = 'Core Collector';
     @track labelNetwork = 'Network Instrumentation';
     @track labelMetrics = 'Metrics';
-    @track labelMetricsQueries = 'Metrics Queries';
+    @track labelMetricsQueries = 'Query metrics in Argus';
     @track labelLogAccumulation = 'Log Accumulation';
     @track labelPlayground = 'Playground';
-    @track labelSplunker = 'Splunker';
+    @track labelSplunker = 'Query logs in Splunk';
     @track labelUtility = 'Utility';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 

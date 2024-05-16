@@ -3,7 +3,7 @@
         name="presets"
         label="Presets"
         value={selectedPreset}
-        placeholder="Use a preset to auto-fill input fields below for example metrics"
+        placeholder="Use a preset to auto-fill input fields below for example metrics."
         options={presetOptions}
         onchange={handlePresetChange}
     >
@@ -20,7 +20,7 @@
         name="loggerName"
         label="Logger Name"
         value={selectedLoggerName}
-        placeholder="e.g. WebVitals"
+        placeholder="This is the string passed to getInstrumentation()."
         onchange={handleLoggerNameChange}
     >
     </lightning-input>
@@ -31,21 +31,34 @@
         name="activityName"
         label="Activity Name"
         value={selectedActivityName}
-        placeholder="e.g. LCP"
+        placeholder="This is the string passed to startActivity()."
         onchange={handleActivityNameChange}
     >
     </lightning-input>
 
     <lightning-combobox
         name="schemas"
-        label="Schema:"
+        label="Schema"
         value={selectedSchemaId}
-        placeholder="Select your schema"
+        placeholder="If you used a schema in the call to the logging API, select it here."
         options={schemaOptions}
         onchange={handleSchemaChange}
     >
     </lightning-combobox>
     <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
+
+    <div>
+        <lightning-combobox
+            name="days"
+            label="Time Window"
+            value={selectedDays}
+            options={daysOptions}
+            onchange={handleDaysChange}
+        >
+        </lightning-combobox>
+        <lightning-badge label="Note" icon-name="utility:info"></lightning-badge>
+        <span>If you receive an error in Argus, try again or use a smaller time window. </span>
+    </div>
 
     <div class="slds-p-vertical_x-small">
         <lightning-button
@@ -67,7 +80,10 @@
     >
     </lightning-input>
 
-    <h2>Sample Queries (auto-generated)</h2>
+    <h2>Queries</h2>
+    <p class="slds-m-bottom_large"
+        >These sample queries are auto-generated based on provided input above.</p
+    >
 
     <lightning-accordion onsectiontoggle={handleToggleSection} class="queries">
         <lightning-accordion-section
@@ -84,6 +100,7 @@
                 aggregator="sum"
                 downsampler="sum"
                 grouper={grouperSum}
+                earliest={selectedDays}
             ></my-argus-query>
         </lightning-accordion-section>
 
@@ -101,6 +118,7 @@
                 aggregator="sum"
                 downsampler="sum"
                 grouper={grouperSum}
+                earliest={selectedDays}
             ></my-argus-query>
         </lightning-accordion-section>
 
@@ -118,6 +136,7 @@
                 aggregator="sum"
                 downsampler="sum"
                 grouper={grouperSum}
+                earliest={selectedDays}
             ></my-argus-query>
         </lightning-accordion-section>
 
@@ -136,6 +155,7 @@
                 aggregator="sum"
                 downsampler="sum"
                 grouper={grouperSum}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
 
@@ -154,6 +174,7 @@
                 aggregator="avg"
                 downsampler="avg"
                 grouper={grouperAvg}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
 
@@ -172,6 +193,7 @@
                 aggregator="max"
                 downsampler="max"
                 grouper={grouperMax}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
 
@@ -190,12 +212,13 @@
                 aggregator="sum"
                 downsampler="sum"
                 grouper={grouperSum}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
 
         <lightning-accordion-section
             name="Percentile90"
-            label="P95 Duration in activities"
+            label="P90 Duration in activities"
             class={classes.Percentile90}
         >
             <my-argus-activity-query
@@ -208,6 +231,7 @@
                 aggregator="avg"
                 downsampler="avg"
                 grouper={grouperAvg}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
 
@@ -226,6 +250,7 @@
                 aggregator="avg"
                 downsampler="avg"
                 grouper={grouperAvg}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
 
@@ -244,6 +269,7 @@
                 aggregator="avg"
                 downsampler="avg"
                 grouper={grouperAvg}
+                earliest={selectedDays}
             ></my-argus-activity-query>
         </lightning-accordion-section>
     </lightning-accordion>

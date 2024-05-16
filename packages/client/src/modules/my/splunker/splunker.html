@@ -22,8 +22,10 @@
     </lightning-combobox>
     <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
 
-    <h2>Sample Queries (auto-generated)</h2>
-
+    <h2>Queries</h2>
+    <p class="slds-m-bottom_large"
+        >These sample queries are auto-generated based on provided input above.</p
+    >
     <lightning-accordion
         if:true={areInputsValid}
         onsectiontoggle={handleToggleSection}
