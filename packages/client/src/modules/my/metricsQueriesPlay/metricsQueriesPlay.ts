@@ -170,7 +170,10 @@ export default class MetricsQueriesPlay extends LightningElement {
     @track
     groupingOptions: ComboBoxOption[] = [
         { value: 'true', label: 'On - Collapses multiple timeseries into one (default)' },
-        { value: 'false', label: 'Off' }
+        {
+            value: 'false',
+            label: 'Off - Shows individual timeseries to help isolate possibly problematic instances'
+        }
     ];
 
     @track
