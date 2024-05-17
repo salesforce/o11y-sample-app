@@ -23,3 +23,21 @@ code {
     display: inline-block;
     margin-right: 10px;
 }
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex :first-child {
+    flex-grow: 1;
+}
+
+.clear-icon {
+    margin: 22px 5px 0;
+}
+
+.schema-link {
+    margin: 22px 5px 0;
+}

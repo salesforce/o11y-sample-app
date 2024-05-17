@@ -3,23 +3,23 @@ import QueryBase from './queryBase';
 import { Tag } from '../types/Tag';
 
 const enum MetricType {
-    StdCount = 'STANDARD.Count',
-    StdAverage = 'STANDARD.Average',
-    StdMaximum = 'STANDARD.Max',
-    StdTotal = 'STANDARD.Total',
+    logCount = 'log.COUNT.Count',
+    errorCount = 'error.COUNT.Count',
+    domEventCount = 'domEvent.COUNT.Count',
     PerCount = 'PERCENTILE_SET.Count',
-    PerErrorCount = 'PERCENTILE_SET.Error.Count',
+    PerP50 = 'PERCENTILE_SET.p50th',
     PerP90 = 'PERCENTILE_SET.p90th',
     PerP95 = 'PERCENTILE_SET.p95th',
     PerP99 = 'PERCENTILE_SET.p99th',
-    PerTotal = 'PERCENTILE_SET.Total'
+    HistogramAvg = 'HISTOGRAM.Average',
+    HistogramMax = 'HISTOGRAM.Max'
 }
 
 export default abstract class ArgusQueryBase extends QueryBase {
     constructor() {
         super();
-        this.earliest = '-2d'; // -7d seems to be more likely to cause an error
-        this.bucketSize = '1h';
+        this.earliest = '-1d'; // -7d seems to be more likely to cause an error
+        this.bucketSize = '30m';
         this.language = 'language-plaintext';
     }
 
@@ -30,6 +30,16 @@ export default abstract class ArgusQueryBase extends QueryBase {
     }
     set metricName(value: string) {
         this._metricName = value;
+        this.updateQuery();
+    }
+
+    private _hostId: string;
+    @api
+    get hostId(): string {
+        return this._hostId;
+    }
+    set hostId(value: string) {
+        this._hostId = value;
         this.updateQuery();
     }
 
@@ -103,6 +113,16 @@ export default abstract class ArgusQueryBase extends QueryBase {
         this.updateQuery();
     }
 
+    private _useWorkaround: boolean;
+    @api
+    get useWorkaround(): boolean {
+        return this._useWorkaround;
+    }
+    set useWorkaround(value: boolean) {
+        this._useWorkaround = value;
+        this.updateQuery();
+    }
+
     protected argusEncode(text: string) {
         // valid values: a to z, A to Z, 0 to 9, -, _, .,/
         const validChars = new Set([
@@ -135,12 +155,29 @@ export default abstract class ArgusQueryBase extends QueryBase {
     }
 
     private getScope(scopePrefix: string): string {
-        let scope = scopePrefix;
-        if (this.loggerAppName !== '*') {
-            scope += `.${this.loggerAppName}.`;
+        let tokens: string[] = [scopePrefix];
+
+        if (this.loggerAppName && this.loggerAppName !== '*') {
+            tokens.push(this.argusEncode(this.loggerAppName));
+        } else {
+            tokens.push('*');
         }
-        scope = this.argusEncode(scope) + '*';
-        return scope;
+
+        if (this.hostId) {
+            tokens.push(this.argusEncode(this.hostId));
+        } else {
+            tokens.push('*');
+        }
+
+        if (this.useWorkaround) {
+            // There is some inconsistency in the way the metric name is encoded for certain cases.
+            // For exmple, the scope starts with core_ui_ instead of core.ui.
+            const firstTwo = tokens.splice(0, 2);
+            tokens.unshift(firstTwo.join('_'));
+            return tokens.join('.');
+        }
+
+        return tokens.join('.');
     }
 
     private getTagsText(): string {
@@ -168,14 +205,22 @@ export default abstract class ArgusQueryBase extends QueryBase {
     }
 
     protected getMetricName(): string {
-        if (this.metricName) {
-            return this.argusEncode(this.metricName);
-        }
-
         let tokens: string[] = [];
+
         if (this.loggerName) {
             tokens.push(this.argusEncode(this.loggerName));
         } else {
+            tokens.push('*');
+        }
+
+        if (this.useWorkaround) {
+            tokens.push('-');
+            tokens.push('-');
+        }
+
+        if (this.metricName) {
+            tokens.push(this.argusEncode(this.metricName));
+        } else if (this.useWorkaround) {
             tokens.push('*');
         }
 
@@ -196,9 +241,7 @@ export default abstract class ArgusQueryBase extends QueryBase {
         let query = `${this.earliest}:${latest}:${scope}:${metricName}${tagsText}:${this.aggregator}:${this.bucketSize}-${this.downsampler}`;
 
         if (this.grouper) {
-            const regex = `#(^${scopePrefix})#`;
-            const group = `#${this.grouper}#`;
-            query = `GROUPBY(${query},${regex},${group})`;
+            query = `${this.grouper}(${query})`;
         }
         return query;
     }

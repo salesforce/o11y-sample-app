@@ -738,8 +738,8 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                             <my-app-section label={labelSplunker}>
                                 <div slot="doc"
                                     >Here you can generate sample Splunk queries for preprod and
-                                    prod instances for your schema.</div
-                                >
+                                    prod instances for your schema.
+                                </div>
                                 <div slot="play">
                                     <my-splunker></my-splunker>
                                 </div>
@@ -753,9 +753,20 @@ this.instr = getInstrumentation('my_instrumentation_name');</pre
                         >
                             <my-app-section label={labelMetricsQueries}>
                                 <div slot="doc"
-                                    >Here you can generate sample Argus queries for your
-                                    instrumentation instance / schema.</div
-                                >
+                                    ><p
+                                        >Here you can generate sample Argus queries for metrics
+                                        collected by o11y, either implicitly or explicity. All
+                                        inputs are optional and help you to narrow down the scope to
+                                        your instrumentation instance or schema. Inputs are
+                                        case-sensitive. To get started, you can choose from one of
+                                        the presets to auto-fill the input fields.</p
+                                    >
+                                    <lightning-badge
+                                        style="padding-left: 0"
+                                        label="If you receive 'Error retrieving the data' in Argus, try refreshing it or try again with a more specific query or use a smaller time window."
+                                        icon-name="utility:info"
+                                    ></lightning-badge
+                                ></div>
                                 <div slot="play">
                                     <my-metrics-queries-play></my-metrics-queries-play>
                                 </div>

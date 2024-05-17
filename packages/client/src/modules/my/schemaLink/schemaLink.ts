@@ -36,4 +36,10 @@ export default class SchemaLink extends LightningElement {
         }
         this.selectedSchemaUrl = undefined;
     }
+
+    handleClick() {
+        if (this.selectedSchemaUrl) {
+            window.open(this.selectedSchemaUrl, '_blank');
+        }
+    }
 }

@@ -11,16 +11,22 @@
 
     <my-logger-app-name-selector onselect={handleLoggerAppNameChange}></my-logger-app-name-selector>
 
-    <lightning-combobox
-        name="schemas"
-        label="Schema"
-        value={selectedSchemaId}
-        placeholder="Select your schema"
-        options={schemaOptions}
-        onchange={handleSchemaChange}
-    >
-    </lightning-combobox>
-    <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
+    <div class="flex">
+        <lightning-combobox
+            name="schemas"
+            label="Schema"
+            value={selectedSchemaId}
+            placeholder="Select your schema"
+            options={schemaOptions}
+            onchange={handleSchemaChange}
+        >
+        </lightning-combobox>
+        <my-schema-link
+            if:true={selectedSchemaId}
+            schema={selectedSchemaId}
+            class="schema-link"
+        ></my-schema-link>
+    </div>
 
     <h2>Queries</h2>
     <p class="slds-m-bottom_large"

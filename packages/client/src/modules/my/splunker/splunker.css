@@ -11,3 +11,17 @@ h2 {
     margin-top: 1em;
     font-size: x-large;
 }
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.flex :first-child {
+    flex-grow: 1;
+}
+
+.schema-link {
+    margin: 22px 5px 0;
+}
