@@ -40,9 +40,10 @@ export default class App extends LightningElement implements LogCollector {
     @track labelServer = 'Core Collector';
     @track labelNetwork = 'Network Instrumentation';
     @track labelMetrics = 'Metrics';
+    @track labelMetricsQueries = 'Query metrics in Argus';
     @track labelLogAccumulation = 'Log Accumulation';
     @track labelPlayground = 'Playground';
-    @track labelSplunker = 'Splunker';
+    @track labelSplunker = 'Query logs in Splunk';
     @track labelUtility = 'Utility';
     // If adding a new label, also add a corresponding section, and update _sectionToLabelMap
 
@@ -55,6 +56,7 @@ export default class App extends LightningElement implements LogCollector {
     @track sectionServer = 'section_server';
     @track sectionNetwork = 'section_network';
     @track sectionMetrics = 'section_metrics';
+    @track sectionMetricsQueries = 'section_metrics_queries';
     @track sectionLogAccumulation = 'section_log_accumulation';
     @track sectionPlayground = 'section_utilities';
     @track sectionSplunker = 'section_splunker';
@@ -73,7 +75,8 @@ export default class App extends LightningElement implements LogCollector {
         .set(this.sectionLogAccumulation, this.labelLogAccumulation)
         .set(this.sectionPlayground, this.labelPlayground)
         .set(this.sectionSplunker, this.labelSplunker)
-        .set(this.sectionUtility, this.labelUtility);
+        .set(this.sectionUtility, this.labelUtility)
+        .set(this.sectionMetricsQueries, this.labelMetricsQueries);
 
     private readonly _entityType = 'section';
     private _instrApp: InstrumentedAppMethods;

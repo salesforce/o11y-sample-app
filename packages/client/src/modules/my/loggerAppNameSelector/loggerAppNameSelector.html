@@ -1,9 +1,9 @@
 <template>
     <lightning-combobox
         name="logger-apps"
-        label="Logger App Name:"
-        value={selectedLoggerAppName}
-        placeholder="Select a logger app name"
+        label="Logger app name"
+        value={value}
+        placeholder="This is the string passed to registerInstrumentedApp()."
         options={loggerAppNames}
         onchange={handleLoggerAppNameChange}
     >

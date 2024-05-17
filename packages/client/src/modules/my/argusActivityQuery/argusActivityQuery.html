@@ -1,0 +1,6 @@
+<template>
+    <!-- This hidden input is required to make renderCallback get called when query changes -->
+    <input type="hidden" value={query} />
+    <div class="hljs" lwc:dom="manual"></div>
+    <my-argus-link if:true={query} query={query}></my-argus-link>
+</template>

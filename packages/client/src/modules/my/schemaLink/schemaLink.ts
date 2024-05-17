@@ -24,14 +24,22 @@ export default class SchemaLink extends LightningElement {
     private _updateSelectedSchemaUrl() {
         if (this._schema) {
             const cs: Schema = schemas.get(this._schema);
-            const path = cs.namespace.replace('.', '/');
-            const file = cs.name
-                .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
-                .substring(1);
+            if (cs) {
+                const path = cs.namespace.replace('.', '/');
+                const file = cs.name
+                    .replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`)
+                    .substring(1);
 
-            this.selectedSchemaUrl = `${schemaSourceRoot}/${path}/${file}.proto`;
-        } else {
-            this.selectedSchemaUrl = undefined;
+                this.selectedSchemaUrl = `${schemaSourceRoot}/${path}/${file}.proto`;
+                return;
+            }
+        }
+        this.selectedSchemaUrl = undefined;
+    }
+
+    handleClick() {
+        if (this.selectedSchemaUrl) {
+            window.open(this.selectedSchemaUrl, '_blank');
         }
     }
 }

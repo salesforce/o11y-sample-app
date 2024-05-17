@@ -12,6 +12,18 @@ h2 {
     font-size: x-large;
 }
 
+code {
+    font-family: 'Menlo', 'Monaco', 'Courier New', Courier, monospace;
+    font-size: 10pt;
+    line-height: 19.5px;
+    background-color: lightgoldenrodyellow;
+}
+
+.has-error-cycle-button {
+    display: inline-block;
+    margin-right: 10px;
+}
+
 .flex {
     display: flex;
     flex-direction: row;
@@ -20,6 +32,10 @@ h2 {
 
 .flex :first-child {
     flex-grow: 1;
+}
+
+.clear-icon {
+    margin: 22px 5px 0;
 }
 
 .schema-link {

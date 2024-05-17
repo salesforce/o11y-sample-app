@@ -1,0 +1,482 @@
+<template>
+    <lightning-combobox
+        class="slds-m-bottom_large"
+        name="presets"
+        label="Presets for convenience"
+        value={selectedPreset}
+        placeholder="Use a preset to auto-fill input fields below for example metrics."
+        options={presetOptions}
+        onchange={handlePresetChange}
+    >
+    </lightning-combobox>
+
+    <my-logger-app-name-selector
+        value={selectedLoggerAppName}
+        onselect={handleLoggerAppNameChange}
+    ></my-logger-app-name-selector>
+
+    <div class="flex">
+        <lightning-input
+            class="slds-p-vertical_xx-small logger-name-input"
+            type="text"
+            name="loggerName"
+            label="Logger name"
+            value={selectedLoggerName}
+            placeholder="This is the string passed to getInstrumentation()."
+            onchange={handleLoggerNameChange}
+        >
+        </lightning-input>
+        <lightning-button-icon
+            if:true={selectedLoggerName}
+            class="clear-icon"
+            icon-name="utility:clear"
+            size="medium"
+            alternative-text="Clear logger name"
+            onclick={handleClearLoggerNameClick}
+            variant="bare"
+        ></lightning-button-icon>
+    </div>
+
+    <div class="flex">
+        <lightning-input
+            class="slds-p-vertical_xx-small metric-name-input"
+            type="text"
+            name="metricName"
+            label="Metric name (only used for explicit metrics)"
+            value={selectedMetricName}
+            placeholder="This is the string passed to incrementCounter(), trackValue() or bucketValue()."
+            onchange={handleMetricNameChange}
+        >
+        </lightning-input>
+        <lightning-button-icon
+            if:true={selectedMetricName}
+            class="clear-icon"
+            icon-name="utility:clear"
+            size="medium"
+            alternative-text="Clear metric name"
+            onclick={handleClearMetricNameClick}
+            variant="bare"
+        ></lightning-button-icon>
+    </div>
+
+    <div class="flex">
+        <lightning-input
+            class="slds-p-vertical_xx-small activity-name-input"
+            type="text"
+            name="activityName"
+            label="Activity name"
+            value={selectedActivityName}
+            placeholder="This is the string passed to startActivity()."
+            onchange={handleActivityNameChange}
+        >
+        </lightning-input>
+        <lightning-button-icon
+            if:true={selectedActivityName}
+            class="clear-icon"
+            icon-name="utility:clear"
+            size="medium"
+            alternative-text="Clear activity name"
+            onclick={handleClearActivityNameClick}
+            variant="bare"
+        ></lightning-button-icon>
+    </div>
+
+    <div class="flex">
+        <lightning-combobox
+            name="schemas"
+            label="Schema"
+            value={selectedSchemaId}
+            placeholder="If you used a schema in the call to the logging API, select it here."
+            options={schemaOptions}
+            onchange={handleSchemaChange}
+        >
+        </lightning-combobox>
+        <my-schema-link
+            if:true={selectedSchemaId}
+            schema={selectedSchemaId}
+            class="schema-link"
+        ></my-schema-link>
+    </div>
+
+    <div class="flex">
+        <lightning-input
+            class="slds-p-vertical_xx-small host-id-input"
+            type="text"
+            name="hostId"
+            label="Host ID"
+            value={selectedHostId}
+            placeholder="Specify datacenter.pod.instance (e.g. IA4.SP2.na128 for GUS)."
+            onchange={handleHostIdChange}
+        >
+        </lightning-input>
+        <lightning-button-icon
+            if:true={selectedHostId}
+            class="clear-icon"
+            icon-name="utility:clear"
+            size="medium"
+            alternative-text="Clear host ID"
+            onclick={handleClearHostIdClick}
+            variant="bare"
+        ></lightning-button-icon>
+    </div>
+
+    <lightning-combobox
+        name="days"
+        label="Time window"
+        value={selectedDays}
+        options={daysOptions}
+        onchange={handleDaysChange}
+    >
+    </lightning-combobox>
+
+    <lightning-combobox
+        class="slds-p-vertical_xx-small"
+        name="hasErrorOptions"
+        label="'Has Error' state for the metric"
+        value={hasErrorText}
+        options={hasErrorOptions}
+        onchange={handleHasErrorChange}
+    >
+    </lightning-combobox>
+
+    <lightning-combobox
+        class="slds-p-vertical_xx-small"
+        name="useGrouperOptions"
+        label="Grouping"
+        value={useGrouperText}
+        options={groupingOptions}
+        onchange={handleUseGrouperChange}
+    >
+    </lightning-combobox>
+
+    <h2>API Call Counts</h2>
+    <p class="slds-m-bottom_large"
+        >These queries focus on the number of calls to the o11y API methods. o11y generates the
+        associated ("implicit") metrics automatically.
+    </p>
+
+    <lightning-accordion
+        onsectiontoggle={handleToggleSection}
+        class="queries"
+        active-section-name={activeSectionCountOfCalls}
+        data-accordion="countOfCalls"
+    >
+        <lightning-accordion-section name="hidden" style="display: none">
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="CountOfLogCalls"
+            label="Count of log method calls"
+            class={classes.CountOfLogCalls}
+        >
+            <my-argus-query
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-type="log.COUNT.Count"
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+                earliest={selectedDays}
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="CountOfErrorCalls"
+            label="Count of error method calls (hasError=true by design)"
+            class={classes.CountOfErrorCalls}
+        >
+            <my-argus-query
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-type="error.COUNT.Count"
+                has-error="true"
+                host-id={selectedHostId}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+                earliest={selectedDays}
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="CountOfDomEventCalls"
+            label="Count of domEvent method calls"
+            class={classes.CountOfDomEventCalls}
+        >
+            <my-argus-query
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-type="domEvent.COUNT.Count"
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+                earliest={selectedDays}
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="ActivityStandardCount"
+            label="Count of activity method calls"
+            class={classes.ActivityStandardCount}
+        >
+            <my-argus-activity-query
+                metric-type="STANDARD.Count"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+                earliest={selectedDays}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+    </lightning-accordion>
+
+    <lightning-accordion
+        onsectiontoggle={handleToggleSection}
+        class="queries"
+        active-section-name={activeSectionActivityDurations}
+        data-accordion="durationsOfActivities"
+    >
+        <lightning-accordion-section name="hidden" style="display: none">
+        </lightning-accordion-section>
+
+        <h2>Activity Durations</h2>
+        <p class="slds-m-bottom_large"
+            >These queries focus on the duration of reported activities. o11y generates the
+            associated metrics automatically.</p
+        >
+
+        <lightning-accordion-section
+            name="Percentile90"
+            label="P90 duration in activities"
+            class={classes.Percentile90}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.p90th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="Percentile95"
+            label="P95 duration in activities"
+            class={classes.Percentile95}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.p95th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="Percentile99"
+            label="P99 duration in activities"
+            class={classes.Percentile99}
+        >
+            <my-argus-activity-query
+                metric-type="PERCENTILE_SET.p99th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                activity-name={selectedActivityName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+            ></my-argus-activity-query>
+        </lightning-accordion-section>
+    </lightning-accordion>
+
+    <h2>Explicit Metrics</h2>
+    <p class="slds-m-bottom_large"
+        ><span>These queries focus on metrics created explicitly by the developer.</span>
+        <code>incrementCounter()</code>, <code>trackValue()</code><span> and </span>
+        <code>bucketValue()</code> methods.</p
+    >
+
+    <lightning-accordion
+        onsectiontoggle={handleToggleSection}
+        class="queries"
+        active-section-name={activeSectionExplicitMetrics}
+        data-accordion="explicitMetrics"
+    >
+        <lightning-accordion-section name="hidden" style="display: none">
+        </lightning-accordion-section>
+        <lightning-accordion-section
+            name="incrementCounter"
+            label="Count metric, created via incrementCounter()"
+            class={classes.incrementCounter}
+        >
+            <my-argus-query
+                metric-type="COUNT.Count"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="trackValueCount"
+            label="Count metric, created via trackValue()"
+            class={classes.trackValueCount}
+        >
+            <my-argus-query
+                metric-type="PERCENTILE_SET.Count"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="sum"
+                downsampler="sum"
+                grouper={grouperSum}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="trackValue50"
+            label="P50 metric, created via trackValue()"
+            class={classes.trackValue50}
+        >
+            <my-argus-query
+                metric-type="PERCENTILE_SET.p50th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="trackValue95"
+            label="P95 metric, created via trackValue()"
+            class={classes.trackValue95}
+        >
+            <my-argus-query
+                metric-type="PERCENTILE_SET.p95th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="trackValue99"
+            label="P99 metric, created via trackValue()"
+            class={classes.trackValue99}
+        >
+            <my-argus-query
+                metric-type="PERCENTILE_SET.p99th"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="bucketValueAvg"
+            label="Histogram average metric, created via bucketValue()"
+            class={classes.bucketValueAvg}
+        >
+            <my-argus-query
+                metric-type="HISTOGRAM.Average"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="avg"
+                downsampler="avg"
+                grouper={grouperAvg}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+
+        <lightning-accordion-section
+            name="bucketValueMax"
+            label="Histogram maximum metric, created via bucketValue()"
+            class={classes.bucketValueMax}
+        >
+            <my-argus-query
+                metric-type="HISTOGRAM.Max"
+                schema-id={selectedSchemaId}
+                logger-app-name={selectedLoggerAppName}
+                logger-name={selectedLoggerName}
+                metric-name={selectedMetricName}
+                has-error={hasError}
+                host-id={selectedHostId}
+                aggregator="max"
+                downsampler="max"
+                grouper={grouperMax}
+                earliest={selectedDays}
+                use-workaround="true"
+            ></my-argus-query>
+        </lightning-accordion-section>
+    </lightning-accordion>
+</template>

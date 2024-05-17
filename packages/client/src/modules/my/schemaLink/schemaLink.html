@@ -1,7 +1,10 @@
 <template>
-    <p class="slds-form-element__label" if:true={selectedSchemaUrl}>
-        <a target="_blank" rel="noopener noreferrer" href={selectedSchemaUrl}
-            >Click to open schema source</a
-        >.</p
-    >
+    <lightning-button
+        if:true={selectedSchemaUrl}
+        icon-name="utility:forward_up"
+        icon-position="right"
+        onclick={handleClick}
+        label="View source"
+        variant="brand-outline"
+    ></lightning-button>
 </template>

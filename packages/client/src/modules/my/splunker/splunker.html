@@ -1,7 +1,7 @@
 <template>
     <lightning-combobox
         name="splunk_types"
-        label="Splunk Instance:"
+        label="Splunk Instance"
         value={selectedSplunkType}
         placeholder="Select a Splunk instance"
         options={splunkTypes}
@@ -11,19 +11,27 @@
 
     <my-logger-app-name-selector onselect={handleLoggerAppNameChange}></my-logger-app-name-selector>
 
-    <lightning-combobox
-        name="schemas"
-        label="Schema:"
-        value={selectedSchemaId}
-        placeholder="Select your schema"
-        options={schemaOptions}
-        onchange={handleSchemaChange}
+    <div class="flex">
+        <lightning-combobox
+            name="schemas"
+            label="Schema"
+            value={selectedSchemaId}
+            placeholder="Select your schema"
+            options={schemaOptions}
+            onchange={handleSchemaChange}
+        >
+        </lightning-combobox>
+        <my-schema-link
+            if:true={selectedSchemaId}
+            schema={selectedSchemaId}
+            class="schema-link"
+        ></my-schema-link>
+    </div>
+
+    <h2>Queries</h2>
+    <p class="slds-m-bottom_large"
+        >These sample queries are auto-generated based on provided input above.</p
     >
-    </lightning-combobox>
-    <my-schema-link if:true={selectedSchemaId} schema={selectedSchemaId}></my-schema-link>
-
-    <h2>Sample Queries (auto-generated)</h2>
-
     <lightning-accordion
         if:true={areInputsValid}
         onsectiontoggle={handleToggleSection}
