@@ -1,16 +1,24 @@
 <template>
-    <lightning-combobox
-        name="schemas"
-        label="Schemas:"
-        value={selectedSchema}
-        placeholder="Select Schema"
-        options={schemaOptions}
-        onchange={handleSchemaChange}
-    >
-    </lightning-combobox>
+    <div class="flex">
+        <lightning-combobox
+            name="schemas"
+            label="Schema"
+            value={selectedSchema}
+            placeholder="Select Schema"
+            options={schemaOptions}
+            onchange={handleSchemaChange}
+        >
+        </lightning-combobox>
+        <my-schema-link
+            if:true={selectedSchema}
+            schema={selectedSchema}
+            class="schema-link"
+        ></my-schema-link>
+    </div>
 
     <template if:true={selectedSchema}>
-        <my-schema-link schema={selectedSchema}></my-schema-link>
+        <p class="header">Selected schema Fields</p>
+
         <my-schema-input schema={selectedSchema} ondatachange={handleDataChange}></my-schema-input>
 
         <p class="header">Sample Code</p>
