@@ -38,7 +38,7 @@ as needed.
 Ensure git remote for Heroku is set:
 
 ```sh
-git remote add heroku https://git.heroku.com/o11y-sample-app.git
+git remote add heroku https://git.heroku.com/o11y.git
 git remote -v
 ```
 
