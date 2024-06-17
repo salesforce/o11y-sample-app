@@ -91,6 +91,10 @@ import {
 } from 'o11y_schema/sf_formula';
 
 import {
+    genAiIntelligenceUsageSchema as sf_genAiIntelligenceUsage_genAiIntelligenceUsageSchema,
+} from 'o11y_schema/sf_genAiIntelligenceUsage';
+
+import {
     incidentAlertUtilityComponentSchema as sf_incidentManagement_incidentAlertUtilityComponentSchema,
 } from 'o11y_schema/sf_incidentManagement';
 
@@ -451,6 +455,8 @@ export const schemas = new Map<string, Schema>()
     // sf_formula
     .set(getSchemaId(sf_formula_formulaEinsteinSchema), sf_formula_formulaEinsteinSchema)
     .set(getSchemaId(sf_formula_formulaSyntaxViewerSchema), sf_formula_formulaSyntaxViewerSchema)
+    // sf_genAiIntelligenceUsage
+    .set(getSchemaId(sf_genAiIntelligenceUsage_genAiIntelligenceUsageSchema), sf_genAiIntelligenceUsage_genAiIntelligenceUsageSchema)
     // sf_incidentManagement
     .set(getSchemaId(sf_incidentManagement_incidentAlertUtilityComponentSchema), sf_incidentManagement_incidentAlertUtilityComponentSchema)
     // sf_instrumentation
