@@ -15,6 +15,7 @@ declare module 'o11y_schema/sf_embeddedMessaging';
 declare module 'o11y_schema/sf_enhancedConversation';
 declare module 'o11y_schema/sf_evf';
 declare module 'o11y_schema/sf_formula';
+declare module 'o11y_schema/sf_genAiIntelligenceUsage';
 declare module 'o11y_schema/sf_incidentManagement';
 declare module 'o11y_schema/sf_instrumentation';
 declare module 'o11y_schema/sf_instrumentationTest';
