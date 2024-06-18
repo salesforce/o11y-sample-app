@@ -4,11 +4,13 @@ This stand-alone LWC app demonstrates the use of the `o11y` instrumentation plat
 
 ## Try it Out
 
-You can go to [o11y-sample-app](https://o11y-sample-app.herokuapp.com/), or deploy a copy of the app.
+You can go to [o11y](https://o11y.herokuapp.com/), or deploy a copy of the app.
 
-> Note: deploying from git.soma is not supported
+> Note: deploying from git.soma is not supported.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/salesforce/o11y-sample-app)
+**Deploys** Take place automatically PR merges into master. You can also attempt to manually deploy using the button below
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/salesforce/o11y)
 
 ## Getting Started with Local Development
 
@@ -31,7 +33,8 @@ Before sending your PR, make sure to run one of:
 
 as needed.
 
-## Publishing to Heroku
+## [Backup] Publishing to Heroku
+Every commit to master is automatically deployed to heroku. The steps below can be used if you have to revert to manual deploys for some reason
 
 -   Must have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) pre-installed.
 
