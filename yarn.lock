@@ -7152,24 +7152,24 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==
 
-o11y@250.12.0:
-  version "250.12.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-250.12.0.tgz#e13fa72ea253af7af4c5f4a5a2d54fe7bbb75a61"
-  integrity sha512-YbE/49fs/wHffQAfP8OtMQOizzXz/Y2A6PZAReKO+/f4e8FTq3VtrnKhxPBRL3qKdcQyZUjowx+C1G8lWDc3lA==
+o11y@252.9.0:
+  version "252.9.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y/-/o11y-252.9.0.tgz#6adf4d460e475204a2a893fb1bd6427f03bf8bbf"
+  integrity sha512-ASIuONFzibH6FeLCm1DxYiU7uGFQOoL7/sQjB8sJNVK5ZeatoyA39pMd/QUtPMjsJzUldVbMIhVv14Dthc8igg==
   dependencies:
-    o11y_schema "250.130.0"
+    o11y_schema "252.11.0"
     protobufjs "7.2.4"
-    web-vitals "2.1.4"
-
-o11y_schema@250.130.0:
-  version "250.130.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-250.130.0.tgz#0f2e03ab32620b9a6cf6b91593a8e9ee22d9368a"
-  integrity sha512-oo/GYFM4rIQCtJLj9i5XJNZyr8v6klx/NJQqVYsyJdvAHxI/hfFEeh3JmjpYuxNqG0Sgqs/97M/RGyqAdVWcjQ==
+    web-vitals "3.5.2"
 
 o11y_schema@250.139.0:
   version "250.139.0"
   resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-250.139.0.tgz#f611ffadaa82d78b0c9e99694336dbc165e710b3"
   integrity sha512-klO6fX1Pz1spaKkrYgxK9qkV5Z26SeVTFqIMDyDwXEX7cUv/MuaitLb3Mt7xSS7Scy6in9J/oCI9pmG9E27q1g==
+
+o11y_schema@252.11.0:
+  version "252.11.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-252.11.0.tgz#7e7db5ad99f4661e5e136595d597172ffc6891e4"
+  integrity sha512-gdzht1/LRbnJZZGtR2M6ACopNLiwuUs0yP8OGnDbpCTJITwDS9S5wb7qbxUMY2kyhXkGR3oD8RY0C1S6+/1rRQ==
 
 oauth-sign@~0.9.0:
   version "0.9.0"
@@ -9880,10 +9880,10 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-web-vitals@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-2.1.4.tgz#76563175a475a5e835264d373704f9dde718290c"
-  integrity sha512-sVWcwhU5mX6crfI5Vd2dC4qchyTqxV8URinzt25XqVh+bHEPGH4C3NPrNionCP7Obx59wrYEbNlw4Z8sjALzZg==
+web-vitals@3.5.2:
+  version "3.5.2"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/web-vitals/-/web-vitals-3.5.2.tgz#5bb58461bbc173c3f00c2ddff8bfe6e680999ca9"
+  integrity sha512-c0rhqNcHXRkY/ogGDJQxZ9Im9D19hDihbzSQJrsioex+KnFgmMzBiy57Z1EjkhX/+OjyBpclDCzz2ITtjokFmg==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
