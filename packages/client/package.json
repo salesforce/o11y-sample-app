@@ -3,10 +3,10 @@
     "description": "Sample LWC application to demonstrate the 'o11y' instrumentation platform",
     "version": "250.2.0",
     "dependencies": {
-        "@lwc/synthetic-shadow": "2.12.1",
+        "@lwc/synthetic-shadow": "7.2.4",
         "@salesforce-ux/design-system": "2.21.0",
         "lightning-base-components": "1.18.1-alpha",
-        "lwc": "2.45.2",
+        "lwc": "7.2.4",
         "o11y": "250.12.0",
         "o11y_schema": "250.139.0"
     },
