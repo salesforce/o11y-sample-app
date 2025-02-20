@@ -7161,10 +7161,10 @@ o11y@254.6.0:
     protobufjs "7.2.4"
     web-vitals "3.5.2"
 
-o11y_schema@250.139.0:
-  version "250.139.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-250.139.0.tgz#f611ffadaa82d78b0c9e99694336dbc165e710b3"
-  integrity sha512-klO6fX1Pz1spaKkrYgxK9qkV5Z26SeVTFqIMDyDwXEX7cUv/MuaitLb3Mt7xSS7Scy6in9J/oCI9pmG9E27q1g==
+o11y_schema@256.90.0:
+  version "256.90.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-256.90.0.tgz#7dd3419561ca469e61b26198cd5e0b7a652a8262"
+  integrity sha512-+qL1jF6nJciMsl0Kmnaj5/wFr0EvLCusT/6z6WX7n4lgzso1kGlYIz3q7R418wtHpNh+j/mq8+f+VBdTOU7FCg==
 
 o11y_schema@254.44.0:
   version "254.44.0"
