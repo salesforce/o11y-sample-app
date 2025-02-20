@@ -7,13 +7,11 @@
     "bugs": "https://github.com/salesforce/o11y-sample-app/issues",
     "engines": {
         "node": "18.x",
-        "npm": ">=7.4.3",
         "yarn": "~1.22.19"
     },
     "volta": {
         "node": "18.17.1",
-        "yarn": "1.22.19",
-        "npm": "8.19.3"
+        "yarn": "1.22.19"
     },
     "homepage": "https://github.com/salesforce/o11y-sample-app",
     "keywords": [
