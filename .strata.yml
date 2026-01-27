@@ -2,6 +2,7 @@ global:
   email-reply-to: dpxtools@salesforce.com
 
 stages:
+
   build:
     - npm-setup:
         yarn-modern: true
