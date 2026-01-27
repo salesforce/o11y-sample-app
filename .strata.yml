@@ -12,3 +12,4 @@ stages:
         commands:
           - yarn install
           - yarn build
+
