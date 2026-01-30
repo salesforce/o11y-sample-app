@@ -1,6 +1,5 @@
 global:
   email-reply-to: dpxtools@salesforce.com
-  preprocessor-tag: jenkins-sfci-sfci-managed-preprocessor-PR-6585-latest-itest
 stages:
 
   build:
