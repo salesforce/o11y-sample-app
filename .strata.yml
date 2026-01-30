@@ -1,5 +1,5 @@
 global:
-  email-reply-to: dpxtools@salesforce.com
+  email-reply-to: test@salesforce.com
 stages:
   build:
     - npm-setup:
