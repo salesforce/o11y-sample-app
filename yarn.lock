@@ -7152,19 +7152,19 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha512-4jbtZXNAsfZbAHiiqjLPBiCl16dES1zI4Hpzzxw61Tk+loF+sBDBKx1ICKKKwIqQ7M0mFn1TmkN7euSncWgHiQ==
 
-o11y@250.12.0:
-  version "250.12.0"
-  resolved "https://registry.yarnpkg.com/o11y/-/o11y-250.12.0.tgz#e13fa72ea253af7af4c5f4a5a2d54fe7bbb75a61"
-  integrity sha512-YbE/49fs/wHffQAfP8OtMQOizzXz/Y2A6PZAReKO+/f4e8FTq3VtrnKhxPBRL3qKdcQyZUjowx+C1G8lWDc3lA==
+o11y@258.8.0:
+  version "258.8.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y/-/o11y-258.8.0.tgz#31d2eebafa9f26c8c0a52bbd902a49bcb6025672"
+  integrity sha512-066thqoxPqIegYJAy2xg1fCHrv+YxRD/6ufbA5PMsE+dPsD+gnzbKa7L2C/iha3xLOTWVi//vhbgf60kukbKgg==
   dependencies:
-    o11y_schema "250.130.0"
-    protobufjs "7.2.4"
-    web-vitals "2.1.4"
+    o11y_schema "254.44.0"
+    protobufjs "7.2.6"
+    web-vitals "^4.2.4"
 
-o11y_schema@250.130.0:
-  version "250.130.0"
-  resolved "https://registry.yarnpkg.com/o11y_schema/-/o11y_schema-250.130.0.tgz#0f2e03ab32620b9a6cf6b91593a8e9ee22d9368a"
-  integrity sha512-oo/GYFM4rIQCtJLj9i5XJNZyr8v6klx/NJQqVYsyJdvAHxI/hfFEeh3JmjpYuxNqG0Sgqs/97M/RGyqAdVWcjQ==
+o11y_schema@254.44.0:
+  version "254.44.0"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/o11y_schema/-/o11y_schema-254.44.0.tgz#6b283912cca23589a2be78c064672c02ba1f4f65"
+  integrity sha512-qcwaZsTyl/NFRoyjXk5ZObfjb773wYM5wxDbHSJNkQDBxX96RjUS/Df0M1rSbsmJWPOuYiV4EkvIOEPMm8V86g==
 
 o11y_schema@256.90.0:
   version "256.90.0"
@@ -7857,10 +7857,10 @@ protobufjs@6.11.3:
     "@types/node" ">=13.7.0"
     long "^4.0.0"
 
-protobufjs@7.2.4:
-  version "7.2.4"
-  resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-7.2.4.tgz#3fc1ec0cdc89dd91aef9ba6037ba07408485c3ae"
-  integrity sha512-AT+RJgD2sH8phPmCf7OUZR8xGdcJRga4+1cOaXJ64hvcSkVhNcRHOwIxUatPH15+nj59WAGTDv3LSGZPEQbJaQ==
+protobufjs@7.2.6:
+  version "7.2.6"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/protobufjs/-/protobufjs-7.2.6.tgz#4a0ccd79eb292717aacf07530a07e0ed20278215"
+  integrity sha512-dgJaEDDL6x8ASUZ1YqWciTRrdOuYNzoOf27oHNfdyvKqHr5i0FV7FSLU+aIeFjyFgVxrpTOtQUi0BLLBymZaBw==
   dependencies:
     "@protobufjs/aspromise" "^1.1.2"
     "@protobufjs/base64" "^1.1.2"
@@ -9880,10 +9880,10 @@ wcwidth@^1.0.0:
   dependencies:
     defaults "^1.0.3"
 
-web-vitals@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-2.1.4.tgz#76563175a475a5e835264d373704f9dde718290c"
-  integrity sha512-sVWcwhU5mX6crfI5Vd2dC4qchyTqxV8URinzt25XqVh+bHEPGH4C3NPrNionCP7Obx59wrYEbNlw4Z8sjALzZg==
+web-vitals@^4.2.4:
+  version "4.2.4"
+  resolved "https://nexus-proxy.repo.local.sfdc.net/nexus/content/groups/npm-all/web-vitals/-/web-vitals-4.2.4.tgz#1d20bc8590a37769bd0902b289550936069184b7"
+  integrity sha512-r4DIlprAGwJ7YM11VZp4R884m0Vmgr6EAKe3P+kO0PPj3Unqyvv59rczf6UiGcb9Z8QxZVcqKNwv/g0WNdWwsw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
